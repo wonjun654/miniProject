@@ -14,38 +14,37 @@ import com.kh.view.Store;
 
 public class Pay extends JDialog {
 
-	JLabel pl = new JLabel(); // °áÁ¦±İ¾×È®ÀÎ
-	JLabel cl = new JLabel(); // °áÁ¦¹æ½Ä¼±ÅÃÈ®ÀÎ
-	JLabel presult = new JLabel(); // °áÁ¦±İ¾×
-	JLabel cresult = new JLabel(); // °áÁ¦¹æ½Ä
-	int scoin; // ÄÚÀÎ°³¼ö
-	JLabel p1 = null; // ÄÚÀÎÃæÀü°³¼öÈ®ÀÎ
+	JLabel pl = new JLabel(); // ê²°ì œê¸ˆì•¡í™•ì¸
+	JLabel cl = new JLabel(); // ê²°ì œë°©ì‹ì„ íƒí™•ì¸
+	JLabel presult = new JLabel(); // ê²°ì œê¸ˆì•¡
+	JLabel cresult = new JLabel(); // ê²°ì œë°©ì‹
+	int scoin; // ì½”ì¸ê°œìˆ˜
+	JLabel p1 = null; // ì½”ì¸ì¶©ì „ê°œìˆ˜í™•ì¸
 	ButtonGroup c = null;
 	JRadioButton card = null;
 	JRadioButton cash = null;
-	JRadioButton empty = null;
 
 	public Pay() {
-		// super("°áÁ¦Ã¢");
+		// super("ê²°ì œì°½");
 
-		this.setTitle("°áÁ¦Ã¢");
+		this.setTitle("ê²°ì œì°½");
 		this.setLayout(null);
 		this.setBounds(100, 50, 400, 600);
 
-		// °áÁ¦ÇÏ±â
-		JLabel label = new JLabel("°áÁ¦ÇÏ±â");
+		// ê²°ì œí•˜ê¸°
+		JLabel label = new JLabel("ê²°ì œí•˜ê¸°");
 		label.setLocation(166, 30);
 		label.setSize(80, 30);
 		this.add(label);
 
-		// °áÁ¦ ¹æ½Ä ¼³Á¤
-		JLabel choose = new JLabel("°áÁ¦ ¹æ½Ä");
+		// ê²°ì œ ë°©ì‹ ì„¤ì •
+		JLabel choose = new JLabel("ê²°ì œ ë°©ì‹");
 		choose.setLocation(166, 80);
 		choose.setSize(100, 30);
 		this.add(choose);
 
-		card = new JRadioButton("Ä«µå °áÁ¦");
-		cash = new JRadioButton("°èÁÂ ÀÌÃ¼");
+		card = new JRadioButton("ì¹´ë“œ ê²°ì œ");
+		cash = new JRadioButton("ê³„ì¢Œ ì´ì²´");
 
 		c = new ButtonGroup();
 		c.add(card);
@@ -59,25 +58,25 @@ public class Pay extends JDialog {
 		this.add(card);
 		this.add(cash);
 
-		// °áÁ¦ ±İ¾× ¼³Á¤
-		JLabel price = new JLabel("°áÁ¦ ±İ¾×");
+		// ê²°ì œ ê¸ˆì•¡ ì„¤ì •
+		JLabel price = new JLabel("ê²°ì œ ê¸ˆì•¡");
 		price.setLocation(166, 150);
 		price.setSize(100, 30);
 		this.add(price);
 
-		JRadioButton b1 = new JRadioButton("5,000¿ø : 50°³");
+		JRadioButton b1 = new JRadioButton("5,000ì› : 50ê°œ");
 		b1.setLocation(130, 180);
 		b1.setSize(200, 30);
-		JRadioButton b2 = new JRadioButton("10,000¿ø : 105°³");
+		JRadioButton b2 = new JRadioButton("10,000ì› : 105ê°œ");
 		b2.setLocation(130, 210);
 		b2.setSize(200, 30);
-		JRadioButton b3 = new JRadioButton("20,000¿ø : 210°³");
+		JRadioButton b3 = new JRadioButton("20,000ì› : 210ê°œ");
 		b3.setLocation(130, 240);
 		b3.setSize(200, 30);
-		JRadioButton b4 = new JRadioButton("30,000¿ø : 315°³");
+		JRadioButton b4 = new JRadioButton("30,000ì› : 315ê°œ");
 		b4.setLocation(130, 270);
 		b4.setSize(200, 30);
-		JRadioButton b5 = new JRadioButton("50,000¿ø : 550°³");
+		JRadioButton b5 = new JRadioButton("50,000ì› : 550ê°œ");
 		b5.setLocation(130, 300);
 		b5.setSize(200, 30);
 		ButtonGroup p = new ButtonGroup();
@@ -93,14 +92,14 @@ public class Pay extends JDialog {
 		this.add(b4);
 		this.add(b5);
 
-		// ÃæÀüÇÏ±â ÆË¾÷Ã¢
-		Dialog pd = new Dialog(this, "ÃæÀüÇÏ±â");
+		// ì¶©ì „í•˜ê¸° íŒì—…ì°½
+		Dialog pd = new Dialog(this, "ì¶©ì „í•˜ê¸°");
 		pd.setLayout(null);
 		pd.setSize(300, 300);
 		pd.setLocation(150, 150);
 
-		JButton okbutton = new JButton("È®ÀÎ");
-		JButton cbutton = new JButton("Ãë¼Ò");
+		JButton okbutton = new JButton("í™•ì¸");
+		JButton cbutton = new JButton("ì·¨ì†Œ");
 		// ButtonGroup b = new ButtonGroup();
 		// b.add(okbutton);
 		// b.add(cbutton);
@@ -115,43 +114,43 @@ public class Pay extends JDialog {
 		pd.add(cbutton);
 		pd.add(okbutton);
 
-		this.cresult.setText("¹æ½ÄÀÌ ¼³Á¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+		this.cresult.setText("ë°©ì‹ì´ ì„¤ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
 		this.cresult.setLocation(100, 350);
 		this.cresult.setSize(300, 30);
 		this.add(this.cresult);
 
-		this.presult.setText("±İ¾×ÀÌ ¼³Á¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+		this.presult.setText("ê¸ˆì•¡ì´ ì„¤ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
 		this.presult.setLocation(100, 400);
 		this.presult.setSize(300, 30);
 		this.add(this.presult);
 
-		// Ä«µå°áÁ¦ ¼±ÅÃ ½Ã
+		// ì¹´ë“œê²°ì œ ì„ íƒ ì‹œ
 		card.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cresult.setText("Ä«µå °áÁ¦ ¼±ÅÃµÇ¾ú½À´Ï´Ù.");
+				cresult.setText("ì¹´ë“œ ê²°ì œ ì„ íƒë˜ì—ˆìŠµë‹ˆë‹¤.");
 
 			}
 		});
 
-		// °èÁÂÀÌÃ¼ ¼±ÅÃ ½Ã
+		// ê³„ì¢Œì´ì²´ ì„ íƒ ì‹œ
 		cash.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cresult.setText("°èÁÂ ÀÌÃ¼ ¼±ÅÃµÇ¾ú½À´Ï´Ù.");
+				cresult.setText("ê³„ì¢Œ ì´ì²´ ì„ íƒë˜ì—ˆìŠµë‹ˆë‹¤.");
 
 			}
 		});
 
-		// °áÁ¦±İ¾× ¼±ÅÃ ½Ã
+		// ê²°ì œê¸ˆì•¡ ì„ íƒ ì‹œ
 		b1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				scoin = 50;
-				presult.setText("5,000¿ø ¼±ÅÃµÇ¾ú½À´Ï´Ù.");
+				presult.setText("5,000ì› ì„ íƒë˜ì—ˆìŠµë‹ˆë‹¤.");
 
 			}
 		});
@@ -160,7 +159,7 @@ public class Pay extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				scoin = 105;
-				presult.setText("10,000¿ø ¼±ÅÃµÇ¾ú½À´Ï´Ù.");
+				presult.setText("10,000ì› ì„ íƒë˜ì—ˆìŠµë‹ˆë‹¤.");
 
 			}
 		});
@@ -169,7 +168,7 @@ public class Pay extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				scoin = 210;
-				presult.setText("20,000¿ø ¼±ÅÃµÇ¾ú½À´Ï´Ù.");
+				presult.setText("20,000ì› ì„ íƒë˜ì—ˆìŠµë‹ˆë‹¤.");
 
 			}
 		});
@@ -178,7 +177,7 @@ public class Pay extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				scoin = 315;
-				presult.setText("30,000¿ø ¼±ÅÃµÇ¾ú½À´Ï´Ù.");
+				presult.setText("30,000ì› ì„ íƒë˜ì—ˆìŠµë‹ˆë‹¤.");
 
 			}
 		});
@@ -187,13 +186,13 @@ public class Pay extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				scoin = 550;
-				presult.setText("50,000¿ø ¼±ÅÃµÇ¾ú½À´Ï´Ù.");
+				presult.setText("50,000ì› ì„ íƒë˜ì—ˆìŠµë‹ˆë‹¤.");
 
 			}
 		});
 
-		// ÃæÀüÇÏ±â ¹öÆ°
-		JButton pay = new JButton("ÃæÀüÇÏ±â");
+		// ì¶©ì „í•˜ê¸° ë²„íŠ¼
+		JButton pay = new JButton("ì¶©ì „í•˜ê¸°");
 		pay.setLocation(180, 500);
 		pay.setSize(90, 30);
 		this.add(pay);
@@ -211,25 +210,25 @@ public class Pay extends JDialog {
 		pd.add(pl);
 		pd.add(p1);
 
-		// ¾Æ¹«°Íµµ ¼±ÅÃÇÏÁö ¾Ê¾ÒÀ»¶§ °æ°íÃ¢
+		// ì•„ë¬´ê²ƒë„ ì„ íƒí•˜ì§€ ì•Šì•˜ì„ë•Œ ê²½ê³ ì°½
 		Dialog nochoose = new Dialog(this, "Error!");
 		nochoose.setLayout(null);
 		nochoose.setBounds(150, 150, 300, 150);
-		JLabel error = new JLabel("°áÁ¦¹æ½Ä°ú ±İ¾×À» ¼±ÅÃÇØÁÖ¼¼¿ä!");
+		JLabel error = new JLabel("ê²°ì œë°©ì‹ê³¼ ê¸ˆì•¡ì„ ì„ íƒí•´ì£¼ì„¸ìš”!");
 		error.setSize(200, 100);
 		error.setLocation(60, 20);
-		JButton eb = new JButton("È®ÀÎ");
+		JButton eb = new JButton("í™•ì¸");
 		eb.setSize(70, 30);
 		eb.setLocation(120, 100);
 		nochoose.add(error);
 		nochoose.add(eb);
 
-		// ÃæÀüÇÏ±â Å¬¸¯½Ã ÆË¾÷
+		// ì¶©ì „í•˜ê¸° í´ë¦­ì‹œ íŒì—…
 		pay.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// °áÁ¦¹æ½ÄÀÌ ¼±ÅÃµÇÁö ¾Ê¾ÒÀ» ¶§
+				// ê²°ì œë°©ì‹ì´ ì„ íƒë˜ì§€ ì•Šì•˜ì„ ë•Œ
 				if (!cash.isSelected() && !card.isSelected()) {
 
 					nochoose.setVisible(true);
@@ -243,7 +242,7 @@ public class Pay extends JDialog {
 						}
 					});
 
-					// °áÁ¦±İ¾×ÀÌ ¼±ÅÃµÇÁö ¾Ê¾ÒÀ» ¶§
+					// ê²°ì œê¸ˆì•¡ì´ ì„ íƒë˜ì§€ ì•Šì•˜ì„ ë•Œ
 				} else if (!b1.isSelected() && !b2.isSelected() && !b3.isSelected() && !b4.isSelected()
 						&& !b5.isSelected()) {
 					nochoose.setVisible(true);
@@ -256,11 +255,11 @@ public class Pay extends JDialog {
 
 						}
 					});
-					// °áÁ¦¹æ½Ä °áÁ¦±İ¾× ¸ğµÎ ¼±ÅÃ µÇ¾úÀ» ¶§
+					// ê²°ì œë°©ì‹ ê²°ì œê¸ˆì•¡ ëª¨ë‘ ì„ íƒ ë˜ì—ˆì„ ë•Œ
 				} else {
 					cl.setText(cresult.getText());
 					pl.setText(presult.getText());
-					p1.setText(scoin + "°³ ÃæÀüÇÏ½Ã°Ú½À´Ï±î?");
+					p1.setText(scoin + "ê°œ ì¶©ì „í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 					pd.setVisible(true);
 
 				}
@@ -276,54 +275,50 @@ public class Pay extends JDialog {
 			}
 		});
 
-		// ÃæÀüÈ®ÀÎ½Ã ¹æ½Ä,±İ¾× È®ÀÎ ÆË¾÷
-		Dialog ok = new Dialog(this, "ÃæÀüÇÏ±â");
+		// ì¶©ì „í™•ì¸ì‹œ ë°©ì‹,ê¸ˆì•¡ í™•ì¸ íŒì—…
+		Dialog ok = new Dialog(this, "ì¶©ì „í•˜ê¸°");
 		ok.setLayout(null);
 		ok.setBounds(200, 200, 200, 150);
 
-		JLabel result = new JLabel("°áÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+		JLabel result = new JLabel("ê²°ì œê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 		result.setSize(150, 100);
 		result.setLocation(35, 20);
 		ok.add(result);
-		JButton ob = new JButton("È®ÀÎ");
+		JButton ob = new JButton("í™•ì¸");
 		ob.setSize(60, 30);
 		ob.setLocation(70, 100);
 		ok.add(ob);
 
-		// °áÁ¦¿Ï·á È®ÀÎ Å¬¸¯
+		// ê²°ì œì™„ë£Œ í™•ì¸ í´ë¦­
 		ob.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ok.dispose();
-				pd.dispose();
-
+				dispose();
 			}
 		});
-		// ÃæÀüÇÏ±â È®ÀÎ Å¬¸¯ ½Ã ÆË¾÷
+		// ì¶©ì „í•˜ê¸° í™•ì¸ í´ë¦­ ì‹œ íŒì—…
 		okbutton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ok.setVisible(true);
-
 			}
 
 		});
 
-		JButton exit = new JButton("»óÁ¡À¸·Î");
+		JButton exit = new JButton("ìƒì ìœ¼ë¡œ");
 		exit.setLocation(280, 500);
 		exit.setSize(90, 30);
 		this.add(exit);
 
-		// »óÁ¡À¸·Î Å¬¸¯½Ã ÆË¾÷
+		// ìƒì ìœ¼ë¡œ í´ë¦­ì‹œ íŒì—…
 		exit.addActionListener(new ActionListener() {
-			// ¶óº§ ÅØ½ºÆ® ÃÊ±âÈ­
-			// ¹öÆ° Å¬¸¯ ÃÊ±âÈ­
+			// ë¼ë²¨ í…ìŠ¤íŠ¸ ì´ˆê¸°í™”
+			// ë²„íŠ¼ í´ë¦­ ì´ˆê¸°í™”
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				dispose(); // Ã¢ Á¾·á
+				dispose(); // ì°½ ì¢…ë£Œ
 			}
 		});
 		this.setVisible(true);
