@@ -104,7 +104,7 @@ public class Setting extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				user.setMusicSet(false);
-
+				MediaTest.musicOff();
 			}
 		});
 

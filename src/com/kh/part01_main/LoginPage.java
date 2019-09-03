@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.kh.model.vo.MediaTest;
 import com.kh.part03_ID.FindID;
 import com.kh.part03_password.FindPassword;
 import com.kh.user.controller.UserManager;
@@ -162,7 +163,8 @@ public class LoginPage extends JFrame {
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);// Á¤Áß¾Ó¤Ó
-	
+		MediaTest mt = new MediaTest();
+		mt.musicOn(1, true);
 	
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

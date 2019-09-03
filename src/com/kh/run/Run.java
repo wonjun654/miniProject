@@ -1,4 +1,4 @@
-package com.kh.model.run;
+package com.kh.run;
 
 import com.kh.user.view.UserMenu;
 
