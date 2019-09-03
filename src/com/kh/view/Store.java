@@ -34,6 +34,7 @@ public class Store extends JFrame {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
 		this.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2); // 화면 중앙
 
+		
 		// 상점이름
 		JLabel store = new JLabel("상점");
 		Font font = new Font("고딕", Font.BOLD, 50);
