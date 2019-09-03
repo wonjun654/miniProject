@@ -73,10 +73,6 @@ public class Profile extends JFrame {
 		button.setLocation(200, 130);
 		button.setSize(120, 30);
 
-		JButton button2 = new JButton("쪽지함");
-		button2.setLocation(400, 130);
-		button2.setSize(120, 30);
-
 		JButton button3 = new JButton("확인");
 		sd.add(button3);
 
@@ -86,8 +82,6 @@ public class Profile extends JFrame {
 		JButton button4 = new JButton("확인");
 		button4.setSize(80, 40);
 		button4.setLocation(440, 190);
-
-		// 쪽지함 버튼2
 
 		// 이미지 바꾸기
 		String[] character = { "yangpa", "jumuk", "baechu" };
@@ -122,14 +116,7 @@ public class Profile extends JFrame {
 				sd.setVisible(true);
 			}
 		});
-		// 쪽지함
-		button2.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
 		// sd 확인
 		button3.addActionListener(new ActionListener() {
 
@@ -165,7 +152,6 @@ public class Profile extends JFrame {
 		panel.add(label6);
 		panel.add(label7);
 		panel.add(button);
-		panel.add(button2);
 		panel.add(button4);
 		this.add(panel);
 

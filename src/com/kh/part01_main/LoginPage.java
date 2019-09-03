@@ -109,12 +109,16 @@ public class LoginPage extends JFrame {
         		System.out.println(str);
         		
         		
+        		
+        		
+        		
         		if(um.login(str)) {
         			JOptionPane.showMessageDialog(null, "로그인 성공 !");
         			MainMenu menu = new MainMenu();
         			dispose();
         		} else {
         			JOptionPane.showMessageDialog(null, "ID/PW를 확인해 주세요.");
+        			str = "";
         		}
         		
         		       		
