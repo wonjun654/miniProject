@@ -15,44 +15,48 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import com.kh.user.model.vo.User;
+
 public class Pay extends JDialog {
 
-	JLabel paySelect = new JLabel(); // °áÁ¦±İ¾×È®ÀÎ
-	JLabel chooseSelect = new JLabel(); // °áÁ¦¹æ½Ä¼±ÅÃÈ®ÀÎ
-	JLabel presult = new JLabel(); // °áÁ¦±İ¾×
-	JLabel cresult = new JLabel(); // °áÁ¦¹æ½Ä
-	int buyCoin; // ÄÚÀÎ°³¼ö
-	JLabel chargeCoinNum = null; // ÄÚÀÎÃæÀü°³¼öÈ®ÀÎ
+	JLabel paySelect = new JLabel(); // ê²°ì œê¸ˆì•¡í™•ì¸
+	JLabel chooseSelect = new JLabel(); // ê²°ì œë°©ì‹ì„ íƒí™•ì¸
+	JLabel presult = new JLabel(); // ê²°ì œê¸ˆì•¡
+	JLabel cresult = new JLabel(); // ê²°ì œë°©ì‹
+	int buyCoin; // ì½”ì¸ê°œìˆ˜
+	JLabel chargeCoinNum = null; // ì½”ì¸ì¶©ì „ê°œìˆ˜í™•ì¸
 	ButtonGroup c = null;
 	JRadioButton card = null;
 	JRadioButton cash = null;
-
-	public Pay() {
-		this.setTitle("°áÁ¦Ã¢");
+	int mcoin;
+	User u = new User();
+	
+	public Pay(User u) {
+		this.setTitle("ê²°ì œì°½");
 		this.setLayout(null);
 		this.setBounds(300, 100, 400, 600);
 
-		Dimension frameSize = this.getSize(); // ÇÁ·¹ÀÓ »çÀÌÁî
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // ¸ğ´ÏÅÍ »çÀÌÁî
-		this.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2); // È­¸é Áß¾Ó
+		Dimension frameSize = this.getSize(); // í”„ë ˆì„ ì‚¬ì´ì¦ˆ
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // ëª¨ë‹ˆí„° ì‚¬ì´ì¦ˆ
+		this.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2); // í™”ë©´ ì¤‘ì•™
 
 		// --------------------------------------------------------------------------------
-		// °áÁ¦ÇÏ±â
-		JLabel payLabel = new JLabel("°áÁ¦ÇÏ±â");
-		Font font = new Font("°íµñ", Font.BOLD, 30);
+		// ê²°ì œí•˜ê¸°
+		JLabel payLabel = new JLabel("ê²°ì œí•˜ê¸°");
+		Font font = new Font("ê³ ë”•", Font.BOLD, 30);
 		payLabel.setFont(font);
 		payLabel.setLocation(136, 30);
 		payLabel.setSize(150, 40);
 		this.add(payLabel);
 
-		// °áÁ¦ ¹æ½Ä ¼³Á¤
-		JLabel payChoose = new JLabel("°áÁ¦ ¹æ½Ä");
+		// ê²°ì œ ë°©ì‹ ì„¤ì •
+		JLabel payChoose = new JLabel("ê²°ì œ ë°©ì‹");
 		payChoose.setLocation(166, 80);
 		payChoose.setSize(100, 30);
 		this.add(payChoose);
 
-		card = new JRadioButton("Ä«µå °áÁ¦");
-		cash = new JRadioButton("°èÁÂ ÀÌÃ¼");
+		card = new JRadioButton("ì¹´ë“œ ê²°ì œ");
+		cash = new JRadioButton("ê³„ì¢Œ ì´ì²´");
 
 		c = new ButtonGroup();
 		c.add(card);
@@ -66,79 +70,77 @@ public class Pay extends JDialog {
 		this.add(card);
 		this.add(cash);
 
-		// °áÁ¦ ±İ¾× ¼³Á¤
-		JLabel price = new JLabel("°áÁ¦ ±İ¾×");
+		// ê²°ì œ ê¸ˆì•¡ ì„¤ì •
+		JLabel price = new JLabel("ê²°ì œ ê¸ˆì•¡");
 		price.setLocation(166, 150);
 		price.setSize(100, 30);
 		this.add(price);
 
-		JRadioButton b1 = new JRadioButton("5,000¿ø : 50°³");
-		b1.setLocation(130, 180);
-		b1.setSize(200, 30);
-		JRadioButton b2 = new JRadioButton("10,000¿ø : 105°³");
-		b2.setLocation(130, 210);
-		b2.setSize(200, 30);
-		JRadioButton b3 = new JRadioButton("20,000¿ø : 210°³");
-		b3.setLocation(130, 240);
-		b3.setSize(200, 30);
-		JRadioButton b4 = new JRadioButton("30,000¿ø : 315°³");
-		b4.setLocation(130, 270);
-		b4.setSize(200, 30);
-		JRadioButton b5 = new JRadioButton("50,000¿ø : 550°³");
-		b5.setLocation(130, 300);
-		b5.setSize(200, 30);
+		JRadioButton priceButton1 = new JRadioButton("5,000ì› : 50ê°œ");
+		priceButton1.setLocation(130, 180);
+		priceButton1.setSize(200, 30);
+		JRadioButton priceButton2 = new JRadioButton("10,000ì› : 105ê°œ");
+		priceButton2.setLocation(130, 210);
+		priceButton2.setSize(200, 30);
+		JRadioButton priceButton3 = new JRadioButton("20,000ì› : 210ê°œ");
+		priceButton3.setLocation(130, 240);
+		priceButton3.setSize(200, 30);
+		JRadioButton priceButton4 = new JRadioButton("30,000ì› : 315ê°œ");
+		priceButton4.setLocation(130, 270);
+		priceButton4.setSize(200, 30);
+		JRadioButton priceButton5 = new JRadioButton("50,000ì› : 550ê°œ");
+		priceButton5.setLocation(130, 300);
+		priceButton5.setSize(200, 30);
 		ButtonGroup p = new ButtonGroup();
-		p.add(b1);
-		p.add(b2);
-		p.add(b3);
-		p.add(b4);
-		p.add(b5);
+		p.add(priceButton1);
+		p.add(priceButton2);
+		p.add(priceButton3);
+		p.add(priceButton4);
+		p.add(priceButton5);
 
-		this.add(b1);
-		this.add(b2);
-		this.add(b3);
-		this.add(b4);
-		this.add(b5);
+		this.add(priceButton1);
+		this.add(priceButton2);
+		this.add(priceButton3);
+		this.add(priceButton4);
+		this.add(priceButton5);
 
 		// --------------------------------------------------------------------------------
-		// ÃæÀüÇÏ±â ÆË¾÷Ã¢
-		Dialog payDialog = new Dialog(this, "ÃæÀüÇÏ±â");
+		// ì¶©ì „í•˜ê¸° íŒì—…ì°½
+		Dialog payDialog = new Dialog(this, "ì¶©ì „í•˜ê¸°");
 		payDialog.setLayout(null);
 		payDialog.setSize(300, 300);
 		payDialog.setLocation((screenSize.width - payDialog.getWidth()) / 2,
 				(screenSize.height - payDialog.getHeight()) / 2);
 
-		JButton payDialogOkButton = new JButton("È®ÀÎ");
-		JButton payDialogCancelButton = new JButton("Ãë¼Ò");
+		JButton payDialogOkButton = new JButton("í™•ì¸");
+		JButton payDialogCancelButton = new JButton("ì·¨ì†Œ");
 
 		payDialogOkButton.setLocation(100, 250);
 		payDialogOkButton.setSize(75, 30);
 		payDialogCancelButton.setLocation(200, 250);
 		payDialogCancelButton.setSize(75, 30);
-		// m.setLocation(75, 100);
-		// m.setSize(150, 150);
 
 		payDialog.add(payDialogCancelButton);
 		payDialog.add(payDialogOkButton);
 
-		this.cresult.setText("¹æ½ÄÀÌ ¼³Á¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+		this.cresult.setText("ë°©ì‹ì´ ì„¤ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
 		this.cresult.setLocation(100, 350);
 		this.cresult.setSize(300, 30);
 		this.add(this.cresult);
 
-		this.presult.setText("±İ¾×ÀÌ ¼³Á¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+		this.presult.setText("ê¸ˆì•¡ì´ ì„¤ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
 		this.presult.setLocation(100, 400);
 		this.presult.setSize(300, 30);
 		this.add(this.presult);
 
 		// -----------------------------------------------------
-		// Ä«µå°áÁ¦ ¼±ÅÃ½Ã ¹øÈ£ ÀÔ·Â
-		Dialog cardNumberInput = new Dialog(payDialog, "Ä«µå¹øÈ£ ÀÔ·Â");
+		// ì¹´ë“œê²°ì œ ì„ íƒì‹œ ë²ˆí˜¸ ì…ë ¥
+		Dialog cardNumberInput = new Dialog(payDialog, "ì¹´ë“œë²ˆí˜¸ ì…ë ¥");
 		cardNumberInput.setLayout(null);
 		cardNumberInput.setSize(400, 250);
 		cardNumberInput.setLocation((screenSize.width - cardNumberInput.getWidth()) / 2,
 				(screenSize.height - cardNumberInput.getHeight()) / 2);
-		JLabel cardNumberLabel = new JLabel("Ä«µå¹øÈ£ ÀÔ·Â");
+		JLabel cardNumberLabel = new JLabel("ì¹´ë“œë²ˆí˜¸ ì…ë ¥");
 		cardNumberLabel.setSize(150, 40);
 		cardNumberLabel.setLocation(60, 50);
 		JTextField cardNumberText1 = new JTextField();
@@ -153,13 +155,13 @@ public class Pay extends JDialog {
 		JTextField cardNumberText4 = new JTextField();
 		cardNumberText4.setSize(60, 40);
 		cardNumberText4.setLocation(300, 100);
-		JButton cardNumberInputOkButton = new JButton("È®ÀÎ");
+		JButton cardNumberInputOkButton = new JButton("í™•ì¸");
 		cardNumberInputOkButton.setSize(60, 40);
 		cardNumberInputOkButton.setLocation(200, 180);
-		JButton cardNumberInputCalcelButton = new JButton("Ãë¼Ò");
+		JButton cardNumberInputCalcelButton = new JButton("ì·¨ì†Œ");
 		cardNumberInputCalcelButton.setSize(60, 40);
 		cardNumberInputCalcelButton.setLocation(280, 180);
-		JLabel cardNumberInputCancelMsg = new JLabel("Ãë¼Ò¹öÆ°À» ´©¸£¸é »óÁ¡È­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+		JLabel cardNumberInputCancelMsg = new JLabel("ì·¨ì†Œë²„íŠ¼ì„ ëˆ„ë¥´ë©´ ìƒì í™”ë©´ìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
 		cardNumberInputCancelMsg.setSize(300, 40);
 		cardNumberInputCancelMsg.setLocation(70, 210);
 
@@ -169,10 +171,10 @@ public class Pay extends JDialog {
 		cardNumberError.setSize(200, 150);
 		cardNumberError.setLocation((screenSize.width - cardNumberError.getWidth()) / 2,
 				(screenSize.height - cardNumberError.getHeight()) / 2);
-		JLabel cardNumberErrorLabel = new JLabel("Ä«µå¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+		JLabel cardNumberErrorLabel = new JLabel("ì¹´ë“œë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 		cardNumberErrorLabel.setSize(150, 50);
 		cardNumberErrorLabel.setLocation(30, 40);
-		JButton cardNumberErrorOkButton = new JButton("È®ÀÎ");
+		JButton cardNumberErrorOkButton = new JButton("í™•ì¸");
 		cardNumberErrorOkButton.setSize(60, 40);
 		cardNumberErrorOkButton.setLocation(72, 90);
 		cardNumberError.add(cardNumberErrorLabel);
@@ -187,25 +189,25 @@ public class Pay extends JDialog {
 		cardNumberInput.add(cardNumberInputCalcelButton);
 		cardNumberInput.add(cardNumberInputCancelMsg);
 
-		// °èÁÂÀÌÃ¼ ¼±ÅÃ½Ã ¹øÈ£ÀÔ·Â
-		Dialog cashNumberInput = new Dialog(payDialog, "°èÁÂ¹øÈ£ ÀÔ·Â");
+		// ê³„ì¢Œì´ì²´ ì„ íƒì‹œ ë²ˆí˜¸ì…ë ¥
+		Dialog cashNumberInput = new Dialog(payDialog, "ê³„ì¢Œë²ˆí˜¸ ì…ë ¥");
 		cashNumberInput.setLayout(null);
 		cashNumberInput.setSize(400, 250);
 		cashNumberInput.setLocation((screenSize.width - cashNumberInput.getWidth()) / 2,
 				(screenSize.height - cashNumberInput.getHeight()) / 2);
-		JLabel cashNumberLabel = new JLabel("°èÁÂ¹øÈ£ ÀÔ·Â");
+		JLabel cashNumberLabel = new JLabel("ê³„ì¢Œë²ˆí˜¸ ì…ë ¥");
 		cashNumberLabel.setSize(150, 40);
 		cashNumberLabel.setLocation(60, 50);
 		JTextField cashText = new JTextField();
 		cashText.setSize(200, 40);
 		cashText.setLocation(120, 100);
-		JButton cashNumberInputOkButton = new JButton("È®ÀÎ");
+		JButton cashNumberInputOkButton = new JButton("í™•ì¸");
 		cashNumberInputOkButton.setSize(60, 40);
 		cashNumberInputOkButton.setLocation(170, 180);
-		JButton cashNumberInputCancelButton = new JButton("Ãë¼Ò");
+		JButton cashNumberInputCancelButton = new JButton("ì·¨ì†Œ");
 		cashNumberInputCancelButton.setSize(60, 40);
 		cashNumberInputCancelButton.setLocation(250, 180);
-		JLabel cashNumberInputCancelMsg = new JLabel("Ãë¼Ò¹öÆ°À» ´©¸£¸é »óÁ¡È­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+		JLabel cashNumberInputCancelMsg = new JLabel("ì·¨ì†Œë²„íŠ¼ì„ ëˆ„ë¥´ë©´ ìƒì í™”ë©´ìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
 		cashNumberInputCancelMsg.setSize(300, 40);
 		cashNumberInputCancelMsg.setLocation(70, 210);
 
@@ -214,17 +216,17 @@ public class Pay extends JDialog {
 		cashNumberError.setSize(200, 150);
 		cashNumberError.setLocation((screenSize.width - cashNumberError.getWidth()) / 2,
 				(screenSize.height - cashNumberInput.getHeight()) / 2);
-		JLabel cashNumberErrorLabel = new JLabel("°èÁÂ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+		JLabel cashNumberErrorLabel = new JLabel("ê³„ì¢Œë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 		cashNumberErrorLabel.setSize(150, 50);
 		cashNumberErrorLabel.setLocation(30, 40);
-		JButton cashNumberErrorOkButton = new JButton("È®ÀÎ");
+		JButton cashNumberErrorOkButton = new JButton("í™•ì¸");
 		cashNumberErrorOkButton.setSize(60, 40);
 		cashNumberErrorOkButton.setLocation(72, 90);
 		cashNumberError.add(cashNumberErrorOkButton);
 		cashNumberError.add(cashNumberErrorLabel);
 
-		// ÀºÇà¼±ÅÃ
-		String[] banks = { "½ÅÇÑ", "ÇÏ³ª", "³óÇù", "Ä«Ä«¿À", "´ë±¸", "ºÎ»ê" };
+		// ì€í–‰ì„ íƒ
+		String[] banks = { "ì‹ í•œ", "í•˜ë‚˜", "ë†í˜‘", "ì¹´ì¹´ì˜¤", "ëŒ€êµ¬", "ë¶€ì‚°" };
 		JComboBox banklist = new JComboBox(banks);
 		banklist.setSize(60, 40);
 		banklist.setLocation(60, 100);
@@ -235,79 +237,79 @@ public class Pay extends JDialog {
 		cashNumberInput.add(banklist);
 		cashNumberInput.add(cashNumberInputCancelMsg);
 
-		// Ä«µå°áÁ¦ ¼±ÅÃ ½Ã
+		// ì¹´ë“œê²°ì œ ì„ íƒ ì‹œ
 		card.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Ä«µå°áÁ¦ ¼±ÅÃ Ãâ·Â
-				cresult.setText("Ä«µå °áÁ¦ ¼±ÅÃµÇ¾ú½À´Ï´Ù.");
+				// ì¹´ë“œê²°ì œ ì„ íƒ ì¶œë ¥
+				cresult.setText("ì¹´ë“œ ê²°ì œ ì„ íƒë˜ì—ˆìŠµë‹ˆë‹¤.");
 
 			}
 		});
 
-		// °èÁÂÀÌÃ¼ ¼±ÅÃ ½Ã
+		// ê³„ì¢Œì´ì²´ ì„ íƒ ì‹œ
 		cash.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// °èÁÂÀÌÃ¼ ¼±ÅÃ Ãâ·Â
-				cresult.setText("°èÁÂ ÀÌÃ¼ ¼±ÅÃµÇ¾ú½À´Ï´Ù.");
+				// ê³„ì¢Œì´ì²´ ì„ íƒ ì¶œë ¥
+				cresult.setText("ê³„ì¢Œ ì´ì²´ ì„ íƒë˜ì—ˆìŠµë‹ˆë‹¤.");
 
 			}
 		});
 
-		// °áÁ¦±İ¾× ¼±ÅÃ ½Ã
-		// ±¸¸ÅÇÒ ÄÚÀÎ°³¼ö ³Ñ°ÜÁØ ÈÄ, °áÁ¦±İ¾× Ãâ·Â
-		b1.addActionListener(new ActionListener() {
+		// ê²°ì œê¸ˆì•¡ ì„ íƒ ì‹œ
+		// êµ¬ë§¤í•  ì½”ì¸ê°œìˆ˜ ë„˜ê²¨ì¤€ í›„, ê²°ì œê¸ˆì•¡ ì¶œë ¥
+		priceButton1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				buyCoin = 50;
-				presult.setText("5,000¿ø ¼±ÅÃµÇ¾ú½À´Ï´Ù.");
+				presult.setText("5,000ì› ì„ íƒë˜ì—ˆìŠµë‹ˆë‹¤.");
 
 			}
 		});
-		b2.addActionListener(new ActionListener() {
+		priceButton2.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				buyCoin = 105;
-				presult.setText("10,000¿ø ¼±ÅÃµÇ¾ú½À´Ï´Ù.");
+				presult.setText("10,000ì› ì„ íƒë˜ì—ˆìŠµë‹ˆë‹¤.");
 
 			}
 		});
-		b3.addActionListener(new ActionListener() {
+		priceButton3.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				buyCoin = 210;
-				presult.setText("20,000¿ø ¼±ÅÃµÇ¾ú½À´Ï´Ù.");
+				presult.setText("20,000ì› ì„ íƒë˜ì—ˆìŠµë‹ˆë‹¤.");
 
 			}
 		});
-		b4.addActionListener(new ActionListener() {
+		priceButton4.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				buyCoin = 315;
-				presult.setText("30,000¿ø ¼±ÅÃµÇ¾ú½À´Ï´Ù.");
+				presult.setText("30,000ì› ì„ íƒë˜ì—ˆìŠµë‹ˆë‹¤.");
 
 			}
 		});
-		b5.addActionListener(new ActionListener() {
+		priceButton5.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				buyCoin = 550;
-				presult.setText("50,000¿ø ¼±ÅÃµÇ¾ú½À´Ï´Ù.");
+				presult.setText("50,000ì› ì„ íƒë˜ì—ˆìŠµë‹ˆë‹¤.");
 
 			}
 		});
 
 		// --------------------------------------------------------------------------------
-		// ÃæÀüÇÏ±â ¹öÆ°
-		JButton payButton = new JButton("ÃæÀüÇÏ±â");
+		// ì¶©ì „í•˜ê¸° ë²„íŠ¼
+		JButton payButton = new JButton("ì¶©ì „í•˜ê¸°");
 		payButton.setLocation(180, 500);
 		payButton.setSize(90, 30);
 		this.add(payButton);
@@ -325,95 +327,96 @@ public class Pay extends JDialog {
 		payDialog.add(paySelect);
 		payDialog.add(chargeCoinNum);
 
-		// ¾Æ¹«°Íµµ ¼±ÅÃÇÏÁö ¾Ê¾ÒÀ»¶§ °æ°íÃ¢
+		// ì•„ë¬´ê²ƒë„ ì„ íƒí•˜ì§€ ì•Šì•˜ì„ë•Œ ê²½ê³ ì°½
 		Dialog nochooseDialog = new Dialog(this, "nochooseLabel!");
 		nochooseDialog.setLayout(null);
 		nochooseDialog.setSize(300, 150);
 		nochooseDialog.setLocation((screenSize.width - nochooseDialog.getWidth()) / 2,
 				(screenSize.height - nochooseDialog.getHeight()) / 2);
 
-		JLabel nochooseLabel = new JLabel("°áÁ¦¹æ½Ä°ú ±İ¾×À» ¼±ÅÃÇØÁÖ¼¼¿ä!");
+		JLabel nochooseLabel = new JLabel("ê²°ì œë°©ì‹ê³¼ ê¸ˆì•¡ì„ ì„ íƒí•´ì£¼ì„¸ìš”!");
 		nochooseLabel.setSize(200, 100);
 		nochooseLabel.setLocation(60, 20);
-		JButton nochooseOkButton = new JButton("È®ÀÎ");
+		JButton nochooseOkButton = new JButton("í™•ì¸");
 		nochooseOkButton.setSize(70, 30);
 		nochooseOkButton.setLocation(120, 100);
 		nochooseDialog.add(nochooseLabel);
 		nochooseDialog.add(nochooseOkButton);
 
-		// ÃæÀüÇÏ±â Å¬¸¯½Ã ÆË¾÷
+		// ì¶©ì „í•˜ê¸° í´ë¦­ì‹œ íŒì—…
 
 		payButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// °áÁ¦¹æ½ÄÀÌ ¼±ÅÃµÇÁö ¾Ê¾ÒÀ» ¶§
+				// ê²°ì œë°©ì‹ì´ ì„ íƒë˜ì§€ ì•Šì•˜ì„ ë•Œ
 				if (!cash.isSelected() && !card.isSelected()) {
-					// °æ°íÃ¢ ¶ç¿ò
+					// ê²½ê³ ì°½ ë„ì›€
 					nochooseDialog.setVisible(true);
 
-					// °æ°íÃ¢ È®ÀÎ¹öÆ° Å¬¸¯½Ã
+					// ê²½ê³ ì°½ í™•ì¸ë²„íŠ¼ í´ë¦­ì‹œ
 					nochooseOkButton.addActionListener(new ActionListener() {
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							// °æ°íÃ¢ »ç¶óÁü
+							// ê²½ê³ ì°½ ì‚¬ë¼ì§
 							nochooseDialog.dispose();
 
 						}
 					});
 
-					// °áÁ¦±İ¾×ÀÌ ¼±ÅÃµÇÁö ¾Ê¾ÒÀ» ¶§
-				} else if (!b1.isSelected() && !b2.isSelected() && !b3.isSelected() && !b4.isSelected()
-						&& !b5.isSelected()) {
-					// °æ°íÃ¢ ¶ç¿ò
+					// ê²°ì œê¸ˆì•¡ì´ ì„ íƒë˜ì§€ ì•Šì•˜ì„ ë•Œ
+				} else if (!priceButton1.isSelected() && !priceButton2.isSelected() && !priceButton3.isSelected() && !priceButton4.isSelected()
+						&& !priceButton5.isSelected()) {
+					// ê²½ê³ ì°½ ë„ì›€
 					nochooseDialog.setVisible(true);
 
-					// °æ°íÃ¢ È®ÀÎ¹öÆ° Å¬¸¯½Ã
+					// ê²½ê³ ì°½ í™•ì¸ë²„íŠ¼ í´ë¦­ì‹œ
 					nochooseOkButton.addActionListener(new ActionListener() {
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							// °æ°íÃ¢ »ç¶óÁü
+							// ê²½ê³ ì°½ ì‚¬ë¼ì§
 							nochooseDialog.dispose();
 
 						}
 					});
-					// °áÁ¦¹æ½Ä °áÁ¦±İ¾× ¸ğµÎ ¼±ÅÃ µÇ¾úÀ» ¶§
+					// ê²°ì œë°©ì‹ ê²°ì œê¸ˆì•¡ ëª¨ë‘ ì„ íƒ ë˜ì—ˆì„ ë•Œ
 				} else {
 
-					// Ä«µå ¼±ÅÃ
+					// ì¹´ë“œ ì„ íƒ
 					if (card.isSelected()) {
-						// Ä«µå¹øÈ£ ÀÔ·Â ÆË¾÷ Ãâ·Â
+						// ì¹´ë“œë²ˆí˜¸ ì…ë ¥ íŒì—… ì¶œë ¥
 						cardNumberInput.setVisible(true);
 
-						// Ä«µå¹øÈ£ ÀÔ·Â ÆË¾÷ È®ÀÎ ¹öÆ° Å¬¸¯
+						// ì¹´ë“œë²ˆí˜¸ ì…ë ¥ íŒì—… í™•ì¸ ë²„íŠ¼ í´ë¦­
 						cardNumberInputOkButton.addActionListener(new ActionListener() {
 
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								// Ä«µå¹øÈ£ ¹ÌÀÔ·Â½Ã
+								// ì¹´ë“œë²ˆí˜¸ ë¯¸ì…ë ¥ì‹œ
 								if (cardNumberText1.getText().isEmpty() || cardNumberText2.getText().isEmpty()
 										|| cardNumberText3.getText().isEmpty() || cardNumberText4.getText().isEmpty()) {
-									// Ä«µå¹øÈ£ ¹ÌÀÔ·Â ¿¡·¯ ÆË¾÷ Ãâ·Â
+									// ì¹´ë“œë²ˆí˜¸ ë¯¸ì…ë ¥ ì—ëŸ¬ íŒì—… ì¶œë ¥
 									cardNumberError.setVisible(true);
 
-									// Ä«µå¹øÈ£ ÀÔ·Â½Ã
+									// ì¹´ë“œë²ˆí˜¸ ì…ë ¥ì‹œ
 								} else {
-									// Ä«µå¹øÈ£ ÀÔ·Â ÆË¾÷ »ç¶óÁü
+									// ì¹´ë“œë²ˆí˜¸ ì…ë ¥ íŒì—… ì‚¬ë¼ì§
 									cardNumberInput.dispose();
-									// ÀÔ·ÂµÈ Ä«µå¹øÈ£ °¡Á®¿Í¼­ Ãâ·Â
-									chooseSelect.setText("Ä«µå¹øÈ£ : " + cardNumberText1.getText() + "-"
+									// ì…ë ¥ëœ ì¹´ë“œë²ˆí˜¸ ê°€ì ¸ì™€ì„œ ì¶œë ¥
+									chooseSelect.setText("ì¹´ë“œë²ˆí˜¸ : " + cardNumberText1.getText() + "-"
 											+ cardNumberText2.getText() + "-" + cardNumberText3.getText() + "-"
 											+ cardNumberText4.getText());
-									// ¼±ÅÃµÈ °áÁ¦¹æ½Ä °¡Á®¿Í¼­ Ãâ·Â
+									// ì„ íƒëœ ê²°ì œë°©ì‹ ê°€ì ¸ì™€ì„œ ì¶œë ¥
 									paySelect.setText(presult.getText());
-									// ÃæÀüÇÒ ÄÚÀÎ°³¼ö °¡Á®¿Í¼­ Ãâ·Â
-									chargeCoinNum.setText(buyCoin + "°³ ÃæÀüÇÏ½Ã°Ú½À´Ï±î?");
+									// ì¶©ì „í•  ì½”ì¸ê°œìˆ˜ ê°€ì ¸ì™€ì„œ ì¶œë ¥
+									chargeCoinNum.setText(buyCoin + "ê°œ ì¶©ì „í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
+									u.setCoin(u.getCoin() + buyCoin);
 									payDialog.setVisible(true);
 								}
 
-								// ÀÔ·ÂµÈ °ª ÃÊ±âÈ­
+								// ì…ë ¥ëœ ê°’ ì´ˆê¸°í™”
 								cardNumberText1.setText(null);
 								cardNumberText2.setText(null);
 								cardNumberText3.setText(null);
@@ -423,35 +426,36 @@ public class Pay extends JDialog {
 						});
 					}
 
-					// °èÁÂÀÌÃ¼ ¼±ÅÃ
+					// ê³„ì¢Œì´ì²´ ì„ íƒ
 					if (cash.isSelected()) {
-						// °èÁÂ¹øÈ£ ÀÔ·Â ÆË¾÷ Ãâ·Â
+						// ê³„ì¢Œë²ˆí˜¸ ì…ë ¥ íŒì—… ì¶œë ¥
 						cashNumberInput.setVisible(true);
 
-						// È®ÀÎ¹öÆ° Å¬¸¯
+						// í™•ì¸ë²„íŠ¼ í´ë¦­
 						cashNumberInputOkButton.addActionListener(new ActionListener() {
 
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								// °èÁÂ¹øÈ£ ¹Ì ÀÔ·Â½Ã
+								// ê³„ì¢Œë²ˆí˜¸ ë¯¸ ì…ë ¥ì‹œ
 								if (cashText.getText().isEmpty()) {
-									// °èÁÂ¹øÈ£ ¹ÌÀÔ·Â ¿¡·¯ ÆË¾÷ Ãâ·Â
+									// ê³„ì¢Œë²ˆí˜¸ ë¯¸ì…ë ¥ ì—ëŸ¬ íŒì—… ì¶œë ¥
 									cashNumberError.setVisible(true);
 								}
 
-								// °èÁÂ¹øÈ£ ÀÔ·Â½Ã
+								// ê³„ì¢Œë²ˆí˜¸ ì…ë ¥ì‹œ
 								if (!cashText.getText().isEmpty()) {
-									// °èÁÂ¹øÈ£ ÀÔ·Â ÆË¾÷ »ç¶óÁü
+									// ê³„ì¢Œë²ˆí˜¸ ì…ë ¥ íŒì—… ì‚¬ë¼ì§
 									cashNumberInput.dispose();
-									// ÀÔ·ÂµÈ °èÁÂ¹øÈ£ °¡Á®¿Í¼­ Ãâ·Â
+									// ì…ë ¥ëœ ê³„ì¢Œë²ˆí˜¸ ê°€ì ¸ì™€ì„œ ì¶œë ¥
 									chooseSelect.setText(banklist.getSelectedItem() + " - " + cashText.getText());
-									// ¼±ÅÃµÈ °áÁ¦¹æ½Ä °¡Á®¿Í¼­ Ãâ·Â
+									// ì„ íƒëœ ê²°ì œë°©ì‹ ê°€ì ¸ì™€ì„œ ì¶œë ¥
 									paySelect.setText(presult.getText());
-									// ÃæÀüÇÒ ÄÚÀÎ°è¼ö °¡Á®¿Í¼­ Ãâ·Â
-									chargeCoinNum.setText(buyCoin + "°³ ÃæÀüÇÏ½Ã°Ú½À´Ï±î?");
+									// ì¶©ì „í•  ì½”ì¸ê³„ìˆ˜ ê°€ì ¸ì™€ì„œ ì¶œë ¥
+									chargeCoinNum.setText(buyCoin + "ê°œ ì¶©ì „í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
+									u.setCoin(u.getCoin() + buyCoin);
 									payDialog.setVisible(true);
 								}
-								// ÀÔ·ÂµÈ °ª ÃÊ±âÈ­
+								// ì…ë ¥ëœ ê°’ ì´ˆê¸°í™”
 								cashText.setText(null);
 
 							}
@@ -463,33 +467,33 @@ public class Pay extends JDialog {
 			}
 		});
 
-		// ÃæÀüÈ®ÀÎ¹öÆ°
+		// ì¶©ì „í™•ì¸ë²„íŠ¼
 		payDialogCancelButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// ÃæÀüÇÏ±â ÆË¾÷ »ç¶óÁü
+				// ì¶©ì „í•˜ê¸° íŒì—… ì‚¬ë¼ì§
 				payDialog.dispose();
 
 			}
 		});
 
-		// Ä«µå°áÁ¦ ¿¡·¯ È®ÀÎ¹öÆ°
+		// ì¹´ë“œê²°ì œ ì—ëŸ¬ í™•ì¸ë²„íŠ¼
 		cardNumberErrorOkButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Ä«µå¹øÈ£ ÀÔ·Â ¿¡·¯ ÆË¾÷ »ç¶óÁü
+				// ì¹´ë“œë²ˆí˜¸ ì…ë ¥ ì—ëŸ¬ íŒì—… ì‚¬ë¼ì§
 				cardNumberError.dispose();
 			}
 		});
 
-		// Ä«µå¹øÈ£ÀÔ·Â Ãë¼Ò¹öÆ°
+		// ì¹´ë“œë²ˆí˜¸ì…ë ¥ ì·¨ì†Œë²„íŠ¼
 		cardNumberInputCalcelButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// °áÁ¦Ã¢ Á¾·á
+				// ê²°ì œì°½ ì¢…ë£Œ
 				cardNumberText1.setText(null);
 				cardNumberText2.setText(null);
 				cardNumberText3.setText(null);
@@ -499,76 +503,76 @@ public class Pay extends JDialog {
 			}
 		});
 
-		// °èÁÂÀÌÃ¼ ¿¡·¯ È®ÀÎ¹öÆ°
+		// ê³„ì¢Œì´ì²´ ì—ëŸ¬ í™•ì¸ë²„íŠ¼
 		cashNumberErrorOkButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// °èÁÂ¹øÈ£ ÀÔ·Â ¿¡·¯ ÆË¾÷ »ç¶óÁü
+				// ê³„ì¢Œë²ˆí˜¸ ì…ë ¥ ì—ëŸ¬ íŒì—… ì‚¬ë¼ì§
 				cashNumberError.dispose();
 			}
 		});
 
-		// °èÁÂ¹øÈ£ÀÔ·Â Ãë¼Ò¹öÆ°
+		// ê³„ì¢Œë²ˆí˜¸ì…ë ¥ ì·¨ì†Œë²„íŠ¼
 		cashNumberInputCancelButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// ÀÔ·ÂµÈ Ä«µå¹øÈ£ ÃÊ±âÈ­ ÈÄ °áÁ¦Ã¢ Á¾·á
+				// ì…ë ¥ëœ ì¹´ë“œë²ˆí˜¸ ì´ˆê¸°í™” í›„ ê²°ì œì°½ ì¢…ë£Œ
 				cashText.setText(null);
 				dispose();
 			}
 		});
 
 		// --------------------------------------------------------------------------------
-		// ÃæÀüÈ®ÀÎ½Ã ¹æ½Ä,±İ¾× È®ÀÎ ÆË¾÷
-		Dialog payCompleteDialog = new Dialog(this, "ÃæÀü¿Ï·á");
+		// ì¶©ì „í™•ì¸ì‹œ ë°©ì‹,ê¸ˆì•¡ í™•ì¸ íŒì—…
+		Dialog payCompleteDialog = new Dialog(this, "ì¶©ì „ì™„ë£Œ");
 		payCompleteDialog.setLayout(null);
 		payCompleteDialog.setSize(200, 150);
 		payCompleteDialog.setLocation((screenSize.width - payCompleteDialog.getWidth()) / 2,
 				(screenSize.height - payCompleteDialog.getHeight()) / 2);
 
-		JLabel payCompleteLabel = new JLabel("°áÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+		JLabel payCompleteLabel = new JLabel("ê²°ì œê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 		payCompleteLabel.setSize(150, 100);
 		payCompleteLabel.setLocation(35, 20);
 		payCompleteDialog.add(payCompleteLabel);
-		JButton payCompleteOkButton = new JButton("È®ÀÎ");
+		JButton payCompleteOkButton = new JButton("í™•ì¸");
 		payCompleteOkButton.setSize(60, 30);
 		payCompleteOkButton.setLocation(70, 100);
 		payCompleteDialog.add(payCompleteOkButton);
 
-		// °áÁ¦¿Ï·á È®ÀÎ Å¬¸¯
+		// ê²°ì œì™„ë£Œ í™•ì¸ í´ë¦­
 		payCompleteOkButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// °áÁ¦Ã¢ Á¾·á
+				// ê²°ì œì°½ ì¢…ë£Œ
 				dispose();
 			}
 		});
 
-		// ÃæÀü¿Ï·á È®ÀÎ Å¬¸¯ ½Ã ÆË¾÷
+		// ì¶©ì „ì™„ë£Œ í™•ì¸ í´ë¦­ ì‹œ íŒì—…
 		payDialogOkButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// °áÁ¦ ¿Ï·á ÆË¾÷ Ãâ·Â
+				// ê²°ì œ ì™„ë£Œ íŒì—… ì¶œë ¥
 				payCompleteDialog.setVisible(true);
-
+				u.setCoin(u.getCoin());
 			}
 
 		});
 
-		JButton exit = new JButton("»óÁ¡À¸·Î");
+		JButton exit = new JButton("ìƒì ìœ¼ë¡œ");
 		exit.setLocation(280, 500);
 		exit.setSize(90, 30);
 		this.add(exit);
 
-		// »óÁ¡À¸·Î Å¬¸¯½Ã ÆË¾÷
+		// ìƒì ìœ¼ë¡œ í´ë¦­ì‹œ íŒì—…
 		exit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose(); // Ã¢ Á¾·á
+				dispose(); // ì°½ ì¢…ë£Œ
 			}
 		});
 
