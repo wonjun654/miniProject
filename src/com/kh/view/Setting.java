@@ -30,18 +30,18 @@ public class Setting extends JFrame {
 		panel.setLocation(30, 20);
 		panel.setSize(400, 400);
 
-		JLabel label = new JLabel("¹è°æÀ½¾Ç");
+		JLabel label = new JLabel("ë°°ê²½ìŒì•…");
 		label.setLocation(10, 40);
 		label.setSize(120, 120);
 
-		JLabel label2 = new JLabel("ÇÁ·ÎÇÊ");
+		JLabel label2 = new JLabel("í”„ë¡œí•„");
 		label2.setLocation(10, 120);
 		label2.setSize(120, 120);
 
-		JButton button = new JButton("È®ÀÎ");
+		JButton button = new JButton("í™•ì¸");
 		button.setSize(60, 50);
 		button.setLocation(280, 250);
-		///////////// ÇÁ·ÎÇÊ °ø°³////////////////
+		///////////// í”„ë¡œí•„ ê³µê°œ////////////////
 		JRadioButton profileOn = new JRadioButton("On");
 		JRadioButton profileOff = new JRadioButton("OFF");
 
@@ -50,7 +50,7 @@ public class Setting extends JFrame {
 
 		profileOff.setSize(50, 50);
 		profileOff.setLocation(200, 155);
-		///////////// ¹è°æÀ½¾Ç ¼³Á¤/////////////////
+		///////////// ë°°ê²½ìŒì•… ì„¤ì •/////////////////
 		JRadioButton musicOn = new JRadioButton("On");
 		JRadioButton musicOff = new JRadioButton("OFF");
 		
@@ -72,7 +72,7 @@ public class Setting extends JFrame {
 		panel.add(profileOn);
 		panel.add(profileOff);
 
-		// ------------------ÇÁ·ÎÇÊ¿ÀÇÁ----------------
+		// ------------------í”„ë¡œí•„ì˜¤í”„----------------
 		profileOff.addActionListener(new ActionListener() {
 
 			@Override
@@ -81,7 +81,7 @@ public class Setting extends JFrame {
 
 			}
 		});
-		// -----------------------ÇÁ·ÎÇÊ ¿Â----------------
+		// -----------------------í”„ë¡œí•„ ì˜¨----------------
 
 		profileOn.addActionListener(new ActionListener() {
 
@@ -91,7 +91,7 @@ public class Setting extends JFrame {
 
 			}
 		});
-		//---------------À½¾Ç on---------------
+		//---------------ìŒì•… on---------------
 		musicOn.addActionListener(new ActionListener() {
 
 			@Override
@@ -100,7 +100,7 @@ public class Setting extends JFrame {
 			
 			}
 		});
-		// --------------À½¾Ç off-------------
+		// --------------ìŒì•… off-------------
 		musicOff.addActionListener(new ActionListener() {
 
 			@Override
@@ -110,7 +110,7 @@ public class Setting extends JFrame {
 			}
 		});
 
-		// È®ÀÎ¹öÆ° -----------------------------------------
+		// í™•ì¸ë²„íŠ¼ -----------------------------------------
 		button.addActionListener(new ActionListener() {
 
 			@Override
@@ -135,6 +135,12 @@ public class Setting extends JFrame {
 		this.add(panel);
 
 		this.setVisible(true);
+
+
+
+
+		this.setLocationRelativeTo(null);
+		
 
 	}
 
