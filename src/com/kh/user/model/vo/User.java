@@ -7,6 +7,15 @@ public class User implements Serializable {
 	private String userPwd;
 	private String userName;
 	private String email;
+	private int coin;
+	
+	public int getCoin() {
+		return coin;
+	}
+
+	public void setCoin(int coin) {
+		this.coin = coin;
+	}
 	
 	public User() {}
 	
