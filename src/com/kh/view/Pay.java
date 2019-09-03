@@ -327,6 +327,7 @@ public class Pay extends JDialog {
 			}
 		});
 		this.setVisible(true);
+		this.setLocationRelativeTo(null);
 
 	}
 

@@ -271,6 +271,7 @@ public class Store extends JFrame {
 	      });
 	      
 		this.setVisible(true);
+		this.setLocationRelativeTo(null);
 	
 	}
 }

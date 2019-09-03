@@ -5,7 +5,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class User {
-	private Image img = new ImageIcon("hello\\yangpa.PNG").getImage().getScaledInstance(150, 150, 0);
+	private Image img = new ImageIcon("images\\yangpa.PNG").getImage().getScaledInstance(150, 150, 0);
 	private boolean profile = true;
 	private int musicVolume = 30;
 	

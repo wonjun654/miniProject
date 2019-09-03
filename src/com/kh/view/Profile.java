@@ -80,14 +80,19 @@ public class Profile extends JFrame{
 		button.setLocation(200, 130);
 		button.setSize(120, 30);
 
-		JButton button2 = new JButton("쪽지함");
+		JButton button2 = new JButton("나가기");
 		button2.setLocation(400, 130);
 		button2.setSize(120, 30);
 
 		JButton button3 = new JButton("확인");
 		sd.add(button3);
 		button3.setSize(80,50);
-		button3.setLocation(280, 400);
+		button3.setLocation(180, 400);
+		
+		JButton btnOut = new JButton("취소");
+		sd.add(btnOut);
+		btnOut.setSize(80,50);
+		btnOut.setLocation(280, 400);
 		
 		
 
@@ -110,7 +115,7 @@ public class Profile extends JFrame{
 				JComboBox cb = (JComboBox)e.getSource();
 				 String name = (String)cb.getSelectedItem();
 
-				 img = new ImageIcon("hello\\"+name+".PNG").getImage().getScaledInstance(150, 150, 0);
+				 img = new ImageIcon("images\\"+name+".PNG").getImage().getScaledInstance(150, 150, 0);
 
 				label5.setIcon(new ImageIcon(img));
 
@@ -130,7 +135,7 @@ public class Profile extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				dispose();
 				
 			}
 		});
@@ -148,6 +153,15 @@ public class Profile extends JFrame{
 			}
 			});
 		
+		btnOut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sd.dispose();
+				
+			}
+		});
+		
 	
 		
 		sd.add(charlist);
@@ -164,6 +178,7 @@ public class Profile extends JFrame{
 		panel.add(button);
 		panel.add(button2);
 		this.add(panel);
+		this.setLocationRelativeTo(null);
 
 		
 		

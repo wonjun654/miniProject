@@ -49,7 +49,12 @@ public class Setting extends JFrame{
 
 		JButton button = new JButton("확인");
 		button.setSize(60, 50);
-		button.setLocation(280, 250);
+		button.setLocation(180, 250);
+		
+		JButton btnOut = new JButton("취소");
+		btnOut.setSize(60, 50);
+		btnOut.setLocation(280, 250);
+		
 		/////////////////////////////
 		JRadioButton profileOn = new JRadioButton("On");
 		JRadioButton profileOff = new JRadioButton("OFF");
@@ -108,18 +113,28 @@ public class Setting extends JFrame{
 				System.out.println(user.getProfile());
 			}
 		});
+		
+		btnOut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				
+			}
+		});
 
 		this.setLayout(null);
 		panel.setLayout(null);
 
 		panel.add(button);
-
+		panel.add(btnOut);
 		panel.add(label);
 		panel.add(label2);
 
 		this.add(panel);
 
 		this.setVisible(true);
+		this.setLocationRelativeTo(null);
 		
 	}
 
