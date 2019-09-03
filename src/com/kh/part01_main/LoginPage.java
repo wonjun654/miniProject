@@ -107,6 +107,8 @@ public class LoginPage extends JFrame {
             	str += idText.getText() + ":";
         		str += pwField.getText();
         		System.out.println(str);
+        		
+        		
         		if(um.login(str)) {
         			JOptionPane.showMessageDialog(null, "로그인 성공 !");
         			MainMenu menu = new MainMenu();

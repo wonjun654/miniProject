@@ -17,6 +17,8 @@ public class SIgnUp extends JPanel {
 		btnNewButton.setLayout(null);
 		btnNewButton.setBounds(175, 188, 70, 25);
 		btnNewButton.addActionListener(new ActionListener() {
+			
+			
 			public void actionPerformed(ActionEvent e) {
 			}
 		});

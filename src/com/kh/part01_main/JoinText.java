@@ -115,7 +115,7 @@ public class JoinText extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				LoginPage lp = new LoginPage();
+				dispose();
 			}
 		});
         
