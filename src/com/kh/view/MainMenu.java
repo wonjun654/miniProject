@@ -1,6 +1,5 @@
 package com.kh.view;
 
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -36,16 +35,13 @@ public class MainMenu extends JFrame {
 	public List<JButton> btList;
 	public String row1[][];
 
-
 	public MainMenu() {
 
 		super("MainMenuPage");
 
 		String col1[] = { "방이름", "상태", "인원" };
-		
 
 		String row1[][] = { { "a1", "a2", "a3" }, { "b1", "b2", "b3" }, { "c1", "c2", "c3" } };
-
 
 		model1 = new DefaultTableModel(row1, col1) {
 			public boolean isCellEditable(int row, int column) {
@@ -57,7 +53,6 @@ public class MainMenu extends JFrame {
 		JScrollPane js1 = new JScrollPane(table1);
 		table1.getTableHeader().setReorderingAllowed(false);
 
-
 		Dimension frameSize = this.getSize(); // 프레임 사이즈
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
 
@@ -66,14 +61,12 @@ public class MainMenu extends JFrame {
 		js1.setBounds(80, 150, 700, 320);
 		add(js1);
 
-
 		setLayout(null);
 
 		this.setBounds(300, 200, 1024, 768);
 
 		this.setSize(1024, 768);
 		this.setLocation((screenSize.width - this.getWidth()) / 2, (screenSize.height - this.getHeight()) / 2);
-
 
 		// Layout 지정 없이 위치 지정하면서 배치하는 방법이다.
 		this.setLayout(null);
@@ -86,8 +79,6 @@ public class MainMenu extends JFrame {
 		JButton profilebtn = new JButton(new ImageIcon(profileimg));
 		profilebtn.setLocation(10, 10);
 		profilebtn.setSize(75, 75);
-
-
 
 		JButton makebtn = new JButton(new ImageIcon(makeimg));
 		makebtn.setLocation(765, 500);
@@ -122,9 +113,6 @@ public class MainMenu extends JFrame {
 
 			}
 		});
-
-
-		
 
 		profilebtn.addActionListener(new ActionListener() {
 

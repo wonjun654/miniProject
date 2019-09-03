@@ -16,8 +16,6 @@ import javax.swing.event.ChangeListener;
 import com.kh.model.vo.MediaTest;
 import com.kh.model.vo.User;
 
-import javafx.util.converter.NumberStringConverter;
-
 public class Setting extends JFrame {
 	User user = new User();
 
@@ -30,18 +28,18 @@ public class Setting extends JFrame {
 		panel.setLocation(30, 20);
 		panel.setSize(400, 400);
 
-		JLabel label = new JLabel("ë°°ê²½ìŒì•…");
+		JLabel label = new JLabel("¹è°æÀ½¾Ç");
 		label.setLocation(10, 40);
 		label.setSize(120, 120);
 
-		JLabel label2 = new JLabel("í”„ë¡œí•„");
+		JLabel label2 = new JLabel("ÇÁ·ÎÇÊ");
 		label2.setLocation(10, 120);
 		label2.setSize(120, 120);
 
-		JButton button = new JButton("í™•ì¸");
+		JButton button = new JButton("È®ÀÎ");
 		button.setSize(60, 50);
 		button.setLocation(280, 250);
-		///////////// í”„ë¡œí•„ ê³µê°œ////////////////
+		///////////// ÇÁ·ÎÇÊ °ø°³////////////////
 		JRadioButton profileOn = new JRadioButton("On");
 		JRadioButton profileOff = new JRadioButton("OFF");
 
@@ -50,10 +48,10 @@ public class Setting extends JFrame {
 
 		profileOff.setSize(50, 50);
 		profileOff.setLocation(200, 155);
-		///////////// ë°°ê²½ìŒì•… ì„¤ì •/////////////////
+		///////////// ¹è°æÀ½¾Ç ¼³Á¤/////////////////
 		JRadioButton musicOn = new JRadioButton("On");
 		JRadioButton musicOff = new JRadioButton("OFF");
-		
+
 		musicOn.setSize(50, 50);
 		musicOn.setLocation(100, 75);
 
@@ -62,7 +60,7 @@ public class Setting extends JFrame {
 
 		ButtonGroup profilegroup = new ButtonGroup();
 		ButtonGroup musicgroup = new ButtonGroup();
-		
+
 		profilegroup.add(profileOn);
 		profilegroup.add(profileOff);
 		musicgroup.add(musicOn);
@@ -72,7 +70,7 @@ public class Setting extends JFrame {
 		panel.add(profileOn);
 		panel.add(profileOff);
 
-		// ------------------í”„ë¡œí•„ì˜¤í”„----------------
+		// ------------------ÇÁ·ÎÇÊ¿ÀÇÁ----------------
 		profileOff.addActionListener(new ActionListener() {
 
 			@Override
@@ -81,7 +79,7 @@ public class Setting extends JFrame {
 
 			}
 		});
-		// -----------------------í”„ë¡œí•„ ì˜¨----------------
+		// -----------------------ÇÁ·ÎÇÊ ¿Â----------------
 
 		profileOn.addActionListener(new ActionListener() {
 
@@ -91,36 +89,33 @@ public class Setting extends JFrame {
 
 			}
 		});
-		//---------------ìŒì•… on---------------
+		// ---------------À½¾Ç on---------------
 		musicOn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				user.setMusicSet(true);
-			
+
 			}
 		});
-		// --------------ìŒì•… off-------------
+		// --------------À½¾Ç off-------------
 		musicOff.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				user.setMusicSet(false);
-			
+
 			}
 		});
 
-		// í™•ì¸ë²„íŠ¼ -----------------------------------------
+		// È®ÀÎ¹öÆ° -----------------------------------------
 		button.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-
-
 				dispose();
-				
-			
+
 			}
 		});
 
@@ -136,11 +131,7 @@ public class Setting extends JFrame {
 
 		this.setVisible(true);
 
-
-
-
 		this.setLocationRelativeTo(null);
-		
 
 	}
 

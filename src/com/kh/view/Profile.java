@@ -23,7 +23,7 @@ public class Profile extends JFrame {
 	Image img = user.getImg();
 
 	public Profile() {
-		// ê¸°ë³¸ í”„ë¡œí•„ì°½-----------------------------------------------
+		// ±âº» ÇÁ·ÎÇÊÃ¢-----------------------------------------------
 
 		this.setBounds(700, 300, 600, 300);
 
@@ -32,26 +32,24 @@ public class Profile extends JFrame {
 		panel.setLocation(30, 20);
 		panel.setSize(600, 300);
 
-		// í”„ë¡œí•„ì„¤ì •ì°½ ------------------------------------------------
-		Dialog sd = new Dialog(this, "í”„ë¡œí•„ í™”ë©´ ë³€ê²½");
+		// ÇÁ·ÎÇÊ¼³Á¤Ã¢ ------------------------------------------------
+		Dialog sd = new Dialog(this, "ÇÁ·ÎÇÊ È­¸é º¯°æ");
 		sd.setBounds(800, 250, 400, 500);
-		sd.add(new JLabel("ì´ë¦„"));
+		sd.add(new JLabel("ÀÌ¸§"));
 		sd.setLayout(null);
 
 		//////
-
-		
 
 		JLabel label = new JLabel(new ImageIcon(img));
 		label.setLocation(10, 10);
 		label.setSize(150, 150);
 		label.setBackground(Color.black);
 
-		JLabel label2 = new JLabel("ìš°ìŠ¹");
+		JLabel label2 = new JLabel("¿ì½Â");
 		label2.setLocation(250, 30);
 		label2.setSize(80, 30);
 
-		JLabel label3 = new JLabel("ì½”ì¸");
+		JLabel label3 = new JLabel("ÄÚÀÎ");
 		label3.setLocation(450, 30);
 		label3.setSize(80, 30);
 
@@ -71,28 +69,27 @@ public class Profile extends JFrame {
 		label7.setSize(80, 30);
 		label7.setLocation(460, 80);
 
-		JButton button = new JButton("í”„ë¡œí•„ ì„¤ì •");
+		JButton button = new JButton("ÇÁ·ÎÇÊ ¼³Á¤");
 		button.setLocation(200, 130);
 		button.setSize(120, 30);
 
-		JButton button2 = new JButton("ìª½ì§€í•¨");
+		JButton button2 = new JButton("ÂÊÁöÇÔ");
 		button2.setLocation(400, 130);
 		button2.setSize(120, 30);
 
-		JButton button3 = new JButton("í™•ì¸");
+		JButton button3 = new JButton("È®ÀÎ");
 		sd.add(button3);
 
 		button3.setSize(80, 50);
 		button3.setLocation(280, 400);
 
-		JButton button4 = new JButton("í™•ì¸");
+		JButton button4 = new JButton("È®ÀÎ");
 		button4.setSize(80, 40);
 		button4.setLocation(440, 190);
 
+		// ÂÊÁöÇÔ ¹öÆ°2
 
-		// ìª½ì§€í•¨ ë²„íŠ¼2
-
-		// ì´ë¯¸ì§€ ë°”ê¾¸ê¸°
+		// ÀÌ¹ÌÁö ¹Ù²Ù±â
 		String[] character = { "yangpa", "jumuk", "baechu" };
 
 		JComboBox charlist = new JComboBox(character);
@@ -104,24 +101,20 @@ public class Profile extends JFrame {
 		String name = null;
 		charlist.addActionListener(new ActionListener() {
 
-			
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 
 				JComboBox cb = (JComboBox) e.getSource();
 				String name = (String) cb.getSelectedItem();
 
 				icon = new ImageIcon("images/" + name + ".PNG").getImage().getScaledInstance(150, 150, 0);
 
-
 				label5.setIcon(new ImageIcon(icon));
 
 			}
 		});
 
-		/// í”„ë¡œí•„ì„¤ì •
+		/// ÇÁ·ÎÇÊ¼³Á¤
 		button.addActionListener(new ActionListener() {
 
 			@Override
@@ -129,17 +122,15 @@ public class Profile extends JFrame {
 				sd.setVisible(true);
 			}
 		});
-		// ìª½ì§€í•¨
+		// ÂÊÁöÇÔ
 		button2.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-
-
 			}
 		});
-		// sd í™•ì¸
+		// sd È®ÀÎ
 		button3.addActionListener(new ActionListener() {
 
 			@Override
@@ -149,21 +140,18 @@ public class Profile extends JFrame {
 				user.setImg(icon);
 				label.setIcon(new ImageIcon(img));
 				sd.dispose();
-				
 
 			}
 
 		});
 		button4.addActionListener(new ActionListener() {
 
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				dispose();
 			}
 		});
-
 
 		sd.add(charlist);
 		sd.add(label5);
@@ -182,6 +170,5 @@ public class Profile extends JFrame {
 		this.add(panel);
 
 	}
-
 
 }
