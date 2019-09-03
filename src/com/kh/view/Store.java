@@ -23,7 +23,7 @@ public class Store extends JFrame {
 	int ownItem2Number;
 	int ownItem3Number;
 	int mcoin = 100;
-	
+
 	public Store() {
 
 		this.setLayout(null);
@@ -32,8 +32,7 @@ public class Store extends JFrame {
 		Dimension frameSize = this.getSize(); // 프레임 사이즈
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
 		this.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2); // 화면 중앙
-		
-		
+
 		// 상점이름
 		JLabel store = new JLabel("상점");
 		Font font = new Font("고딕", Font.BOLD, 50);
@@ -101,7 +100,8 @@ public class Store extends JFrame {
 		Dialog randomBoxResultDialog = new Dialog(this, "랜덤박스");
 		randomBoxResultDialog.setLayout(null);
 		randomBoxResultDialog.setSize(300, 300);
-		randomBoxResultDialog.setLocation((screenSize.width - randomBoxResultDialog.getWidth())/2, (screenSize.height - randomBoxResultDialog.getHeight())/2);
+		randomBoxResultDialog.setLocation((screenSize.width - randomBoxResultDialog.getWidth()) / 2,
+				(screenSize.height - randomBoxResultDialog.getHeight()) / 2);
 		// 뽑기결과 아이템 이미지
 		JLabel randomBoxLabel = new JLabel();
 		randomBoxLabel.setBounds(75, 60, 150, 140);
@@ -170,7 +170,8 @@ public class Store extends JFrame {
 		Dialog itemBuyDialog = new Dialog(this, "아이템 구매");
 		itemBuyDialog.setLayout(null);
 		itemBuyDialog.setSize(200, 160);
-		itemBuyDialog.setLocation((screenSize.width - itemBuyDialog.getWidth())/2, (screenSize.height - itemBuyDialog.getHeight())/2);
+		itemBuyDialog.setLocation((screenSize.width - itemBuyDialog.getWidth()) / 2,
+				(screenSize.height - itemBuyDialog.getHeight()) / 2);
 		JLabel itemBuyDialogLabel = new JLabel("구매하시겠습니까?");
 		itemBuyDialogLabel.setSize(150, 40);
 		itemBuyDialogLabel.setLocation(50, 50);
@@ -186,17 +187,20 @@ public class Store extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				// 보유코인 아이템구매에 필요한 코인만큼 감소후
+				// 아이템1의 개수 1 증가
 				mcoin--;
 				ownItem1Number++;
 				itemBuyDialog.setVisible(true);
-				// 구매버튼 클릭시
 
+				// 구매버튼 클릭시
 				itemBuyDialogBuyButton.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						// 아이템1 보유개수 출력
 						ownItem1Label.setText("보유개수 : " + ownItem1Number);
+						// 보유코인개수 출력
 						ownCoinLabel.setText("내 코인 : " + mcoin);
 						itemBuyDialog.dispose();
 
@@ -211,17 +215,20 @@ public class Store extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				// 보유코인 아이템구매에 필요한 코인만큼 감소후
+				// 아이템2의 개수 1 증가
 				mcoin--;
 				ownItem2Number++;
 				itemBuyDialog.setVisible(true);
-				// 구매버튼 클릭시
 
+				// 구매버튼 클릭시
 				itemBuyDialogBuyButton.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						// 아이템2 보유개수 출력
 						ownItem2Label.setText("보유개수 : " + ownItem2Number);
+						// 보유코인개수 출력
 						ownCoinLabel.setText("내 코인 : " + mcoin);
 						itemBuyDialog.dispose();
 
@@ -236,17 +243,20 @@ public class Store extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				// 보유코인 아이템구매에 필요한 코인만큼 감소후
+				// 아이템3의 개수 1 증가
 				mcoin--;
 				ownItem3Number++;
 				itemBuyDialog.setVisible(true);
-				// 구매버튼 클릭시
 
+				// 구매버튼 클릭시
 				itemBuyDialogBuyButton.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						// 아이템3 보유개수 출력
 						ownItem3Label.setText("보유개수 : " + ownItem3Number);
+						// 보유코인개수 출력
 						ownCoinLabel.setText("내 코인 : " + mcoin);
 						itemBuyDialog.dispose();
 
@@ -262,32 +272,48 @@ public class Store extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// 랜덤박스 결과창 출력
 				randomBoxResultDialog.setVisible(true);
+				// 보유코인 랜덤박스 구매에 필요한 개수만큼 감소
 				mcoin--;
+				// 랜덤박스를 위한 변수 설정
 				int rbn = (int) ((Math.random() * 3) + 1);
+				// 변수에 따른 아이템 이미지 및 개수증가 설정
+				// 변수 1이 나왔을 때
 				if (rbn == 1) {
 					Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\캡처.png").getImage().getScaledInstance(150,
 							140, 0);
 					randomBoxLabel.setIcon(new ImageIcon(icon));
 					randomBoxResultLabel.setText("양파쿵야");
+					// 아이템1의 개수 1 증가
 					ownItem1Number++;
+					// 아이템1 개수 출력
 					ownItem1Label.setText("보유개수 : " + ownItem1Number);
+					// 코인개수 출력
 					ownCoinLabel.setText("내 코인 : " + mcoin);
+					// 변수 2 나왔을 때
 				} else if (rbn == 2) {
 					Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\캡처1.png").getImage().getScaledInstance(150,
 							140, 0);
 					randomBoxLabel.setIcon(new ImageIcon(icon));
 					randomBoxResultLabel.setText("양배추 쿵야");
+					// 아이템2 개수 1증사
 					ownItem2Number++;
+					// 아이템2 개수 출력
 					ownItem2Label.setText("보유개수 : " + ownItem2Number);
+					// 코인개수 출력
 					ownCoinLabel.setText("내 코인 : " + mcoin);
+					// 변수 3 나왔을 때
 				} else if (rbn == 3) {
 					Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\캡처2.png").getImage().getScaledInstance(150,
 							140, 0);
 					randomBoxLabel.setIcon(new ImageIcon(icon));
 					randomBoxResultLabel.setText("무시 쿵야");
+					// 아이템3 개수 1 증가
 					ownItem3Number++;
+					// 아이템3 개수 출력
 					ownItem3Label.setText("보유개수 : " + ownItem3Number);
+					// 코인개수 출력
 					ownCoinLabel.setText("내 코인 : " + mcoin);
 				}
 
@@ -296,6 +322,7 @@ public class Store extends JFrame {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						// 뽑기결과 종료
 						randomBoxResultDialog.dispose();
 
 					}
@@ -310,10 +337,12 @@ public class Store extends JFrame {
 		payButton.setLocation(300, 30);
 		this.add(payButton);
 
+		// 결제버튼 클릭시
 		payButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// 결제창 팝업 실행
 				p = new Pay();
 
 			}
