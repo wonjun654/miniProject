@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.kh.user.model.vo.User;
+
 public class Store extends JFrame {
 
 	Pay p;
@@ -22,186 +24,185 @@ public class Store extends JFrame {
 	int ownItem1Number;
 	int ownItem2Number;
 	int ownItem3Number;
-	int mcoin = 100;
-
-	public Store() {
+	
+	public Store(User u) {
 
 		this.setLayout(null);
 		this.setSize(1024, 768);
 
-		Dimension frameSize = this.getSize(); // ÇÁ·¹ÀÓ »çÀÌÁî
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // ¸ğ´ÏÅÍ »çÀÌÁî
-		this.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2); // È­¸é Áß¾Ó
+		Dimension frameSize = this.getSize(); // í”„ë ˆì„ ì‚¬ì´ì¦ˆ
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // ëª¨ë‹ˆí„° ì‚¬ì´ì¦ˆ
+		this.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2); // í™”ë©´ ì¤‘ì•™
 
-		// »óÁ¡ÀÌ¸§
-		JLabel store = new JLabel("»óÁ¡");
-		Font font = new Font("°íµñ", Font.BOLD, 50);
+		// ìƒì ì´ë¦„
+		JLabel store = new JLabel("ìƒì ");
+		Font font = new Font("ê³ ë”•", Font.BOLD, 50);
 		store.setFont(font);
 		store.setSize(150, 80);
 		store.setLocation(30, 10);
 		this.add(store);
 
 		// --------------------------------------------------------------------------------
-		// ¾ÆÀÌÅÛ¸ñ·Ï
-		JLabel itemList = new JLabel("¾ÆÀÌÅÛ ¸ñ·Ï");
+		// ì•„ì´í…œëª©ë¡
+		JLabel itemList = new JLabel("ì•„ì´í…œ ëª©ë¡");
 		itemList.setSize(100, 40);
 		itemList.setLocation(20, 80);
 		this.add(itemList);
 
-		// ¾ÆÀÌÅÛ1
+		// ì•„ì´í…œ1
 		JPanel item1 = new JPanel();
 		item1.setSize(150, 150);
 		item1.setLocation(20, 130);
 		item1.setBackground(Color.GRAY);
 
-		JButton item1BuyButton = new JButton("±¸¸Å");
+		JButton item1BuyButton = new JButton("êµ¬ë§¤");
 		item1BuyButton.setSize(60, 40);
 		item1BuyButton.setLocation(110, 280);
 		this.add(item1);
 		this.add(item1BuyButton);
 
-		// ¾ÆÀÌÅÛ2
+		// ì•„ì´í…œ2
 		JPanel item2 = new JPanel();
 		item2.setSize(150, 150);
 		item2.setLocation(250, 130);
 		item2.setBackground(Color.GRAY);
 
-		JButton item2BuyButton = new JButton("±¸¸Å");
+		JButton item2BuyButton = new JButton("êµ¬ë§¤");
 		item2BuyButton.setSize(60, 40);
 		item2BuyButton.setLocation(340, 280);
 		this.add(item2);
 		this.add(item2BuyButton);
 
-		// ¾ÆÀÌÅÛ3
+		// ì•„ì´í…œ3
 		JPanel item3 = new JPanel();
 		item3.setSize(150, 150);
 		item3.setLocation(480, 130);
 		item3.setBackground(Color.GRAY);
 
-		JButton item3BuyButton = new JButton("±¸¸Å");
+		JButton item3BuyButton = new JButton("êµ¬ë§¤");
 		item3BuyButton.setSize(60, 40);
 		item3BuyButton.setLocation(570, 280);
 		this.add(item3);
 		this.add(item3BuyButton);
 
-		// ·£´ı¹Ú½º
+		// ëœë¤ë°•ìŠ¤
 		JPanel randomBox = new JPanel();
 		randomBox.setSize(150, 150);
 		randomBox.setLocation(710, 130);
 		randomBox.setBackground(Color.GRAY);
 
-		JButton randomBoxBuyButton = new JButton("»Ì±â");
+		JButton randomBoxBuyButton = new JButton("ë½‘ê¸°");
 		randomBoxBuyButton.setSize(60, 40);
 		randomBoxBuyButton.setLocation(800, 280);
 		this.add(randomBox);
 		this.add(randomBoxBuyButton);
 
-		// ·£´ı¹Ú½º»Ì±â °á°ú
-		Dialog randomBoxResultDialog = new Dialog(this, "·£´ı¹Ú½º");
+		// ëœë¤ë°•ìŠ¤ë½‘ê¸° ê²°ê³¼
+		Dialog randomBoxResultDialog = new Dialog(this, "ëœë¤ë°•ìŠ¤");
 		randomBoxResultDialog.setLayout(null);
 		randomBoxResultDialog.setSize(300, 300);
 		randomBoxResultDialog.setLocation((screenSize.width - randomBoxResultDialog.getWidth()) / 2,
 				(screenSize.height - randomBoxResultDialog.getHeight()) / 2);
-		// »Ì±â°á°ú ¾ÆÀÌÅÛ ÀÌ¹ÌÁö
+		// ë½‘ê¸°ê²°ê³¼ ì•„ì´í…œ ì´ë¯¸ì§€
 		JLabel randomBoxLabel = new JLabel();
 		randomBoxLabel.setBounds(75, 60, 150, 140);
 		randomBoxResultDialog.add(randomBoxLabel);
 
-		// »Ì±â °á°ú Ãâ·Â ÈÄ È®ÀÎ ¹öÆ°
-		JButton randomBoxDialogOkButton = new JButton("È®ÀÎ");
+		// ë½‘ê¸° ê²°ê³¼ ì¶œë ¥ í›„ í™•ì¸ ë²„íŠ¼
+		JButton randomBoxDialogOkButton = new JButton("í™•ì¸");
 		randomBoxDialogOkButton.setBounds(120, 250, 60, 30);
 		randomBoxResultDialog.add(randomBoxDialogOkButton);
 
-		// ¾ÆÀÌÅÛ È¹µæ °á°ú
+		// ì•„ì´í…œ íšë“ ê²°ê³¼
 		JLabel randomBoxResultLabel = new JLabel();
 		randomBoxResultLabel.setBounds(120, 200, 200, 30);
 		randomBoxResultDialog.add(randomBoxResultLabel);
 
 		// --------------------------------------------------------------------------------
-		// º¸À¯¾ÆÀÌÅÛ
-		JLabel ownItemList = new JLabel("º¸À¯¾ÆÀÌÅÛ");
+		// ë³´ìœ ì•„ì´í…œ
+		JLabel ownItemList = new JLabel("ë³´ìœ ì•„ì´í…œ");
 		ownItemList.setSize(100, 40);
 		ownItemList.setLocation(20, 400);
 		this.add(ownItemList);
 
-		// º¸À¯¾ÆÀÌÅÛ1
+		// ë³´ìœ ì•„ì´í…œ1
 		JPanel ownItem1 = new JPanel();
 		ownItem1.setSize(150, 150);
 		ownItem1.setLocation(20, 450);
 		ownItem1.setBackground(Color.GRAY);
 		this.add(ownItem1);
 
-		JLabel ownItem1Label = new JLabel("º¸À¯°³¼ö : " + ownItem1Number);
+		JLabel ownItem1Label = new JLabel("ë³´ìœ ê°œìˆ˜ : " + ownItem1Number);
 		ownItem1Label.setSize(100, 40);
 		ownItem1Label.setLocation(90, 600);
 		this.add(ownItem1Label);
 
-		// º¸À¯¾ÆÀÌÅÛ2
+		// ë³´ìœ ì•„ì´í…œ2
 		JPanel ownItem2 = new JPanel();
 		ownItem2.setSize(150, 150);
 		ownItem2.setLocation(250, 450);
 		ownItem2.setBackground(Color.GRAY);
 		this.add(ownItem2);
 
-		JLabel ownItem2Label = new JLabel("º¸À¯°³¼ö : " + ownItem2Number);
+		JLabel ownItem2Label = new JLabel("ë³´ìœ ê°œìˆ˜ : " + ownItem2Number);
 		ownItem2Label.setSize(100, 40);
 		ownItem2Label.setLocation(320, 600);
 		this.add(ownItem2Label);
 
-		// º¸À¯¾ÆÀÌÅÛ3
+		// ë³´ìœ ì•„ì´í…œ3
 		JPanel ownItem3 = new JPanel();
 		ownItem3.setSize(150, 150);
 		ownItem3.setLocation(480, 450);
 		ownItem3.setBackground(Color.GRAY);
 		this.add(ownItem3);
 
-		JLabel ownItem3Label = new JLabel("º¸À¯°³¼ö : " + ownItem3Number);
+		JLabel ownItem3Label = new JLabel("ë³´ìœ ê°œìˆ˜ : " + ownItem3Number);
 		ownItem3Label.setSize(100, 40);
 		ownItem3Label.setLocation(550, 600);
 		this.add(ownItem3Label);
 
 		// --------------------------------------------------------------------------------
-		// ÄÚÀÎ°³¼ö Ãâ·Â
-		JLabel ownCoinLabel = new JLabel("³» ÄÚÀÎ : " + mcoin);
+		// ì½”ì¸ê°œìˆ˜ ì¶œë ¥
+		JLabel ownCoinLabel = new JLabel("ë‚´ ì½”ì¸ : " + u.getCoin());
 		ownCoinLabel.setSize(100, 40);
 		ownCoinLabel.setLocation(200, 30);
 		this.add(ownCoinLabel);
 
-		Dialog itemBuyDialog = new Dialog(this, "¾ÆÀÌÅÛ ±¸¸Å");
+		Dialog itemBuyDialog = new Dialog(this, "ì•„ì´í…œ êµ¬ë§¤");
 		itemBuyDialog.setLayout(null);
 		itemBuyDialog.setSize(200, 160);
 		itemBuyDialog.setLocation((screenSize.width - itemBuyDialog.getWidth()) / 2,
 				(screenSize.height - itemBuyDialog.getHeight()) / 2);
-		JLabel itemBuyDialogLabel = new JLabel("±¸¸ÅÇÏ½Ã°Ú½À´Ï±î?");
+		JLabel itemBuyDialogLabel = new JLabel("êµ¬ë§¤í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 		itemBuyDialogLabel.setSize(150, 40);
 		itemBuyDialogLabel.setLocation(50, 50);
 		itemBuyDialog.add(itemBuyDialogLabel);
-		JButton itemBuyDialogBuyButton = new JButton("±¸¸Å");
+		JButton itemBuyDialogBuyButton = new JButton("êµ¬ë§¤");
 		itemBuyDialogBuyButton.setSize(60, 40);
 		itemBuyDialogBuyButton.setLocation(70, 100);
 		itemBuyDialog.add(itemBuyDialogBuyButton);
 
 		// --------------------------------------------------------------------------------
-		// ¾ÆÀÌÅÛ1 ±¸¸Å½Ã
+		// ì•„ì´í…œ1 êµ¬ë§¤ì‹œ
 		item1BuyButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// º¸À¯ÄÚÀÎ ¾ÆÀÌÅÛ±¸¸Å¿¡ ÇÊ¿äÇÑ ÄÚÀÎ¸¸Å­ °¨¼ÒÈÄ
-				// ¾ÆÀÌÅÛ1ÀÇ °³¼ö 1 Áõ°¡
-				mcoin--;
+				// ë³´ìœ ì½”ì¸ ì•„ì´í…œêµ¬ë§¤ì— í•„ìš”í•œ ì½”ì¸ë§Œí¼ ê°ì†Œí›„
+				// ì•„ì´í…œ1ì˜ ê°œìˆ˜ 1 ì¦ê°€
+				u.setCoin(u.getCoin() - 1);
 				ownItem1Number++;
 				itemBuyDialog.setVisible(true);
 
-				// ±¸¸Å¹öÆ° Å¬¸¯½Ã
+				// êµ¬ë§¤ë²„íŠ¼ í´ë¦­ì‹œ
 				itemBuyDialogBuyButton.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						// ¾ÆÀÌÅÛ1 º¸À¯°³¼ö Ãâ·Â
-						ownItem1Label.setText("º¸À¯°³¼ö : " + ownItem1Number);
-						// º¸À¯ÄÚÀÎ°³¼ö Ãâ·Â
-						ownCoinLabel.setText("³» ÄÚÀÎ : " + mcoin);
+						// ì•„ì´í…œ1 ë³´ìœ ê°œìˆ˜ ì¶œë ¥
+						ownItem1Label.setText("ë³´ìœ ê°œìˆ˜ : " + ownItem1Number);
+						// ë³´ìœ ì½”ì¸ê°œìˆ˜ ì¶œë ¥
+						ownCoinLabel.setText("ë‚´ ì½”ì¸ : " + u.getCoin());
 						itemBuyDialog.dispose();
 
 					}
@@ -210,26 +211,26 @@ public class Store extends JFrame {
 			}
 		});
 
-		// ¾ÆÀÌÅÛ2 ±¸¸Å½Ã
+		// ì•„ì´í…œ2 êµ¬ë§¤ì‹œ
 		item2BuyButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// º¸À¯ÄÚÀÎ ¾ÆÀÌÅÛ±¸¸Å¿¡ ÇÊ¿äÇÑ ÄÚÀÎ¸¸Å­ °¨¼ÒÈÄ
-				// ¾ÆÀÌÅÛ2ÀÇ °³¼ö 1 Áõ°¡
-				mcoin--;
+				// ë³´ìœ ì½”ì¸ ì•„ì´í…œêµ¬ë§¤ì— í•„ìš”í•œ ì½”ì¸ë§Œí¼ ê°ì†Œí›„
+				// ì•„ì´í…œ2ì˜ ê°œìˆ˜ 1 ì¦ê°€
+				u.setCoin(u.getCoin() - 1);
 				ownItem2Number++;
 				itemBuyDialog.setVisible(true);
 
-				// ±¸¸Å¹öÆ° Å¬¸¯½Ã
+				// êµ¬ë§¤ë²„íŠ¼ í´ë¦­ì‹œ
 				itemBuyDialogBuyButton.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						// ¾ÆÀÌÅÛ2 º¸À¯°³¼ö Ãâ·Â
-						ownItem2Label.setText("º¸À¯°³¼ö : " + ownItem2Number);
-						// º¸À¯ÄÚÀÎ°³¼ö Ãâ·Â
-						ownCoinLabel.setText("³» ÄÚÀÎ : " + mcoin);
+						// ì•„ì´í…œ2 ë³´ìœ ê°œìˆ˜ ì¶œë ¥
+						ownItem2Label.setText("ë³´ìœ ê°œìˆ˜ : " + ownItem2Number);
+						// ë³´ìœ ì½”ì¸ê°œìˆ˜ ì¶œë ¥
+						ownCoinLabel.setText("ë‚´ ì½”ì¸ : " + u.getCoin());
 						itemBuyDialog.dispose();
 
 					}
@@ -238,26 +239,26 @@ public class Store extends JFrame {
 			}
 		});
 
-		// ¾ÆÀÌÅÛ3 ±¸¸Å½Ã
+		// ì•„ì´í…œ3 êµ¬ë§¤ì‹œ
 		item3BuyButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// º¸À¯ÄÚÀÎ ¾ÆÀÌÅÛ±¸¸Å¿¡ ÇÊ¿äÇÑ ÄÚÀÎ¸¸Å­ °¨¼ÒÈÄ
-				// ¾ÆÀÌÅÛ3ÀÇ °³¼ö 1 Áõ°¡
-				mcoin--;
+				// ë³´ìœ ì½”ì¸ ì•„ì´í…œêµ¬ë§¤ì— í•„ìš”í•œ ì½”ì¸ë§Œí¼ ê°ì†Œí›„
+				// ì•„ì´í…œ3ì˜ ê°œìˆ˜ 1 ì¦ê°€
+				u.setCoin(u.getCoin() - 1);
 				ownItem3Number++;
 				itemBuyDialog.setVisible(true);
 
-				// ±¸¸Å¹öÆ° Å¬¸¯½Ã
+				// êµ¬ë§¤ë²„íŠ¼ í´ë¦­ì‹œ
 				itemBuyDialogBuyButton.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						// ¾ÆÀÌÅÛ3 º¸À¯°³¼ö Ãâ·Â
-						ownItem3Label.setText("º¸À¯°³¼ö : " + ownItem3Number);
-						// º¸À¯ÄÚÀÎ°³¼ö Ãâ·Â
-						ownCoinLabel.setText("³» ÄÚÀÎ : " + mcoin);
+						// ì•„ì´í…œ3 ë³´ìœ ê°œìˆ˜ ì¶œë ¥
+						ownItem3Label.setText("ë³´ìœ ê°œìˆ˜ : " + ownItem3Number);
+						// ë³´ìœ ì½”ì¸ê°œìˆ˜ ì¶œë ¥
+						ownCoinLabel.setText("ë‚´ ì½”ì¸ : " + u.getCoin());
 						itemBuyDialog.dispose();
 
 					}
@@ -266,63 +267,63 @@ public class Store extends JFrame {
 			}
 		});
 
-		// ·£´ı¹Ú½º »Ì±â °á°ú Ã¢
-		// ·£´ıº¯¼ö¿¡ µû¸¥ ¾ÆÀÌÅÛÀÌ¹ÌÁö¿Í °á°úÅØ½ºÆ® Ãâ·Â
+		// ëœë¤ë°•ìŠ¤ ë½‘ê¸° ê²°ê³¼ ì°½
+		// ëœë¤ë³€ìˆ˜ì— ë”°ë¥¸ ì•„ì´í…œì´ë¯¸ì§€ì™€ ê²°ê³¼í…ìŠ¤íŠ¸ ì¶œë ¥
 		randomBoxBuyButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// ·£´ı¹Ú½º °á°úÃ¢ Ãâ·Â
+				// ëœë¤ë°•ìŠ¤ ê²°ê³¼ì°½ ì¶œë ¥
 				randomBoxResultDialog.setVisible(true);
-				// º¸À¯ÄÚÀÎ ·£´ı¹Ú½º ±¸¸Å¿¡ ÇÊ¿äÇÑ °³¼ö¸¸Å­ °¨¼Ò
-				mcoin--;
-				// ·£´ı¹Ú½º¸¦ À§ÇÑ º¯¼ö ¼³Á¤
+				// ë³´ìœ ì½”ì¸ ëœë¤ë°•ìŠ¤ êµ¬ë§¤ì— í•„ìš”í•œ ê°œìˆ˜ë§Œí¼ ê°ì†Œ
+				u.setCoin(u.getCoin() - 1);
+				// ëœë¤ë°•ìŠ¤ë¥¼ ìœ„í•œ ë³€ìˆ˜ ì„¤ì •
 				int rbn = (int) ((Math.random() * 3) + 1);
-				// º¯¼ö¿¡ µû¸¥ ¾ÆÀÌÅÛ ÀÌ¹ÌÁö ¹× °³¼öÁõ°¡ ¼³Á¤
-				// º¯¼ö 1ÀÌ ³ª¿ÔÀ» ¶§
+				// ë³€ìˆ˜ì— ë”°ë¥¸ ì•„ì´í…œ ì´ë¯¸ì§€ ë° ê°œìˆ˜ì¦ê°€ ì„¤ì •
+				// ë³€ìˆ˜ 1ì´ ë‚˜ì™”ì„ ë•Œ
 				if (rbn == 1) {
-					Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\Ä¸Ã³.png").getImage().getScaledInstance(150,
+					Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\ìº¡ì²˜.png").getImage().getScaledInstance(150,
 							140, 0);
 					randomBoxLabel.setIcon(new ImageIcon(icon));
-					randomBoxResultLabel.setText("¾çÆÄÄô¾ß");
-					// ¾ÆÀÌÅÛ1ÀÇ °³¼ö 1 Áõ°¡
+					randomBoxResultLabel.setText("ì–‘íŒŒì¿µì•¼");
+					// ì•„ì´í…œ1ì˜ ê°œìˆ˜ 1 ì¦ê°€
 					ownItem1Number++;
-					// ¾ÆÀÌÅÛ1 °³¼ö Ãâ·Â
-					ownItem1Label.setText("º¸À¯°³¼ö : " + ownItem1Number);
-					// ÄÚÀÎ°³¼ö Ãâ·Â
-					ownCoinLabel.setText("³» ÄÚÀÎ : " + mcoin);
-					// º¯¼ö 2 ³ª¿ÔÀ» ¶§
+					// ì•„ì´í…œ1 ê°œìˆ˜ ì¶œë ¥
+					ownItem1Label.setText("ë³´ìœ ê°œìˆ˜ : " + ownItem1Number);
+					// ì½”ì¸ê°œìˆ˜ ì¶œë ¥
+					ownCoinLabel.setText("ë‚´ ì½”ì¸ : " + u.getCoin());
+					// ë³€ìˆ˜ 2 ë‚˜ì™”ì„ ë•Œ
 				} else if (rbn == 2) {
-					Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\Ä¸Ã³1.png").getImage().getScaledInstance(150,
+					Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\ìº¡ì²˜1.png").getImage().getScaledInstance(150,
 							140, 0);
 					randomBoxLabel.setIcon(new ImageIcon(icon));
-					randomBoxResultLabel.setText("¾ç¹èÃß Äô¾ß");
-					// ¾ÆÀÌÅÛ2 °³¼ö 1Áõ»ç
+					randomBoxResultLabel.setText("ì–‘ë°°ì¶” ì¿µì•¼");
+					// ì•„ì´í…œ2 ê°œìˆ˜ 1ì¦ì‚¬
 					ownItem2Number++;
-					// ¾ÆÀÌÅÛ2 °³¼ö Ãâ·Â
-					ownItem2Label.setText("º¸À¯°³¼ö : " + ownItem2Number);
-					// ÄÚÀÎ°³¼ö Ãâ·Â
-					ownCoinLabel.setText("³» ÄÚÀÎ : " + mcoin);
-					// º¯¼ö 3 ³ª¿ÔÀ» ¶§
+					// ì•„ì´í…œ2 ê°œìˆ˜ ì¶œë ¥
+					ownItem2Label.setText("ë³´ìœ ê°œìˆ˜ : " + ownItem2Number);
+					// ì½”ì¸ê°œìˆ˜ ì¶œë ¥
+					ownCoinLabel.setText("ë‚´ ì½”ì¸ : " + u.getCoin());
+					// ë³€ìˆ˜ 3 ë‚˜ì™”ì„ ë•Œ
 				} else if (rbn == 3) {
-					Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\Ä¸Ã³2.png").getImage().getScaledInstance(150,
+					Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\ìº¡ì²˜2.png").getImage().getScaledInstance(150,
 							140, 0);
 					randomBoxLabel.setIcon(new ImageIcon(icon));
-					randomBoxResultLabel.setText("¹«½Ã Äô¾ß");
-					// ¾ÆÀÌÅÛ3 °³¼ö 1 Áõ°¡
+					randomBoxResultLabel.setText("ë¬´ì‹œ ì¿µì•¼");
+					// ì•„ì´í…œ3 ê°œìˆ˜ 1 ì¦ê°€
 					ownItem3Number++;
-					// ¾ÆÀÌÅÛ3 °³¼ö Ãâ·Â
-					ownItem3Label.setText("º¸À¯°³¼ö : " + ownItem3Number);
-					// ÄÚÀÎ°³¼ö Ãâ·Â
-					ownCoinLabel.setText("³» ÄÚÀÎ : " + mcoin);
+					// ì•„ì´í…œ3 ê°œìˆ˜ ì¶œë ¥
+					ownItem3Label.setText("ë³´ìœ ê°œìˆ˜ : " + ownItem3Number);
+					// ì½”ì¸ê°œìˆ˜ ì¶œë ¥
+					ownCoinLabel.setText("ë‚´ ì½”ì¸ : " + u.getCoin());
 				}
 
-				// »Ì±â°á°ú Ãâ·Â ÈÄ È®ÀÎ ¹öÆ°
+				// ë½‘ê¸°ê²°ê³¼ ì¶œë ¥ í›„ í™•ì¸ ë²„íŠ¼
 				randomBoxDialogOkButton.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						// »Ì±â°á°ú Á¾·á
+						// ë½‘ê¸°ê²°ê³¼ ì¢…ë£Œ
 						randomBoxResultDialog.dispose();
 
 					}
@@ -331,29 +332,29 @@ public class Store extends JFrame {
 		});
 
 		// --------------------------------------------------------------------------------
-		// °áÁ¦¹öÆ°
-		JButton payButton = new JButton("°áÁ¦ÇÏ±â");
-		payButton.setSize(100, 30);
+		// ê²°ì œë²„íŠ¼
+		JButton payButton = new JButton("ê²°ì œí•˜ê¸°");
+		payButton.setSize(86, 30);
 		payButton.setLocation(300, 30);
 		this.add(payButton);
 
-		// °áÁ¦¹öÆ° Å¬¸¯½Ã
+		// ê²°ì œë²„íŠ¼ í´ë¦­ì‹œ
 		payButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// °áÁ¦Ã¢ ÆË¾÷ ½ÇÇà
-				p = new Pay();
+				// ê²°ì œì°½ íŒì—… ì‹¤í–‰
+				p = new Pay(u);
 
 			}
 		});
 
-		// ÀÌÀüÈ­¸éÀ¸·Î
-		JButton exit = new JButton("³ª°¡±â");
+		// ì´ì „í™”ë©´ìœ¼ë¡œ
+		JButton exit = new JButton("ë‚˜ê°€ê¸°");
 		exit.setSize(100, 30);
 		exit.setLocation(760, 650);
 		this.add(exit);
-
+		
 		exit.addActionListener(new ActionListener() {
 
 			@Override
@@ -362,8 +363,20 @@ public class Store extends JFrame {
 			}
 		});
 
+		JButton refresh = new JButton("ìƒˆë¡œê³ ì¹¨");
+		refresh.setSize(86, 30);
+		refresh.setLocation(400, 30);
+		this.add(refresh);
+		
+		refresh.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ownCoinLabel.setText("ë‚´ ì½”ì¸ : " + u.getCoin());
+				
+			}
+		});
 		this.setVisible(true);
-
 		this.setLocationRelativeTo(null);
 
 	}
