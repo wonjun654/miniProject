@@ -19,12 +19,11 @@ public class Store extends JFrame {
 
 	Pay p;
 
-	int hi1;
-	int hi2;
-	int hi3;
+	int ownItem1Number;
+	int ownItem2Number;
+	int ownItem3Number;
 	int mcoin = 100;
-	int time = 5;
-
+	
 	public Store() {
 
 		this.setLayout(null);
@@ -99,87 +98,87 @@ public class Store extends JFrame {
 		this.add(randomBoxBuyButton);
 
 		// 랜덤박스뽑기 결과
-		Dialog rbd = new Dialog(this, "랜덤박스");
-		rbd.setLayout(null);
-		rbd.setSize(300, 300);
-		rbd.setLocation((screenSize.width - rbd.getWidth())/2, (screenSize.height - rbd.getHeight())/2);
+		Dialog randomBoxResultDialog = new Dialog(this, "랜덤박스");
+		randomBoxResultDialog.setLayout(null);
+		randomBoxResultDialog.setSize(300, 300);
+		randomBoxResultDialog.setLocation((screenSize.width - randomBoxResultDialog.getWidth())/2, (screenSize.height - randomBoxResultDialog.getHeight())/2);
 		// 뽑기결과 아이템 이미지
-		JLabel rbl = new JLabel();
-		rbl.setBounds(75, 60, 150, 140);
-		rbd.add(rbl);
+		JLabel randomBoxLabel = new JLabel();
+		randomBoxLabel.setBounds(75, 60, 150, 140);
+		randomBoxResultDialog.add(randomBoxLabel);
 
 		// 뽑기 결과 출력 후 확인 버튼
-		JButton rbok = new JButton("확인");
-		rbok.setBounds(120, 250, 60, 30);
-		rbd.add(rbok);
+		JButton randomBoxDialogOkButton = new JButton("확인");
+		randomBoxDialogOkButton.setBounds(120, 250, 60, 30);
+		randomBoxResultDialog.add(randomBoxDialogOkButton);
 
 		// 아이템 획득 결과
-		JLabel result = new JLabel();
-		result.setBounds(120, 200, 200, 30);
-		rbd.add(result);
+		JLabel randomBoxResultLabel = new JLabel();
+		randomBoxResultLabel.setBounds(120, 200, 200, 30);
+		randomBoxResultDialog.add(randomBoxResultLabel);
 
 		// --------------------------------------------------------------------------------
 		// 보유아이템
-		JLabel hitem = new JLabel("보유아이템");
-		hitem.setSize(100, 40);
-		hitem.setLocation(20, 400);
-		this.add(hitem);
+		JLabel ownItemList = new JLabel("보유아이템");
+		ownItemList.setSize(100, 40);
+		ownItemList.setLocation(20, 400);
+		this.add(ownItemList);
 
 		// 보유아이템1
-		JPanel hitem1 = new JPanel();
-		hitem1.setSize(150, 150);
-		hitem1.setLocation(20, 450);
-		hitem1.setBackground(Color.GRAY);
-		this.add(hitem1);
+		JPanel ownItem1 = new JPanel();
+		ownItem1.setSize(150, 150);
+		ownItem1.setLocation(20, 450);
+		ownItem1.setBackground(Color.GRAY);
+		this.add(ownItem1);
 
-		JLabel i1 = new JLabel("보유개수 : " + hi1);
-		i1.setSize(100, 40);
-		i1.setLocation(90, 600);
-		this.add(i1);
+		JLabel ownItem1Label = new JLabel("보유개수 : " + ownItem1Number);
+		ownItem1Label.setSize(100, 40);
+		ownItem1Label.setLocation(90, 600);
+		this.add(ownItem1Label);
 
 		// 보유아이템2
-		JPanel hitem2 = new JPanel();
-		hitem2.setSize(150, 150);
-		hitem2.setLocation(250, 450);
-		hitem2.setBackground(Color.GRAY);
-		this.add(hitem2);
+		JPanel ownItem2 = new JPanel();
+		ownItem2.setSize(150, 150);
+		ownItem2.setLocation(250, 450);
+		ownItem2.setBackground(Color.GRAY);
+		this.add(ownItem2);
 
-		JLabel i2 = new JLabel("보유개수 : " + hi2);
-		i2.setSize(100, 40);
-		i2.setLocation(320, 600);
-		this.add(i2);
+		JLabel ownItem2Label = new JLabel("보유개수 : " + ownItem2Number);
+		ownItem2Label.setSize(100, 40);
+		ownItem2Label.setLocation(320, 600);
+		this.add(ownItem2Label);
 
 		// 보유아이템3
-		JPanel hitem3 = new JPanel();
-		hitem3.setSize(150, 150);
-		hitem3.setLocation(480, 450);
-		hitem3.setBackground(Color.GRAY);
-		this.add(hitem3);
+		JPanel ownItem3 = new JPanel();
+		ownItem3.setSize(150, 150);
+		ownItem3.setLocation(480, 450);
+		ownItem3.setBackground(Color.GRAY);
+		this.add(ownItem3);
 
-		JLabel i3 = new JLabel("보유개수 : " + hi3);
-		i3.setSize(100, 40);
-		i3.setLocation(550, 600);
-		this.add(i3);
+		JLabel ownItem3Label = new JLabel("보유개수 : " + ownItem3Number);
+		ownItem3Label.setSize(100, 40);
+		ownItem3Label.setLocation(550, 600);
+		this.add(ownItem3Label);
 
 		// --------------------------------------------------------------------------------
 		// 코인개수 출력
-		JLabel coinl = new JLabel("내 코인 : " + mcoin);
-		coinl.setSize(100, 40);
-		coinl.setLocation(200, 30);
-		this.add(coinl);
+		JLabel ownCoinLabel = new JLabel("내 코인 : " + mcoin);
+		ownCoinLabel.setSize(100, 40);
+		ownCoinLabel.setLocation(200, 30);
+		this.add(ownCoinLabel);
 
-		Dialog buy = new Dialog(this, "아이템 구매");
-		buy.setLayout(null);
-		buy.setSize(200, 160);
-		buy.setLocation((screenSize.width - buy.getWidth())/2, (screenSize.height - buy.getHeight())/2);
-		JLabel buyl = new JLabel("구매하시겠습니까?");
-		buyl.setSize(150, 40);
-		buyl.setLocation(50, 50);
-		buy.add(buyl);
-		JButton buyb = new JButton("구매");
-		buyb.setSize(60, 40);
-		buyb.setLocation(70, 100);
-		buy.add(buyb);
+		Dialog itemBuyDialog = new Dialog(this, "아이템 구매");
+		itemBuyDialog.setLayout(null);
+		itemBuyDialog.setSize(200, 160);
+		itemBuyDialog.setLocation((screenSize.width - itemBuyDialog.getWidth())/2, (screenSize.height - itemBuyDialog.getHeight())/2);
+		JLabel itemBuyDialogLabel = new JLabel("구매하시겠습니까?");
+		itemBuyDialogLabel.setSize(150, 40);
+		itemBuyDialogLabel.setLocation(50, 50);
+		itemBuyDialog.add(itemBuyDialogLabel);
+		JButton itemBuyDialogBuyButton = new JButton("구매");
+		itemBuyDialogBuyButton.setSize(60, 40);
+		itemBuyDialogBuyButton.setLocation(70, 100);
+		itemBuyDialog.add(itemBuyDialogBuyButton);
 
 		// --------------------------------------------------------------------------------
 		// 아이템1 구매시
@@ -189,17 +188,17 @@ public class Store extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				mcoin--;
-				hi1++;
-				buy.setVisible(true);
+				ownItem1Number++;
+				itemBuyDialog.setVisible(true);
 				// 구매버튼 클릭시
 
-				buyb.addActionListener(new ActionListener() {
+				itemBuyDialogBuyButton.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						i1.setText("보유개수 : " + hi1);
-						coinl.setText("내 코인 : " + mcoin);
-						buy.dispose();
+						ownItem1Label.setText("보유개수 : " + ownItem1Number);
+						ownCoinLabel.setText("내 코인 : " + mcoin);
+						itemBuyDialog.dispose();
 
 					}
 				});
@@ -214,17 +213,17 @@ public class Store extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				mcoin--;
-				hi2++;
-				buy.setVisible(true);
+				ownItem2Number++;
+				itemBuyDialog.setVisible(true);
 				// 구매버튼 클릭시
 
-				buyb.addActionListener(new ActionListener() {
+				itemBuyDialogBuyButton.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						i2.setText("보유개수 : " + hi2);
-						coinl.setText("내 코인 : " + mcoin);
-						buy.dispose();
+						ownItem2Label.setText("보유개수 : " + ownItem2Number);
+						ownCoinLabel.setText("내 코인 : " + mcoin);
+						itemBuyDialog.dispose();
 
 					}
 				});
@@ -239,17 +238,17 @@ public class Store extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				mcoin--;
-				hi3++;
-				buy.setVisible(true);
+				ownItem3Number++;
+				itemBuyDialog.setVisible(true);
 				// 구매버튼 클릭시
 
-				buyb.addActionListener(new ActionListener() {
+				itemBuyDialogBuyButton.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						i3.setText("보유개수 : " + hi3);
-						coinl.setText("내 코인 : " + mcoin);
-						buy.dispose();
+						ownItem3Label.setText("보유개수 : " + ownItem3Number);
+						ownCoinLabel.setText("내 코인 : " + mcoin);
+						itemBuyDialog.dispose();
 
 					}
 				});
@@ -263,41 +262,41 @@ public class Store extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				rbd.setVisible(true);
+				randomBoxResultDialog.setVisible(true);
 				mcoin--;
 				int rbn = (int) ((Math.random() * 3) + 1);
 				if (rbn == 1) {
 					Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\캡처.png").getImage().getScaledInstance(150,
 							140, 0);
-					rbl.setIcon(new ImageIcon(icon));
-					result.setText("양파쿵야");
-					hi1++;
-					i1.setText("보유개수 : " + hi1);
-					coinl.setText("내 코인 : " + mcoin);
+					randomBoxLabel.setIcon(new ImageIcon(icon));
+					randomBoxResultLabel.setText("양파쿵야");
+					ownItem1Number++;
+					ownItem1Label.setText("보유개수 : " + ownItem1Number);
+					ownCoinLabel.setText("내 코인 : " + mcoin);
 				} else if (rbn == 2) {
 					Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\캡처1.png").getImage().getScaledInstance(150,
 							140, 0);
-					rbl.setIcon(new ImageIcon(icon));
-					result.setText("양배추 쿵야");
-					hi2++;
-					i2.setText("보유개수 : " + hi2);
-					coinl.setText("내 코인 : " + mcoin);
+					randomBoxLabel.setIcon(new ImageIcon(icon));
+					randomBoxResultLabel.setText("양배추 쿵야");
+					ownItem2Number++;
+					ownItem2Label.setText("보유개수 : " + ownItem2Number);
+					ownCoinLabel.setText("내 코인 : " + mcoin);
 				} else if (rbn == 3) {
 					Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\캡처2.png").getImage().getScaledInstance(150,
 							140, 0);
-					rbl.setIcon(new ImageIcon(icon));
-					result.setText("무시 쿵야");
-					hi3++;
-					i3.setText("보유개수 : " + hi3);
-					coinl.setText("내 코인 : " + mcoin);
+					randomBoxLabel.setIcon(new ImageIcon(icon));
+					randomBoxResultLabel.setText("무시 쿵야");
+					ownItem3Number++;
+					ownItem3Label.setText("보유개수 : " + ownItem3Number);
+					ownCoinLabel.setText("내 코인 : " + mcoin);
 				}
 
 				// 뽑기결과 출력 후 확인 버튼
-				rbok.addActionListener(new ActionListener() {
+				randomBoxDialogOkButton.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						rbd.dispose();
+						randomBoxResultDialog.dispose();
 
 					}
 				});
@@ -306,12 +305,12 @@ public class Store extends JFrame {
 
 		// --------------------------------------------------------------------------------
 		// 결제버튼
-		JButton payb = new JButton("결제하기");
-		payb.setSize(100, 30);
-		payb.setLocation(300, 30);
-		this.add(payb);
+		JButton payButton = new JButton("결제하기");
+		payButton.setSize(100, 30);
+		payButton.setLocation(300, 30);
+		this.add(payButton);
 
-		payb.addActionListener(new ActionListener() {
+		payButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
