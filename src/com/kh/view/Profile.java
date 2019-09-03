@@ -2,9 +2,8 @@ package com.kh.view;
 
 import java.awt.Color;
 import java.awt.Dialog;
-import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,119 +18,110 @@ import javax.swing.JPanel;
 import com.kh.model.vo.User;
 
 public class Profile extends JFrame {
-	Image icon = null;
-	Image img = null;
 	User user = new User();
+	Image icon = null;
+	Image img = user.getImg();
 
 	public Profile() {
-		// ±‚∫ª «¡∑Œ« √¢-----------------------------------------------
+		// Í∏∞Î≥∏ ÌîÑÎ°úÌïÑÏ∞Ω-----------------------------------------------
 
-		this.setSize(600, 300);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // ∏¥œ≈Õ ªÁ¿Ã¡Ó
-
-		Dimension frameSize = this.getSize(); // «¡∑π¿” ªÁ¿Ã¡Ó
-		this.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2); // »≠∏È ¡ﬂæ”
+		this.setBounds(700, 300, 600, 300);
 
 		JPanel panel = new JPanel();
 
 		panel.setLocation(30, 20);
 		panel.setSize(600, 300);
 
-		// «¡∑Œ« º≥¡§√¢ ------------------------------------------------
-		Dialog sd = new Dialog(this, "«¡∑Œ«  »≠∏È ∫Ø∞Ê");
-		sd.setSize(400, 500);
-		sd.setLocation((screenSize.width - sd.getWidth()) / 2, (screenSize.height - sd.getHeight()) / 2); // »≠∏È ¡ﬂæ”
-		sd.add(new JLabel("¿Ã∏ß"));
+		// ÌîÑÎ°úÌïÑÏÑ§Ï†ïÏ∞Ω ------------------------------------------------
+		Dialog sd = new Dialog(this, "ÌîÑÎ°úÌïÑ ÌôîÎ©¥ Î≥ÄÍ≤Ω");
+		sd.setBounds(800, 250, 400, 500);
+		sd.add(new JLabel("Ïù¥Î¶Ñ"));
 		sd.setLayout(null);
 
 		//////
 
-		icon = user.getImg();
+		
 
-		JLabel label = new JLabel(new ImageIcon(icon));
+		JLabel label = new JLabel(new ImageIcon(img));
 		label.setLocation(10, 10);
 		label.setSize(150, 150);
 		label.setBackground(Color.black);
 
-		JLabel label2 = new JLabel("øÏΩ¬");
+		JLabel label2 = new JLabel("Ïö∞Ïäπ");
 		label2.setLocation(250, 30);
 		label2.setSize(80, 30);
 
-		JLabel label3 = new JLabel("ƒ⁄¿Œ");
+		JLabel label3 = new JLabel("ÏΩîÏù∏");
 		label3.setLocation(450, 30);
 		label3.setSize(80, 30);
 
-		JLabel label4 = new JLabel("¥–≥◊¿”");
-		label4.setLocation(70, 170);
+		JLabel label4 = new JLabel(user.getId());
+		label4.setLocation(75, 170);
 		label4.setSize(80, 30);
 
 		JLabel label5 = new JLabel();
 		label5.setSize(200, 200);
 		label5.setLocation(120, 60);
 
-		JLabel label6 = new JLabel("victory");
+		JLabel label6 = new JLabel(user.getVictory() + "");
 		label6.setSize(80, 30);
-		label6.setLocation(245, 80);
+		label6.setLocation(260, 80);
 
-		JLabel label7 = new JLabel("coin");
+		JLabel label7 = new JLabel(user.getCoin() + "");
 		label7.setSize(80, 30);
-		label7.setLocation(450, 80);
+		label7.setLocation(460, 80);
 
-		JButton button = new JButton("«¡∑Œ«  º≥¡§");
+		JButton button = new JButton("ÌîÑÎ°úÌïÑ ÏÑ§Ï†ï");
 		button.setLocation(200, 130);
 		button.setSize(120, 30);
 
-		JButton button2 = new JButton("≥™∞°±‚");
+		JButton button2 = new JButton("Ï™ΩÏßÄÌï®");
 		button2.setLocation(400, 130);
 		button2.setSize(120, 30);
 
-		JButton button3 = new JButton("»Æ¿Œ");
+		JButton button3 = new JButton("ÌôïÏù∏");
 		sd.add(button3);
-
-		button3.setSize(80,50);
-		button3.setLocation(180, 400);
-		
-		JButton btnOut = new JButton("√Îº“");
-		sd.add(btnOut);
-		btnOut.setSize(80,50);
-		btnOut.setLocation(280, 400);
-		
-		
 
 		button3.setSize(80, 50);
 		button3.setLocation(280, 400);
 
+		JButton button4 = new JButton("ÌôïÏù∏");
+		button4.setSize(80, 40);
+		button4.setLocation(440, 190);
 
-		// ¬ ¡ˆ«‘ πˆ∆∞2
 
-		// ¿ÃπÃ¡ˆ πŸ≤Ÿ±‚
+		// Ï™ΩÏßÄÌï® Î≤ÑÌäº2
+
+		// Ïù¥ÎØ∏ÏßÄ Î∞îÍæ∏Í∏∞
 		String[] character = { "yangpa", "jumuk", "baechu" };
 
 		JComboBox charlist = new JComboBox(character);
 		charlist.setBounds(200, 280, 150, 30);
 
-		charlist.setSelectedIndex(1);
-
+		charlist.setSelectedIndex(0);
+		icon = new ImageIcon("images/yangpa.PNG").getImage().getScaledInstance(150, 150, 0);
+		label5.setIcon(new ImageIcon(icon));
 		String name = null;
 		charlist.addActionListener(new ActionListener() {
 
+			
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
 
-				 img = new ImageIcon("images\\"+name+".PNG").getImage().getScaledInstance(150, 150, 0);
-
 				JComboBox cb = (JComboBox) e.getSource();
 				String name = (String) cb.getSelectedItem();
 
-				img = new ImageIcon("hello\\" + name + ".PNG").getImage().getScaledInstance(150, 150, 0);
+				icon = new ImageIcon("images/" + name + ".PNG").getImage().getScaledInstance(150, 150, 0);
 
 
-				label5.setIcon(new ImageIcon(img));
+				label5.setIcon(new ImageIcon(icon));
 
 			}
 		});
 
+		/// ÌîÑÎ°úÌïÑÏÑ§Ï†ï
 		button.addActionListener(new ActionListener() {
 
 			@Override
@@ -139,51 +129,59 @@ public class Profile extends JFrame {
 				sd.setVisible(true);
 			}
 		});
-
+		// Ï™ΩÏßÄÌï®
 		button2.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				dispose();
-				
-
 
 
 			}
 		});
-
+		// sd ÌôïÏù∏
 		button3.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				icon = img;
-				user.setImg(img);
-				label.setIcon(new ImageIcon(icon));
-				sd.dispose();
-
-			}
-
-			});
-		
-		btnOut.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
+				img = icon;
+				user.setImg(icon);
+				label.setIcon(new ImageIcon(img));
 				sd.dispose();
 				
+
+			}
+
+		});
+		button4.addActionListener(new ActionListener() {
+
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				dispose();
 			}
 		});
-		
-	
-	
 
-	sd.add(charlist);sd.add(label5);
 
-	//
-	panel.setLayout(null);panel.add(label);panel.add(label2);panel.add(label3);panel.add(label4);panel.add(label6);panel.add(label7);panel.add(button);panel.add(button2);this.add(panel);this.setLocationRelativeTo(null);
+		sd.add(charlist);
+		sd.add(label5);
 
-}
+		//
+		panel.setLayout(null);
+		panel.add(label);
+		panel.add(label2);
+		panel.add(label3);
+		panel.add(label4);
+		panel.add(label6);
+		panel.add(label7);
+		panel.add(button);
+		panel.add(button2);
+		panel.add(button4);
+		this.add(panel);
+
+	}
+
 
 }
