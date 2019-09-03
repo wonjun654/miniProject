@@ -1,10 +1,15 @@
 package com.kh.view;
 
+<<<<<<< HEAD
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+=======
+import java.awt.Dimension;
+>>>>>>> refs/remotes/origin/master
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -27,14 +32,22 @@ public class MainMenu extends JFrame {
 	JTable table1;
 	DefaultTableModel model1;
 	JTextField tf;
+<<<<<<< HEAD
 	public List<JButton> btList;
 	public String row1[][];
+=======
+>>>>>>> refs/remotes/origin/master
 
 	public MainMenu() {
+
 		super("MainMenuPage");
 
 		String col1[] = { "방이름", "상태", "인원" };
+<<<<<<< HEAD
 		String row1[][] = new String[100][3];
+=======
+		String row1[][] = { { "a1", "a2", "a3" }, { "b1", "b2", "b3" }, { "c1", "c2", "c3" } };
+>>>>>>> refs/remotes/origin/master
 
 		model1 = new DefaultTableModel(row1, col1) {
 			public boolean isCellEditable(int row, int column) {
@@ -46,12 +59,24 @@ public class MainMenu extends JFrame {
 		JScrollPane js1 = new JScrollPane(table1);
 		table1.getTableHeader().setReorderingAllowed(false);
 
+<<<<<<< HEAD
+=======
+		Dimension frameSize = this.getSize(); // 프레임 사이즈
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
+
+		setLayout(null);
+>>>>>>> refs/remotes/origin/master
 		js1.setBounds(80, 150, 700, 320);
 		add(js1);
 
+<<<<<<< HEAD
 		setLayout(null);
 
 		this.setBounds(300, 200, 1024, 768);
+=======
+		this.setSize(1024, 768);
+		this.setLocation((screenSize.width - this.getWidth()) / 2, (screenSize.height - this.getHeight()) / 2);
+>>>>>>> refs/remotes/origin/master
 
 		// Layout 지정 없이 위치 지정하면서 배치하는 방법이다.
 		this.setLayout(null);
@@ -65,6 +90,13 @@ public class MainMenu extends JFrame {
 		profilebtn.setLocation(10, 10);
 		profilebtn.setSize(75, 75);
 
+<<<<<<< HEAD
+=======
+		JButton msgbtn = new JButton(new ImageIcon(msgimg));
+		msgbtn.setLocation(925, 10);
+		msgbtn.setSize(75, 75);
+
+>>>>>>> refs/remotes/origin/master
 		JButton makebtn = new JButton(new ImageIcon(makeimg));
 		makebtn.setLocation(765, 500);
 		makebtn.setSize(75, 75);
@@ -99,6 +131,17 @@ public class MainMenu extends JFrame {
 			}
 		});
 
+<<<<<<< HEAD
+=======
+		msgbtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
+>>>>>>> refs/remotes/origin/master
 		profilebtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -143,8 +186,11 @@ public class MainMenu extends JFrame {
 		this.add(shopbtn);
 		this.add(optbtn);
 		this.add(makebtn);
+<<<<<<< HEAD
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
+=======
+>>>>>>> refs/remotes/origin/master
 
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

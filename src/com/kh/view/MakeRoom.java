@@ -85,7 +85,7 @@ public class MakeRoom extends JFrame{
 				
 			}
 		});
-		//.
+		
 		
 		
 		this.add(roomPeople);
