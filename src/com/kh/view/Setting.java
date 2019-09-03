@@ -1,7 +1,5 @@
 package com.kh.view;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,24 +13,22 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import com.kh.model.vo.MediaTest;
 import com.kh.model.vo.User;
+
+import javafx.util.converter.NumberStringConverter;
 
 public class Setting extends JFrame {
 	User user = new User();
 
 	public Setting() {
 
-		this.setSize(400, 400);
-		Dimension frameSize = this.getSize(); // 프레임 사이즈
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
-
-		this.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2); // 화면 중앙
+		this.setBounds(800, 300, 400, 400);
 
 		JPanel panel = new JPanel();
 
 		panel.setLocation(30, 20);
 		panel.setSize(400, 400);
-		// panel.setBackground(Color.black);
 
 		JLabel label = new JLabel("배경음악");
 		label.setLocation(10, 40);
@@ -42,25 +38,10 @@ public class Setting extends JFrame {
 		label2.setLocation(10, 120);
 		label2.setSize(120, 120);
 
-		JSlider slider = new JSlider(0, 100, 50); // 최소값 , 최대값 ,기본값
-		slider.setMajorTickSpacing(10);
-		slider.setMinorTickSpacing(1);
-		slider.setPaintTicks(true);
-		slider.setPaintLabels(true);
-		slider.setSize(200, 60);
-		slider.setLocation(70, 80);
-
-		panel.add(slider);
-
 		JButton button = new JButton("확인");
 		button.setSize(60, 50);
-		button.setLocation(180, 250);
-		
-		JButton btnOut = new JButton("취소");
-		btnOut.setSize(60, 50);
-		btnOut.setLocation(280, 250);
-		
-		/////////////////////////////
+		button.setLocation(280, 250);
+		///////////// 프로필 공개////////////////
 		JRadioButton profileOn = new JRadioButton("On");
 		JRadioButton profileOff = new JRadioButton("OFF");
 
@@ -69,24 +50,29 @@ public class Setting extends JFrame {
 
 		profileOff.setSize(50, 50);
 		profileOff.setLocation(200, 155);
+		///////////// 배경음악 설정/////////////////
+		JRadioButton musicOn = new JRadioButton("On");
+		JRadioButton musicOff = new JRadioButton("OFF");
+		
+		musicOn.setSize(50, 50);
+		musicOn.setLocation(100, 75);
 
-		ButtonGroup group = new ButtonGroup();
+		musicOff.setSize(50, 50);
+		musicOff.setLocation(200, 75);
 
-		group.add(profileOn);
-		group.add(profileOff);
-
+		ButtonGroup profilegroup = new ButtonGroup();
+		ButtonGroup musicgroup = new ButtonGroup();
+		
+		profilegroup.add(profileOn);
+		profilegroup.add(profileOff);
+		musicgroup.add(musicOn);
+		musicgroup.add(musicOff);
+		panel.add(musicOff);
+		panel.add(musicOn);
 		panel.add(profileOn);
 		panel.add(profileOff);
 
-		slider.addChangeListener(new ChangeListener() {
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				user.setMusicVolume(slider.getValue());
-
-			}
-		});
-
+		// ------------------프로필오프----------------
 		profileOff.addActionListener(new ActionListener() {
 
 			@Override
@@ -95,6 +81,7 @@ public class Setting extends JFrame {
 
 			}
 		});
+		// -----------------------프로필 온----------------
 
 		profileOn.addActionListener(new ActionListener() {
 
@@ -104,23 +91,36 @@ public class Setting extends JFrame {
 
 			}
 		});
+		//---------------음악 on---------------
+		musicOn.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				user.setMusicSet(true);
+			
+			}
+		});
+		// --------------음악 off-------------
+		musicOff.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				user.setMusicSet(false);
+			
+			}
+		});
+
+		// 확인버튼 -----------------------------------------
 		button.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				dispose();
-				System.out.println(user.getProfile());
-			}
-		});
-		
-		btnOut.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
+
+
 				dispose();
 				
+			
 			}
 		});
 
@@ -128,19 +128,14 @@ public class Setting extends JFrame {
 		panel.setLayout(null);
 
 		panel.add(button);
-		panel.add(btnOut);
+
 		panel.add(label);
 		panel.add(label2);
 
 		this.add(panel);
 
 		this.setVisible(true);
-<<<<<<< HEAD
-		this.setLocationRelativeTo(null);
-		
-=======
 
->>>>>>> refs/remotes/origin/master
 	}
 
 }

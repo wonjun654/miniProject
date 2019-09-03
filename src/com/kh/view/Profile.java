@@ -2,9 +2,8 @@ package com.kh.view;
 
 import java.awt.Color;
 import java.awt.Dialog;
-import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,18 +18,14 @@ import javax.swing.JPanel;
 import com.kh.model.vo.User;
 
 public class Profile extends JFrame {
-	Image icon = null;
-	Image img = null;
 	User user = new User();
+	Image icon = null;
+	Image img = user.getImg();
 
 	public Profile() {
 		// 기본 프로필창-----------------------------------------------
 
-		this.setSize(600, 300);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
-
-		Dimension frameSize = this.getSize(); // 프레임 사이즈
-		this.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2); // 화면 중앙
+		this.setBounds(700, 300, 600, 300);
 
 		JPanel panel = new JPanel();
 
@@ -39,16 +34,15 @@ public class Profile extends JFrame {
 
 		// 프로필설정창 ------------------------------------------------
 		Dialog sd = new Dialog(this, "프로필 화면 변경");
-		sd.setSize(400, 500);
-		sd.setLocation((screenSize.width - sd.getWidth()) / 2, (screenSize.height - sd.getHeight()) / 2); // 화면 중앙
+		sd.setBounds(800, 250, 400, 500);
 		sd.add(new JLabel("이름"));
 		sd.setLayout(null);
 
 		//////
 
-		icon = user.getImg();
+		
 
-		JLabel label = new JLabel(new ImageIcon(icon));
+		JLabel label = new JLabel(new ImageIcon(img));
 		label.setLocation(10, 10);
 		label.setSize(150, 150);
 		label.setBackground(Color.black);
@@ -61,46 +55,38 @@ public class Profile extends JFrame {
 		label3.setLocation(450, 30);
 		label3.setSize(80, 30);
 
-		JLabel label4 = new JLabel("닉네임");
-		label4.setLocation(70, 170);
+		JLabel label4 = new JLabel(user.getId());
+		label4.setLocation(75, 170);
 		label4.setSize(80, 30);
 
 		JLabel label5 = new JLabel();
 		label5.setSize(200, 200);
 		label5.setLocation(120, 60);
 
-		JLabel label6 = new JLabel("victory");
+		JLabel label6 = new JLabel(user.getVictory() + "");
 		label6.setSize(80, 30);
-		label6.setLocation(245, 80);
+		label6.setLocation(260, 80);
 
-		JLabel label7 = new JLabel("coin");
+		JLabel label7 = new JLabel(user.getCoin() + "");
 		label7.setSize(80, 30);
-		label7.setLocation(450, 80);
+		label7.setLocation(460, 80);
 
 		JButton button = new JButton("프로필 설정");
 		button.setLocation(200, 130);
 		button.setSize(120, 30);
 
-		JButton button2 = new JButton("나가기");
+		JButton button2 = new JButton("쪽지함");
 		button2.setLocation(400, 130);
 		button2.setSize(120, 30);
 
 		JButton button3 = new JButton("확인");
 		sd.add(button3);
-<<<<<<< HEAD
-		button3.setSize(80,50);
-		button3.setLocation(180, 400);
-		
-		JButton btnOut = new JButton("취소");
-		sd.add(btnOut);
-		btnOut.setSize(80,50);
-		btnOut.setLocation(280, 400);
-		
-		
-=======
 		button3.setSize(80, 50);
 		button3.setLocation(280, 400);
->>>>>>> refs/remotes/origin/master
+
+		JButton button4 = new JButton("확인");
+		button4.setSize(80, 40);
+		button4.setLocation(440, 190);
 
 		// 쪽지함 버튼2
 
@@ -110,28 +96,28 @@ public class Profile extends JFrame {
 		JComboBox charlist = new JComboBox(character);
 		charlist.setBounds(200, 280, 150, 30);
 
-		charlist.setSelectedIndex(1);
-
+		charlist.setSelectedIndex(0);
+		icon = new ImageIcon("images/yangpa.PNG").getImage().getScaledInstance(150, 150, 0);
+		label5.setIcon(new ImageIcon(icon));
 		String name = null;
 		charlist.addActionListener(new ActionListener() {
 
+			
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-<<<<<<< HEAD
-				 img = new ImageIcon("images\\"+name+".PNG").getImage().getScaledInstance(150, 150, 0);
-=======
 				JComboBox cb = (JComboBox) e.getSource();
 				String name = (String) cb.getSelectedItem();
 
-				img = new ImageIcon("hello\\" + name + ".PNG").getImage().getScaledInstance(150, 150, 0);
->>>>>>> refs/remotes/origin/master
+				icon = new ImageIcon("images/" + name + ".PNG").getImage().getScaledInstance(150, 150, 0);
 
-				label5.setIcon(new ImageIcon(img));
+				label5.setIcon(new ImageIcon(icon));
 
 			}
 		});
 
+		/// 프로필설정
 		button.addActionListener(new ActionListener() {
 
 			@Override
@@ -139,49 +125,37 @@ public class Profile extends JFrame {
 				sd.setVisible(true);
 			}
 		});
-
+		// 쪽지함
 		button2.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-				dispose();
-				
-=======
 
->>>>>>> refs/remotes/origin/master
 			}
 		});
-
+		// sd 확인
 		button3.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				icon = img;
-				user.setImg(img);
-				label.setIcon(new ImageIcon(icon));
-				sd.dispose();
-
-			}
-<<<<<<< HEAD
-			});
-		
-		btnOut.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
+				img = icon;
+				user.setImg(icon);
+				label.setIcon(new ImageIcon(img));
 				sd.dispose();
 				
+
 			}
 		});
-		
-	
-		
-=======
+		button4.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				dispose();
+			}
 		});
 
->>>>>>> refs/remotes/origin/master
 		sd.add(charlist);
 		sd.add(label5);
 
@@ -195,8 +169,8 @@ public class Profile extends JFrame {
 		panel.add(label7);
 		panel.add(button);
 		panel.add(button2);
+		panel.add(button4);
 		this.add(panel);
-		this.setLocationRelativeTo(null);
 
 	}
 
