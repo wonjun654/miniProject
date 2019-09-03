@@ -33,7 +33,7 @@ public class Store extends JFrame {
 		Dimension frameSize = this.getSize(); // 프레임 사이즈
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
 		this.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2); // 화면 중앙
-
+		
 		
 		// 상점이름
 		JLabel store = new JLabel("상점");
@@ -45,10 +45,10 @@ public class Store extends JFrame {
 
 		// --------------------------------------------------------------------------------
 		// 아이템목록
-		JLabel item = new JLabel("아이템 목록");
-		item.setSize(100, 40);
-		item.setLocation(20, 80);
-		this.add(item);
+		JLabel itemList = new JLabel("아이템 목록");
+		itemList.setSize(100, 40);
+		itemList.setLocation(20, 80);
+		this.add(itemList);
 
 		// 아이템1
 		JPanel item1 = new JPanel();
@@ -56,11 +56,11 @@ public class Store extends JFrame {
 		item1.setLocation(20, 130);
 		item1.setBackground(Color.GRAY);
 
-		JButton b1 = new JButton("구매");
-		b1.setSize(60, 40);
-		b1.setLocation(110, 280);
+		JButton item1BuyButton = new JButton("구매");
+		item1BuyButton.setSize(60, 40);
+		item1BuyButton.setLocation(110, 280);
 		this.add(item1);
-		this.add(b1);
+		this.add(item1BuyButton);
 
 		// 아이템2
 		JPanel item2 = new JPanel();
@@ -68,11 +68,11 @@ public class Store extends JFrame {
 		item2.setLocation(250, 130);
 		item2.setBackground(Color.GRAY);
 
-		JButton b2 = new JButton("구매");
-		b2.setSize(60, 40);
-		b2.setLocation(340, 280);
+		JButton item2BuyButton = new JButton("구매");
+		item2BuyButton.setSize(60, 40);
+		item2BuyButton.setLocation(340, 280);
 		this.add(item2);
-		this.add(b2);
+		this.add(item2BuyButton);
 
 		// 아이템3
 		JPanel item3 = new JPanel();
@@ -80,23 +80,23 @@ public class Store extends JFrame {
 		item3.setLocation(480, 130);
 		item3.setBackground(Color.GRAY);
 
-		JButton b3 = new JButton("구매");
-		b3.setSize(60, 40);
-		b3.setLocation(570, 280);
+		JButton item3BuyButton = new JButton("구매");
+		item3BuyButton.setSize(60, 40);
+		item3BuyButton.setLocation(570, 280);
 		this.add(item3);
-		this.add(b3);
+		this.add(item3BuyButton);
 
 		// 랜덤박스
-		JPanel rb = new JPanel();
-		rb.setSize(150, 150);
-		rb.setLocation(710, 130);
-		rb.setBackground(Color.GRAY);
+		JPanel randomBox = new JPanel();
+		randomBox.setSize(150, 150);
+		randomBox.setLocation(710, 130);
+		randomBox.setBackground(Color.GRAY);
 
-		JButton b4 = new JButton("뽑기");
-		b4.setSize(60, 40);
-		b4.setLocation(800, 280);
-		this.add(rb);
-		this.add(b4);
+		JButton randomBoxBuyButton = new JButton("뽑기");
+		randomBoxBuyButton.setSize(60, 40);
+		randomBoxBuyButton.setLocation(800, 280);
+		this.add(randomBox);
+		this.add(randomBoxBuyButton);
 
 		// 랜덤박스뽑기 결과
 		Dialog rbd = new Dialog(this, "랜덤박스");
@@ -183,7 +183,7 @@ public class Store extends JFrame {
 
 		// --------------------------------------------------------------------------------
 		// 아이템1 구매시
-		b1.addActionListener(new ActionListener() {
+		item1BuyButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -208,7 +208,7 @@ public class Store extends JFrame {
 		});
 
 		// 아이템2 구매시
-		b2.addActionListener(new ActionListener() {
+		item2BuyButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -233,7 +233,7 @@ public class Store extends JFrame {
 		});
 
 		// 아이템3 구매시
-		b3.addActionListener(new ActionListener() {
+		item3BuyButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -259,7 +259,7 @@ public class Store extends JFrame {
 
 		// 랜덤박스 뽑기 결과 창
 		// 랜덤변수에 따른 아이템이미지와 결과텍스트 출력
-		b4.addActionListener(new ActionListener() {
+		randomBoxBuyButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
