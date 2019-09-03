@@ -87,7 +87,7 @@ public class Profile extends JFrame {
 
 		JButton button3 = new JButton("확인");
 		sd.add(button3);
-<<<<<<< HEAD
+
 		button3.setSize(80,50);
 		button3.setLocation(180, 400);
 		
@@ -97,10 +97,10 @@ public class Profile extends JFrame {
 		btnOut.setLocation(280, 400);
 		
 		
-=======
+
 		button3.setSize(80, 50);
 		button3.setLocation(280, 400);
->>>>>>> refs/remotes/origin/master
+
 
 		// 쪽지함 버튼2
 
@@ -118,14 +118,14 @@ public class Profile extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-<<<<<<< HEAD
+
 				 img = new ImageIcon("images\\"+name+".PNG").getImage().getScaledInstance(150, 150, 0);
-=======
+
 				JComboBox cb = (JComboBox) e.getSource();
 				String name = (String) cb.getSelectedItem();
 
 				img = new ImageIcon("hello\\" + name + ".PNG").getImage().getScaledInstance(150, 150, 0);
->>>>>>> refs/remotes/origin/master
+
 
 				label5.setIcon(new ImageIcon(img));
 
@@ -144,12 +144,12 @@ public class Profile extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
+
 				dispose();
 				
-=======
 
->>>>>>> refs/remotes/origin/master
+
+
 			}
 		});
 
@@ -164,7 +164,7 @@ public class Profile extends JFrame {
 				sd.dispose();
 
 			}
-<<<<<<< HEAD
+
 			});
 		
 		btnOut.addActionListener(new ActionListener() {
@@ -177,27 +177,13 @@ public class Profile extends JFrame {
 		});
 		
 	
-		
-=======
-		});
+	
 
->>>>>>> refs/remotes/origin/master
-		sd.add(charlist);
-		sd.add(label5);
+	sd.add(charlist);sd.add(label5);
 
-		//
-		panel.setLayout(null);
-		panel.add(label);
-		panel.add(label2);
-		panel.add(label3);
-		panel.add(label4);
-		panel.add(label6);
-		panel.add(label7);
-		panel.add(button);
-		panel.add(button2);
-		this.add(panel);
-		this.setLocationRelativeTo(null);
+	//
+	panel.setLayout(null);panel.add(label);panel.add(label2);panel.add(label3);panel.add(label4);panel.add(label6);panel.add(label7);panel.add(button);panel.add(button2);this.add(panel);this.setLocationRelativeTo(null);
 
-	}
+}
 
 }

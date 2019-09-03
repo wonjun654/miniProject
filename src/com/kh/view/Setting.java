@@ -135,12 +135,10 @@ public class Setting extends JFrame {
 		this.add(panel);
 
 		this.setVisible(true);
-<<<<<<< HEAD
+
 		this.setLocationRelativeTo(null);
 		
-=======
 
->>>>>>> refs/remotes/origin/master
 	}
 
 }

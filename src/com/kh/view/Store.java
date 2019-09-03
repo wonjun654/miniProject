@@ -335,11 +335,9 @@ public class Store extends JFrame {
 		});
 
 		this.setVisible(true);
-<<<<<<< HEAD
+
 		this.setLocationRelativeTo(null);
 	
-=======
 
->>>>>>> refs/remotes/origin/master
 	}
 }
