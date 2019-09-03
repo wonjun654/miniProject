@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import com.kh.part03_ID.FindID;
 import com.kh.part03_password.FindPassword;
 import com.kh.user.controller.UserManager;
+import com.kh.view.MainMenu;
 
 
 
@@ -27,6 +28,7 @@ public class LoginPage extends JFrame {
 	 ImageIcon icon;
 	 String str = "";
 	 UserManager um = new UserManager();
+	 
 	public LoginPage() {
 	
 
@@ -34,7 +36,7 @@ public class LoginPage extends JFrame {
 		this.setSize(1024, 768);
 		setTitle("KH치 마인드");
 		try {
-			this.setIconImage(ImageIO.read(new File("아이콘.PNG")));
+			this.setIconImage(ImageIO.read(new File("images//logo.PNG")));
 		} catch (IOException e) {
 
 			e.printStackTrace();
@@ -44,7 +46,7 @@ public class LoginPage extends JFrame {
 
 		
 		//배경 이미지 삽입
-		icon = new ImageIcon("C:\\Users\\LG\\Desktop\\web_e\\미니프로젝트\\Logo.jpg");
+		icon = new ImageIcon("images//login.PNG");
 		JPanel panel = new JPanel() {
 		 public void paintComponent(Graphics g) {
 			 g.drawImage(icon.getImage(), 0, 0, null);
@@ -107,9 +109,13 @@ public class LoginPage extends JFrame {
         		System.out.println(str);
         		if(um.login(str)) {
         			JOptionPane.showMessageDialog(null, "로그인 성공 !");
+        			MainMenu menu = new MainMenu();
+        			dispose();
         		} else {
         			JOptionPane.showMessageDialog(null, "ID/PW를 확인해 주세요.");
         		}
+        		
+        		       		
         			
 			}
 		});

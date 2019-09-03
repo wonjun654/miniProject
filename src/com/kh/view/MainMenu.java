@@ -1,30 +1,23 @@
 package com.kh.view;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-
-import java.awt.Dimension;
-
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
+
+import com.kh.model.vo.MediaTest;
+import com.kh.part01_main.LoginPage;
 
 public class MainMenu extends JFrame {
 
@@ -149,7 +142,17 @@ public class MainMenu extends JFrame {
 
 			}
 		});
-
+		exitbtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				LoginPage login = new LoginPage();
+				
+			}
+		});
+		MediaTest mt = new MediaTest();
+		mt.musicOn(0,true);
 		this.add(tf);
 		this.add(ta);
 		this.add(profilebtn);

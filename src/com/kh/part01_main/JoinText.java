@@ -29,7 +29,7 @@ public class JoinText extends JFrame {
 		
 		setTitle("KH치 마인드 - 회원 약관 동의서");
 		try {
-			this.setIconImage(ImageIO.read(new File("아이콘.PNG")));
+			this.setIconImage(ImageIO.read(new File("images//logo.PNG")));
 		} catch (IOException e) {
 			
 			e.printStackTrace();

@@ -27,7 +27,7 @@ public class FindID extends JFrame{
 		
 		setTitle("KH치 마인드 - 아이디 찾기");
 		try {
-			this.setIconImage(ImageIO.read(new File("아이콘.PNG")));
+			this.setIconImage(ImageIO.read(new File("images//logo.PNG")));
 		} catch (IOException e) {
 			
 			e.printStackTrace();

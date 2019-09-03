@@ -20,8 +20,8 @@ public class MediaTest {
 		JFrame mf = new JFrame();
 
 		String[] bgmarr = new String[2];
-		bgmarr[0] = "c:/CatchMind1.wav";
-		bgmarr[1] = "c:/CatchMind2.wav";
+		bgmarr[0] = "bgm/CatchMind1.wav";
+		bgmarr[1] = "bgm/CatchMind2.wav";
 		// bgm = new File("c:/CatchMind1.wav"); // 사용시에는 개별 폴더로 변경할 것
 		// bgm2= new File("c:/CatchMind2.wav");
 
