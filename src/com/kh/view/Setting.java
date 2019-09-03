@@ -1,5 +1,7 @@
 package com.kh.view;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,13 +17,16 @@ import javax.swing.event.ChangeListener;
 
 import com.kh.model.vo.User;
 
-public class Setting extends JFrame{
+public class Setting extends JFrame {
 	User user = new User();
 
 	public Setting() {
-		
 
-		this.setBounds(800, 300, 400, 400);
+		this.setSize(400, 400);
+		Dimension frameSize = this.getSize(); // 프레임 사이즈
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
+
+		this.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2); // 화면 중앙
 
 		JPanel panel = new JPanel();
 
@@ -53,14 +58,12 @@ public class Setting extends JFrame{
 		/////////////////////////////
 		JRadioButton profileOn = new JRadioButton("On");
 		JRadioButton profileOff = new JRadioButton("OFF");
-		
+
 		profileOn.setSize(50, 50);
 		profileOn.setLocation(100, 155);
 
 		profileOff.setSize(50, 50);
 		profileOff.setLocation(200, 155);
-
-		
 
 		ButtonGroup group = new ButtonGroup();
 
@@ -75,35 +78,33 @@ public class Setting extends JFrame{
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				user.setMusicVolume(slider.getValue());
-			
 
 			}
 		});
 
 		profileOff.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				user.setProfile(false);
-				
+
 			}
 		});
-		
+
 		profileOn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				user.setProfile(true);
-				
+
 			}
 		});
-		
+
 		button.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
+
 				dispose();
 				System.out.println(user.getProfile());
 			}
@@ -120,8 +121,7 @@ public class Setting extends JFrame{
 		this.add(panel);
 
 		this.setVisible(true);
-		
+
 	}
 
-	
 }
