@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import com.kh.user.controller.UserManager;
 import com.kh.user.model.vo.User;
 
 public class Store extends JFrame {
@@ -36,9 +37,10 @@ public class Store extends JFrame {
 	ButtonGroup c = null;
 	JRadioButton card = null;
 	JRadioButton cash = null;
-
+	UserManager um = new UserManager();
+	
 	public Store(User u) {
-
+		
 		this.setLayout(null);
 		this.setSize(1024, 768);
 		this.setResizable(false);
@@ -734,6 +736,7 @@ public class Store extends JFrame {
 									// 충전할 코인개수 가져와서 출력
 									chargeCoinNum.setText(buyCoin + "개 충전하시겠습니까?");
 									u.setCoin(u.getCoin() + buyCoin);
+									um.updateUser(u);
 									payDialog.setVisible(true);
 								}
 
@@ -774,6 +777,7 @@ public class Store extends JFrame {
 									// 충전할 코인계수 가져와서 출력
 									chargeCoinNum.setText(buyCoin + "개 충전하시겠습니까?");
 									u.setCoin(u.getCoin() + buyCoin);
+									um.updateUser(u);
 									payDialog.setVisible(true);
 								}
 								// 입력된 값 초기화
@@ -886,6 +890,8 @@ public class Store extends JFrame {
 						pay.dispose();
 						//보유코인개수 수정
 						ownCoinLabel.setText("내 코인 : " + u.getCoin());
+						um.updateUser(u);
+						System.out.println(u.getCoin());
 					}
 				});
 			}
@@ -901,6 +907,7 @@ public class Store extends JFrame {
 		payexit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				um.updateUser(u);
 				pay.dispose(); // 창 종료
 			}
 		});
@@ -917,6 +924,7 @@ public class Store extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// 결제창 팝업 실행
+				um.updateUser(u);
 				pay.setVisible(true);
 			}
 		});
@@ -931,6 +939,7 @@ public class Store extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				um.updateUser(u);
 				dispose();
 			}
 		});
