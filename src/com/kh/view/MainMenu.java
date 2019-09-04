@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.kh.model.vo.MediaTest;
 import com.kh.part01_main.LoginPage;
+import com.kh.user.model.vo.User;
 
 public class MainMenu extends JFrame {
 
@@ -122,7 +123,7 @@ public class MainMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Store st = new Store();
+				Store st = new Store(u);
 
 			}
 		});

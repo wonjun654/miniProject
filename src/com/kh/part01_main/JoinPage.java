@@ -1,6 +1,5 @@
 package com.kh.part01_main;
 
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -24,35 +23,33 @@ import javax.swing.JTextField;
 
 import com.kh.user.controller.UserManager;
 
-
 public class JoinPage extends JFrame {
 
-	public JTextArea textArea;
-	 public JRadioButton rbAgree;
-	    public JRadioButton rbdisAgree;
-	    UserManager um = new UserManager();
-	    String str = "";
-	    
+	private JTextArea textArea;
+	private JRadioButton rbAgree;
+	private JRadioButton rbdisAgree;
+	UserManager um = new UserManager();
+	String str = "";
 
 	public JoinPage() {
-		
+
 		setTitle("KH치 마인드 - 회원가입");
 		try {
-			this.setIconImage(ImageIO.read(new File("images.PNG")));
+			this.setIconImage(ImageIO.read(new File("images/logo.PNG")));
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
 		}
 		this.setBounds(250, 250, 800, 768);
 		this.setLayout(null);
 
-		//회원가입 로고
+		// 회원가입 로고
 		JLabel nameCard = new JLabel("회원가입");
 		nameCard.setFont(new Font("굴림", Font.BOLD, 22));
 		nameCard.setBounds(330, 150, 292, 64);
 		add(nameCard);
-		
-		//아이디
+
+		// 아이디
 		JLabel ldLabel = new JLabel("아이디 : ");
 		ldLabel.setBounds(177, 248, 57, 15);
 		add(ldLabel);
@@ -62,12 +59,12 @@ public class JoinPage extends JFrame {
 		add(idtextField);
 		idtextField.setColumns(10);
 
-		//아이디 중복확인
+		// 아이디 중복확인
 		JButton btnNewButton = new JButton("중복확인");
 		btnNewButton.setBounds(525, 240, 97, 31);
 		add(btnNewButton);
 
-		//비밀번호
+		// 비밀번호
 		JLabel pwLabel = new JLabel("비밀번호 : ");
 		pwLabel.setBounds(162, 301, 72, 15);
 		add(pwLabel);
@@ -77,7 +74,7 @@ public class JoinPage extends JFrame {
 		pwTextField.setBounds(249, 294, 263, 30);
 		add(pwTextField);
 
-		//비밀번호 재확인
+		// 비밀번호 재확인
 		JLabel pwLabel2 = new JLabel("비밀번호 재확인 : ");
 		pwLabel2.setBounds(119, 353, 200, 15);
 		add(pwLabel2);
@@ -86,40 +83,54 @@ public class JoinPage extends JFrame {
 		pwTextField2.setColumns(10);
 		pwTextField2.setBounds(249, 346, 263, 30);
 		add(pwTextField2);
-		
-		//비밀번호 일치여부
+
+		// 비밀번호 일치여부
 		JLabel pwCheck = new JLabel();
 		pwCheck.setBounds(250, 380, 200, 15);
 		pwTextField2.addKeyListener(new KeyListener() {
-	
+
 			@Override
 			public void keyTyped(KeyEvent e) {
 
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(pwTextField.getText().equals(pwTextField2.getText())) {
-					System.out.println(pwTextField.getText() + "\n"+pwTextField2.getText());
+
+				// 비밀번호 스트링변환
+				char[] tempPassword = pwTextField.getPassword();
+				String pwd = "";
+
+				for (int i = 0; i < tempPassword.length; i++) {
+					pwd += tempPassword[i];
+
+				}
+
+				// 비밀번호 확인 스트링변환
+				char[] tempPassword2 = pwTextField2.getPassword();
+				String pwd2 = "";
+
+				for (int j = 0; j < tempPassword2.length; j++) {
+					pwd2 += tempPassword2[j];
+
+				}
+
+				if (pwd.equals(pwd2)) {
+					System.out.println(pwd + "\n" + pwd2);
 					pwCheck.setText("비밀번호가 일치합니다.");
-				}else {
+				} else {
 					pwCheck.setText("비밀번호가 일치하지 않습니다.");
 				}
 			}
-				
 
 			@Override
 			public void keyPressed(KeyEvent e) {
 			}
 		});
-		
-		  add(pwCheck);
 
-	
-		
-		
+		add(pwCheck);
 
-		//이름
+		// 이름
 		JLabel nameLabel = new JLabel("이름 : ");
 		nameLabel.setBounds(177, 411, 57, 15);
 		add(nameLabel);
@@ -129,7 +140,7 @@ public class JoinPage extends JFrame {
 		nameTextField.setBounds(249, 404, 263, 30);
 		add(nameTextField);
 
-		//이메일
+		// 이메일
 		JLabel emailLabel = new JLabel("이메일 : ");
 		emailLabel.setBounds(177, 467, 57, 15);
 		add(emailLabel);
@@ -139,27 +150,30 @@ public class JoinPage extends JFrame {
 		emailTextField.setBounds(249, 460, 263, 30);
 		add(emailTextField);
 
-		//가입완료 버튼_가입 완료 팝업창 후 로그인화면
+		// 가입완료 버튼_가입 완료 팝업창 후 로그인화면
 		JButton CompleteBtn = new JButton("가입완료");
 		CompleteBtn.setBounds(254, 527, 118, 42);
 		add(CompleteBtn);
 
-		//나가기 _ 로그인화면
+		// 나가기 _ 로그인화면
 		JButton exitBtn = new JButton("나가기");
 		exitBtn.setBounds(394, 527, 118, 42);
 		add(exitBtn);
-		
-	
-		
-		
-        
-        CompleteBtn.addActionListener(new ActionListener() {
-			
+
+		CompleteBtn.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "회원가입에 감사드립니다. \n 환영합니다!!!");
 				str += idtextField.getText() + ":";
-				str += pwTextField.getText() + ":";
+
+				char[] tempPassword = pwTextField.getPassword();
+				String pwd = "";
+				for (int i = 0; i < tempPassword.length; i++) {
+					pwd += tempPassword[i];
+				}				
+				str += pwd + ":";
+				
 				str += nameTextField.getText() + ":";
 				str += emailTextField.getText();
 				System.out.println(str);
@@ -168,22 +182,18 @@ public class JoinPage extends JFrame {
 			}
 		});
 
-
 		exitBtn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//dispose();
-				LoginPage lp = new LoginPage();
+				dispose();
+
 			}
 		});
 
-		
 		this.setResizable(false);
 		this.setVisible(true);
-		this.setLocationRelativeTo(null);//정중앙
-		}
-	
-
+		this.setLocationRelativeTo(null);// 정중앙
+	}
 
 }

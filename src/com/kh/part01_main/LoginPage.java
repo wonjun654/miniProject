@@ -103,10 +103,17 @@ public class LoginPage extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-                
-                
+				
             	str += idText.getText() + ":";
-        		str += pwField.getText();
+            	
+            	char[] tempPassword = pwField.getPassword();
+				String pwd = "";
+
+				for (int i = 0; i < tempPassword.length; i++) {
+					pwd += tempPassword[i];
+
+				}          	
+        		str += pwd;
         		System.out.println(str);
         		
         		
