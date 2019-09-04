@@ -24,7 +24,8 @@ public class MainMenu extends JFrame {
 	JTable table1;
 	DefaultTableModel model1;
 	JTextField tf;
-
+	User u = new User();
+	
 	public List<JButton> btList;
 	public String row1[][];
 
@@ -32,7 +33,7 @@ public class MainMenu extends JFrame {
 
 		super("MainMenuPage");
 
-		String col1[] = { "¹æÀÌ¸§", "»óÅÂ", "ÀÎ¿ø" };
+		String col1[] = { "ë°©ì´ë¦„", "ìƒíƒœ", "ì¸ì›" };
 
 		String row1[][] = { { "a1", "a2", "a3" }, { "b1", "b2", "b3" }, { "c1", "c2", "c3" } };
 
@@ -46,8 +47,8 @@ public class MainMenu extends JFrame {
 		JScrollPane js1 = new JScrollPane(table1);
 		table1.getTableHeader().setReorderingAllowed(false);
 
-		Dimension frameSize = this.getSize(); // ÇÁ·¹ÀÓ »çÀÌÁî
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // ¸ğ´ÏÅÍ »çÀÌÁî
+		Dimension frameSize = this.getSize(); // í”„ë ˆì„ ì‚¬ì´ì¦ˆ
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // ëª¨ë‹ˆí„° ì‚¬ì´ì¦ˆ
 
 		setLayout(null);
 
@@ -61,7 +62,7 @@ public class MainMenu extends JFrame {
 		this.setSize(1024, 768);
 		this.setLocation((screenSize.width - this.getWidth()) / 2, (screenSize.height - this.getHeight()) / 2);
 
-		// Layout ÁöÁ¤ ¾øÀÌ À§Ä¡ ÁöÁ¤ÇÏ¸é¼­ ¹èÄ¡ÇÏ´Â ¹æ¹ıÀÌ´Ù.
+		// Layout ì§€ì • ì—†ì´ ìœ„ì¹˜ ì§€ì •í•˜ë©´ì„œ ë°°ì¹˜í•˜ëŠ” ë°©ë²•ì´ë‹¤.
 		this.setLayout(null);
 		Image profileimg = new ImageIcon("images\\profile.PNG").getImage().getScaledInstance(75, 75, 0);
 		Image makeimg = new ImageIcon("images\\make.PNG").getImage().getScaledInstance(75, 75, 0);
