@@ -122,7 +122,7 @@ public class MainMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Store st = new Store();
+				Store st = new Store(u);
 
 			}
 		});
