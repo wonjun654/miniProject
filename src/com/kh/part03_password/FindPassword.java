@@ -97,7 +97,8 @@ public FindPassword() {
 				//JOptionPane.showConfirmDialog(null, "이메일 전송 준비중 ㅠㅠ");
 				um.findPwd(idf.getText(), emailf.getText());
                 JOptionPane.showMessageDialog(null, "입력하신 이메일로 전송을 완료하였습니다.");
-				dispose();
+               // LoginPage lp = new LoginPage();
+                dispose();
 			}
 		});
 		
@@ -109,6 +110,7 @@ public FindPassword() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				LoginPage lp = new LoginPage();
 				dispose();
 			}
 		});

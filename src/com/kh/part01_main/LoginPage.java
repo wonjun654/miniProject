@@ -135,7 +135,7 @@ public class LoginPage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JoinText jt = new JoinText();
-
+				dispose();
 			}
 		});
 
@@ -145,7 +145,7 @@ public class LoginPage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				FindID fi = new FindID();
-
+				dispose();
 			}
 		});
 

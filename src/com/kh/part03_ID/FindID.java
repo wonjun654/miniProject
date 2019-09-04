@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.kh.part01_main.LoginPage;
 import com.kh.user.controller.UserManager;
 
 public class FindID extends JFrame{
@@ -83,7 +84,7 @@ public class FindID extends JFrame{
 				String str = um.FindId(idf.getText());
 				if(str != null) {
 					FindResult fr = new FindResult(str);
-					
+					dispose();
 				}
 				
 			}
@@ -93,6 +94,7 @@ public class FindID extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				LoginPage lp = new LoginPage();
 				dispose();
 				
 			}
