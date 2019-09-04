@@ -1,5 +1,6 @@
 package com.kh.view;
 
+import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -28,14 +29,12 @@ public class Pay extends JDialog {
 	ButtonGroup c = null;
 	JRadioButton card = null;
 	JRadioButton cash = null;
-	int mcoin;
-	User u = new User();
-	
+
 	public Pay(User u) {
 		this.setTitle("결제창");
 		this.setLayout(null);
 		this.setBounds(300, 100, 400, 600);
-
+		this.setResizable(false);
 		Dimension frameSize = this.getSize(); // 프레임 사이즈
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
 		this.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2); // 화면 중앙
@@ -76,37 +75,38 @@ public class Pay extends JDialog {
 		price.setSize(100, 30);
 		this.add(price);
 
-		JRadioButton priceButton1 = new JRadioButton("5,000원 : 50개");
-		priceButton1.setLocation(130, 180);
-		priceButton1.setSize(200, 30);
-		JRadioButton priceButton2 = new JRadioButton("10,000원 : 105개");
-		priceButton2.setLocation(130, 210);
-		priceButton2.setSize(200, 30);
-		JRadioButton priceButton3 = new JRadioButton("20,000원 : 210개");
-		priceButton3.setLocation(130, 240);
-		priceButton3.setSize(200, 30);
-		JRadioButton priceButton4 = new JRadioButton("30,000원 : 315개");
-		priceButton4.setLocation(130, 270);
-		priceButton4.setSize(200, 30);
-		JRadioButton priceButton5 = new JRadioButton("50,000원 : 550개");
-		priceButton5.setLocation(130, 300);
-		priceButton5.setSize(200, 30);
+		JRadioButton b1 = new JRadioButton("5,000원 : 50개");
+		b1.setLocation(130, 180);
+		b1.setSize(200, 30);
+		JRadioButton b2 = new JRadioButton("10,000원 : 105개");
+		b2.setLocation(130, 210);
+		b2.setSize(200, 30);
+		JRadioButton b3 = new JRadioButton("20,000원 : 210개");
+		b3.setLocation(130, 240);
+		b3.setSize(200, 30);
+		JRadioButton b4 = new JRadioButton("30,000원 : 315개");
+		b4.setLocation(130, 270);
+		b4.setSize(200, 30);
+		JRadioButton b5 = new JRadioButton("50,000원 : 550개");
+		b5.setLocation(130, 300);
+		b5.setSize(200, 30);
 		ButtonGroup p = new ButtonGroup();
-		p.add(priceButton1);
-		p.add(priceButton2);
-		p.add(priceButton3);
-		p.add(priceButton4);
-		p.add(priceButton5);
+		p.add(b1);
+		p.add(b2);
+		p.add(b3);
+		p.add(b4);
+		p.add(b5);
 
-		this.add(priceButton1);
-		this.add(priceButton2);
-		this.add(priceButton3);
-		this.add(priceButton4);
-		this.add(priceButton5);
+		this.add(b1);
+		this.add(b2);
+		this.add(b3);
+		this.add(b4);
+		this.add(b5);
 
 		// --------------------------------------------------------------------------------
 		// 충전하기 팝업창
 		Dialog payDialog = new Dialog(this, "충전하기");
+		payDialog.setResizable(false);
 		payDialog.setLayout(null);
 		payDialog.setSize(300, 300);
 		payDialog.setLocation((screenSize.width - payDialog.getWidth()) / 2,
@@ -119,6 +119,8 @@ public class Pay extends JDialog {
 		payDialogOkButton.setSize(75, 30);
 		payDialogCancelButton.setLocation(200, 250);
 		payDialogCancelButton.setSize(75, 30);
+		// m.setLocation(75, 100);
+		// m.setSize(150, 150);
 
 		payDialog.add(payDialogCancelButton);
 		payDialog.add(payDialogOkButton);
@@ -136,6 +138,7 @@ public class Pay extends JDialog {
 		// -----------------------------------------------------
 		// 카드결제 선택시 번호 입력
 		Dialog cardNumberInput = new Dialog(payDialog, "카드번호 입력");
+		cardNumberInput.setResizable(false);
 		cardNumberInput.setLayout(null);
 		cardNumberInput.setSize(400, 250);
 		cardNumberInput.setLocation((screenSize.width - cardNumberInput.getWidth()) / 2,
@@ -166,6 +169,7 @@ public class Pay extends JDialog {
 		cardNumberInputCancelMsg.setLocation(70, 210);
 
 		Dialog cardNumberError = new Dialog(cardNumberInput, "nochooseLabel!");
+		cardNumberError.setResizable(false);
 		cardNumberError.setModal(false);
 		cardNumberError.setLayout(null);
 		cardNumberError.setSize(200, 150);
@@ -191,6 +195,7 @@ public class Pay extends JDialog {
 
 		// 계좌이체 선택시 번호입력
 		Dialog cashNumberInput = new Dialog(payDialog, "계좌번호 입력");
+		cashNumberInput.setResizable(false);
 		cashNumberInput.setLayout(null);
 		cashNumberInput.setSize(400, 250);
 		cashNumberInput.setLocation((screenSize.width - cashNumberInput.getWidth()) / 2,
@@ -211,7 +216,8 @@ public class Pay extends JDialog {
 		cashNumberInputCancelMsg.setSize(300, 40);
 		cashNumberInputCancelMsg.setLocation(70, 210);
 
-		Dialog cashNumberError = new Dialog(cashNumberInput, "nochooseLabel!");
+		Dialog cashNumberError = new Dialog(cashNumberInput, "Error!");
+		cashNumberError.setResizable(false);
 		cashNumberError.setLayout(null);
 		cashNumberError.setSize(200, 150);
 		cashNumberError.setLocation((screenSize.width - cashNumberError.getWidth()) / 2,
@@ -261,7 +267,7 @@ public class Pay extends JDialog {
 
 		// 결제금액 선택 시
 		// 구매할 코인개수 넘겨준 후, 결제금액 출력
-		priceButton1.addActionListener(new ActionListener() {
+		b1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -270,7 +276,7 @@ public class Pay extends JDialog {
 
 			}
 		});
-		priceButton2.addActionListener(new ActionListener() {
+		b2.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -279,7 +285,7 @@ public class Pay extends JDialog {
 
 			}
 		});
-		priceButton3.addActionListener(new ActionListener() {
+		b3.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -288,7 +294,7 @@ public class Pay extends JDialog {
 
 			}
 		});
-		priceButton4.addActionListener(new ActionListener() {
+		b4.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -297,7 +303,7 @@ public class Pay extends JDialog {
 
 			}
 		});
-		priceButton5.addActionListener(new ActionListener() {
+		b5.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -328,7 +334,8 @@ public class Pay extends JDialog {
 		payDialog.add(chargeCoinNum);
 
 		// 아무것도 선택하지 않았을때 경고창
-		Dialog nochooseDialog = new Dialog(this, "nochooseLabel!");
+		Dialog nochooseDialog = new Dialog(this, "Error!");
+		nochooseDialog.setResizable(false);
 		nochooseDialog.setLayout(null);
 		nochooseDialog.setSize(300, 150);
 		nochooseDialog.setLocation((screenSize.width - nochooseDialog.getWidth()) / 2,
@@ -366,8 +373,8 @@ public class Pay extends JDialog {
 					});
 
 					// 결제금액이 선택되지 않았을 때
-				} else if (!priceButton1.isSelected() && !priceButton2.isSelected() && !priceButton3.isSelected() && !priceButton4.isSelected()
-						&& !priceButton5.isSelected()) {
+				} else if (!b1.isSelected() && !b2.isSelected() && !b3.isSelected() && !b4.isSelected()
+						&& !b5.isSelected()) {
 					// 경고창 띄움
 					nochooseDialog.setVisible(true);
 
@@ -527,6 +534,7 @@ public class Pay extends JDialog {
 		// --------------------------------------------------------------------------------
 		// 충전확인시 방식,금액 확인 팝업
 		Dialog payCompleteDialog = new Dialog(this, "충전완료");
+		payCompleteDialog.setResizable(false);
 		payCompleteDialog.setLayout(null);
 		payCompleteDialog.setSize(200, 150);
 		payCompleteDialog.setLocation((screenSize.width - payCompleteDialog.getWidth()) / 2,
@@ -536,12 +544,30 @@ public class Pay extends JDialog {
 		payCompleteLabel.setSize(150, 100);
 		payCompleteLabel.setLocation(35, 20);
 		payCompleteDialog.add(payCompleteLabel);
+		
 		JButton payCompleteOkButton = new JButton("확인");
 		payCompleteOkButton.setSize(60, 30);
 		payCompleteOkButton.setLocation(70, 100);
 		payCompleteDialog.add(payCompleteOkButton);
+		
+		// payCompleteDialog.setBackground(Color.GREEN); //팝업창 배경색
+		// payCompleteLabel.setForeground(Color.WHITE); //라벨 글씨색
+		// payCompleteOkButton.setBackground(Color.CYAN); //버튼 배경색
+		// payCompleteOkButton.setForeground(Color.WHITE); //버튼 글씨색
+		
+		// 충전하기 확인 클릭 시 팝업
+		payDialogOkButton.addActionListener(new ActionListener() {
 
-		// 결제완료 확인 클릭
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// 충전 완료 팝업 출력
+				payCompleteDialog.setVisible(true);
+
+			}
+
+		});
+
+		// 충전완료 확인 클릭
 		payCompleteOkButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -549,18 +575,6 @@ public class Pay extends JDialog {
 				// 결제창 종료
 				dispose();
 			}
-		});
-
-		// 충전완료 확인 클릭 시 팝업
-		payDialogOkButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// 결제 완료 팝업 출력
-				payCompleteDialog.setVisible(true);
-				u.setCoin(u.getCoin());
-			}
-
 		});
 
 		JButton exit = new JButton("상점으로");
