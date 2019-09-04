@@ -20,16 +20,15 @@ import com.kh.user.model.vo.User;
 public class Store extends JFrame {
 
 	Pay p;
-
 	int ownItem1Number;
 	int ownItem2Number;
 	int ownItem3Number;
-	
-	public Store(User u) {
 
+	public Store(User u) {
+		
 		this.setLayout(null);
 		this.setSize(1024, 768);
-
+		this.setResizable(false);
 		Dimension frameSize = this.getSize(); // 프레임 사이즈
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
 		this.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2); // 화면 중앙
@@ -99,6 +98,7 @@ public class Store extends JFrame {
 
 		// 랜덤박스뽑기 결과
 		Dialog randomBoxResultDialog = new Dialog(this, "랜덤박스");
+		randomBoxResultDialog.setResizable(false);
 		randomBoxResultDialog.setLayout(null);
 		randomBoxResultDialog.setSize(300, 300);
 		randomBoxResultDialog.setLocation((screenSize.width - randomBoxResultDialog.getWidth()) / 2,
@@ -169,6 +169,7 @@ public class Store extends JFrame {
 		this.add(ownCoinLabel);
 
 		Dialog itemBuyDialog = new Dialog(this, "아이템 구매");
+		itemBuyDialog.setResizable(false);
 		itemBuyDialog.setLayout(null);
 		itemBuyDialog.setSize(200, 160);
 		itemBuyDialog.setLocation((screenSize.width - itemBuyDialog.getWidth()) / 2,
@@ -190,6 +191,7 @@ public class Store extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// 보유코인 아이템구매에 필요한 코인만큼 감소후
 				// 아이템1의 개수 1 증가
+
 				u.setCoin(u.getCoin() - 1);
 				ownItem1Number++;
 				itemBuyDialog.setVisible(true);
@@ -345,7 +347,6 @@ public class Store extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// 결제창 팝업 실행
 				p = new Pay(u);
-
 			}
 		});
 
@@ -354,7 +355,7 @@ public class Store extends JFrame {
 		exit.setSize(100, 30);
 		exit.setLocation(760, 650);
 		this.add(exit);
-		
+
 		exit.addActionListener(new ActionListener() {
 
 			@Override
@@ -363,19 +364,6 @@ public class Store extends JFrame {
 			}
 		});
 
-		JButton refresh = new JButton("새로고침");
-		refresh.setSize(86, 30);
-		refresh.setLocation(400, 30);
-		this.add(refresh);
-		
-		refresh.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ownCoinLabel.setText("내 코인 : " + u.getCoin());
-				
-			}
-		});
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 
