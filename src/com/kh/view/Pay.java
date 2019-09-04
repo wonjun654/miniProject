@@ -168,7 +168,7 @@ public class Pay extends JDialog {
 		cardNumberInputCancelMsg.setSize(300, 40);
 		cardNumberInputCancelMsg.setLocation(70, 210);
 
-		Dialog cardNumberError = new Dialog(cardNumberInput, "nochooseLabel!");
+		Dialog cardNumberError = new Dialog(cardNumberInput, "Error!");
 		cardNumberError.setResizable(false);
 		cardNumberError.setModal(false);
 		cardNumberError.setLayout(null);
