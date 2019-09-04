@@ -40,74 +40,73 @@ public class Store extends JFrame {
 	UserManager um = new UserManager();
 	
 	public Store(User u) {
-		
 		this.setLayout(null);
 		this.setSize(1024, 768);
 		this.setResizable(false);
 		Dimension frameSize = this.getSize(); // 프레임 사이즈
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
 		this.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2); // 화면 중앙
-
+		
 		// 상점이름
 		JLabel store = new JLabel("상점");
 		Font font = new Font("고딕", Font.BOLD, 50);
 		store.setFont(font);
 		store.setSize(150, 80);
-		store.setLocation(30, 10);
+		store.setLocation(60, 10);
 		this.add(store);
 
 		// --------------------------------------------------------------------------------
 		// 아이템목록
 		JLabel itemList = new JLabel("아이템 목록");
 		itemList.setSize(100, 40);
-		itemList.setLocation(20, 80);
+		itemList.setLocation(60, 80);
 		this.add(itemList);
 
 		// 아이템1
 		JPanel item1 = new JPanel();
 		item1.setSize(150, 150);
-		item1.setLocation(20, 130);
+		item1.setLocation(60, 130);
 		item1.setBackground(Color.GRAY);
 
 		JButton item1BuyButton = new JButton("구매");
 		item1BuyButton.setSize(60, 40);
-		item1BuyButton.setLocation(110, 280);
+		item1BuyButton.setLocation(150, 280);
 		this.add(item1);
 		this.add(item1BuyButton);
 
 		// 아이템2
 		JPanel item2 = new JPanel();
 		item2.setSize(150, 150);
-		item2.setLocation(250, 130);
+		item2.setLocation(290, 130);
 		item2.setBackground(Color.GRAY);
 
 		JButton item2BuyButton = new JButton("구매");
 		item2BuyButton.setSize(60, 40);
-		item2BuyButton.setLocation(340, 280);
+		item2BuyButton.setLocation(380, 280);
 		this.add(item2);
 		this.add(item2BuyButton);
 
 		// 아이템3
 		JPanel item3 = new JPanel();
 		item3.setSize(150, 150);
-		item3.setLocation(480, 130);
+		item3.setLocation(520, 130);
 		item3.setBackground(Color.GRAY);
 
 		JButton item3BuyButton = new JButton("구매");
 		item3BuyButton.setSize(60, 40);
-		item3BuyButton.setLocation(570, 280);
+		item3BuyButton.setLocation(610, 280);
 		this.add(item3);
 		this.add(item3BuyButton);
 
 		// 랜덤박스
 		JPanel randomBox = new JPanel();
 		randomBox.setSize(150, 150);
-		randomBox.setLocation(710, 130);
+		randomBox.setLocation(750, 130);
 		randomBox.setBackground(Color.GRAY);
 
 		JButton randomBoxBuyButton = new JButton("뽑기");
 		randomBoxBuyButton.setSize(60, 40);
-		randomBoxBuyButton.setLocation(800, 280);
+		randomBoxBuyButton.setLocation(840, 280);
 		this.add(randomBox);
 		this.add(randomBoxBuyButton);
 
@@ -137,52 +136,58 @@ public class Store extends JFrame {
 		// 보유아이템
 		JLabel ownItemList = new JLabel("보유아이템");
 		ownItemList.setSize(100, 40);
-		ownItemList.setLocation(20, 400);
+		ownItemList.setLocation(60, 400);
 		this.add(ownItemList);
 
 		// 보유아이템1
 		JPanel ownItem1 = new JPanel();
 		ownItem1.setSize(150, 150);
-		ownItem1.setLocation(20, 450);
+		ownItem1.setLocation(60, 450);
 		ownItem1.setBackground(Color.GRAY);
 		this.add(ownItem1);
 
 		JLabel ownItem1Label = new JLabel("보유개수 : " + ownItem1Number);
 		ownItem1Label.setSize(100, 40);
-		ownItem1Label.setLocation(90, 600);
+		ownItem1Label.setLocation(150, 600);
 		this.add(ownItem1Label);
 
 		// 보유아이템2
 		JPanel ownItem2 = new JPanel();
 		ownItem2.setSize(150, 150);
-		ownItem2.setLocation(250, 450);
+		ownItem2.setLocation(290, 450);
 		ownItem2.setBackground(Color.GRAY);
 		this.add(ownItem2);
 
 		JLabel ownItem2Label = new JLabel("보유개수 : " + ownItem2Number);
 		ownItem2Label.setSize(100, 40);
-		ownItem2Label.setLocation(320, 600);
+		ownItem2Label.setLocation(360, 600);
 		this.add(ownItem2Label);
 
 		// 보유아이템3
 		JPanel ownItem3 = new JPanel();
 		ownItem3.setSize(150, 150);
-		ownItem3.setLocation(480, 450);
+		ownItem3.setLocation(520, 450);
 		ownItem3.setBackground(Color.GRAY);
 		this.add(ownItem3);
 
 		JLabel ownItem3Label = new JLabel("보유개수 : " + ownItem3Number);
 		ownItem3Label.setSize(100, 40);
-		ownItem3Label.setLocation(550, 600);
+		ownItem3Label.setLocation(590, 600);
 		this.add(ownItem3Label);
 
 		// --------------------------------------------------------------------------------
 		// 코인개수 출력
 		JLabel ownCoinLabel = new JLabel("내 코인 : " + u.getCoin());
 		ownCoinLabel.setSize(100, 40);
-		ownCoinLabel.setLocation(200, 30);
+		ownCoinLabel.setLocation(300, 50);
 		this.add(ownCoinLabel);
-
+		
+		Image icon = new ImageIcon("images/coin.jpg").getImage().getScaledInstance(75, 75, 0);
+		JLabel coinimg = new JLabel(new ImageIcon(icon));
+		coinimg.setSize(75, 75);
+		coinimg.setLocation(215, 30);
+		this.add(coinimg);
+		
 		Dialog itemBuyDialog = new Dialog(this, "아이템 구매");
 		itemBuyDialog.setResizable(false);
 		itemBuyDialog.setLayout(null);
@@ -915,7 +920,7 @@ public class Store extends JFrame {
 		// 결제버튼
 		JButton payButton = new JButton("결제하기");
 		payButton.setSize(86, 30);
-		payButton.setLocation(300, 30);
+		payButton.setLocation(400, 50);
 		this.add(payButton);
 
 		// 결제버튼 클릭시
@@ -932,7 +937,7 @@ public class Store extends JFrame {
 		// 이전화면으로
 		JButton exit = new JButton("나가기");
 		exit.setSize(100, 30);
-		exit.setLocation(760, 650);
+		exit.setLocation(800, 650);
 		this.add(exit);
 
 		exit.addActionListener(new ActionListener() {
