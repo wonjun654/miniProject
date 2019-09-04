@@ -26,7 +26,7 @@ public class UserDao {
 			ois = new ObjectInputStream(new FileInputStream("UserList.dat"));
 			list = (ArrayList<User>) ois.readObject();
 		} catch (FileNotFoundException e) {
-			System.out.println("ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.");
+			System.out.println("파일이 없습니다.");
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		} finally {
