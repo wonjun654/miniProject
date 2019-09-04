@@ -27,7 +27,7 @@ public FindPassword() {
 
 		
 		
-		setTitle("KHÄ¡ ¸¶ÀÎµå - ºñ¹Ğ¹øÈ£ Ã£±â");
+		setTitle("KHì¹˜ ë§ˆì¸ë“œ - ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°");
 		try {
 			this.setIconImage(ImageIO.read(new File("images//logo.PNG")));
 		} catch (IOException e) {
@@ -36,43 +36,43 @@ public FindPassword() {
 		}
 		setSize(1024,768);
 		pwPopup.setSize(1024,768);
-		this.setLayout(null);// ·ÎÄÉÀÌ¼Çº°·Î À§Ä¡¿Í »çÀÌÁî ÁöÁ¤°¡´É
+		this.setLayout(null);// ë¡œì¼€ì´ì…˜ë³„ë¡œ ìœ„ì¹˜ì™€ ì‚¬ì´ì¦ˆ ì§€ì •ê°€ëŠ¥
 		pwPopup.setLayout(null);
 		
 		
-		//·Î°í
-		JLabel pwLogoLabel = new JLabel("ºñ¹Ğ¹øÈ£ Ã£±â");
-		pwLogoLabel.setFont(new Font("±¼¸²", Font.BOLD, 40));
+		//ë¡œê³ 
+		JLabel pwLogoLabel = new JLabel("ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°");
+		pwLogoLabel.setFont(new Font("êµ´ë¦¼", Font.BOLD, 40));
 		pwLogoLabel.setBounds(380,150, 300, 50);
 		
-		//³»¿ë
-		JLabel idText = new JLabel("È¸¿ø °¡ÀÔ½Ã ÀÔ·ÂµÈ ¾ÆÀÌµğ¿Í ÀÌ¸ŞÀÏ ÁÖ¼Ò¸¦ ÀÔ·ÂÇÏ¿© ÁÖ¼¼¿ä.");
+		//ë‚´ìš©
+		JLabel idText = new JLabel("íšŒì› ê°€ì…ì‹œ ì…ë ¥ëœ ì•„ì´ë””ì™€ ì´ë©”ì¼ ì£¼ì†Œë¥¼ ì…ë ¥í•˜ì—¬ ì£¼ì„¸ìš”.");
 		idText.setBounds(330, 200, 400, 200);
 		
-		//°¡ÀÔ¾ÆÀÌµğ
-		JLabel idLabel = new JLabel("¾ÆÀÌµğ  : ");
+		//ê°€ì…ì•„ì´ë””
+		JLabel idLabel = new JLabel("ì•„ì´ë””  : ");
 		idLabel.setBounds(320,338, 100, 50);
 		
-		//°¡ÀÔ ¾ÆÀÌµğ ÅØ½ºÆ®
+		//ê°€ì… ì•„ì´ë”” í…ìŠ¤íŠ¸
 		JTextField idf = new JTextField();
 		idf.setBounds(380, 350, 300	, 30);
 		
-		//°¡ÀÔÀÌ¸ŞÀÏ
-		JLabel emailLabel = new JLabel("ÀÌ¸ŞÀÏ  : ");
+		//ê°€ì…ì´ë©”ì¼
+		JLabel emailLabel = new JLabel("ì´ë©”ì¼  : ");
 		emailLabel.setBounds(320,390, 100, 50);
 		
-		//°¡ÀÔ ÀÌ¸ŞÀÏ ÅØ½ºÆ®
+		//ê°€ì… ì´ë©”ì¼ í…ìŠ¤íŠ¸
 		JTextField emailf = new JTextField();
 		emailf.setBounds(380, 400, 300	, 30);
 		
 		
-		//ÀÌ¸ŞÀÏ·Î Àü¼ÛÇÔ
-		JButton checkBtn = new JButton("Àü¼Û");
+		//ì´ë©”ì¼ë¡œ ì „ì†¡í•¨
+		JButton checkBtn = new JButton("ì „ì†¡");
 		checkBtn.setBounds(380,480, 300	, 40);
 
 		
-		//·Î±×ÀÎ È­¸éÀ¸·Î ³ª°¡±â
-		JButton exitBtn = new JButton("³ª°¡±â");
+		//ë¡œê·¸ì¸ í™”ë©´ìœ¼ë¡œ ë‚˜ê°€ê¸°
+		JButton exitBtn = new JButton("ë‚˜ê°€ê¸°");
 		exitBtn.setBounds(580,550, 80	, 50);
 
 		
@@ -89,14 +89,14 @@ public FindPassword() {
 	
 		add(pwPopup);
 		
-		//ÀÌ¸ŞÀÏ·Î Àü¼Û
+		//ì´ë©”ì¼ë¡œ ì „ì†¡
 		checkBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//JOptionPane.showConfirmDialog(null, "ÀÌ¸ŞÀÏ Àü¼Û ÁØºñÁß ¤Ğ¤Ğ");
+				//JOptionPane.showConfirmDialog(null, "ì´ë©”ì¼ ì „ì†¡ ì¤€ë¹„ì¤‘ ã… ã… ");
 				um.findPwd(idf.getText(), emailf.getText());
-                JOptionPane.showMessageDialog(null, "ÀÔ·ÂÇÏ½Å ÀÌ¸ŞÀÏ·Î Àü¼ÛÀ» ¿Ï·áÇÏ¿´½À´Ï´Ù.");
+                JOptionPane.showMessageDialog(null, "ì…ë ¥í•˜ì‹  ì´ë©”ì¼ë¡œ ì „ì†¡ì„ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 				dispose();
 			}
 		});
@@ -104,7 +104,7 @@ public FindPassword() {
 		
 		
 		
-		//³ª°¡±â : ·Î±×ÀÎ È­¸éÀ¸·Î
+		//ë‚˜ê°€ê¸° : ë¡œê·¸ì¸ í™”ë©´ìœ¼ë¡œ
 		exitBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -121,4 +121,3 @@ public FindPassword() {
 }
 
 }
-

@@ -23,9 +23,9 @@ public class MakeRoom extends JFrame {
 		this.setBounds(600, 500, 600, 500);
 		setLayout(null);
 
-		JLabel roomName = new JLabel("¹æÁ¦¸ñ");
-		JLabel roomPwd = new JLabel("¹æ¾ÏÈ£");
-		JLabel roomPeople = new JLabel("ÀÎ¿ø¼ö");
+		JLabel roomName = new JLabel("ë°©ì œëª©");
+		JLabel roomPwd = new JLabel("ë°©ì•”í˜¸");
+		JLabel roomPeople = new JLabel("ì¸ì›ìˆ˜");
 
 		roomName.setBounds(125, 150, 75, 35);
 		roomPwd.setBounds(125, 200, 75, 35);
@@ -44,8 +44,8 @@ public class MakeRoom extends JFrame {
 		JSpinner selectPeople = new JSpinner(numberModel);
 		selectPeople.setBounds(175, 250, 175, 25);
 
-		btnOK = new JButton("È®ÀÎ");
-		JButton btnCancel = new JButton("Ãë¼Ò");
+		btnOK = new JButton("í™•ì¸");
+		JButton btnCancel = new JButton("ì·¨ì†Œ");
 		btnOK.setBounds(250, 300, 100, 35);
 		btnCancel.setBounds(375, 300, 100, 35);
 

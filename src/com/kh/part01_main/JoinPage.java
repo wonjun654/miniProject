@@ -36,7 +36,7 @@ public class JoinPage extends JFrame {
 
 	public JoinPage() {
 		
-		setTitle("KHÄ¡ ¸¶ÀÎµå - È¸¿ø°¡ÀÔ");
+		setTitle("KHì¹˜ ë§ˆì¸ë“œ - íšŒì›ê°€ì…");
 		try {
 			this.setIconImage(ImageIO.read(new File("images.PNG")));
 		} catch (IOException e) {
@@ -46,14 +46,14 @@ public class JoinPage extends JFrame {
 		this.setBounds(250, 250, 800, 768);
 		this.setLayout(null);
 
-		//È¸¿ø°¡ÀÔ ·Î°í
-		JLabel nameCard = new JLabel("È¸¿ø°¡ÀÔ");
-		nameCard.setFont(new Font("±¼¸²", Font.BOLD, 22));
+		//íšŒì›ê°€ì… ë¡œê³ 
+		JLabel nameCard = new JLabel("íšŒì›ê°€ì…");
+		nameCard.setFont(new Font("êµ´ë¦¼", Font.BOLD, 22));
 		nameCard.setBounds(330, 150, 292, 64);
 		add(nameCard);
 		
-		//¾ÆÀÌµğ
-		JLabel ldLabel = new JLabel("¾ÆÀÌµğ : ");
+		//ì•„ì´ë””
+		JLabel ldLabel = new JLabel("ì•„ì´ë”” : ");
 		ldLabel.setBounds(177, 248, 57, 15);
 		add(ldLabel);
 
@@ -62,13 +62,13 @@ public class JoinPage extends JFrame {
 		add(idtextField);
 		idtextField.setColumns(10);
 
-		//¾ÆÀÌµğ Áßº¹È®ÀÎ
-		JButton btnNewButton = new JButton("Áßº¹È®ÀÎ");
+		//ì•„ì´ë”” ì¤‘ë³µí™•ì¸
+		JButton btnNewButton = new JButton("ì¤‘ë³µí™•ì¸");
 		btnNewButton.setBounds(525, 240, 97, 31);
 		add(btnNewButton);
 
-		//ºñ¹Ğ¹øÈ£
-		JLabel pwLabel = new JLabel("ºñ¹Ğ¹øÈ£ : ");
+		//ë¹„ë°€ë²ˆí˜¸
+		JLabel pwLabel = new JLabel("ë¹„ë°€ë²ˆí˜¸ : ");
 		pwLabel.setBounds(162, 301, 72, 15);
 		add(pwLabel);
 
@@ -77,8 +77,8 @@ public class JoinPage extends JFrame {
 		pwTextField.setBounds(249, 294, 263, 30);
 		add(pwTextField);
 
-		//ºñ¹Ğ¹øÈ£ ÀçÈ®ÀÎ
-		JLabel pwLabel2 = new JLabel("ºñ¹Ğ¹øÈ£ ÀçÈ®ÀÎ : ");
+		//ë¹„ë°€ë²ˆí˜¸ ì¬í™•ì¸
+		JLabel pwLabel2 = new JLabel("ë¹„ë°€ë²ˆí˜¸ ì¬í™•ì¸ : ");
 		pwLabel2.setBounds(119, 353, 200, 15);
 		add(pwLabel2);
 
@@ -87,7 +87,7 @@ public class JoinPage extends JFrame {
 		pwTextField2.setBounds(249, 346, 263, 30);
 		add(pwTextField2);
 		
-		//ºñ¹Ğ¹øÈ£ ÀÏÄ¡¿©ºÎ
+		//ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜ì—¬ë¶€
 		JLabel pwCheck = new JLabel();
 		pwCheck.setBounds(250, 380, 200, 15);
 		pwTextField2.addKeyListener(new KeyListener() {
@@ -101,9 +101,9 @@ public class JoinPage extends JFrame {
 			public void keyReleased(KeyEvent e) {
 				if(pwTextField.getText().equals(pwTextField2.getText())) {
 					System.out.println(pwTextField.getText() + "\n"+pwTextField2.getText());
-					pwCheck.setText("ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÕ´Ï´Ù.");
+					pwCheck.setText("ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•©ë‹ˆë‹¤.");
 				}else {
-					pwCheck.setText("ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+					pwCheck.setText("ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 				}
 			}
 				
@@ -119,8 +119,8 @@ public class JoinPage extends JFrame {
 		
 		
 
-		//ÀÌ¸§
-		JLabel nameLabel = new JLabel("ÀÌ¸§ : ");
+		//ì´ë¦„
+		JLabel nameLabel = new JLabel("ì´ë¦„ : ");
 		nameLabel.setBounds(177, 411, 57, 15);
 		add(nameLabel);
 
@@ -129,8 +129,8 @@ public class JoinPage extends JFrame {
 		nameTextField.setBounds(249, 404, 263, 30);
 		add(nameTextField);
 
-		//ÀÌ¸ŞÀÏ
-		JLabel emailLabel = new JLabel("ÀÌ¸ŞÀÏ : ");
+		//ì´ë©”ì¼
+		JLabel emailLabel = new JLabel("ì´ë©”ì¼ : ");
 		emailLabel.setBounds(177, 467, 57, 15);
 		add(emailLabel);
 
@@ -139,13 +139,13 @@ public class JoinPage extends JFrame {
 		emailTextField.setBounds(249, 460, 263, 30);
 		add(emailTextField);
 
-		//°¡ÀÔ¿Ï·á ¹öÆ°_°¡ÀÔ ¿Ï·á ÆË¾÷Ã¢ ÈÄ ·Î±×ÀÎÈ­¸é
-		JButton CompleteBtn = new JButton("°¡ÀÔ¿Ï·á");
+		//ê°€ì…ì™„ë£Œ ë²„íŠ¼_ê°€ì… ì™„ë£Œ íŒì—…ì°½ í›„ ë¡œê·¸ì¸í™”ë©´
+		JButton CompleteBtn = new JButton("ê°€ì…ì™„ë£Œ");
 		CompleteBtn.setBounds(254, 527, 118, 42);
 		add(CompleteBtn);
 
-		//³ª°¡±â _ ·Î±×ÀÎÈ­¸é
-		JButton exitBtn = new JButton("³ª°¡±â");
+		//ë‚˜ê°€ê¸° _ ë¡œê·¸ì¸í™”ë©´
+		JButton exitBtn = new JButton("ë‚˜ê°€ê¸°");
 		exitBtn.setBounds(394, 527, 118, 42);
 		add(exitBtn);
 		
@@ -157,7 +157,7 @@ public class JoinPage extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "È¸¿ø°¡ÀÔ¿¡ °¨»çµå¸³´Ï´Ù. \n È¯¿µÇÕ´Ï´Ù!!!");
+				JOptionPane.showMessageDialog(null, "íšŒì›ê°€ì…ì— ê°ì‚¬ë“œë¦½ë‹ˆë‹¤. \n í™˜ì˜í•©ë‹ˆë‹¤!!!");
 				str += idtextField.getText() + ":";
 				str += pwTextField.getText() + ":";
 				str += nameTextField.getText() + ":";
@@ -181,7 +181,7 @@ public class JoinPage extends JFrame {
 		
 		this.setResizable(false);
 		this.setVisible(true);
-		this.setLocationRelativeTo(null);//Á¤Áß¾Ó
+		this.setLocationRelativeTo(null);//ì •ì¤‘ì•™
 		}
 	
 

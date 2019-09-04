@@ -23,7 +23,7 @@ public class Profile extends JFrame {
 	Image img = user.getImg();
 
 	public Profile() {
-		// ±âº» ÇÁ·ÎÇÊÃ¢-----------------------------------------------
+		// ê¸°ë³¸ í”„ë¡œí•„ì°½-----------------------------------------------
 
 		this.setBounds(700, 300, 600, 300);
 
@@ -32,10 +32,10 @@ public class Profile extends JFrame {
 		panel.setLocation(30, 20);
 		panel.setSize(600, 300);
 
-		// ÇÁ·ÎÇÊ¼³Á¤Ã¢ ------------------------------------------------
-		Dialog sd = new Dialog(this, "ÇÁ·ÎÇÊ È­¸é º¯°æ");
+		// í”„ë¡œí•„ì„¤ì •ì°½ ------------------------------------------------
+		Dialog sd = new Dialog(this, "í”„ë¡œí•„ í™”ë©´ ë³€ê²½");
 		sd.setBounds(800, 250, 400, 500);
-		sd.add(new JLabel("ÀÌ¸§"));
+		sd.add(new JLabel("ì´ë¦„"));
 		sd.setLayout(null);
 
 		//////
@@ -45,11 +45,11 @@ public class Profile extends JFrame {
 		label.setSize(150, 150);
 		label.setBackground(Color.black);
 
-		JLabel label2 = new JLabel("¿ì½Â");
+		JLabel label2 = new JLabel("ìš°ìŠ¹");
 		label2.setLocation(250, 30);
 		label2.setSize(80, 30);
 
-		JLabel label3 = new JLabel("ÄÚÀÎ");
+		JLabel label3 = new JLabel("ì½”ì¸");
 		label3.setLocation(450, 30);
 		label3.setSize(80, 30);
 
@@ -69,21 +69,21 @@ public class Profile extends JFrame {
 		label7.setSize(80, 30);
 		label7.setLocation(460, 80);
 
-		JButton button = new JButton("ÇÁ·ÎÇÊ ¼³Á¤");
+		JButton button = new JButton("í”„ë¡œí•„ ì„¤ì •");
 		button.setLocation(200, 130);
 		button.setSize(120, 30);
 
-		JButton button3 = new JButton("È®ÀÎ");
+		JButton button3 = new JButton("í™•ì¸");
 		sd.add(button3);
 
 		button3.setSize(80, 50);
 		button3.setLocation(280, 400);
 
-		JButton button4 = new JButton("È®ÀÎ");
+		JButton button4 = new JButton("í™•ì¸");
 		button4.setSize(80, 40);
 		button4.setLocation(440, 190);
 
-		// ÀÌ¹ÌÁö ¹Ù²Ù±â
+		// ì´ë¯¸ì§€ ë°”ê¾¸ê¸°
 		String[] character = { "yangpa", "jumuk", "baechu" };
 
 		JComboBox charlist = new JComboBox(character);
@@ -108,7 +108,7 @@ public class Profile extends JFrame {
 			}
 		});
 
-		/// ÇÁ·ÎÇÊ¼³Á¤
+		/// í”„ë¡œí•„ì„¤ì •
 		button.addActionListener(new ActionListener() {
 
 			@Override
@@ -117,7 +117,7 @@ public class Profile extends JFrame {
 			}
 		});
 
-		// sd È®ÀÎ
+		// sd í™•ì¸
 		button3.addActionListener(new ActionListener() {
 
 			@Override

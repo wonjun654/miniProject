@@ -35,7 +35,7 @@ public class LoginPage extends JFrame {
 
 	
 		this.setSize(1024, 768);
-		setTitle("KHÄ¡ ¸¶ÀÎµå");
+		setTitle("KHì¹˜ ë§ˆì¸ë“œ");
 		try {
 			this.setIconImage(ImageIO.read(new File("images//logo.PNG")));
 		} catch (IOException e) {
@@ -46,7 +46,7 @@ public class LoginPage extends JFrame {
 		setLayout(null);
 
 		
-		//¹è°æ ÀÌ¹ÌÁö »ğÀÔ
+		//ë°°ê²½ ì´ë¯¸ì§€ ì‚½ì…
 		icon = new ImageIcon("images//login.PNG");
 		JPanel panel = new JPanel() {
 		 public void paintComponent(Graphics g) {
@@ -61,44 +61,44 @@ public class LoginPage extends JFrame {
 
 		
 		
-		// ¾ÆÀÌµğ
-		JLabel idLabel = new JLabel("¾ÆÀÌµğ : ");
+		// ì•„ì´ë””
+		JLabel idLabel = new JLabel("ì•„ì´ë”” : ");
 		idLabel.setBounds(290, 460, 300, 100);
 		JTextField idText = new JTextField();
 		idText.setBounds(360, 495, 305, 30);
 		panel.add(idLabel);
 		panel.add(idText);
 
-		// ÆĞ½º¿öµå
-		JLabel pwLabel = new JLabel("ºñ¹Ğ ¹øÈ£ : ");
+		// íŒ¨ìŠ¤ì›Œë“œ
+		JLabel pwLabel = new JLabel("ë¹„ë°€ ë²ˆí˜¸ : ");
 		pwLabel.setBounds(274, 503, 300, 100);
 		JPasswordField pwField = new JPasswordField();
 		pwField.setBounds(360, 540, 305, 30);
 		panel.add(pwLabel);
 		panel.add(pwField);
 
-		// ·Î±×ÀÎ ¹öÆ°
-		JButton loginbtn = new JButton("·Î±×ÀÎ");
+		// ë¡œê·¸ì¸ ë²„íŠ¼
+		JButton loginbtn = new JButton("ë¡œê·¸ì¸");
 		loginbtn.setBounds(680, 495, 120, 75);
 		panel.add(idText);
 		panel.add(loginbtn);
 
-		// È¸¿ø°¡ÀÔ ¹öÆ°
-		JButton joinbtn = new JButton("È¸¿ø°¡ÀÔ");
+		// íšŒì›ê°€ì… ë²„íŠ¼
+		JButton joinbtn = new JButton("íšŒì›ê°€ì…");
 		joinbtn.setBounds(360, 600, 90, 30);
 		panel.add(joinbtn);
 
-		// ¾ÆÀÌµğ Ã£±â ¹öÆ°
-		JButton idbtn = new JButton("ID Ã£±â ");
+		// ì•„ì´ë”” ì°¾ê¸° ë²„íŠ¼
+		JButton idbtn = new JButton("ID ì°¾ê¸° ");
 		idbtn.setBounds(466, 600, 90, 30);
 		panel.add(idbtn);
 
-		// ºñ¹Ğ¹øÈ£ Ã£±â ¹öÆ°
-		JButton pwbtn = new JButton("P/W Ã£±â ");
+		// ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ë²„íŠ¼
+		JButton pwbtn = new JButton("P/W ì°¾ê¸° ");
 		pwbtn.setBounds(572, 600, 90, 30);
 		panel.add(pwbtn);
 		
-		//·Î±×ÀÎ ¹öÆ°
+		//ë¡œê·¸ì¸ ë²„íŠ¼
 		loginbtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -114,11 +114,11 @@ public class LoginPage extends JFrame {
         		
         		
         		if(um.login(str)) {
-        			JOptionPane.showMessageDialog(null, "·Î±×ÀÎ ¼º°ø !");
+        			JOptionPane.showMessageDialog(null, "ë¡œê·¸ì¸ ì„±ê³µ !");
         			MainMenu menu = new MainMenu();
         			dispose();
         		} else {
-        			JOptionPane.showMessageDialog(null, "ID/PW¸¦ È®ÀÎÇØ ÁÖ¼¼¿ä.");
+        			JOptionPane.showMessageDialog(null, "ID/PWë¥¼ í™•ì¸í•´ ì£¼ì„¸ìš”.");
         			str = "";
         		}
         		
@@ -129,7 +129,7 @@ public class LoginPage extends JFrame {
 		
 		
 		
-		// È¸¿ø°¡ÀÔ ¿¬µ¿
+		// íšŒì›ê°€ì… ì—°ë™
 		joinbtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -139,7 +139,7 @@ public class LoginPage extends JFrame {
 			}
 		});
 
-		// ¾ÆÀÌµğ Ã£±â ¹öÆ°
+		// ì•„ì´ë”” ì°¾ê¸° ë²„íŠ¼
 		idbtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -149,7 +149,7 @@ public class LoginPage extends JFrame {
 			}
 		});
 
-		// ºñ¹Ğ¹øÈ£ Ã£±â ¹öÆ°
+		// ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ë²„íŠ¼
 		pwbtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -162,7 +162,7 @@ public class LoginPage extends JFrame {
 		this.add(panel);
 		this.setResizable(false);
 		this.setVisible(true);
-		this.setLocationRelativeTo(null);// Á¤Áß¾Ó¤Ó
+		this.setLocationRelativeTo(null);// ì •ì¤‘ì•™ã…£
 		MediaTest mt = new MediaTest();
 		mt.musicOn(1, true);
 	
@@ -173,7 +173,6 @@ public class LoginPage extends JFrame {
 	
 	/*public static void main(String[] args) {
 		new LoginPage();
-
 	}*/
 
 }

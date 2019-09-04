@@ -25,7 +25,7 @@ public class FindID extends JFrame{
 
 		
 		
-		setTitle("KHÄ¡ ¸¶ÀÎµå - ¾ÆÀÌµğ Ã£±â");
+		setTitle("KHì¹˜ ë§ˆì¸ë“œ - ì•„ì´ë”” ì°¾ê¸°");
 		try {
 			this.setIconImage(ImageIO.read(new File("images//logo.PNG")));
 		} catch (IOException e) {
@@ -34,31 +34,31 @@ public class FindID extends JFrame{
 		}
 		setSize(1024,768);
 		idPopup.setSize(1024,768);
-		this.setLayout(null);// ·ÎÄÉÀÌ¼Çº°·Î À§Ä¡¿Í »çÀÌÁî ÁöÁ¤°¡´É
+		this.setLayout(null);// ë¡œì¼€ì´ì…˜ë³„ë¡œ ìœ„ì¹˜ì™€ ì‚¬ì´ì¦ˆ ì§€ì •ê°€ëŠ¥
 		idPopup.setLayout(null);
 		
 		
-		JLabel forntLabel = new JLabel("¾ÆÀÌµğ Ã£±â");
-		forntLabel.setFont(new Font("±¼¸²", Font.BOLD, 40));
+		JLabel forntLabel = new JLabel("ì•„ì´ë”” ì°¾ê¸°");
+		forntLabel.setFont(new Font("êµ´ë¦¼", Font.BOLD, 40));
 		forntLabel.setBounds(380,150, 300, 50);
 		
 		
-		JLabel idText = new JLabel("È¸¿ø °¡ÀÔ½Ã ÀÔ·ÂÇÑ ÀÌ¸ŞÀÏ ÁÖ¼Ò¸¦ ÀÔ·ÂÇÏ¼¼¿ä. ");
+		JLabel idText = new JLabel("íšŒì› ê°€ì…ì‹œ ì…ë ¥í•œ ì´ë©”ì¼ ì£¼ì†Œë¥¼ ì…ë ¥í•˜ì„¸ìš”. ");
 		idText.setBounds(400, 200, 400, 200);
 		
 		
 	
 		
-		JLabel idText2 = new JLabel("ÀÌ¸ŞÀÏ  : ");
+		JLabel idText2 = new JLabel("ì´ë©”ì¼  : ");
 		idText2.setBounds(320,338, 100, 50);
 		
 		JTextField idf = new JTextField();
 		idf.setBounds(380, 350, 300	, 30);
 		
-		JButton checkBtn = new JButton("È®ÀÎ");
+		JButton checkBtn = new JButton("í™•ì¸");
 		checkBtn.setBounds(500,420, 70	, 50);
 
-		JButton exitBtn = new JButton("³ª°¡±â");
+		JButton exitBtn = new JButton("ë‚˜ê°€ê¸°");
 		exitBtn.setBounds(580,420, 80	, 50);
 
 		

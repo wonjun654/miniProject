@@ -20,7 +20,7 @@ public class FindResult extends JFrame {
 
 		JPanel idResultPop = new JPanel();
 
-		setTitle("KHÄ¡ ¸¶ÀÎµå - ¾ÆÀÌµğ Ã£±â °á°ú");
+		setTitle("KHì¹˜ ë§ˆì¸ë“œ - ì•„ì´ë”” ì°¾ê¸° ê²°ê³¼");
 		try {
 			this.setIconImage(ImageIO.read(new File("images//logo.PNG")));
 		} catch (IOException e) {
@@ -29,23 +29,23 @@ public class FindResult extends JFrame {
 		}
 		setSize(1024, 768);
 		idResultPop.setSize(1024, 768);
-		this.setLayout(null);// ·ÎÄÉÀÌ¼Çº°·Î À§Ä¡¿Í »çÀÌÁî ÁöÁ¤°¡´É
+		this.setLayout(null);// ë¡œì¼€ì´ì…˜ë³„ë¡œ ìœ„ì¹˜ì™€ ì‚¬ì´ì¦ˆ ì§€ì •ê°€ëŠ¥
 		idResultPop.setLayout(null);
 
-		JLabel idText = new JLabel("°¡ÀÔÇÏ½Å ¾ÆÀÌµğ´Â ");
+		JLabel idText = new JLabel("ê°€ì…í•˜ì‹  ì•„ì´ë””ëŠ” ");
 		idText.setBounds(400, 200, 400, 200);
 
 		JTextField idf = new JTextField();
 		idf.setBounds(350, 350, 300, 30);
 		idf.setText(str);
 
-		JLabel idText2 = new JLabel("ÀÔ´Ï´Ù.");
+		JLabel idText2 = new JLabel("ì…ë‹ˆë‹¤.");
 		idText2.setBounds(650, 350, 300, 30);
 
-		JButton checkBtn = new JButton("·Î±×ÀÎ");
+		JButton checkBtn = new JButton("ë¡œê·¸ì¸");
 		checkBtn.setBounds(350, 420, 80, 50);
 
-		JButton exitBtn = new JButton("³ª°¡±â");
+		JButton exitBtn = new JButton("ë‚˜ê°€ê¸°");
 		exitBtn.setBounds(580, 420, 80, 50);
 
 		idResultPop.add(idText);

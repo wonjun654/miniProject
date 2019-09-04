@@ -33,17 +33,17 @@ public class smtptest {
 	            MimeMessage message = new MimeMessage(session);
 	            message.setFrom(new InternetAddress(user));
 
-	            //¼ö½ÅÀÚ¸ŞÀÏÁÖ¼Ò
+	            //ìˆ˜ì‹ ìë©”ì¼ì£¼ì†Œ
 	            message.addRecipient(Message.RecipientType.TO, new InternetAddress(email)); 
 
 	            // Subject
-	            message.setSubject("KHÄ¡¸¶ÀÎµå"); //¸ŞÀÏ Á¦¸ñÀ» ÀÔ·Â
+	            message.setSubject("KHì¹˜ë§ˆì¸ë“œ"); //ë©”ì¼ ì œëª©ì„ ì…ë ¥
 
 	            // Text
-	            message.setText("¸ŞÀÏ¼­ºñ½º Å×½ºÆ®ÁßÀÔ´Ï´Ù");    //¸ŞÀÏ ³»¿ëÀ» ÀÔ·Â
+	            message.setText("ë©”ì¼ì„œë¹„ìŠ¤ í…ŒìŠ¤íŠ¸ì¤‘ì…ë‹ˆë‹¤");    //ë©”ì¼ ë‚´ìš©ì„ ì…ë ¥
 
 	            // send the message
-	            Transport.send(message); ////Àü¼Û
+	            Transport.send(message); ////ì „ì†¡
 	            System.out.println("message sent successfully...");
 	        } catch (AddressException e) {
 	            // TODO Auto-generated catch block

@@ -54,9 +54,9 @@ public class UserManager {
 		int result = ud.addUserList(list);
 
 		if (result > 0) {
-			System.out.println("À¯Àú Ãß°¡ ¼º°ø");
+			System.out.println("ìœ ì € ì¶”ê°€ ì„±ê³µ");
 		} else {
-			System.out.println("À¯Àú Ãß°¡ ½ÇÆĞ");
+			System.out.println("ìœ ì € ì¶”ê°€ ì‹¤íŒ¨");
 		}
 	}
 
@@ -73,7 +73,7 @@ public class UserManager {
 			}
 		}
 		if (selectedUser == null) {
-			System.out.println("ÇØ´ç ¾ÆÀÌµğ°¡ ¾ø½À´Ï´Ù.");
+			System.out.println("í•´ë‹¹ ì•„ì´ë””ê°€ ì—†ìŠµë‹ˆë‹¤.");
 		} else {
 			System.out.println(selectedUser);
 		}

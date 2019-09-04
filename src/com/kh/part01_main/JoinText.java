@@ -27,7 +27,7 @@ public class JoinText extends JFrame {
 	public JoinText() {
 
 		
-		setTitle("KHÄ¡ ¸¶ÀÎµå - È¸¿ø ¾à°ü µ¿ÀÇ¼­");
+		setTitle("KHì¹˜ ë§ˆì¸ë“œ - íšŒì› ì•½ê´€ ë™ì˜ì„œ");
 		try {
 			this.setIconImage(ImageIO.read(new File("images//logo.PNG")));
 		} catch (IOException e) {
@@ -38,12 +38,12 @@ public class JoinText extends JFrame {
 		this.setLayout(null);
 
 		
-		JLabel agreeLabel = new JLabel("È¸¿ø ¾à°ü µ¿ÀÇ");
-		agreeLabel.setFont(new Font("±¼¸²",Font.BOLD,40));
+		JLabel agreeLabel = new JLabel("íšŒì› ì•½ê´€ ë™ì˜");
+		agreeLabel.setFont(new Font("êµ´ë¦¼",Font.BOLD,40));
 		agreeLabel.setBounds(200, 100, 300, 200);
 		add(agreeLabel);
 
-        // È¸¿ø¾à°ü 
+        // íšŒì›ì•½ê´€ 
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(200, 365, 342, 115);
         add(scrollPane);
@@ -56,15 +56,15 @@ public class JoinText extends JFrame {
         
         
         
-        // È¸¿ø¾à°ü µ¿ÀÇ or ¹Ìµ¿ÀÇ ¹öÆ°
+        // íšŒì›ì•½ê´€ ë™ì˜ or ë¯¸ë™ì˜ ë²„íŠ¼
         ButtonGroup bg = new ButtonGroup();
-        rbAgree = new JRadioButton("µ¿ÀÇ");
+        rbAgree = new JRadioButton("ë™ì˜");
         rbAgree.setOpaque(false);
         rbAgree.setForeground(Color.BLACK);
         rbAgree.setBounds(280, 500, 71, 27);
         add(rbAgree);
         
-        rbdisAgree = new JRadioButton("¹Ìµ¿ÀÇ");
+        rbdisAgree = new JRadioButton("ë¯¸ë™ì˜");
         rbdisAgree.setOpaque(false);
         rbdisAgree.setForeground(Color.BLACK);
         rbdisAgree.setBounds(390, 500, 139, 27);
@@ -79,15 +79,15 @@ public class JoinText extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 		
-				JOptionPane.showMessageDialog(null, "¹Ìµ¿ÀÇ½Ã È¸¿ø°¡ÀÔ ÁøÇàÀÌ ºÒ°¡´ÉÇÕ´Ï´Ù.");
+				JOptionPane.showMessageDialog(null, "ë¯¸ë™ì˜ì‹œ íšŒì›ê°€ì… ì§„í–‰ì´ ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤.");
 				
 			}
 		});
         
         
         
-        //µ¿ÀÇ¿Ï·á ¹öÆ°
-        JButton agreeBtn = new JButton("µ¿ÀÇ ¿Ï·á");
+        //ë™ì˜ì™„ë£Œ ë²„íŠ¼
+        JButton agreeBtn = new JButton("ë™ì˜ ì™„ë£Œ");
         agreeBtn.setBounds(230, 550, 100, 30);
         add(agreeBtn);
         
@@ -100,14 +100,14 @@ public class JoinText extends JFrame {
 				JoinPage jp = new JoinPage();
 				dispose();
 				}else if(rbdisAgree.isSelected()) {
-					JOptionPane.showMessageDialog(null, "¹Ìµ¿ÀÇ½Ã È¸¿ø°¡ÀÔ ÁøÇàÀÌ ºÒ°¡´ÉÇÕ´Ï´Ù.");
+					JOptionPane.showMessageDialog(null, "ë¯¸ë™ì˜ì‹œ íšŒì›ê°€ì… ì§„í–‰ì´ ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤.");
 				}
 			}
 		});
         
         
-        //Ãë¼Ò
-        JButton cancleBtn = new JButton("Ãë¼Ò");
+        //ì·¨ì†Œ
+        JButton cancleBtn = new JButton("ì·¨ì†Œ");
         cancleBtn.setBounds(400, 550, 100, 30);
         add(cancleBtn);
         
@@ -128,7 +128,7 @@ public class JoinText extends JFrame {
 		
 		this.setResizable(false);
 		this.setVisible(true);
-		this.setLocationRelativeTo(null);//Á¤Áß¾Ó
+		this.setLocationRelativeTo(null);//ì •ì¤‘ì•™
 		}
 	
 	

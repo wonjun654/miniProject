@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
 public class SIgnUp extends JPanel {
 	public SIgnUp() {
 		setLayout(null);
-		JButton btnNewButton = new JButton("È®ÀÎ");
+		JButton btnNewButton = new JButton("í™•ì¸");
 		btnNewButton.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnNewButton.setLayout(null);
 		btnNewButton.setBounds(175, 188, 70, 25);
@@ -24,8 +24,8 @@ public class SIgnUp extends JPanel {
 		});
 		add(btnNewButton);
 		
-		JLabel label = new JLabel("È¸¿ø°¡ÀÔÀ» ÃàÇÏµå¸³´Ï´Ù~!!");
-		label.setFont(new Font("±¼¸²", Font.PLAIN, 18));
+		JLabel label = new JLabel("íšŒì›ê°€ì…ì„ ì¶•í•˜ë“œë¦½ë‹ˆë‹¤~!!");
+		label.setFont(new Font("êµ´ë¦¼", Font.PLAIN, 18));
 		label.setBounds(101, 125, 255, 40);
 		add(label);
 

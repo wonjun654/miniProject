@@ -22,7 +22,7 @@ public class MediaTest {
 		String[] bgmarr = new String[2];
 		bgmarr[0] = "bgm/CatchMind1.wav";
 		bgmarr[1] = "bgm/CatchMind2.wav";
-		// bgm = new File("c:/CatchMind1.wav"); // »ç¿ë½Ã¿¡´Â °³º° Æú´õ·Î º¯°æÇÒ °Í
+		// bgm = new File("c:/CatchMind1.wav"); // ì‚¬ìš©ì‹œì—ëŠ” ê°œë³„ í´ë”ë¡œ ë³€ê²½í•  ê²ƒ
 		// bgm2= new File("c:/CatchMind2.wav");
 
 		if (b) {
