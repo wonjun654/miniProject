@@ -1,30 +1,29 @@
 package com.kh.user.model.vo;
 
+import java.awt.Image;
 import java.io.Serializable;
 
+import javax.swing.ImageIcon;
+
 public class User implements Serializable {
+	/**
+	 * 
+	 */
 	private String userId;
 	private String userPwd;
 	private String userName;
 	private String email;
-	private int coin;
-	
-	public int getCoin() {
-		return coin;
-	}
+	private int coin = 0;
+	private String imgName;
+	private boolean profile;
+	private boolean musicSet;
+	private int victory;
 
-	public void setCoin(int coin) {
-		this.coin = coin;
-	}
-	
-	public User() {}
-	
-	public User(String userId, String userPwd, String userName, String email) {
-		super();
-		this.userId = userId;
-		this.userPwd = userPwd;
-		this.userName = userName;
-		this.email = email;
+	public User() {
+		this.coin = 0;
+		this.profile = true;
+		this.musicSet = true;
+		this.victory = 0;
 	}
 
 	public String getUserId() {
@@ -47,7 +46,7 @@ public class User implements Serializable {
 		return userName;
 	}
 
-	public void setUserNickName(String userName) {
+	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
@@ -59,12 +58,59 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", userPwd=" + userPwd + ", userNickName=" + userName + ", email=" + email
-				+ "]";
+	public int getCoin() {
+		return coin;
+	}
+
+	public void setCoin(int coin) {
+		this.coin = coin;
 	}
 	
-	
-	
+	public boolean getProfile() {
+		return profile;
+	}
+
+	public void setProfile(boolean profile) {
+		this.profile = profile;
+	}
+
+	public boolean getMusicSet() {
+		return musicSet;
+	}
+
+	public void setMusicSet(boolean musicSet) {
+		this.musicSet = musicSet;
+	}
+
+	public int getVictory() {
+		return victory;
+	}
+
+	public void setVictory(int victory) {
+		this.victory = victory;
+	}
+
+	public User(String userId, String userPwd, String userName, String email) {
+		this();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName + ", email=" + email
+				+ ", imgName = " + imgName + ", coin=" + coin + ", profile=" + profile + ", musicSet=" + musicSet + ", victory="
+				+ victory + "]";
+	}
+
+	public String getImgName() {
+		return imgName;
+	}
+
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
+
 }

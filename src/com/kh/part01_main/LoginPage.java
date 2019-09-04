@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -25,7 +26,7 @@ import com.kh.view.MainMenu;
 
 
 
-public class LoginPage extends JFrame {
+public class LoginPage extends JFrame implements Serializable {
 	 ImageIcon icon;
 	 String str = "";
 	 UserManager um = new UserManager();

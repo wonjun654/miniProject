@@ -14,12 +14,12 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.kh.model.vo.MediaTest;
-import com.kh.model.vo.User;
+import com.kh.user.model.vo.User;
 
 public class Setting extends JFrame {
-	User user = new User();
+	
 
-	public Setting() {
+	public Setting(User user) {
 
 		this.setBounds(800, 300, 400, 400);
 
