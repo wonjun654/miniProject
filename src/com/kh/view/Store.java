@@ -23,7 +23,6 @@ import com.kh.user.model.vo.User;
 
 public class Store extends JFrame {
 
-	Pay p;
 	int ownItem1Number;
 	int ownItem2Number;
 	int ownItem3Number;
