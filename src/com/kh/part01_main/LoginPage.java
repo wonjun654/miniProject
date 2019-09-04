@@ -22,18 +22,13 @@ import com.kh.part03_password.FindPassword;
 import com.kh.user.controller.UserManager;
 import com.kh.view.MainMenu;
 
-
-
-
 public class LoginPage extends JFrame {
-	 ImageIcon icon;
-	 String str = "";
-	 UserManager um = new UserManager();
-	 
-	public LoginPage() {
-	
+	ImageIcon icon;
+	String str = "";
+	UserManager um = new UserManager();
 
-	
+	public LoginPage() {
+
 		this.setSize(1024, 768);
 		setTitle("KH치 마인드");
 		try {
@@ -45,22 +40,19 @@ public class LoginPage extends JFrame {
 
 		setLayout(null);
 
-		
-		//배경 이미지 삽입
+		// 배경 이미지 삽입
 		icon = new ImageIcon("images//login.PNG");
 		JPanel panel = new JPanel() {
-		 public void paintComponent(Graphics g) {
-			 g.drawImage(icon.getImage(), 0, 0, null);
-			 setOpaque(false); 
-			 super.paintComponent(g);
-		 }
+			public void paintComponent(Graphics g) {
+				g.drawImage(icon.getImage(), 0, 0, null);
+				setOpaque(false);
+				super.paintComponent(g);
+			}
 		};
-		 
+
 		panel.setBounds(0, 0, 1024, 768);
 		panel.setLayout(null);
 
-		
-		
 		// 아이디
 		JLabel idLabel = new JLabel("아이디 : ");
 		idLabel.setBounds(290, 460, 300, 100);
@@ -97,45 +89,37 @@ public class LoginPage extends JFrame {
 		JButton pwbtn = new JButton("P/W 찾기 ");
 		pwbtn.setBounds(572, 600, 90, 30);
 		panel.add(pwbtn);
-		
-		//로그인 버튼
+
+		// 로그인 버튼
 		loginbtn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-            	str += idText.getText() + ":";
-            	
-            	char[] tempPassword = pwField.getPassword();
+
+				str += idText.getText() + ":";
+
+				char[] tempPassword = pwField.getPassword();
 				String pwd = "";
 
 				for (int i = 0; i < tempPassword.length; i++) {
 					pwd += tempPassword[i];
 
-				}          	
-        		str += pwd;
-        		System.out.println(str);
-        		
-        		
-        		
-        		
-        		
-        		if(um.login(str)) {
-        			JOptionPane.showMessageDialog(null, "로그인 성공 !");
-        			MainMenu menu = new MainMenu();
-        			dispose();
-        		} else {
-        			JOptionPane.showMessageDialog(null, "ID/PW를 확인해 주세요.");
-        			str = "";
-        		}
-        		
-        		       		
-        			
+				}
+				str += pwd;
+				System.out.println(str);
+
+				if (um.login(str)) {
+					JOptionPane.showMessageDialog(null, "로그인 성공 !");
+					MainMenu menu = new MainMenu();
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "ID/PW를 확인해 주세요.");
+					str = "";
+				}
+
 			}
 		});
-		
-		
-		
+
 		// 회원가입 연동
 		joinbtn.addActionListener(new ActionListener() {
 
@@ -172,14 +156,13 @@ public class LoginPage extends JFrame {
 		this.setLocationRelativeTo(null);// 정중앙ㅣ
 		MediaTest mt = new MediaTest();
 		mt.musicOn(1, true);
-	
-		
+
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
-	
-	/*public static void main(String[] args) {
-		new LoginPage();
-	}*/
+
+	/*
+	 * public static void main(String[] args) { new LoginPage(); }
+	 */
 
 }

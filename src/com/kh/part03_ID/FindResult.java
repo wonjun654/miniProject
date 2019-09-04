@@ -48,6 +48,7 @@ public class FindResult extends JFrame {
 		JButton exitBtn = new JButton("나가기");
 		exitBtn.setBounds(580, 420, 80, 50);
 
+		
 		idResultPop.add(idText);
 		idResultPop.add(idf);
 		idResultPop.add(checkBtn);

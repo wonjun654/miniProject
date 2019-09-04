@@ -78,6 +78,7 @@ public class UserManager {
 			System.out.println(selectedUser);
 		}
 	}
+	
 
 	public String FindId(String email) {
 		ArrayList<User> list = ud.readUserList();
