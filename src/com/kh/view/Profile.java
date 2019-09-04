@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -15,16 +16,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.kh.model.vo.User;
+import com.kh.user.controller.UserManager;
+import com.kh.user.model.vo.User;
+
+
 
 public class Profile extends JFrame {
-	User user = new User();
+	
 	Image icon = null;
-	Image img = user.getImg();
+	//Image img = user.getImg();
 
-	public Profile() {
+	public Profile(User user) {
 		// 기본 프로필창-----------------------------------------------
-
+		UserManager um = new UserManager();
 		this.setBounds(700, 300, 600, 300);
 
 		JPanel panel = new JPanel();
@@ -38,9 +42,9 @@ public class Profile extends JFrame {
 		sd.add(new JLabel("이름"));
 		sd.setLayout(null);
 
-		//////
-
-		JLabel label = new JLabel(new ImageIcon(img));
+		
+		
+		JLabel label = new JLabel(new ImageIcon(new ImageIcon(user.getImgName()).getImage().getScaledInstance(150, 150, 0)));
 		label.setLocation(10, 10);
 		label.setSize(150, 150);
 		label.setBackground(Color.black);
@@ -53,7 +57,7 @@ public class Profile extends JFrame {
 		label3.setLocation(450, 30);
 		label3.setSize(80, 30);
 
-		JLabel label4 = new JLabel(user.getId());
+		JLabel label4 = new JLabel(user.getUserId());
 		label4.setLocation(75, 170);
 		label4.setSize(80, 30);
 
@@ -102,9 +106,13 @@ public class Profile extends JFrame {
 				String name = (String) cb.getSelectedItem();
 
 				icon = new ImageIcon("images/" + name + ".PNG").getImage().getScaledInstance(150, 150, 0);
-
+				user.setImgName("images/" + name + ".PNG");
+				System.out.println(user.getImgName());
+				
+				
+				
 				label5.setIcon(new ImageIcon(icon));
-
+				um.updateUser(user);
 			}
 		});
 
@@ -123,9 +131,8 @@ public class Profile extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				img = icon;
-				user.setImg(icon);
-				label.setIcon(new ImageIcon(img));
+				
+				label.setIcon(new ImageIcon(icon));
 				sd.dispose();
 
 			}

@@ -1,5 +1,6 @@
 package com.kh.user.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,7 +8,7 @@ import com.kh.user.smtptest;
 import com.kh.user.model.dao.UserDao;
 import com.kh.user.model.vo.User;
 
-public class UserManager {
+public class UserManager implements Serializable {
 	private UserDao ud = new UserDao();
 
 	public boolean login(String str) {
@@ -60,7 +61,31 @@ public class UserManager {
 		}
 	}
 
-	public void selectOneUser(String userId) {
+	public void updateUser(User u) {
+		ArrayList<User> list = ud.readUserList();
+
+		if (list == null) {
+			list = new ArrayList<User>();
+		}
+		for(int i=0;i<list.size(); i++) {
+			if(list.get(i).getUserId().equals(u.getUserId())) {
+				list.remove(i);
+				list.add(u);
+				break;
+			}
+		}
+		//list.add(u);
+
+		int result = ud.addUserList(list);
+
+		if (result > 0) {
+			System.out.println("유저 추가 성공");
+		} else {
+			System.out.println("유저 추가 실패");
+		}
+	}
+	
+	public User selectOneUser(String userId) {
 		ArrayList<User> list = ud.readUserList();
 		User selectedUser = null;
 
@@ -77,6 +102,8 @@ public class UserManager {
 		} else {
 			System.out.println(selectedUser);
 		}
+		
+		return selectedUser;
 	}
 
 	public String FindId(String email) {

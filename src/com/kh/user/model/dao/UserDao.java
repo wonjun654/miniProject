@@ -6,12 +6,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.kh.user.model.vo.User;
 
-public class UserDao {
+public class UserDao implements Serializable {
 
 	public UserDao() {
 	}

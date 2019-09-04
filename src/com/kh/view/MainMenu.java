@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import com.kh.model.vo.MediaTest;
+import com.kh.user.controller.UserManager;
+import com.kh.user.model.vo.User;
 import com.kh.part01_main.LoginPage;
 
 public class MainMenu extends JFrame {
@@ -24,7 +26,8 @@ public class MainMenu extends JFrame {
 	JTable table1;
 	DefaultTableModel model1;
 	JTextField tf;
-	User u = new User();
+	UserManager um = new UserManager();
+	
 	
 	public List<JButton> btList;
 	public String row1[][];
@@ -112,7 +115,8 @@ public class MainMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Profile pf = new Profile();
+				
+				Profile pf = new Profile(um.selectOneUser("123"));
 				pf.setVisible(true);
 
 			}
@@ -122,16 +126,17 @@ public class MainMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Store st = new Store(u);
+				Store st = new Store(um.selectOneUser("123"));
 
 			}
+			
 		});
 
 		optbtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Setting set = new Setting();
+				Setting set = new Setting(um.selectOneUser("123"));
 
 			}
 		});
@@ -153,7 +158,7 @@ public class MainMenu extends JFrame {
 			}
 		});
 		MediaTest mt = new MediaTest();
-		mt.musicOn(0,true);
+		mt.musicOn(0,um.selectOneUser("123").getMusicSet());
 		this.add(tf);
 		this.add(ta);
 		this.add(profilebtn);
