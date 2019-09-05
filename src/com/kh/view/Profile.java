@@ -31,9 +31,10 @@ public class Profile extends JFrame {
 		// 기본 프로필창-----------------------------------------------
 		UserManager um = new UserManager();
 		this.setBounds(700, 300, 600, 300);
-
 		JPanel panel = new JPanel();
 
+		
+		
 		panel.setLocation(30, 20);
 		panel.setSize(600, 300);
 
@@ -50,7 +51,7 @@ public class Profile extends JFrame {
 		JLabel label = new JLabel(new ImageIcon(new ImageIcon(user.getImgName()).getImage().getScaledInstance(150, 150, 0)));
 		label.setLocation(10, 10);
 		label.setSize(150, 150);
-		label.setBackground(Color.black);
+		
 
 		JLabel label2 = new JLabel("우승");
 		label2.setLocation(250, 30);
