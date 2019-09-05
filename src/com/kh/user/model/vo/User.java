@@ -21,6 +21,15 @@ public class User implements Serializable {
 	private int ownItem1;
 	private int ownItem2;
 
+	public User() {
+		this.coin = 0;
+		this.profile = true;
+		this.musicSet = true;
+		this.victory = 0;
+		this.ownItem1 = 0;
+		this.ownItem2 = 0;
+	}
+
 	public int getOwnItem1() {
 		return ownItem1;
 	}
@@ -35,15 +44,6 @@ public class User implements Serializable {
 
 	public void setOwnItem2(int ownItem2) {
 		this.ownItem2 = ownItem2;
-	}
-
-	public User() {
-		this.coin = 0;
-		this.profile = true;
-		this.musicSet = true;
-		this.victory = 0;
-		this.ownItem1 = 0;
-		this.ownItem2 = 0;
 	}
 
 	public String getUserId() {
