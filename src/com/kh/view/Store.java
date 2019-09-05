@@ -266,7 +266,7 @@ public class Store extends JFrame {
 							// 아이템1 보유개수 출력
 							ownItem1Label.setText("보유개수 : " + u.getOwnItem1());
 							System.out.println("개수증가");
-							// 보유코인개수 출력
+							// 보유코인개수 출력 
 							ownCoinLabel.setText("내 코인 : " + u.getCoin());
 							itemBuyDialog.dispose();
 
