@@ -244,6 +244,45 @@ public class MainMenu extends JFrame{
 		});
 		questbtn.addActionListener(new ActionListener() {
 
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			//@Override
 			public void actionPerformed(ActionEvent e) {
 

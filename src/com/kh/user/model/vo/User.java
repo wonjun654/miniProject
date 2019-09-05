@@ -6,6 +6,45 @@ public class User implements Serializable {
 	/**
 	 * 
 	 */
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private String userId;
 	private String userPwd;
 	private String userName;
@@ -82,7 +121,21 @@ public class User implements Serializable {
 	public void setQuestClear2(boolean questClear2) {
 		this.questClear2 = questClear2;
 	}
-	public boolean getQuestClear3() {
+	public 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	boolean getQuestClear3() {
 		return questClear3;
 	}
 
@@ -142,6 +195,29 @@ public class User implements Serializable {
 		return musicSet;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//public void setMusicSet(boolean musicSet) {
 		this.musicSet = musicSet;
 	}
