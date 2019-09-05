@@ -165,12 +165,7 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName + ", email=" + email
-				+ ", imgName = " + imgName + ", coin=" + coin + ", profile=" + profile + ", musicSet=" + musicSet + ", victory="
-				+ victory + "]";
-	}
+
 	public String getImgName() {
 		return imgName;
 	}
