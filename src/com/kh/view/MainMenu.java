@@ -72,7 +72,7 @@ public class MainMenu extends JFrame {
 		Image optimg = new ImageIcon("images\\opt.PNG").getImage().getScaledInstance(75, 75, 0);
 		Image shopimg = new ImageIcon("images\\shop.PNG").getImage().getScaledInstance(75, 75, 0);
 		Image exitimg = new ImageIcon("images\\exit.PNG").getImage().getScaledInstance(75, 75, 0);
-
+		Image questimg = new ImageIcon("images\\login.PNG").getImage().getScaledInstance(75, 75, 0);
 		JButton profilebtn = new JButton(new ImageIcon(profileimg));
 		profilebtn.setLocation(10, 10);
 		profilebtn.setSize(75, 75);
@@ -93,6 +93,10 @@ public class MainMenu extends JFrame {
 		exitbtn.setLocation(885, 600);
 		exitbtn.setSize(75, 75);
 
+		JButton questbtn = new JButton(new ImageIcon(questimg));
+		questbtn.setLocation(600, 500);
+		questbtn.setSize(75,75);
+		
 		JTextArea ta = new JTextArea();
 		ta.setBounds(0, 590, 400, 400);
 		ta.setEditable(false);
@@ -158,10 +162,18 @@ public class MainMenu extends JFrame {
 				
 			}
 		});
+		questbtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				QuestMenu qm = new QuestMenu(um.selectOneUser("123"));
+				qm.setVisible(true);
+			}
+		});
+		/*MediaTest.musicOff();
 		
-		MediaTest.musicOff();
-		
-		MediaTest.musicOn(1,um.selectOneUser("123").getMusicSet());
+		MediaTest.musicOn(1,um.selectOneUser("123").getMusicSet());*/
 		this.add(tf);
 		this.add(ta);
 		this.add(profilebtn);
@@ -170,7 +182,9 @@ public class MainMenu extends JFrame {
 		this.add(shopbtn);
 		this.add(optbtn);
 		this.add(makebtn);
-
+		this.add(questbtn);
+		
+		
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 

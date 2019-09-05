@@ -18,13 +18,87 @@ public class User implements Serializable {
 	private boolean profile;
 	private boolean musicSet;
 	private int victory;
+	boolean acceptQuest1 = false;
+	boolean acceptQuest2 = false;
+	boolean acceptQuest3 = false;
+	boolean questClear1 = false;
+	boolean questClear2 = false;
+	boolean questClear3 = false;
 
 	public User() {
 		this.coin = 0;
 		this.profile = true;
 		this.musicSet = true;
 		this.victory = 0;
+		this.acceptQuest1 = false;
+		this.acceptQuest2 = false;
+		this.acceptQuest3 = false;
+		this.questClear1 = false;
+		this.questClear2 = false;
+		this.questClear3 = false;
+
 	}
+
+	
+	public boolean getAcceptQuest1() {
+		return acceptQuest1;
+	}
+
+
+	public void setAcceptQuest1(boolean acceptQuest1) {
+		this.acceptQuest1 = acceptQuest1;
+	}
+
+
+	public boolean getAcceptQuest2() {
+		return acceptQuest2;
+	}
+
+
+	public void setAcceptQuest2(boolean acceptQuest2) {
+		this.acceptQuest2 = acceptQuest2;
+	}
+
+
+	public boolean getAcceptQuest3() {
+		return acceptQuest3;
+	}
+
+
+	public void setAcceptQuest3(boolean acceptQuest3) {
+		this.acceptQuest3 = acceptQuest3;
+	}
+
+
+	public boolean getQuestClear1() {
+		return questClear1;
+	}
+
+
+	public void setQuestClear1(boolean questClear1) {
+		this.questClear1 = questClear1;
+	}
+
+
+	public boolean getQuestClear2() {
+		return questClear2;
+	}
+
+
+	public void setQuestClear2(boolean questClear2) {
+		this.questClear2 = questClear2;
+	}
+
+
+	public boolean getQuestClear3() {
+		return questClear3;
+	}
+
+
+	public void setQuestClear3(boolean questClear3) {
+		this.questClear3 = questClear3;
+	}
+
 
 	public String getUserId() {
 		return userId;

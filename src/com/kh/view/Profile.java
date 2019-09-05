@@ -22,7 +22,7 @@ import com.kh.user.model.vo.User;
 
 
 public class Profile extends JFrame {
-	
+	ImageIcon background ;
 	Image icon = null;
 	//Image img = user.getImg();
 
@@ -31,7 +31,14 @@ public class Profile extends JFrame {
 		UserManager um = new UserManager();
 		this.setBounds(700, 300, 600, 300);
 
-		JPanel panel = new JPanel();
+		background = new ImageIcon("images/login.PNG");
+		JPanel panel = new JPanel()
+				{
+			public void paintComponent(Graphics g) {
+				 g.drawImage(background.getImage(), 0, 0, null);
+				 setOpaque(false); 
+				 super.paintComponent(g);
+			}};
 
 		panel.setLocation(30, 20);
 		panel.setSize(600, 300);
@@ -41,13 +48,17 @@ public class Profile extends JFrame {
 		sd.setBounds(800, 250, 400, 500);
 		sd.add(new JLabel("이름"));
 		sd.setLayout(null);
-
+		
+		//기본 배경화면
+		
+			
+		
 		
 		
 		JLabel label = new JLabel(new ImageIcon(new ImageIcon(user.getImgName()).getImage().getScaledInstance(150, 150, 0)));
 		label.setLocation(10, 10);
 		label.setSize(150, 150);
-		label.setBackground(Color.black);
+		
 
 		JLabel label2 = new JLabel("우승");
 		label2.setLocation(250, 30);
@@ -57,6 +68,7 @@ public class Profile extends JFrame {
 		label3.setLocation(450, 30);
 		label3.setSize(80, 30);
 
+ 
 		JLabel label4 = new JLabel(user.getUserId());
 		label4.setLocation(75, 170);
 		label4.setSize(80, 30);
