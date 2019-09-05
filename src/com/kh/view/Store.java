@@ -46,6 +46,10 @@ public class Store extends JFrame {
 		Dimension frameSize = this.getSize(); // 프레임 사이즈
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
 		this.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2); // 화면 중앙
+		JPanel bg = new JPanel();
+		bg.setSize(1024, 768);
+		bg.setBackground(Color.WHITE);
+		
 		
 		// 상점이름
 		JLabel store = new JLabel("상점");
@@ -948,7 +952,7 @@ public class Store extends JFrame {
 				dispose();
 			}
 		});
-
+		this.add(bg);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 

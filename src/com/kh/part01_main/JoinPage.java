@@ -116,7 +116,6 @@ public class JoinPage extends JFrame {
 				}
 
 				if (pwd.equals(pwd2)) {
-					System.out.println(pwd + "\n" + pwd2);
 					pwCheck.setText("비밀번호가 일치합니다.");
 				} else {
 					pwCheck.setText("비밀번호가 일치하지 않습니다.");
@@ -176,7 +175,6 @@ public class JoinPage extends JFrame {
 				
 				str += nameTextField.getText() + ":";
 				str += emailTextField.getText();
-				System.out.println(str);
 				um.signUp(str);
 				dispose();
 			}
