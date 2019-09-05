@@ -142,15 +142,15 @@ public class User implements Serializable {
 		return musicSet;
 	}
 
-	public void setMusicSet(boolean musicSet) {
+	//public void setMusicSet(boolean musicSet) {
 		this.musicSet = musicSet;
 	}
 
-	public int getVictory() {
+	//public int getVictory() {
 		return victory;
 	}
 
-	public void setVictory(int victory) {
+	//public void setVictory(int victory) {
 		this.victory = victory;
 	}
 

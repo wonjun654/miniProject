@@ -244,18 +244,18 @@ public class MainMenu extends JFrame{
 		});
 		questbtn.addActionListener(new ActionListener() {
 
-			@Override
+			//@Override
 			public void actionPerformed(ActionEvent e) {
 
-				QuestMenu qm = new QuestMenu(um.selectOneUser("123"));
+				//QuestMenu qm = new QuestMenu(um.selectOneUser("123"));
 				qm.setVisible(true);
 			}
 		});
 
 
-		MediaTest.musicOff();
+		//MediaTest.musicOff();
 
-		MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
+		//MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
 		this.add(listPan);
 
 		this.add(tf);
