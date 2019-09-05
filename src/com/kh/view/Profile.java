@@ -25,6 +25,7 @@ public class Profile extends JFrame {
 	
 	Image icon = null;
 	//Image img = user.getImg();
+	
 
 	public Profile(User user) {
 		// 기본 프로필창-----------------------------------------------

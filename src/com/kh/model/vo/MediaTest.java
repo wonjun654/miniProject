@@ -41,13 +41,13 @@ public class MediaTest {
 			}
 
 		} else {
-			clip.stop();
-			clip.close();
+			//clip.stop();
+			//clip.close();
 		}
 	}
 
 	public static void musicOff() {
-		clip.stop();
-		clip.close();
+		//clip.stop();
+		//clip.close();
 	}
 }
