@@ -19,11 +19,11 @@ public class MediaTest {
 		DataLine.Info info;
 		JFrame mf = new JFrame();
 
-		String[] bgmarr = new String[2];
+		String[] bgmarr = new String[3];
 		bgmarr[0] = "bgm/CatchMind1.wav";
 		bgmarr[1] = "bgm/CatchMind2.wav";
-		// bgm = new File("c:/CatchMind1.wav"); // 사용시에는 개별 폴더로 변경할 것
-		// bgm2= new File("c:/CatchMind2.wav");
+		bgmarr[2] = "bgm/CatchMind3.wav";
+		
 
 		if (b) {
 
@@ -40,6 +40,9 @@ public class MediaTest {
 				System.out.println("err : " + e);
 			}
 
+		} else {
+			clip.stop();
+			clip.close();
 		}
 	}
 

@@ -153,12 +153,15 @@ public class MainMenu extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				MediaTest.musicOff();
 				LoginPage login = new LoginPage();
 				
 			}
 		});
-		MediaTest mt = new MediaTest();
-		mt.musicOn(0,um.selectOneUser("123").getMusicSet());
+		
+		MediaTest.musicOff();
+		
+		MediaTest.musicOn(1,um.selectOneUser("123").getMusicSet());
 		this.add(tf);
 		this.add(ta);
 		this.add(profilebtn);

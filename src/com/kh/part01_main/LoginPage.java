@@ -170,7 +170,7 @@ public class LoginPage extends JFrame {
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);// 정중앙ㅣ
 		MediaTest mt = new MediaTest();
-		mt.musicOn(1, true);
+		MediaTest.musicOn(2, true);
 	
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

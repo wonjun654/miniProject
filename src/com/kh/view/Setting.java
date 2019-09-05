@@ -14,10 +14,11 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.kh.model.vo.MediaTest;
+import com.kh.user.controller.UserManager;
 import com.kh.user.model.vo.User;
 
 public class Setting extends JFrame {
-	
+	UserManager um = new UserManager();
 
 	public Setting(User user) {
 
@@ -89,33 +90,26 @@ public class Setting extends JFrame {
 
 			}
 		});
-		// ---------------음악 on---------------
-		musicOn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				user.setMusicSet(true);
-
-			}
-		});
-		// --------------음악 off-------------
-		musicOff.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				user.setMusicSet(false);
-				MediaTest.musicOff();
-			}
-		});
-
 		// 확인버튼 -----------------------------------------
 		button.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (musicOn.isSelected() == true) {
+					user.setMusicSet(true);
 
+				} else if (musicOn.isSelected() == false) {
+					user.setMusicSet(false);
+
+				}
+
+				if (musicOn.isSelected() == true && um.selectOneUser("123").getMusicSet() == true) {
+
+				} else {
+					um.updateUser(user);
+					MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
+				}
 				dispose();
-
 			}
 		});
 
