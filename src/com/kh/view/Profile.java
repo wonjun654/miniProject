@@ -25,6 +25,7 @@ public class Profile extends JFrame {
 	
 	Image icon = null;
 	//Image img = user.getImg();
+	
 
 	public Profile(User user) {
 		// 기본 프로필창-----------------------------------------------
@@ -36,6 +37,8 @@ public class Profile extends JFrame {
 		panel.setLocation(30, 20);
 		panel.setSize(600, 300);
 
+		
+		
 		// 프로필설정창 ------------------------------------------------
 		Dialog sd = new Dialog(this, "프로필 화면 변경");
 		sd.setBounds(800, 250, 400, 500);

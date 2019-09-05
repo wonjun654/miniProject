@@ -41,8 +41,10 @@ public class MediaTest {
 			}
 
 		} else {
-//			clip.stop();
-//			clip.close();
+
+		clip.stop();
+		clip.close();
+
 		}
 	}
 
