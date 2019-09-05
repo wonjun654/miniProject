@@ -8,7 +8,7 @@ import com.kh.user.smtptest;
 import com.kh.user.model.dao.UserDao;
 import com.kh.user.model.vo.User;
 
-public class UserManager implements Serializable {
+public class UserManager {
 	private UserDao ud = new UserDao();
 
 	public boolean login(String str) {
@@ -79,9 +79,9 @@ public class UserManager implements Serializable {
 		int result = ud.addUserList(list);
 
 		if (result > 0) {
-			System.out.println("유저 추가 성공");
+			System.out.println("유저 정보 수정 성공");
 		} else {
-			System.out.println("유저 추가 실패");
+			System.out.println("유저 정보 수정 실패");
 		}
 	}
 	
@@ -100,10 +100,11 @@ public class UserManager implements Serializable {
 		if (selectedUser == null) {
 			System.out.println("해당 아이디가 없습니다.");
 		} else {
-			System.out.println(selectedUser);
+			//System.out.println(selectedUser);
+			return selectedUser;
 		}
 		
-		return selectedUser;
+		return null;
 	}
 
 	public String FindId(String email) {

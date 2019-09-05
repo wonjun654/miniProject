@@ -114,7 +114,6 @@ public class LoginPage extends JFrame {
 
 				}          	
         		str += pwd;
-        		System.out.println(str);
         		
         		
         		

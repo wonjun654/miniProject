@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 import com.kh.user.model.vo.User;
 
-public class UserDao implements Serializable {
+public class UserDao {
 
 	public UserDao() {
 	}
