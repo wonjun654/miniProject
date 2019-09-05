@@ -1,8 +1,11 @@
 package com.kh.view;
 
+import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,6 +22,8 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import com.kh.model.vo.MediaTest;
+import com.kh.user.controller.UserManager;
+import com.kh.user.model.vo.User;
 import com.kh.part01_main.LoginPage;
 import com.kh.user.controller.UserManager;
 
