@@ -29,7 +29,7 @@ public class GameRoom extends JFrame{
 		roomLeft.setLocation(0, 0);
 		roomLeft.setSize(262, 768);
 		this.add(roomLeft);
-		
+		 
 		
 		
 		
