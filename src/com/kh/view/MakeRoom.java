@@ -16,9 +16,10 @@ public class MakeRoom extends JFrame {
 	public JTextArea roomName2;
 	public JTextArea roomPwd2;
 	public JButton btnOK;
-	public MainMenu mm;
+	
+	
 
-	public MakeRoom() {
+	public MakeRoom(MainMenu mm) {
 
 		this.setBounds(600, 500, 600, 500);
 		setLayout(null);
@@ -64,7 +65,9 @@ public class MakeRoom extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				mm.model1.addRow(new Object[] {roomName2.getText(), "대기중", selectPeople});
+				
+				dispose();
 			}
 		});
 

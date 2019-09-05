@@ -20,6 +20,7 @@ import com.kh.model.vo.MediaTest;
 import com.kh.part03_ID.FindID;
 import com.kh.part03_password.FindPassword;
 import com.kh.user.controller.UserManager;
+import com.kh.user.model.vo.User;
 import com.kh.view.MainMenu;
 
 
@@ -29,6 +30,7 @@ public class LoginPage extends JFrame {
 	 ImageIcon icon;
 	 String str = "";
 	 UserManager um = new UserManager();
+	
 	 
 	public LoginPage() {
 	

@@ -1,77 +1,154 @@
 package com.kh.view;
 
-import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+
+import org.w3c.dom.events.MouseEvent;
 
 import com.kh.model.vo.MediaTest;
-import com.kh.user.controller.UserManager;
-import com.kh.user.model.vo.User;
 import com.kh.part01_main.LoginPage;
+import com.kh.user.controller.UserManager;
 
-public class MainMenu extends JFrame {
+public class MainMenu extends JFrame{
 
 	JTable table1;
 	DefaultTableModel model1;
 	JTextField tf;
 	UserManager um = new UserManager();
-	
-	
-	public List<JButton> btList;
-	public String row1[][];
+	JPanel listPan = new JPanel();
+	JTextArea ta;
+	JScrollPane sc;
+
+	JList roomList;
+	JList roomList2;
+	JList roomList3;
+	String col1[] = { "방이름", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원" };
+	String col2[] = { "방이름", "상태", "인원" };
+	String col3[] = { "방이름", "상태", "인원" };
 
 	public MainMenu() {
 
 		super("MainMenuPage");
 
-		String col1[] = { "방이름", "상태", "인원" };
+		// String row1[][] = new String[0][3];
 
-		String row1[][] = { { "a1", "a2", "a3" }, { "b1", "b2", "b3" }, { "c1", "c2", "c3" } };
+		// model1 = new DefaultTableModel(col1) {
+		// public boolean isCellEditable(int row, int column) {
+		// return false;
+		// }
+		// };
 
-		model1 = new DefaultTableModel(row1, col1) {
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
+		// table1 = new JTable(model1);
+		// table1.setBounds(80, 150, 750, 320);
+		// JScrollPane js1 = new JScrollPane(table1);
+		// table1.getTableHeader().setReorderingAllowed(false);
+		// js1.setBounds(x, y, width, height);
+		//
 
-		table1 = new JTable(model1);
-		JScrollPane js1 = new JScrollPane(table1);
-		table1.getTableHeader().setReorderingAllowed(false);
+		// listPan.setBounds(80, 150, 750, 100);
+		// JScrollPane jsp = new JScrollPane(listPan);
+		// jsp.setSize(80, 150);
+		//
+		// roomList = new JList(col1);
+		// roomList.setBounds(80, 150, 250, 20);
+		//
+		//
+		//
+		// roomList2 = new JList(col1);
+		// roomList2.setBounds(330, 150, 250, 20);
+		//
+		//
+		// roomList3 = new JList(col1);
+		// roomList3.setBounds(580, 150, 250, 20);
+		//
+		//
+		// listPan.add(roomList);
+		// listPan.add(roomList2);
+		// listPan.add(roomList3);
+		//
 
-		Dimension frameSize = this.getSize(); // 프레임 사이즈
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
+		// jsp.setHorizontalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		// jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-		setLayout(null);
+		// listPan.add(jsp);
 
-		js1.setBounds(80, 150, 700, 320);
-		add(js1);
+		//
 
-		setLayout(null);
-
-		this.setBounds(300, 200, 1024, 768);
-
-		this.setSize(1024, 768);
-		this.setLocation((screenSize.width - this.getWidth()) / 2, (screenSize.height - this.getHeight()) / 2);
+		//
 
 		// Layout 지정 없이 위치 지정하면서 배치하는 방법이다.
 		this.setLayout(null);
+		this.setSize(1024, 768);
+
+		ta = new JTextArea(50, 50);
+		ta.setBounds(80, 150, 500, 500);
+		ta.setEditable(false);
+		
+
+		sc = new JScrollPane(ta);
+		sc.setBounds(80, 150, 750, 320);
+		
+		
+		roomList = new JList(col1);
+		roomList.setBounds(0, 0, 250, 360);
+
+		roomList2 = new JList(col1);
+		roomList2.setBounds(250, 0, 250, 360);
+
+		roomList3 = new JList(col1);
+		roomList3.setBounds(500, 0, 250, 360);
+
+		ta.add(roomList);
+		ta.add(roomList2);
+		ta.add(roomList3);
+
+		sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		
+		roomList.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				
+				
+			}
+		});
+		
+		
+
 		Image profileimg = new ImageIcon("images\\profile.PNG").getImage().getScaledInstance(75, 75, 0);
 		Image makeimg = new ImageIcon("images\\make.PNG").getImage().getScaledInstance(75, 75, 0);
 		Image optimg = new ImageIcon("images\\opt.PNG").getImage().getScaledInstance(75, 75, 0);
 		Image shopimg = new ImageIcon("images\\shop.PNG").getImage().getScaledInstance(75, 75, 0);
 		Image exitimg = new ImageIcon("images\\exit.PNG").getImage().getScaledInstance(75, 75, 0);
+		Image coinimg = new ImageIcon("images\\coin.jpg").getImage().getScaledInstance(75, 75, 0);
+
+		JLabel namelbl = new JLabel(um.selectOneUser("123").getUserId() + "");
+		namelbl.setBounds(86, 10, 75, 75);
+
+		JLabel coinlbl = new JLabel("내 코인 : " + um.selectOneUser("123").getCoin() + "");
+		coinlbl.setBounds(276, 10, 200, 75);
+
+		JLabel coinImg = new JLabel(new ImageIcon(coinimg));
+		coinImg.setBounds(200, 10, 75, 75);
 
 		JButton profilebtn = new JButton(new ImageIcon(profileimg));
 		profilebtn.setLocation(10, 10);
@@ -115,7 +192,7 @@ public class MainMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				Profile pf = new Profile(um.selectOneUser("123"));
 				pf.setVisible(true);
 
@@ -129,7 +206,7 @@ public class MainMenu extends JFrame {
 				Store st = new Store(um.selectOneUser("123"));
 
 			}
-			
+
 		});
 
 		optbtn.addActionListener(new ActionListener() {
@@ -144,32 +221,41 @@ public class MainMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MakeRoom mr = new MakeRoom();
+				MakeRoom mr = new MakeRoom(null);
 
 			}
 		});
 		exitbtn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				MediaTest.musicOff();
 				LoginPage login = new LoginPage();
-				
+
 			}
 		});
-		
-		MediaTest.musicOff();
-		
-		MediaTest.musicOn(1,um.selectOneUser("123").getMusicSet());
+
+		// MediaTest.musicOff();
+
+		MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
+		this.add(listPan);
 		this.add(tf);
 		this.add(ta);
 		this.add(profilebtn);
+		this.add(coinlbl);
+		this.add(coinImg);
 		// this.add(panel);
 		this.add(exitbtn);
 		this.add(shopbtn);
 		this.add(optbtn);
 		this.add(makebtn);
+		this.add(namelbl);
+		// this.add(jsp);
+		// this.add(table1);
+		// this.add(js1);
+		this.add(ta);
+		this.add(sc);
 
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
@@ -177,4 +263,10 @@ public class MainMenu extends JFrame {
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+
+	public static void main(String[] args) {
+		new MainMenu();
+	}
+
+	
 }
