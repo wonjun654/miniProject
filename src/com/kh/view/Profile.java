@@ -37,6 +37,8 @@ public class Profile extends JFrame {
 		panel.setLocation(30, 20);
 		panel.setSize(600, 300);
 
+		
+		
 		// 프로필설정창 ------------------------------------------------
 		Dialog sd = new Dialog(this, "프로필 화면 변경");
 		sd.setBounds(800, 250, 400, 500);
