@@ -236,7 +236,7 @@ public class MainMenu extends JFrame{
 			}
 		});
 
-		// MediaTest.musicOff();
+		MediaTest.musicOff();
 
 		MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
 		this.add(listPan);
