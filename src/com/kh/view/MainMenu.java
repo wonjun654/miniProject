@@ -33,6 +33,7 @@ public class MainMenu extends JFrame{
 	DefaultTableModel model1;
 	JTextField tf;
 	UserManager um = new UserManager();
+
 	JPanel listPan = new JPanel();
 	JTextArea ta;
 	JScrollPane sc;
@@ -43,6 +44,7 @@ public class MainMenu extends JFrame{
 	String col1[] = { "방이름", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원" };
 	String col2[] = { "방이름", "상태", "인원" };
 	String col3[] = { "방이름", "상태", "인원" };
+
 
 	public MainMenu() {
 
@@ -203,8 +205,8 @@ public class MainMenu extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 				Store st = new Store(um.selectOneUser("123"));
-
 			}
 
 		});
@@ -236,10 +238,12 @@ public class MainMenu extends JFrame{
 			}
 		});
 
+
 		MediaTest.musicOff();
 
 		MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
 		this.add(listPan);
+
 		this.add(tf);
 		this.add(ta);
 		this.add(profilebtn);
