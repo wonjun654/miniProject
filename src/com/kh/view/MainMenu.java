@@ -1,3 +1,320 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 package com.kh.view;
 
 import java.awt.Dimension;
@@ -27,7 +344,7 @@ import com.kh.user.model.vo.User;
 import com.kh.part01_main.LoginPage;
 import com.kh.user.controller.UserManager;
 
-public class MainMenu extends JFrame{
+public class MainMenu extends JFrame {
 
 	JTable table1;
 	DefaultTableModel model1;
@@ -41,10 +358,10 @@ public class MainMenu extends JFrame{
 	JList roomList;
 	JList roomList2;
 	JList roomList3;
-	String col1[] = { "방이름", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원" };
+	String col1[] = { "방이름", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태",
+			"인원", "상태", "인원", "상태", "인원" };
 	String col2[] = { "방이름", "상태", "인원" };
 	String col3[] = { "방이름", "상태", "인원" };
-
 
 	public MainMenu() {
 
@@ -103,12 +420,10 @@ public class MainMenu extends JFrame{
 		ta = new JTextArea(50, 50);
 		ta.setBounds(80, 150, 500, 500);
 		ta.setEditable(false);
-		
 
 		sc = new JScrollPane(ta);
 		sc.setBounds(80, 150, 750, 320);
-		
-		
+
 		roomList = new JList(col1);
 		roomList.setBounds(0, 0, 250, 360);
 
@@ -124,17 +439,14 @@ public class MainMenu extends JFrame{
 
 		sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		
+
 		roomList.addListSelectionListener(new ListSelectionListener() {
-			
+
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				
-				
+
 			}
 		});
-		
-		
 
 		Image profileimg = new ImageIcon("images\\profile.PNG").getImage().getScaledInstance(75, 75, 0);
 		Image makeimg = new ImageIcon("images\\make.PNG").getImage().getScaledInstance(75, 75, 0);
@@ -143,7 +455,7 @@ public class MainMenu extends JFrame{
 		Image exitimg = new ImageIcon("images\\exit.PNG").getImage().getScaledInstance(75, 75, 0);
 		Image coinimg = new ImageIcon("images\\coin.jpg").getImage().getScaledInstance(75, 75, 0);
 		Image questimg = new ImageIcon("images\\login.PNG").getImage().getScaledInstance(75, 75, 0);
-		
+
 		JLabel namelbl = new JLabel(um.selectOneUser("123").getUserId() + "");
 		namelbl.setBounds(86, 10, 75, 75);
 
@@ -172,10 +484,10 @@ public class MainMenu extends JFrame{
 		JButton exitbtn = new JButton(new ImageIcon(exitimg));
 		exitbtn.setLocation(885, 600);
 		exitbtn.setSize(75, 75);
-		
+
 		JButton questbtn = new JButton(new ImageIcon(questimg));
 		questbtn.setLocation(600, 500);
-		questbtn.setSize(75,75);
+		questbtn.setSize(75, 75);
 
 		JTextArea ta = new JTextArea();
 		ta.setBounds(0, 590, 400, 400);
@@ -244,57 +556,17 @@ public class MainMenu extends JFrame{
 		});
 		questbtn.addActionListener(new ActionListener() {
 
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			//@Override
+			// @Override
 			public void actionPerformed(ActionEvent e) {
 
-				//QuestMenu qm = new QuestMenu(um.selectOneUser("123"));
+				// QuestMenu qm = new QuestMenu(um.selectOneUser("123"));
 				qm.setVisible(true);
 			}
 		});
 
+		// MediaTest.musicOff();
 
-		//MediaTest.musicOff();
-
-		//MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
+		// MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
 		this.add(listPan);
 
 		this.add(tf);
@@ -326,5 +598,4 @@ public class MainMenu extends JFrame{
 		new MainMenu();
 	}
 
-	
 }
