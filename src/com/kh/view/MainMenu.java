@@ -3,7 +3,6 @@ package com.kh.view;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,10 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
-
-import org.w3c.dom.events.MouseEvent;
 
 import com.kh.model.vo.MediaTest;
 import com.kh.part01_main.LoginPage;
@@ -142,7 +137,8 @@ public class MainMenu extends JFrame{
 		Image shopimg = new ImageIcon("images\\shop.PNG").getImage().getScaledInstance(75, 75, 0);
 		Image exitimg = new ImageIcon("images\\exit.PNG").getImage().getScaledInstance(75, 75, 0);
 		Image coinimg = new ImageIcon("images\\coin.jpg").getImage().getScaledInstance(75, 75, 0);
-
+		Image questimg = new ImageIcon("images\\login.PNG").getImage().getScaledInstance(75, 75, 0);
+		
 		JLabel namelbl = new JLabel(um.selectOneUser("123").getUserId() + "");
 		namelbl.setBounds(86, 10, 75, 75);
 
@@ -171,6 +167,10 @@ public class MainMenu extends JFrame{
 		JButton exitbtn = new JButton(new ImageIcon(exitimg));
 		exitbtn.setLocation(885, 600);
 		exitbtn.setSize(75, 75);
+		
+		JButton questbtn = new JButton(new ImageIcon(questimg));
+		questbtn.setLocation(600, 500);
+		questbtn.setSize(75,75);
 
 		JTextArea ta = new JTextArea();
 		ta.setBounds(0, 590, 400, 400);
@@ -237,6 +237,15 @@ public class MainMenu extends JFrame{
 
 			}
 		});
+		questbtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				QuestMenu qm = new QuestMenu(um.selectOneUser("123"));
+				qm.setVisible(true);
+			}
+		});
 
 
 		MediaTest.musicOff();
@@ -255,6 +264,7 @@ public class MainMenu extends JFrame{
 		this.add(optbtn);
 		this.add(makebtn);
 		this.add(namelbl);
+		this.add(questbtn);
 		// this.add(jsp);
 		// this.add(table1);
 		// this.add(js1);
