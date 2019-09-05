@@ -13,17 +13,37 @@ public class User implements Serializable {
 	private String userPwd;
 	private String userName;
 	private String email;
-	private int coin = 0;
+	private int coin;
 	private String imgName;
 	private boolean profile;
 	private boolean musicSet;
 	private int victory;
+	private int ownItem1;
+	private int ownItem2;
+
+	public int getOwnItem1() {
+		return ownItem1;
+	}
+
+	public int getOwnItem2() {
+		return ownItem2;
+	}
+
+	public void setOwnItem1(int ownItem1) {
+		this.ownItem1 = ownItem1;
+	}
+
+	public void setOwnItem2(int ownItem2) {
+		this.ownItem2 = ownItem2;
+	}
 
 	public User() {
 		this.coin = 0;
 		this.profile = true;
 		this.musicSet = true;
 		this.victory = 0;
+		this.ownItem1 = 0;
+		this.ownItem2 = 0;
 	}
 
 	public String getUserId() {
@@ -65,7 +85,7 @@ public class User implements Serializable {
 	public void setCoin(int coin) {
 		this.coin = coin;
 	}
-	
+
 	public boolean getProfile() {
 		return profile;
 	}
@@ -98,19 +118,19 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName + ", email=" + email
-				+ ", imgName = " + imgName + ", coin=" + coin + ", profile=" + profile + ", musicSet=" + musicSet + ", victory="
-				+ victory + "]";
-	}
-
 	public String getImgName() {
 		return imgName;
 	}
 
 	public void setImgName(String imgName) {
 		this.imgName = imgName;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName + ", email=" + email
+				+ ", coin=" + coin + ", imgName=" + imgName + ", profile=" + profile + ", musicSet=" + musicSet
+				+ ", victory=" + victory + ", ownItem1=" + ownItem1 + ", ownItem2=" + ownItem2 + "]";
 	}
 
 }

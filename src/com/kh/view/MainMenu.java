@@ -27,8 +27,7 @@ public class MainMenu extends JFrame {
 	DefaultTableModel model1;
 	JTextField tf;
 	UserManager um = new UserManager();
-	
-	
+
 	public List<JButton> btList;
 	public String row1[][];
 
@@ -115,7 +114,7 @@ public class MainMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				Profile pf = new Profile(um.selectOneUser("123"));
 				pf.setVisible(true);
 
@@ -126,10 +125,10 @@ public class MainMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 				Store st = new Store(um.selectOneUser("123"));
-
 			}
-			
+
 		});
 
 		optbtn.addActionListener(new ActionListener() {
@@ -149,19 +148,19 @@ public class MainMenu extends JFrame {
 			}
 		});
 		exitbtn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				MediaTest.musicOff();
 				LoginPage login = new LoginPage();
-				
+
 			}
 		});
-		
-		MediaTest.musicOff();
-		
-		MediaTest.musicOn(1,um.selectOneUser("123").getMusicSet());
+
+		// MediaTest.musicOff();
+		//
+		// MediaTest.musicOn(1,um.selectOneUser("123").getMusicSet());
 		this.add(tf);
 		this.add(ta);
 		this.add(profilebtn);

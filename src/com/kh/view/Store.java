@@ -24,10 +24,6 @@ import com.kh.user.model.vo.User;
 
 public class Store extends JFrame {
 
-	int ownItem1Number;
-	int ownItem2Number;
-	int ownItem3Number;
-
 	JLabel paySelect = new JLabel(); // 결제금액확인
 	JLabel chooseSelect = new JLabel(); // 결제방식선택확인
 	JLabel presult = new JLabel(); // 결제금액
@@ -38,7 +34,8 @@ public class Store extends JFrame {
 	JRadioButton card = null;
 	JRadioButton cash = null;
 	UserManager um = new UserManager();
-	
+	MainMenu mm;
+
 	public Store(User u) {
 		this.setLayout(null);
 		this.setSize(1024, 768);
@@ -46,72 +43,95 @@ public class Store extends JFrame {
 		Dimension frameSize = this.getSize(); // 프레임 사이즈
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
 		this.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2); // 화면 중앙
+
 		JPanel bg = new JPanel();
 		bg.setSize(1024, 768);
-		bg.setBackground(Color.WHITE);
+//		bg.setBackground(Color.PINK);
 		
+		Image storeImage = new ImageIcon("images/bg.png").getImage().getScaledInstance(1024, 768, 0);
+		JLabel storeImageIcon = new JLabel(new ImageIcon(storeImage));
+		storeImageIcon.setSize(1024, 768);
+//		storeImageIcon.setLocation(650, 10);
+		bg.add(storeImageIcon);
+//		this.add(storeImageIcon);
 		
 		// 상점이름
 		JLabel store = new JLabel("상점");
 		Font font = new Font("고딕", Font.BOLD, 50);
 		store.setFont(font);
 		store.setSize(150, 80);
-		store.setLocation(60, 10);
+		store.setLocation(60, 30);
 		this.add(store);
 
 		// --------------------------------------------------------------------------------
 		// 아이템목록
 		JLabel itemList = new JLabel("아이템 목록");
 		itemList.setSize(100, 40);
-		itemList.setLocation(60, 80);
+		itemList.setLocation(95, 120);
 		this.add(itemList);
 
 		// 아이템1
-		JPanel item1 = new JPanel();
-		item1.setSize(150, 150);
-		item1.setLocation(60, 130);
-		item1.setBackground(Color.GRAY);
-
+		// JPanel item1 = new JPanel();
+		// item1.setSize(150, 150);
+		// item1.setLocation(95, 170);
+		JLabel item1Coin = new JLabel("50코인");
+		item1Coin.setSize(50, 30);
+		item1Coin.setLocation(95, 320);
 		JButton item1BuyButton = new JButton("구매");
-		item1BuyButton.setSize(60, 40);
-		item1BuyButton.setLocation(150, 280);
-		this.add(item1);
+		item1BuyButton.setSize(60, 30);
+		item1BuyButton.setLocation(185, 320);
+		JLabel item1Name = new JLabel("출제자 아이템");
+		item1Name.setSize(100, 30);
+		item1Name.setLocation(130, 350);
+		item1Name.setForeground(Color.BLUE);
+		Image item1icon = new ImageIcon("images/timer.png").getImage().getScaledInstance(150, 150, 1);
+		JLabel item1Image = new JLabel(new ImageIcon(item1icon));
+		item1Image.setSize(150, 150);
+		item1Image.setLocation(95, 170);
+		// item1.add(item1Image);
+		this.add(item1Image);
+		this.add(item1Name);
+		this.add(item1Coin);
 		this.add(item1BuyButton);
 
 		// 아이템2
-		JPanel item2 = new JPanel();
-		item2.setSize(150, 150);
-		item2.setLocation(290, 130);
-		item2.setBackground(Color.GRAY);
-
+		JLabel item2Coin = new JLabel("50코인");
+		item2Coin.setSize(50, 30);
+		item2Coin.setLocation(430, 320);
 		JButton item2BuyButton = new JButton("구매");
-		item2BuyButton.setSize(60, 40);
-		item2BuyButton.setLocation(380, 280);
-		this.add(item2);
+		item2BuyButton.setSize(60, 30);
+		item2BuyButton.setLocation(520, 320);
+		JLabel item2Name = new JLabel("정답자 아이템");
+		item2Name.setSize(100, 30);
+		item2Name.setLocation(465, 350);
+		item2Name.setForeground(Color.BLUE);
+		Image item2icon = new ImageIcon("images/chosung.png").getImage().getScaledInstance(150, 150, 0);
+		JLabel item2Image = new JLabel(new ImageIcon(item2icon));
+		item2Image.setSize(150, 150);
+		item2Image.setLocation(430, 170);
+		this.add(item2Image);
+		this.add(item2Name);
+		this.add(item2Coin);
 		this.add(item2BuyButton);
 
-		// 아이템3
-		JPanel item3 = new JPanel();
-		item3.setSize(150, 150);
-		item3.setLocation(520, 130);
-		item3.setBackground(Color.GRAY);
-
-		JButton item3BuyButton = new JButton("구매");
-		item3BuyButton.setSize(60, 40);
-		item3BuyButton.setLocation(610, 280);
-		this.add(item3);
-		this.add(item3BuyButton);
-
 		// 랜덤박스
-		JPanel randomBox = new JPanel();
-		randomBox.setSize(150, 150);
-		randomBox.setLocation(750, 130);
-		randomBox.setBackground(Color.GRAY);
-
+		JLabel randomBoxCoin = new JLabel("30코인");
+		randomBoxCoin.setSize(50, 30);
+		randomBoxCoin.setLocation(750, 320);
 		JButton randomBoxBuyButton = new JButton("뽑기");
-		randomBoxBuyButton.setSize(60, 40);
-		randomBoxBuyButton.setLocation(840, 280);
-		this.add(randomBox);
+		randomBoxBuyButton.setSize(60, 30);
+		randomBoxBuyButton.setLocation(840, 320);
+		JLabel randomBoxName = new JLabel("랜덤 박스");
+		randomBoxName.setSize(100, 30);
+		randomBoxName.setLocation(802, 350);
+		randomBoxName.setForeground(Color.BLUE);
+		Image randomBoxicon = new ImageIcon("images/randomBox.gif").getImage().getScaledInstance(150, 150, 0);
+		JLabel randomBoxImage = new JLabel(new ImageIcon(randomBoxicon));
+		randomBoxImage.setSize(150, 150);
+		randomBoxImage.setLocation(750, 170);
+		this.add(randomBoxName);
+		this.add(randomBoxCoin);
+		this.add(randomBoxImage);
 		this.add(randomBoxBuyButton);
 
 		// 랜덤박스뽑기 결과
@@ -140,58 +160,53 @@ public class Store extends JFrame {
 		// 보유아이템
 		JLabel ownItemList = new JLabel("보유아이템");
 		ownItemList.setSize(100, 40);
-		ownItemList.setLocation(60, 400);
+		ownItemList.setLocation(95, 400);
 		this.add(ownItemList);
 
 		// 보유아이템1
 		JPanel ownItem1 = new JPanel();
 		ownItem1.setSize(150, 150);
-		ownItem1.setLocation(60, 450);
-		ownItem1.setBackground(Color.GRAY);
+		ownItem1.setLocation(95, 450);
+		JLabel ownItem1Image = new JLabel(new ImageIcon(item1icon));
+		ownItem1.add(ownItem1Image);
 		this.add(ownItem1);
 
-		JLabel ownItem1Label = new JLabel("보유개수 : " + ownItem1Number);
+		JLabel ownItem1Label = new JLabel("보유개수 : " + u.getOwnItem1());
 		ownItem1Label.setSize(100, 40);
-		ownItem1Label.setLocation(150, 600);
+		ownItem1Label.setLocation(165, 590);
+		JLabel ownItem1Name = new JLabel("출제자 아이템");
+		ownItem1Name.setSize(100, 30);
+		ownItem1Name.setLocation(130, 630);
+		ownItem1Name.setForeground(Color.BLUE);
+		this.add(ownItem1Name);
 		this.add(ownItem1Label);
 
 		// 보유아이템2
 		JPanel ownItem2 = new JPanel();
 		ownItem2.setSize(150, 150);
-		ownItem2.setLocation(290, 450);
-		ownItem2.setBackground(Color.GRAY);
+		ownItem2.setLocation(430, 450);
+		JLabel ownItem2Image = new JLabel(new ImageIcon(item2icon));
+		ownItem2.add(ownItem2Image);
 		this.add(ownItem2);
 
-		JLabel ownItem2Label = new JLabel("보유개수 : " + ownItem2Number);
+		JLabel ownItem2Label = new JLabel("보유개수 : " + u.getOwnItem2());
 		ownItem2Label.setSize(100, 40);
-		ownItem2Label.setLocation(360, 600);
+		ownItem2Label.setLocation(500, 590);
+		JLabel ownItem2Name = new JLabel("정답자 아이템");
+		ownItem2Name.setSize(100, 30);
+		ownItem2Name.setLocation(465, 630);
+		ownItem2Name.setForeground(Color.BLUE);
+		this.add(ownItem2Name);
 		this.add(ownItem2Label);
-
-		// 보유아이템3
-		JPanel ownItem3 = new JPanel();
-		ownItem3.setSize(150, 150);
-		ownItem3.setLocation(520, 450);
-		ownItem3.setBackground(Color.GRAY);
-		this.add(ownItem3);
-
-		JLabel ownItem3Label = new JLabel("보유개수 : " + ownItem3Number);
-		ownItem3Label.setSize(100, 40);
-		ownItem3Label.setLocation(590, 600);
-		this.add(ownItem3Label);
 
 		// --------------------------------------------------------------------------------
 		// 코인개수 출력
 		JLabel ownCoinLabel = new JLabel("내 코인 : " + u.getCoin());
 		ownCoinLabel.setSize(100, 40);
-		ownCoinLabel.setLocation(300, 50);
+		ownCoinLabel.setLocation(310, 55);
 		this.add(ownCoinLabel);
-		
-		Image icon = new ImageIcon("images/coin.jpg").getImage().getScaledInstance(75, 75, 0);
-		JLabel coinimg = new JLabel(new ImageIcon(icon));
-		coinimg.setSize(75, 75);
-		coinimg.setLocation(215, 30);
-		this.add(coinimg);
-		
+
+
 		Dialog itemBuyDialog = new Dialog(this, "아이템 구매");
 		itemBuyDialog.setResizable(false);
 		itemBuyDialog.setLayout(null);
@@ -207,33 +222,60 @@ public class Store extends JFrame {
 		itemBuyDialogBuyButton.setLocation(70, 100);
 		itemBuyDialog.add(itemBuyDialogBuyButton);
 
+		Dialog emptyCoin = new Dialog(this, "코인 부족!");
+		emptyCoin.setResizable(false);
+		emptyCoin.setLayout(null);
+		emptyCoin.setSize(130, 130);
+		emptyCoin.setLocation((screenSize.width - emptyCoin.getWidth()) / 2,
+				(screenSize.height - emptyCoin.getHeight()) / 2);
+		JButton emptyCoinButton = new JButton("확인");
+		emptyCoinButton.setSize(60, 30);
+		emptyCoinButton.setLocation(45, 90);
+		JLabel emptyCoinLabel = new JLabel("코인이 부족합니다!");
+		emptyCoinLabel.setSize(130, 40);
+		emptyCoinLabel.setLocation(17, 40);
+		emptyCoin.add(emptyCoinLabel);
+		emptyCoin.add(emptyCoinButton);
+
+		emptyCoinButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				emptyCoin.dispose();
+			}
+		});
 		// --------------------------------------------------------------------------------
 		// 아이템1 구매시
 		item1BuyButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// 보유코인 아이템구매에 필요한 코인만큼 감소후
-				// 아이템1의 개수 1 증가
 
-				u.setCoin(u.getCoin() - 1);
-				ownItem1Number++;
-				itemBuyDialog.setVisible(true);
+				if (u.getCoin() >= 0 && u.getCoin() - 50 >= 0) {
+					itemBuyDialog.setVisible(true);
 
-				// 구매버튼 클릭시
-				itemBuyDialogBuyButton.addActionListener(new ActionListener() {
+					// 구매버튼 클릭시
+					itemBuyDialogBuyButton.addActionListener(new ActionListener() {
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						// 아이템1 보유개수 출력
-						ownItem1Label.setText("보유개수 : " + ownItem1Number);
-						// 보유코인개수 출력
-						ownCoinLabel.setText("내 코인 : " + u.getCoin());
-						itemBuyDialog.dispose();
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							// 보유코인 아이템구매에 필요한 코인만큼 감소후
+							u.setCoin(u.getCoin() - 50);
+							// 아이템1의 개수 1 증가
+							u.setOwnItem1(u.getOwnItem1() + 1);
+							// 아이템1 보유개수 출력
+							ownItem1Label.setText("보유개수 : " + u.getOwnItem1());
+							System.out.println("개수증가");
+							// 보유코인개수 출력
+							ownCoinLabel.setText("내 코인 : " + u.getCoin());
+							itemBuyDialog.dispose();
 
-					}
-				});
-
+						}
+					});
+				} else if (u.getCoin() < 0 || u.getCoin() - 50 < 0) {
+					// System.out.println("구매 불가");
+					emptyCoin.setVisible(true);
+				}
 			}
 		});
 
@@ -242,56 +284,64 @@ public class Store extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// 보유코인 아이템구매에 필요한 코인만큼 감소후
-				// 아이템2의 개수 1 증가
-				u.setCoin(u.getCoin() - 1);
-				ownItem2Number++;
-				itemBuyDialog.setVisible(true);
 
-				// 구매버튼 클릭시
-				itemBuyDialogBuyButton.addActionListener(new ActionListener() {
+				if (u.getCoin() >= 0 && u.getCoin() - 50 >= 0) {
+					itemBuyDialog.setVisible(true);
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						// 아이템2 보유개수 출력
-						ownItem2Label.setText("보유개수 : " + ownItem2Number);
-						// 보유코인개수 출력
-						ownCoinLabel.setText("내 코인 : " + u.getCoin());
-						itemBuyDialog.dispose();
+					// 구매버튼 클릭시
+					itemBuyDialogBuyButton.addActionListener(new ActionListener() {
 
-					}
-				});
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							// 보유코인 아이템구매에 필요한 코인만큼 감소후
+							u.setCoin(u.getCoin() - 50);
+							// 아이템2의 개수 1 증가
+							u.setOwnItem2(u.getOwnItem2() + 1);
+							// 아이템2 보유개수 출력
+							ownItem2Label.setText("보유개수 : " + u.getOwnItem2());
+							// 보유코인개수 출력
+							ownCoinLabel.setText("내 코인 : " + u.getCoin());
+							itemBuyDialog.dispose();
 
+						}
+					});
+				} else if (u.getCoin() < 0 || u.getCoin() - 50 < 0) {
+					emptyCoin.setVisible(true);
+				}
 			}
 		});
 
-		// 아이템3 구매시
-		item3BuyButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// 보유코인 아이템구매에 필요한 코인만큼 감소후
-				// 아이템3의 개수 1 증가
-				u.setCoin(u.getCoin() - 1);
-				ownItem3Number++;
-				itemBuyDialog.setVisible(true);
-
-				// 구매버튼 클릭시
-				itemBuyDialogBuyButton.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						// 아이템3 보유개수 출력
-						ownItem3Label.setText("보유개수 : " + ownItem3Number);
-						// 보유코인개수 출력
-						ownCoinLabel.setText("내 코인 : " + u.getCoin());
-						itemBuyDialog.dispose();
-
-					}
-				});
-
-			}
-		});
+		// // 아이템3 구매시
+		// item3BuyButton.addActionListener(new ActionListener() {
+		//
+		// @Override
+		// public void actionPerformed(ActionEvent e) {
+		//
+		// if (u.getCoin() >= 0) {
+		// itemBuyDialog.setVisible(true);
+		//
+		// // 구매버튼 클릭시
+		// itemBuyDialogBuyButton.addActionListener(new ActionListener() {
+		//
+		// @Override
+		// public void actionPerformed(ActionEvent e) {
+		// // 보유코인 아이템구매에 필요한 코인만큼 감소후
+		// u.setCoin(u.getCoin() - 1);
+		// // 아이템3의 개수 1 증가
+		// ownItem3Number++;
+		// // 아이템3 보유개수 출력
+		// ownItem3Label.setText("보유개수 : " + ownItem3Number);
+		// // 보유코인개수 출력
+		// ownCoinLabel.setText("내 코인 : " + u.getCoin());
+		// itemBuyDialog.dispose();
+		//
+		// }
+		// });
+		// } else {
+		// emptyCoin.setVisible(true);
+		// }
+		// }
+		// });
 
 		// 랜덤박스 뽑기 결과 창
 		// 랜덤변수에 따른 아이템이미지와 결과텍스트 출력
@@ -299,61 +349,62 @@ public class Store extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// 랜덤박스 결과창 출력
-				randomBoxResultDialog.setVisible(true);
-				// 보유코인 랜덤박스 구매에 필요한 개수만큼 감소
-				u.setCoin(u.getCoin() - 1);
-				// 랜덤박스를 위한 변수 설정
-				int rbn = (int) ((Math.random() * 3) + 1);
-				// 변수에 따른 아이템 이미지 및 개수증가 설정
-				// 변수 1이 나왔을 때
-				if (rbn == 1) {
-					Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\캡처.png").getImage().getScaledInstance(150,
-							140, 0);
-					randomBoxLabel.setIcon(new ImageIcon(icon));
-					randomBoxResultLabel.setText("양파쿵야");
-					// 아이템1의 개수 1 증가
-					ownItem1Number++;
-					// 아이템1 개수 출력
-					ownItem1Label.setText("보유개수 : " + ownItem1Number);
-					// 코인개수 출력
-					ownCoinLabel.setText("내 코인 : " + u.getCoin());
-					// 변수 2 나왔을 때
-				} else if (rbn == 2) {
-					Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\캡처1.png").getImage().getScaledInstance(150,
-							140, 0);
-					randomBoxLabel.setIcon(new ImageIcon(icon));
-					randomBoxResultLabel.setText("양배추 쿵야");
-					// 아이템2 개수 1증사
-					ownItem2Number++;
-					// 아이템2 개수 출력
-					ownItem2Label.setText("보유개수 : " + ownItem2Number);
-					// 코인개수 출력
-					ownCoinLabel.setText("내 코인 : " + u.getCoin());
-					// 변수 3 나왔을 때
-				} else if (rbn == 3) {
-					Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\캡처2.png").getImage().getScaledInstance(150,
-							140, 0);
-					randomBoxLabel.setIcon(new ImageIcon(icon));
-					randomBoxResultLabel.setText("무시 쿵야");
-					// 아이템3 개수 1 증가
-					ownItem3Number++;
-					// 아이템3 개수 출력
-					ownItem3Label.setText("보유개수 : " + ownItem3Number);
-					// 코인개수 출력
-					ownCoinLabel.setText("내 코인 : " + u.getCoin());
-				}
-
-				// 뽑기결과 출력 후 확인 버튼
-				randomBoxDialogOkButton.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						// 뽑기결과 종료
-						randomBoxResultDialog.dispose();
+				if (u.getCoin() >= 0 && u.getCoin() - 30 >= 0) {
+					// 랜덤박스 결과창 출력
+					randomBoxResultDialog.setVisible(true);
+					// 보유코인 랜덤박스 구매에 필요한 개수만큼 감소
+					u.setCoin(u.getCoin() - 30);
+					// 랜덤박스를 위한 변수 설정
+					int rbn = (int) ((Math.random() * 3) + 1);
+					// 변수에 따른 아이템 이미지 및 개수증가 설정
+					// 변수 1이 나왔을 때
+					if (rbn == 1) {
+						Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\캡처.png").getImage()
+								.getScaledInstance(150, 140, 0);
+						randomBoxLabel.setIcon(new ImageIcon(icon));
+						randomBoxResultLabel.setText("양파쿵야");
+						// 아이템1의 개수 1 증가
+						u.setOwnItem1(u.getOwnItem1() + 1);
+						// 아이템1 개수 출력
+						ownItem1Label.setText("보유개수 : " + u.getOwnItem1());
+						// 코인개수 출력
+						ownCoinLabel.setText("내 코인 : " + u.getCoin());
+						// 변수 2 나왔을 때
+					} else if (rbn == 2) {
+						Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\캡처1.png").getImage()
+								.getScaledInstance(150, 140, 0);
+						randomBoxLabel.setIcon(new ImageIcon(icon));
+						randomBoxResultLabel.setText("양배추 쿵야");
+						// 아이템2 개수 1증가
+						u.setOwnItem2(u.getOwnItem2() + 1);
+						// 아이템2 개수 출력
+						ownItem2Label.setText("보유개수 : " + u.getOwnItem2());
+						// 코인개수 출력
+						ownCoinLabel.setText("내 코인 : " + u.getCoin());
+						// 변수 3 나왔을 때
+					} else if (rbn == 3) {
+						Image icon = new ImageIcon("C:\\Users\\user2\\Desktop\\캡처2.png").getImage()
+								.getScaledInstance(150, 140, 0);
+						randomBoxLabel.setIcon(new ImageIcon(icon));
+						randomBoxResultLabel.setText("꽝~! 보상 : 1코인");
+						u.setCoin(u.getCoin() + 1);
+						ownCoinLabel.setText("내 코인 : " + u.getCoin());
 
 					}
-				});
+
+					// 뽑기결과 출력 후 확인 버튼
+					randomBoxDialogOkButton.addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							// 뽑기결과 종료
+							randomBoxResultDialog.dispose();
+
+						}
+					});
+				} else if (u.getCoin() < 0 || u.getCoin() - 30 < 0) {
+					emptyCoin.setVisible(true);
+				}
 			}
 		});
 
@@ -897,7 +948,7 @@ public class Store extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						// 결제창 종료
 						pay.dispose();
-						//보유코인개수 수정
+						// 보유코인개수 수정
 						ownCoinLabel.setText("내 코인 : " + u.getCoin());
 						um.updateUser(u);
 						System.out.println(u.getCoin());
@@ -924,7 +975,7 @@ public class Store extends JFrame {
 		// 결제버튼
 		JButton payButton = new JButton("결제하기");
 		payButton.setSize(86, 30);
-		payButton.setLocation(400, 50);
+		payButton.setLocation(400, 58);
 		this.add(payButton);
 
 		// 결제버튼 클릭시
@@ -948,13 +999,16 @@ public class Store extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				um.updateUser(u);
 				dispose();
+				mm = new MainMenu();
 			}
 		});
+		
 		this.add(bg);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
-
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);	//X눌러도 안꺼짐
 	}
 }
