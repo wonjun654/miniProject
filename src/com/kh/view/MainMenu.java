@@ -136,13 +136,13 @@ public class MainMenu extends JFrame implements MouseListener {
 		JLabel chosungImg = new JLabel(new ImageIcon(chosungimg));
 		chosungImg.setBounds(376, 10, 60, 60);
 		
-		JLabel chosunglbl = new JLabel("내 아이템 : " + um.selectOneUser("123").getOwnItem1() + "");
+		JLabel chosunglbl = new JLabel("내 아이템 : " + um.selectOneUser("123").getOwnItem2() + "");
 		chosunglbl.setBounds(437, 10, 100, 60);
 		
 		JLabel timerImg = new JLabel(new ImageIcon(timerimg));
 		timerImg.setBounds(576, 10, 60, 60);
 		
-		JLabel timerlbl = new JLabel("내 아이템 : " + um.selectOneUser("123").getOwnItem2() + "");
+		JLabel timerlbl = new JLabel("내 아이템 : " + um.selectOneUser("123").getOwnItem1() + "");
 		timerlbl.setBounds(637, 10, 100, 60);
 
 		JButton profilebtn = new JButton(new ImageIcon(profileimg));
