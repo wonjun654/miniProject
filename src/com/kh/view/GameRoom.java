@@ -137,6 +137,7 @@ public class GameRoom extends JFrame {
 		timer.setLocation(35, 10);
 		toolPane.add(timer);
 
+		
 		JLabel item1 = new JLabel(u.getOwnItem1() + "");
 		item1.setSize(30, 30);
 		item1.setLocation(150, 10);
