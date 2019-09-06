@@ -21,18 +21,7 @@ import javafx.scene.layout.Pane;
 public class QuestMenu extends JFrame {
 
 	ImageIcon background;
-	///// 퀘스트 수락//////
-	boolean acceptQuest1 = false;
-	boolean acceptQuest2 = false;
-	boolean acceptQuest3 = false;
 
-	//// 꺴는지 안깼는지
-	boolean questClear1 = false;
-	boolean questClear2 = false;
-	boolean questClear3 = false;
-	
-	
-	
 
 	public QuestMenu(User user) {
 		String[] qusetList = new String[3];
@@ -97,15 +86,23 @@ public class QuestMenu extends JFrame {
 		JButton acceptButton1 = new JButton("수락");
 		acceptButton1.setSize(80, 30);
 		acceptButton1.setLocation(380, 80);
-
+		if(user.getAcceptQuest1()==true) {
+			acceptButton1.setEnabled(false);
+		}
 		JButton acceptButton2 = new JButton("수락");
 		acceptButton2.setSize(80, 30);
 		acceptButton2.setLocation(380, 200);
 
+		if(user.getAcceptQuest2()==true) {
+			acceptButton2.setEnabled(false);
+		}
 		JButton acceptButton3 = new JButton("수락");
 		acceptButton3.setSize(80, 30);
 		acceptButton3.setLocation(380, 325);
 		
+		if(user.getAcceptQuest3()==true) {
+			acceptButton3.setEnabled(false);
+		}
 		JButton sdButton = new JButton();
 		sdButton.setSize(60,60);
 		sdButton.setLocation(60, 60);
@@ -137,7 +134,7 @@ public class QuestMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(acceptQuest1 = true&&um.selectOneUser("123").getCoin()>=100) {
+				if(user.getAcceptQuest1()==true&&um.selectOneUser("123").getCoin()>=100) {
 					System.out.println("줌");
 					sd.setVisible(true);
 					
@@ -149,6 +146,11 @@ public class QuestMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(user.getAcceptQuest2()==true&&um.selectOneUser("123").getOwnItem1()>=10) {
+					System.out.println("줌");
+					sd.setVisible(true);
+					
+				}
 
 			}
 		});
@@ -157,7 +159,7 @@ public class QuestMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(acceptQuest3==true&&um.selectOneUser("123").getVictory()>=1) {
+				if(user.getAcceptQuest3()==true&&um.selectOneUser("123").getVictory()>=1) {
 					System.out.println("3333줌");
 					sd.setVisible(true);
 				}
@@ -169,7 +171,8 @@ public class QuestMenu extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				acceptButton1.setEnabled(false);
-				acceptQuest1 = true;
+				user.setAcceptQuest1(true); 
+				um.updateUser(user);
 				
 			
 
@@ -181,6 +184,8 @@ public class QuestMenu extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				acceptButton2.setEnabled(false);
+				user.setAcceptQuest2(true); 
+				um.updateUser(user);
 
 			}
 		});
@@ -190,6 +195,8 @@ public class QuestMenu extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				acceptButton3.setEnabled(false);
+				user.setAcceptQuest3(true); 
+				um.updateUser(user);
 
 			}
 		});

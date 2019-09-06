@@ -171,7 +171,7 @@ public class LoginPage extends JFrame {
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);// 정중앙ㅣ
-		MediaTest mt = new MediaTest();
+		
 		MediaTest.musicOn(2, true);
 	
 		
