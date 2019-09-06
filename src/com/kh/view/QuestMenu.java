@@ -20,7 +20,8 @@ import com.kh.user.model.vo.User;
 public class QuestMenu extends JFrame {
 
    ImageIcon background;
-
+  
+   
    public QuestMenu(User user) {
       String[] questList = new String[4];
       questList[0] = "\t코인100개소유"; // 1번 아이템 10개
