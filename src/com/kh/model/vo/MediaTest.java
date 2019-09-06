@@ -49,7 +49,7 @@ public class MediaTest {
 	}
 
 	public static void musicOff() {
-//		clip.stop();
-//		clip.close();
+		clip.stop();
+		clip.close();
 	}
 }

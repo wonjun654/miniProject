@@ -52,6 +52,10 @@ public class User implements Serializable {
 	public boolean getAcceptQuest2() {
 		return acceptQuest2;
 	}
+	public int getOwnItem1() {
+		return ownItem1;
+	}
+	
 	public int getOwnItem2() {
 		return ownItem2;
 	}

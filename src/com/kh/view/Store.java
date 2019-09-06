@@ -211,21 +211,39 @@ public class Store extends JFrame {
 		ownCoinLabel.setLocation(310, 55);
 		this.add(ownCoinLabel);
 
-		Dialog itemBuyDialog = new Dialog(this, "아이템 구매", true);
-		itemBuyDialog.setResizable(false);
-		itemBuyDialog.setLayout(null);
-		itemBuyDialog.setSize(200, 160);
-		itemBuyDialog.setLocation((screenSize.width - itemBuyDialog.getWidth()) / 2,
-				(screenSize.height - itemBuyDialog.getHeight()) / 2);
-		JLabel itemBuyDialogLabel = new JLabel("구매하시겠습니까?");
-		itemBuyDialogLabel.setSize(150, 40);
-		itemBuyDialogLabel.setLocation(50, 50);
-		itemBuyDialog.add(itemBuyDialogLabel);
-		JButton itemBuyDialogBuyButton = new JButton("구매");
-		itemBuyDialogBuyButton.setSize(60, 40);
-		itemBuyDialogBuyButton.setLocation(70, 100);
-		itemBuyDialog.add(itemBuyDialogBuyButton);
+		//아이템1 구매 팝업
+		Dialog item1BuyDialog = new Dialog(this, "아이템 구매", true);
+		item1BuyDialog.setResizable(false);
+		item1BuyDialog.setLayout(null);
+		item1BuyDialog.setSize(200, 160);
+		item1BuyDialog.setLocation((screenSize.width - item1BuyDialog.getWidth()) / 2,
+				(screenSize.height - item1BuyDialog.getHeight()) / 2);
+		JLabel item1BuyDialogLabel = new JLabel("구매하시겠습니까?");
+		item1BuyDialogLabel.setSize(150, 40);
+		item1BuyDialogLabel.setLocation(50, 50);
+		item1BuyDialog.add(item1BuyDialogLabel);
+		JButton item1BuyDialogBuyButton = new JButton("구매");
+		item1BuyDialogBuyButton.setSize(60, 40);
+		item1BuyDialogBuyButton.setLocation(70, 100);
+		item1BuyDialog.add(item1BuyDialogBuyButton);
+		
+		//아이템2 구매 팝업
+		Dialog item2BuyDialog = new Dialog(this, "아이템 구매", true);
+		item2BuyDialog.setResizable(false);
+		item2BuyDialog.setLayout(null);
+		item2BuyDialog.setSize(200, 160);
+		item2BuyDialog.setLocation((screenSize.width - item2BuyDialog.getWidth()) / 2,
+				(screenSize.height - item2BuyDialog.getHeight()) / 2);
+		JLabel item2BuyDialogLabel = new JLabel("구매하시겠습니까?");
+		item2BuyDialogLabel.setSize(150, 40);
+		item2BuyDialogLabel.setLocation(50, 50);
+		item2BuyDialog.add(item2BuyDialogLabel);
+		JButton item2BuyDialogBuyButton = new JButton("구매");
+		item2BuyDialogBuyButton.setSize(60, 40);
+		item2BuyDialogBuyButton.setLocation(70, 100);
+		item2BuyDialog.add(item2BuyDialogBuyButton);
 
+		//코인 부족할때 팝업
 		Dialog emptyCoin = new Dialog(this, "코인 부족!");
 		emptyCoin.setResizable(false);
 		emptyCoin.setLayout(null);
@@ -256,7 +274,7 @@ public class Store extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				if (u.getCoin() >= 0 && u.getCoin() - item >= 0) {
-					itemBuyDialog.setVisible(true);
+					item1BuyDialog.setVisible(true);
 
 				} else if (u.getCoin() < 0 || u.getCoin() - item < 0) {
 					emptyCoin.setVisible(true);
@@ -264,8 +282,8 @@ public class Store extends JFrame {
 			}
 		});
 
-		// 구매버튼 클릭시
-		itemBuyDialogBuyButton.addActionListener(new ActionListener() {
+		// 아이템1 구매버튼 클릭시
+		item1BuyDialogBuyButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -277,7 +295,7 @@ public class Store extends JFrame {
 				ownItem1Label.setText("보유개수 : " + u.getOwnItem1());
 				// 보유코인개수 출력
 				ownCoinLabel.setText("내 코인 : " + u.getCoin());
-				itemBuyDialog.dispose();
+				item1BuyDialog.dispose();
 				um.updateUser(u);
 			}
 		});
@@ -289,7 +307,7 @@ public class Store extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				if (u.getCoin() >= 0 && u.getCoin() - item >= 0) {
-					itemBuyDialog.setVisible(true);
+					item2BuyDialog.setVisible(true);
 
 				} else if (u.getCoin() < 0 || u.getCoin() - item < 0) {
 					emptyCoin.setVisible(true);
@@ -298,8 +316,8 @@ public class Store extends JFrame {
 			}
 		});
 
-		// 구매버튼 클릭시
-		itemBuyDialogBuyButton.addActionListener(new ActionListener() {
+		// 아이템2 구매버튼 클릭시
+		item2BuyDialogBuyButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -311,7 +329,7 @@ public class Store extends JFrame {
 				ownItem2Label.setText("보유개수 : " + u.getOwnItem2());
 				// 보유코인개수 출력
 				ownCoinLabel.setText("내 코인 : " + u.getCoin());
-				itemBuyDialog.dispose();
+				item2BuyDialog.dispose();
 				um.updateUser(u);
 			}
 		});
