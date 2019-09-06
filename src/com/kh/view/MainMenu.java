@@ -83,6 +83,7 @@ public class MainMenu extends JFrame implements MouseListener {
 		lblpeople = new JLabel("인원");
 		lblpeople.setBounds(625, 100, 60, 60);
 
+		
 		roomList = new JList(col1);
 		roomList.setBounds(0, 0, 200, 360);
 
