@@ -11,11 +11,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -38,6 +37,7 @@ public class Store extends JFrame {
 	MainMenu mm;
 	int item = 50;
 	int random = 30;
+	
 
 	public Store(User u) {
 		this.setLayout(null);
@@ -74,7 +74,7 @@ public class Store extends JFrame {
 		JLabel item1Coin = new JLabel(item + "코인");
 		item1Coin.setSize(50, 30);
 		item1Coin.setLocation(95, 320);
-		JButton item1BuyButton = new JButton("구매");
+		RoundButton item1BuyButton = new RoundButton("구매");
 		item1BuyButton.setSize(60, 30);
 		item1BuyButton.setLocation(185, 320);
 		JLabel item1Name = new JLabel("출제자 아이템");
@@ -95,7 +95,7 @@ public class Store extends JFrame {
 		JLabel item2Coin = new JLabel(item + "코인");
 		item2Coin.setSize(50, 30);
 		item2Coin.setLocation(430, 320);
-		JButton item2BuyButton = new JButton("구매");
+		RoundButton item2BuyButton = new RoundButton("구매");
 		item2BuyButton.setSize(60, 30);
 		item2BuyButton.setLocation(520, 320);
 		JLabel item2Name = new JLabel("정답자 아이템");
@@ -115,7 +115,7 @@ public class Store extends JFrame {
 		JLabel randomBoxCoin = new JLabel(random + "코인");
 		randomBoxCoin.setSize(50, 30);
 		randomBoxCoin.setLocation(750, 320);
-		JButton randomBoxBuyButton = new JButton("뽑기");
+		RoundButton randomBoxBuyButton = new RoundButton("뽑기");
 		randomBoxBuyButton.setSize(60, 30);
 		randomBoxBuyButton.setLocation(840, 320);
 		JLabel randomBoxName = new JLabel("랜덤 박스");
@@ -144,7 +144,7 @@ public class Store extends JFrame {
 		randomBoxResultDialog.add(randomBoxLabel);
 
 		// 뽑기 결과 출력 후 확인 버튼
-		JButton randomBoxDialogOkButton = new JButton("확인");
+		RoundButton randomBoxDialogOkButton = new RoundButton("확인");
 		randomBoxDialogOkButton.setBounds(120, 250, 60, 30);
 		randomBoxResultDialog.add(randomBoxDialogOkButton);
 
@@ -214,7 +214,7 @@ public class Store extends JFrame {
 		item1BuyDialogLabel.setSize(150, 40);
 		item1BuyDialogLabel.setLocation(50, 50);
 		item1BuyDialog.add(item1BuyDialogLabel);
-		JButton item1BuyDialogBuyButton = new JButton("구매");
+		RoundButton item1BuyDialogBuyButton = new RoundButton("구매");
 		item1BuyDialogBuyButton.setSize(60, 40);
 		item1BuyDialogBuyButton.setLocation(70, 100);
 		item1BuyDialog.add(item1BuyDialogBuyButton);
@@ -230,7 +230,7 @@ public class Store extends JFrame {
 		item2BuyDialogLabel.setSize(150, 40);
 		item2BuyDialogLabel.setLocation(50, 50);
 		item2BuyDialog.add(item2BuyDialogLabel);
-		JButton item2BuyDialogBuyButton = new JButton("구매");
+		RoundButton item2BuyDialogBuyButton = new RoundButton("구매");
 		item2BuyDialogBuyButton.setSize(60, 40);
 		item2BuyDialogBuyButton.setLocation(70, 100);
 		item2BuyDialog.add(item2BuyDialogBuyButton);
@@ -242,7 +242,7 @@ public class Store extends JFrame {
 		emptyCoin.setSize(130, 130);
 		emptyCoin.setLocation((screenSize.width - emptyCoin.getWidth()) / 2,
 				(screenSize.height - emptyCoin.getHeight()) / 2);
-		JButton emptyCoinButton = new JButton("확인");
+		RoundButton emptyCoinButton = new RoundButton("확인");
 		emptyCoinButton.setSize(60, 30);
 		emptyCoinButton.setLocation(45, 90);
 		JLabel emptyCoinLabel = new JLabel("코인이 부족합니다!");
@@ -468,8 +468,8 @@ public class Store extends JFrame {
 		payDialog.setLocation((screenSize.width - payDialog.getWidth()) / 2,
 				(screenSize.height - payDialog.getHeight()) / 2);
 
-		JButton payDialogOkButton = new JButton("확인");
-		JButton payDialogCancelButton = new JButton("취소");
+		RoundButton payDialogOkButton = new RoundButton("확인");
+		RoundButton payDialogCancelButton = new RoundButton("취소");
 
 		payDialogOkButton.setLocation(100, 250);
 		payDialogOkButton.setSize(75, 30);
@@ -512,10 +512,10 @@ public class Store extends JFrame {
 		JTextField cardNumberText4 = new JTextField();
 		cardNumberText4.setSize(60, 40);
 		cardNumberText4.setLocation(300, 100);
-		JButton cardNumberInputOkButton = new JButton("확인");
+		RoundButton cardNumberInputOkButton = new RoundButton("확인");
 		cardNumberInputOkButton.setSize(60, 40);
 		cardNumberInputOkButton.setLocation(200, 180);
-		JButton cardNumberInputCalcelButton = new JButton("취소");
+		RoundButton cardNumberInputCalcelButton = new RoundButton("취소");
 		cardNumberInputCalcelButton.setSize(60, 40);
 		cardNumberInputCalcelButton.setLocation(280, 180);
 		JLabel cardNumberInputCancelMsg = new JLabel("취소버튼을 누르면 상점화면으로 돌아갑니다.");
@@ -532,7 +532,7 @@ public class Store extends JFrame {
 		JLabel cardNumberErrorLabel = new JLabel("카드번호를 입력해주세요.");
 		cardNumberErrorLabel.setSize(150, 50);
 		cardNumberErrorLabel.setLocation(30, 40);
-		JButton cardNumberErrorOkButton = new JButton("확인");
+		RoundButton cardNumberErrorOkButton = new RoundButton("확인");
 		cardNumberErrorOkButton.setSize(60, 40);
 		cardNumberErrorOkButton.setLocation(72, 90);
 		cardNumberError.add(cardNumberErrorLabel);
@@ -560,10 +560,10 @@ public class Store extends JFrame {
 		JTextField cashText = new JTextField();
 		cashText.setSize(200, 40);
 		cashText.setLocation(120, 100);
-		JButton cashNumberInputOkButton = new JButton("확인");
+		RoundButton cashNumberInputOkButton = new RoundButton("확인");
 		cashNumberInputOkButton.setSize(60, 40);
 		cashNumberInputOkButton.setLocation(170, 180);
-		JButton cashNumberInputCancelButton = new JButton("취소");
+		RoundButton cashNumberInputCancelButton = new RoundButton("취소");
 		cashNumberInputCancelButton.setSize(60, 40);
 		cashNumberInputCancelButton.setLocation(250, 180);
 		JLabel cashNumberInputCancelMsg = new JLabel("취소버튼을 누르면 상점화면으로 돌아갑니다.");
@@ -579,7 +579,7 @@ public class Store extends JFrame {
 		JLabel cashNumberErrorLabel = new JLabel("계좌번호를 입력해주세요.");
 		cashNumberErrorLabel.setSize(150, 50);
 		cashNumberErrorLabel.setLocation(30, 40);
-		JButton cashNumberErrorOkButton = new JButton("확인");
+		RoundButton cashNumberErrorOkButton = new RoundButton("확인");
 		cashNumberErrorOkButton.setSize(60, 40);
 		cashNumberErrorOkButton.setLocation(72, 90);
 		cashNumberError.add(cashNumberErrorOkButton);
@@ -669,7 +669,7 @@ public class Store extends JFrame {
 
 		// --------------------------------------------------------------------------------
 		// 충전하기 버튼
-		JButton payDialogPayButton = new JButton("충전하기");
+		RoundButton payDialogPayButton = new RoundButton("충전하기");
 		payDialogPayButton.setLocation(180, 500);
 		payDialogPayButton.setSize(90, 30);
 		pay.add(payDialogPayButton);
@@ -698,7 +698,7 @@ public class Store extends JFrame {
 		JLabel nochooseLabel = new JLabel("결제방식과 금액을 선택해주세요!");
 		nochooseLabel.setSize(200, 100);
 		nochooseLabel.setLocation(60, 20);
-		JButton nochooseOkButton = new JButton("확인");
+		RoundButton nochooseOkButton = new RoundButton("확인");
 		nochooseOkButton.setSize(70, 30);
 		nochooseOkButton.setLocation(120, 100);
 		nochooseDialog.add(nochooseLabel);
@@ -892,7 +892,7 @@ public class Store extends JFrame {
 		payCompleteLabel.setLocation(35, 20);
 		payCompleteDialog.add(payCompleteLabel);
 
-		JButton payCompleteOkButton = new JButton("확인");
+		RoundButton payCompleteOkButton = new RoundButton("확인");
 		payCompleteOkButton.setSize(60, 30);
 		payCompleteOkButton.setLocation(70, 100);
 		payCompleteDialog.add(payCompleteOkButton);
@@ -930,7 +930,7 @@ public class Store extends JFrame {
 			}
 		});
 
-		JButton payexit = new JButton("상점으로");
+		RoundButton payexit = new RoundButton("상점으로");
 		payexit.setLocation(280, 500);
 		payexit.setSize(90, 30);
 		pay.add(payexit);
@@ -945,8 +945,8 @@ public class Store extends JFrame {
 		});
 		// --------------------------------------------------------------------------------
 		// 결제버튼
-		JButton payButton = new JButton("결제하기");
-		payButton.setSize(86, 30);
+		RoundButton payButton = new RoundButton("결제하기");
+		payButton.setSize(106, 30);
 		payButton.setLocation(400, 58);
 		this.add(payButton);
 
@@ -962,7 +962,7 @@ public class Store extends JFrame {
 		});
 
 		// 이전화면으로
-		JButton exit = new JButton("나가기");
+		RoundButton exit = new RoundButton("나가기");
 		exit.setSize(100, 30);
 		exit.setLocation(800, 650);
 		this.add(exit);

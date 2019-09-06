@@ -7,15 +7,14 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.kh.part01_main.LoginPage;
 import com.kh.user.controller.UserManager;
+import com.kh.view.RoundButton;
 
 public class FindPassword extends JFrame{
 	
@@ -67,12 +66,12 @@ public FindPassword() {
 		
 		
 		//이메일로 전송함
-		JButton checkBtn = new JButton("전송");
+		RoundButton checkBtn = new RoundButton("전송");
 		checkBtn.setBounds(380,480, 300	, 40);
 
 		
 		//로그인 화면으로 나가기
-		JButton exitBtn = new JButton("나가기");
+		RoundButton exitBtn = new RoundButton("나가기");
 		exitBtn.setBounds(580,550, 80	, 50);
 
 		

@@ -9,13 +9,14 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import com.kh.view.RoundButton;
 
 public class JoinText extends JFrame {
 
@@ -87,7 +88,7 @@ public class JoinText extends JFrame {
         
         
         //동의완료 버튼
-        JButton agreeBtn = new JButton("동의 완료");
+        RoundButton agreeBtn = new RoundButton("동의 완료");
         agreeBtn.setBounds(230, 550, 100, 30);
         add(agreeBtn);
         
@@ -107,7 +108,7 @@ public class JoinText extends JFrame {
         
         
         //취소
-        JButton cancleBtn = new JButton("취소");
+        RoundButton cancleBtn = new RoundButton("취소");
         cancleBtn.setBounds(400, 550, 100, 30);
         add(cancleBtn);
         

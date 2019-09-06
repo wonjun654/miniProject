@@ -3,7 +3,6 @@ package com.kh.view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,7 +14,7 @@ import javax.swing.SpinnerNumberModel;
 public class MakeRoom extends JFrame {
 	public JTextArea roomName2;
 	public JTextArea roomPwd2;
-	public JButton btnOK;
+	public RoundButton btnOK;
 	
 	
 
@@ -45,8 +44,8 @@ public class MakeRoom extends JFrame {
 		JSpinner selectPeople = new JSpinner(numberModel);
 		selectPeople.setBounds(175, 250, 175, 25);
 
-		btnOK = new JButton("확인");
-		JButton btnCancel = new JButton("취소");
+		btnOK = new RoundButton("확인");
+		RoundButton btnCancel = new RoundButton("취소");
 		btnOK.setBounds(250, 300, 100, 35);
 		btnCancel.setBounds(375, 300, 100, 35);
 
