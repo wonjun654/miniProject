@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.kh.model.vo.asdasd;
 import com.kh.user.controller.UserManager;
 import com.kh.user.model.vo.User;
 
@@ -23,9 +22,9 @@ public class QuestMenu extends JFrame {
 
 	public QuestMenu(User user) {
 		String[] questList = new String[4];
-		questList[0] = "코인100개소유"; // 시간아이템 + 10
-		questList[1] = "주먹밥쿵야 10개 모으기"; // 초성아이템 + 10
-		questList[2] = "처음으로 우승해보기"; // 사진.
+		questList[0] = "\t코인100개소유"; // 1번 아이템 10개
+		questList[1] = "\t주먹밥쿵야 10개 모으기"; // 2번 아이템 10개
+		questList[2] = "\t처음으로 우승해보기"; // 3 그냥
 		
 
 		UserManager um = new UserManager();
