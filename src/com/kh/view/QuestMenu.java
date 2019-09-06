@@ -37,7 +37,8 @@ public class QuestMenu extends JFrame {
 			
 				g.drawImage(background.getImage(), 0, 0, 600, 600, null);
 				setOpaque(false);
-				super.paintComponent(g);
+				super.paintComponent(g); 
+				
 			}
 		};
 
