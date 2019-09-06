@@ -125,22 +125,18 @@ public class GameRoom extends JFrame {
 		prev.setContentAreaFilled(false);
 		tool.setBorderPainted(false);
 		tool.setContentAreaFilled(false);
-		
+
 		Image ctnimg = new ImageIcon("images/ctntimer.png").getImage().getScaledInstance(30, 30, 0);
 		JLabel ctntimer = new JLabel(new ImageIcon(ctnimg));
 		ctntimer.setSize(30, 30);
 		ctntimer.setLocation(5, 10);
 		toolPane.add(ctntimer);
-		
-		timer tm = new timer();
-		
+
 		JLabel timer = new JLabel();
 		timer.setSize(80, 30);
 		timer.setLocation(35, 10);
 		toolPane.add(timer);
-//		timer.setText(new timer().toString());
-		System.out.println(tm.toString());
-		
+
 		JLabel item1 = new JLabel(u.getOwnItem1() + "");
 		item1.setSize(30, 30);
 		item1.setLocation(150, 10);
@@ -225,7 +221,7 @@ public class GameRoom extends JFrame {
 
 			}
 		});
-		
+
 		// 전송버튼 클릭시 채팅넘기기
 		chatOkbtn.addActionListener(new ActionListener() {
 
@@ -581,13 +577,11 @@ public class GameRoom extends JFrame {
 		copyRight.setLocation(170, 717);
 		roomCenter.add(copyRight);
 
-		
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
-	
 	public static void main(String[] args) {
 		new GameRoom();
 	}
