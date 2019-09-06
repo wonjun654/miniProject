@@ -810,8 +810,6 @@ public class Store extends JFrame {
 					paySelect.setText(presult.getText());
 					// 충전할 코인계수 가져와서 출력
 					chargeCoinNum.setText(buyCoin + "개 충전하시겠습니까?");
-					u.setCoin(u.getCoin() + buyCoin);
-					um.updateUser(u);
 					payDialog.setVisible(true);
 					// 입력된 값 초기화
 					cashText.setText(null);

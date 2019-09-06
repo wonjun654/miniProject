@@ -1,5 +1,6 @@
 package com.kh.part01_main;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
@@ -25,6 +27,7 @@ public class JoinPage extends JFrame {
 	private JTextArea textArea;
 	private JRadioButton rbAgree;
 	private JRadioButton rbdisAgree;
+	JPanel bgPan = new JPanel();
 	UserManager um = new UserManager();
 	String str = "";
 
@@ -39,6 +42,9 @@ public class JoinPage extends JFrame {
 		}
 		this.setBounds(250, 250, 800, 768);
 		this.setLayout(null);
+		bgPan.setLayout(null);
+		bgPan.setSize(1024, 768);
+		bgPan.setBackground(new Color(195, 245, 230));
 
 		// 회원가입 로고
 		JLabel nameCard = new JLabel("회원가입");
@@ -185,7 +191,7 @@ public class JoinPage extends JFrame {
 
 			}
 		});
-
+		this.add(bgPan);
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);// 정중앙

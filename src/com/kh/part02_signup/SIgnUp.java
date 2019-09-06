@@ -1,5 +1,6 @@
 package com.kh.part02_signup;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,8 +12,14 @@ import javax.swing.SwingConstants;
 import com.kh.view.RoundButton;
 
 public class SIgnUp extends JPanel {
+	JPanel bgPan = new JPanel();
 	public SIgnUp() {
 		setLayout(null);
+		
+		bgPan.setLayout(null);
+		bgPan.setSize(1024, 768);
+		bgPan.setBackground(new Color(195, 245, 230));
+		
 		RoundButton btnNewButton = new RoundButton("확인");
 		btnNewButton.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnNewButton.setLayout(null);
@@ -29,6 +36,7 @@ public class SIgnUp extends JPanel {
 		label.setFont(new Font("굴림", Font.PLAIN, 18));
 		label.setBounds(101, 125, 255, 40);
 		add(label);
+		this.add(bgPan);
 
 	}
 }
