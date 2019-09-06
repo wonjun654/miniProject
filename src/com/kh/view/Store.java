@@ -38,8 +38,6 @@ public class Store extends JFrame {
 	MainMenu mm;
 	int item = 50;
 	int random = 30;
-	int item1Number = 0;
-	int item2Number = 0;
 
 	public Store(User u) {
 		this.setLayout(null);
@@ -51,14 +49,11 @@ public class Store extends JFrame {
 
 		JPanel bg = new JPanel();
 		bg.setSize(1024, 768);
-		// bg.setBackground(Color.PINK);
 
 		Image storeImage = new ImageIcon("images/bg.png").getImage().getScaledInstance(1024, 768, 0);
 		JLabel storeImageIcon = new JLabel(new ImageIcon(storeImage));
 		storeImageIcon.setSize(1024, 768);
-		// storeImageIcon.setLocation(650, 10);
 		bg.add(storeImageIcon);
-		// this.add(storeImageIcon);
 
 		// 상점이름
 		JLabel store = new JLabel("상점");
@@ -76,9 +71,6 @@ public class Store extends JFrame {
 		this.add(itemList);
 
 		// 아이템1
-		// JPanel item1 = new JPanel();
-		// item1.setSize(150, 150);
-		// item1.setLocation(95, 170);
 		JLabel item1Coin = new JLabel(item + "코인");
 		item1Coin.setSize(50, 30);
 		item1Coin.setLocation(95, 320);
@@ -211,7 +203,7 @@ public class Store extends JFrame {
 		ownCoinLabel.setLocation(310, 55);
 		this.add(ownCoinLabel);
 
-		//아이템1 구매 팝업
+		// 아이템1 구매 팝업
 		Dialog item1BuyDialog = new Dialog(this, "아이템 구매", true);
 		item1BuyDialog.setResizable(false);
 		item1BuyDialog.setLayout(null);
@@ -226,8 +218,8 @@ public class Store extends JFrame {
 		item1BuyDialogBuyButton.setSize(60, 40);
 		item1BuyDialogBuyButton.setLocation(70, 100);
 		item1BuyDialog.add(item1BuyDialogBuyButton);
-		
-		//아이템2 구매 팝업
+
+		// 아이템2 구매 팝업
 		Dialog item2BuyDialog = new Dialog(this, "아이템 구매", true);
 		item2BuyDialog.setResizable(false);
 		item2BuyDialog.setLayout(null);
@@ -243,8 +235,8 @@ public class Store extends JFrame {
 		item2BuyDialogBuyButton.setLocation(70, 100);
 		item2BuyDialog.add(item2BuyDialogBuyButton);
 
-		//코인 부족할때 팝업
-		Dialog emptyCoin = new Dialog(this, "코인 부족!");
+		// 코인 부족할때 팝업
+		Dialog emptyCoin = new Dialog(this, "코인 부족!", true);
 		emptyCoin.setResizable(false);
 		emptyCoin.setLayout(null);
 		emptyCoin.setSize(130, 130);
@@ -469,7 +461,7 @@ public class Store extends JFrame {
 
 		// --------------------------------------------------------------------------------
 		// 충전하기 팝업창
-		Dialog payDialog = new Dialog(pay, "충전하기");
+		Dialog payDialog = new Dialog(pay, "충전하기", true);
 		payDialog.setResizable(false);
 		payDialog.setLayout(null);
 		payDialog.setSize(300, 300);
@@ -723,33 +715,11 @@ public class Store extends JFrame {
 					// 경고창 띄움
 					nochooseDialog.setVisible(true);
 
-					// // 경고창 확인버튼 클릭시
-					// nochooseOkButton.addActionListener(new ActionListener() {
-					//
-					// @Override
-					// public void actionPerformed(ActionEvent e) {
-					// // 경고창 사라짐
-					// nochooseDialog.dispose();
-					//
-					// }
-					// });
-
 					// 결제금액이 선택되지 않았을 때
 				} else if (!priceButton1.isSelected() && !priceButton2.isSelected() && !priceButton3.isSelected()
 						&& !priceButton4.isSelected() && !priceButton5.isSelected()) {
 					// 경고창 띄움
 					nochooseDialog.setVisible(true);
-
-					// // 경고창 확인버튼 클릭시
-					// nochooseOkButton.addActionListener(new ActionListener() {
-					//
-					// @Override
-					// public void actionPerformed(ActionEvent e) {
-					// // 경고창 사라짐
-					// nochooseDialog.dispose();
-					//
-					// }
-					// });
 
 					// 결제방식 결제금액 모두 선택 되었을 때
 				} else {
@@ -758,83 +728,12 @@ public class Store extends JFrame {
 					if (card.isSelected()) {
 						// 카드번호 입력 팝업 출력
 						cardNumberInput.setVisible(true);
-
-						// // 카드번호 입력 팝업 확인 버튼 클릭
-						// cardNumberInputOkButton.addActionListener(new ActionListener() {
-						//
-						// @Override
-						// public void actionPerformed(ActionEvent e) {
-						// // 카드번호 미입력시
-						// if (cardNumberText1.getText().isEmpty() ||
-						// cardNumberText2.getText().isEmpty()
-						// || cardNumberText3.getText().isEmpty() ||
-						// cardNumberText4.getText().isEmpty()) {
-						// // 카드번호 미입력 에러 팝업 출력
-						// cardNumberError.setVisible(true);
-						//
-						// // 카드번호 입력시
-						// } else {
-						// // 카드번호 입력 팝업 사라짐
-						// cardNumberInput.dispose();
-						// // 입력된 카드번호 가져와서 출력
-						// chooseSelect.setText("카드번호 : " + cardNumberText1.getText() + "-"
-						// + cardNumberText2.getText() + "-" + cardNumberText3.getText() + "-"
-						// + cardNumberText4.getText());
-						// // 선택된 결제방식 가져와서 출력
-						// paySelect.setText(presult.getText());
-						// // 충전할 코인개수 가져와서 출력
-						// chargeCoinNum.setText(buyCoin + "개 충전하시겠습니까?");
-						// u.setCoin(u.getCoin() + buyCoin);
-						// um.updateUser(u);
-						// payDialog.setVisible(true);
-						// }
-						//
-						// // 입력된 값 초기화
-						// cardNumberText1.setText(null);
-						// cardNumberText2.setText(null);
-						// cardNumberText3.setText(null);
-						// cardNumberText4.setText(null);
-						//
-						// }
-						// });
 					}
 
 					// 계좌이체 선택
 					if (cash.isSelected()) {
 						// 계좌번호 입력 팝업 출력
 						cashNumberInput.setVisible(true);
-
-						// // 확인버튼 클릭
-						// cashNumberInputOkButton.addActionListener(new ActionListener() {
-						//
-						// @Override
-						// public void actionPerformed(ActionEvent e) {
-						// // 계좌번호 미 입력시
-						// if (cashText.getText().isEmpty()) {
-						// // 계좌번호 미입력 에러 팝업 출력
-						// cashNumberError.setVisible(true);
-						// }
-						//
-						// // 계좌번호 입력시
-						// if (!cashText.getText().isEmpty()) {
-						// // 계좌번호 입력 팝업 사라짐
-						// cashNumberInput.dispose();
-						// // 입력된 계좌번호 가져와서 출력
-						// chooseSelect.setText(banklist.getSelectedItem() + " - " +
-						// cashText.getText());
-						// // 선택된 결제방식 가져와서 출력
-						// paySelect.setText(presult.getText());
-						// // 충전할 코인계수 가져와서 출력
-						// chargeCoinNum.setText(buyCoin + "개 충전하시겠습니까?");
-						// u.setCoin(u.getCoin() + buyCoin);
-						// um.updateUser(u);
-						// payDialog.setVisible(true);
-						// }
-						// // 입력된 값 초기화
-						// cashText.setText(null);
-						//
-						// }
-						// });
 
 					}
 
@@ -883,15 +782,8 @@ public class Store extends JFrame {
 					cardNumberText2.setText(null);
 					cardNumberText3.setText(null);
 					cardNumberText4.setText(null);
-					// 선택된 값 초기화
 					cresult.setText("방식이 설정되지 않았습니다.");
 					presult.setText("금액이 설정되지 않았습니다.");
-					card.setSelected(false);
-					priceButton1.setSelected(false);
-					priceButton2.setSelected(false);
-					priceButton3.setSelected(false);
-					priceButton4.setSelected(false);
-					priceButton5.setSelected(false);
 				}
 
 			}
@@ -925,13 +817,6 @@ public class Store extends JFrame {
 					cashText.setText(null);
 					cresult.setText("방식이 설정되지 않았습니다.");
 					presult.setText("금액이 설정되지 않았습니다.");
-					// 선택된 값 초기화
-					cash.setSelected(false);
-					priceButton1.setSelected(false);
-					priceButton2.setSelected(false);
-					priceButton3.setSelected(false);
-					priceButton4.setSelected(false);
-					priceButton5.setSelected(false);
 				}
 			}
 		});
@@ -995,7 +880,7 @@ public class Store extends JFrame {
 
 		// --------------------------------------------------------------------------------
 		// 충전확인시 방식,금액 확인 팝업
-		Dialog payCompleteDialog = new Dialog(pay, "충전완료");
+		Dialog payCompleteDialog = new Dialog(pay, "충전완료", true);
 		payCompleteDialog.setResizable(false);
 		payCompleteDialog.setLayout(null);
 		payCompleteDialog.setSize(200, 150);
@@ -1024,25 +909,25 @@ public class Store extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// 충전 완료 팝업 출력
 				payCompleteDialog.setVisible(true);
-
-				// 충전완료 확인 클릭
-				payCompleteOkButton.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						// 선택된 값 초기화
-						c.clearSelection();
-						p.clearSelection();
-
-						// 결제창 종료
-						pay.dispose();
-						// 보유코인개수 수정
-						ownCoinLabel.setText("내 코인 : " + u.getCoin());
-						um.updateUser(u);
-					}
-				});
 			}
 
+		});
+
+		// 충전완료 확인 클릭
+		payCompleteOkButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// 선택된 값 초기화
+				c.clearSelection();
+				p.clearSelection();
+
+				// 결제창 종료
+				pay.dispose();
+				// 보유코인개수 수정
+				ownCoinLabel.setText("내 코인 : " + u.getCoin());
+				um.updateUser(u);
+			}
 		});
 
 		JButton payexit = new JButton("상점으로");
