@@ -7,13 +7,13 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.kh.user.controller.UserManager;
+import com.kh.view.RoundButton;
 
 public class FindID extends JFrame{
 	UserManager um = new UserManager();
@@ -55,10 +55,10 @@ public class FindID extends JFrame{
 		JTextField idf = new JTextField();
 		idf.setBounds(380, 350, 300	, 30);
 		
-		JButton checkBtn = new JButton("확인");
+		RoundButton checkBtn = new RoundButton("확인");
 		checkBtn.setBounds(500,420, 70	, 50);
 
-		JButton exitBtn = new JButton("나가기");
+		RoundButton exitBtn = new RoundButton("나가기");
 		exitBtn.setBounds(580,420, 80	, 50);
 
 		

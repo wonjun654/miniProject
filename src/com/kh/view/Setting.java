@@ -4,14 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JSlider;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import com.kh.model.vo.MediaTest;
 import com.kh.user.controller.UserManager;
@@ -37,7 +33,7 @@ public class Setting extends JFrame {
 		label2.setLocation(10, 120);
 		label2.setSize(120, 120);
 
-		JButton button = new JButton("확인");
+		RoundButton button = new RoundButton("확인");
 		button.setSize(60, 50);
 		button.setLocation(280, 250);
 		///////////// 프로필 공개////////////////

@@ -6,13 +6,13 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.kh.part01_main.LoginPage;
+import com.kh.view.RoundButton;
 
 public class FindResult extends JFrame {
 
@@ -42,10 +42,10 @@ public class FindResult extends JFrame {
 		JLabel idText2 = new JLabel("입니다.");
 		idText2.setBounds(650, 350, 300, 30);
 
-		JButton checkBtn = new JButton("로그인");
+		RoundButton checkBtn = new RoundButton("로그인");
 		checkBtn.setBounds(350, 420, 80, 50);
 
-		JButton exitBtn = new JButton("나가기");
+		RoundButton exitBtn = new RoundButton("나가기");
 		exitBtn.setBounds(580, 420, 80, 50);
 
 		idResultPop.add(idText);

@@ -4,15 +4,16 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.kh.view.RoundButton;
+
 public class SIgnUp extends JPanel {
 	public SIgnUp() {
 		setLayout(null);
-		JButton btnNewButton = new JButton("확인");
+		RoundButton btnNewButton = new RoundButton("확인");
 		btnNewButton.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnNewButton.setLayout(null);
 		btnNewButton.setBounds(175, 188, 70, 25);

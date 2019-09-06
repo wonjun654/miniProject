@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,8 +14,6 @@ import javax.swing.JTextField;
 
 import com.kh.user.controller.UserManager;
 import com.kh.user.model.vo.User;
-
-import javafx.scene.layout.Pane;
 
 public class QuestMenu extends JFrame {
 
@@ -67,43 +64,43 @@ public class QuestMenu extends JFrame {
 		title.setSize(150, 60);
 		title.setLocation(250, 0);
 
-		JButton button = new JButton("확인");
+		RoundButton button = new RoundButton("확인");
 		button.setSize(80, 30);
 		button.setLocation(470, 480);
 
-		JButton clearButton1 = new JButton("보상받기");
+		RoundButton clearButton1 = new RoundButton("보상받기");
 		clearButton1.setSize(80, 30);
 		clearButton1.setLocation(470, 80);
 
-		JButton clearButton2 = new JButton("보상받기");
+		RoundButton clearButton2 = new RoundButton("보상받기");
 		clearButton2.setSize(80, 30);
 		clearButton2.setLocation(470, 200);
 
-		JButton clearButton3 = new JButton("보상받기");
+		RoundButton clearButton3 = new RoundButton("보상받기");
 		clearButton3.setSize(80, 30);
 		clearButton3.setLocation(470, 325);
 
-		JButton acceptButton1 = new JButton("수락");
+		RoundButton acceptButton1 = new RoundButton("수락");
 		acceptButton1.setSize(80, 30);
 		acceptButton1.setLocation(380, 80);
 		if(user.getAcceptQuest1()==true) {
 			acceptButton1.setEnabled(false);
 		}
-		JButton acceptButton2 = new JButton("수락");
+		RoundButton acceptButton2 = new RoundButton("수락");
 		acceptButton2.setSize(80, 30);
 		acceptButton2.setLocation(380, 200);
 
 		if(user.getAcceptQuest2()==true) {
 			acceptButton2.setEnabled(false);
 		}
-		JButton acceptButton3 = new JButton("수락");
+		RoundButton acceptButton3 = new RoundButton("수락");
 		acceptButton3.setSize(80, 30);
 		acceptButton3.setLocation(380, 325);
 		
 		if(user.getAcceptQuest3()==true) {
 			acceptButton3.setEnabled(false);
 		}
-		JButton sdButton = new JButton();
+		RoundButton sdButton = new RoundButton();
 		sdButton.setSize(60,60);
 		sdButton.setLocation(60, 60);
 	

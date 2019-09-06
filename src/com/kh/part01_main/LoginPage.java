@@ -8,7 +8,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,8 +19,8 @@ import com.kh.model.vo.MediaTest;
 import com.kh.part03_ID.FindID;
 import com.kh.part03_password.FindPassword;
 import com.kh.user.controller.UserManager;
-import com.kh.user.model.vo.User;
 import com.kh.view.MainMenu;
+import com.kh.view.RoundButton;
 
 
 
@@ -80,23 +79,23 @@ public class LoginPage extends JFrame {
 		panel.add(pwField);
 
 		// 로그인 버튼
-		JButton loginbtn = new JButton("로그인");
+		RoundButton loginbtn = new RoundButton("로그인");
 		loginbtn.setBounds(680, 495, 120, 75);
 		panel.add(idText);
 		panel.add(loginbtn);
 
 		// 회원가입 버튼
-		JButton joinbtn = new JButton("회원가입");
+		RoundButton joinbtn = new RoundButton("회원가입");
 		joinbtn.setBounds(360, 600, 90, 30);
 		panel.add(joinbtn);
 
 		// 아이디 찾기 버튼
-		JButton idbtn = new JButton("ID 찾기 ");
+		RoundButton idbtn = new RoundButton("ID 찾기 ");
 		idbtn.setBounds(466, 600, 90, 30);
 		panel.add(idbtn);
 
 		// 비밀번호 찾기 버튼
-		JButton pwbtn = new JButton("P/W 찾기 ");
+		RoundButton pwbtn = new RoundButton("P/W 찾기 ");
 		pwbtn.setBounds(572, 600, 90, 30);
 		panel.add(pwbtn);
 		

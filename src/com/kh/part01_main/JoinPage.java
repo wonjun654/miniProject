@@ -1,6 +1,5 @@
 package com.kh.part01_main;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,18 +9,16 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.kh.user.controller.UserManager;
+import com.kh.view.RoundButton;
 
 public class JoinPage extends JFrame {
 
@@ -60,7 +57,7 @@ public class JoinPage extends JFrame {
 		idtextField.setColumns(10);
 
 		// 아이디 중복확인
-		JButton btnNewButton = new JButton("중복확인");
+		RoundButton btnNewButton = new RoundButton("중복확인");
 		btnNewButton.setBounds(525, 240, 97, 31);
 		add(btnNewButton);
 
@@ -150,12 +147,12 @@ public class JoinPage extends JFrame {
 		add(emailTextField);
 
 		// 가입완료 버튼_가입 완료 팝업창 후 로그인화면
-		JButton CompleteBtn = new JButton("가입완료");
+		RoundButton CompleteBtn = new RoundButton("가입완료");
 		CompleteBtn.setBounds(254, 527, 118, 42);
 		add(CompleteBtn);
 
 		// 나가기 _ 로그인화면
-		JButton exitBtn = new JButton("나가기");
+		RoundButton exitBtn = new RoundButton("나가기");
 		exitBtn.setBounds(394, 527, 118, 42);
 		add(exitBtn);
 

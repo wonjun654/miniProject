@@ -1,12 +1,10 @@
 package com.kh.view;
 
-import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,21 +16,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
-
-import org.w3c.dom.events.MouseEvent;
 
 import com.kh.model.vo.MediaTest;
-import com.kh.user.controller.UserManager;
-import com.kh.user.model.vo.User;
 import com.kh.part01_main.LoginPage;
 import com.kh.user.controller.UserManager;
 
-public class MainMenu extends JFrame{
+public class MainMenu extends JFrame implements MouseListener{
 
 	JTable table1;
 	DefaultTableModel model1;
@@ -42,86 +35,67 @@ public class MainMenu extends JFrame{
 	JPanel listPan = new JPanel();
 	JTextArea ta;
 	JScrollPane sc;
+	
+	RoundButton rbtn; 
 
 	JList roomList;
 	JList roomList2;
 	JList roomList3;
-	String col1[] = { "방이름", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원", "상태", "인원" };
-	String col2[] = { "방이름", "상태", "인원" };
-	String col3[] = { "방이름", "상태", "인원" };
-
+	
+	JLabel lblroom;
+	JLabel lblsang;
+	JLabel lblpeople;
+	
+	String col1[] = {"안녕하세요", "반갑습니다", "수고하세요"};
+	String col2[] = {"게임중", "대기중", "대기중"};
+	String col3[] = {"4/4", "2/6", "3/8"};
+	
+	Color color;
 
 	public MainMenu() {
 
 		super("MainMenuPage");
 
-		// String row1[][] = new String[0][3];
-
-		// model1 = new DefaultTableModel(col1) {
-		// public boolean isCellEditable(int row, int column) {
-		// return false;
-		// }
-		// };
-
-		// table1 = new JTable(model1);
-		// table1.setBounds(80, 150, 750, 320);
-		// JScrollPane js1 = new JScrollPane(table1);
-		// table1.getTableHeader().setReorderingAllowed(false);
-		// js1.setBounds(x, y, width, height);
-		//
-
-		// listPan.setBounds(80, 150, 750, 100);
-		// JScrollPane jsp = new JScrollPane(listPan);
-		// jsp.setSize(80, 150);
-		//
-		// roomList = new JList(col1);
-		// roomList.setBounds(80, 150, 250, 20);
-		//
-		//
-		//
-		// roomList2 = new JList(col1);
-		// roomList2.setBounds(330, 150, 250, 20);
-		//
-		//
-		// roomList3 = new JList(col1);
-		// roomList3.setBounds(580, 150, 250, 20);
-		//
-		//
-		// listPan.add(roomList);
-		// listPan.add(roomList2);
-		// listPan.add(roomList3);
-		//
-
-		// jsp.setHorizontalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		// jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-		// listPan.add(jsp);
-
-		//
-
-		//
+		
 
 		// Layout 지정 없이 위치 지정하면서 배치하는 방법이다.
 		this.setLayout(null);
 		this.setSize(1024, 768);
-
+		this.setBackground(Color.WHITE);
+		
+		rbtn = new RoundButton("확인");
+		rbtn.setBounds(800, 20, 60, 35);
+		rbtn.setBackground(new Color(52, 152, 219));		
+		rbtn.setFocusPainted(false);
+		rbtn.setContentAreaFilled(false);
+		rbtn.setVerticalTextPosition(JButton.CENTER);
+		rbtn.setHorizontalTextPosition(JButton.CENTER);
+		
 		ta = new JTextArea(50, 50);
-		ta.setBounds(80, 150, 500, 500);
+		ta.setBounds(80, 150, 450, 500);
 		ta.setEditable(false);
 		
 
 		sc = new JScrollPane(ta);
-		sc.setBounds(80, 150, 750, 320);
+		sc.setBounds(80, 150, 700, 320);
 		
+		lblroom = new JLabel("방이름");
+		lblroom.setBounds(145, 100, 75, 75);
+		
+		lblsang = new JLabel("상태");
+		lblsang.setBounds(385, 100, 75, 75);
+		
+		lblpeople = new JLabel("인원");
+		lblpeople.setBounds(625, 100, 75, 75);
 		
 		roomList = new JList(col1);
-		roomList.setBounds(0, 0, 250, 360);
+		roomList.setBounds(0, 0, 200, 360);
 
-		roomList2 = new JList(col1);
-		roomList2.setBounds(250, 0, 250, 360);
+		roomList2 = new JList(col2);
+		roomList2.setBounds(250, 0, 200, 360);
 
-		roomList3 = new JList(col1);
-		roomList3.setBounds(500, 0, 250, 360);
+		roomList3 = new JList(col3);
+		roomList3.setBounds(500, 0, 200, 360);
 
 		ta.add(roomList);
 		ta.add(roomList2);
@@ -279,6 +253,10 @@ public class MainMenu extends JFrame{
 		this.add(ta);
 		this.add(sc);
 		this.add(questbtn);
+		this.add(lblroom);
+		this.add(lblsang);
+		this.add(lblpeople);
+		this.add(rbtn);
 
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
@@ -287,9 +265,39 @@ public class MainMenu extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		new MainMenu();
-	}*/
+	}
+
+	@Override
+	public void mouseClicked(java.awt.event.MouseEvent e) {
+		
+		
+	}
+
+	@Override
+	public void mouseEntered(java.awt.event.MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(java.awt.event.MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(java.awt.event.MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(java.awt.event.MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	
 }

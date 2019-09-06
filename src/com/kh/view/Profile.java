@@ -1,17 +1,12 @@
 package com.kh.view;
 
-import java.awt.Color;
 import java.awt.Dialog;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -77,17 +72,17 @@ public class Profile extends JFrame {
 		label7.setSize(80, 30);
 		label7.setLocation(460, 80);
 
-		JButton button = new JButton("프로필 설정");
+		RoundButton button = new RoundButton("프로필 설정");
 		button.setLocation(200, 130);
 		button.setSize(120, 30);
 
-		JButton button3 = new JButton("확인");
+		RoundButton button3 = new RoundButton("확인");
 		sd.add(button3);
 
 		button3.setSize(80, 50);
 		button3.setLocation(280, 400);
 
-		JButton button4 = new JButton("확인");
+		RoundButton button4 = new RoundButton("확인");
 		button4.setSize(80, 40);
 		button4.setLocation(440, 190);
 
