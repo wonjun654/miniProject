@@ -46,6 +46,7 @@ public class Profile extends JFrame {
 
 		
 		
+		
 		JLabel label = new JLabel(new ImageIcon(new ImageIcon(user.getImgName()).getImage().getScaledInstance(150, 150, 0)));
 		label.setLocation(10, 10);
 		label.setSize(150, 150);

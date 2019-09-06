@@ -1,6 +1,7 @@
 package com.kh.view;
 
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -10,12 +11,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.kh.user.model.vo.User;
+import com.sun.glass.events.KeyEvent;
 
 public class GameRoom extends JFrame {
 
@@ -26,8 +29,12 @@ public class GameRoom extends JFrame {
 	JLabel userCtn = null;
 	User u = new User();
 	Font copyfont = new Font("고딕", Font.PLAIN, 10);
+
 	JPanel bgPan = new JPanel();
 	
+Setting setting;
+
+
 	public GameRoom() {
 		this.setTitle("방번호 - 00");
 		this.setLayout(null);
@@ -47,52 +54,146 @@ public class GameRoom extends JFrame {
 		roomCenter.setSize(500, 768);
 		this.add(roomCenter);
 
-		//그림판
+		// 그림판
 		JPanel paint = new JPanel();
 		paint.setLayout(null);
 		paint.setSize(480, 480);
 		paint.setLocation(10, 35);
 		paint.setBackground(Color.BLACK);
 		roomCenter.add(paint);
-		
+
 		JPanel toolPane = new JPanel();
 		toolPane.setLayout(null);
 		toolPane.setSize(480, 50);
 		toolPane.setLocation(10, 520);
-		toolPane.setBackground(Color.LIGHT_GRAY);
+		toolPane.setBackground(Color.WHITE);
 		roomCenter.add(toolPane);
-		
+
 		JButton tool = new JButton("도구");
 		tool.setSize(60, 30);
 		tool.setLocation(400, 10);
 		toolPane.add(tool);
-		
-		JButton trash = new JButton();
+
+		tool.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		Image trashIcon = new ImageIcon("images/trash.jpg").getImage().getScaledInstance(30, 30, 0);
+		JButton trash = new JButton(new ImageIcon(trashIcon));
 		trash.setSize(30, 30);
 		trash.setLocation(350, 10);
 		toolPane.add(trash);
-		
-		JButton next = new JButton();
+
+		trash.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		Image nextIcon = new ImageIcon("images/right.png").getImage().getScaledInstance(30, 30, 0);
+		JButton next = new JButton(new ImageIcon(nextIcon));
 		next.setSize(30, 30);
 		next.setLocation(300, 10);
 		toolPane.add(next);
-		
-		JButton prev = new JButton();
+
+		next.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		Image prevIcon = new ImageIcon("images/left.png").getImage().getScaledInstance(30, 30, 0);
+		JButton prev = new JButton(new ImageIcon(prevIcon));
 		prev.setSize(30, 30);
 		prev.setLocation(260, 10);
 		toolPane.add(prev);
-		
+
+		prev.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
+		// 버튼 테두리 없앰
 		trash.setBorderPainted(false);
-//		trash.setContentAreaFilled(false);
+		trash.setContentAreaFilled(false);
 		next.setBorderPainted(false);
+		next.setContentAreaFilled(false);
 		prev.setBorderPainted(false);
-		
-		JLabel timer = new JLabel("00:00");
-		timer.setSize(150, 30);
+		prev.setContentAreaFilled(false);
+		tool.setBorderPainted(false);
+		tool.setContentAreaFilled(false);
+
+		Image ctnimg = new ImageIcon("images/ctntimer.png").getImage().getScaledInstance(30, 30, 0);
+		JLabel ctntimer = new JLabel(new ImageIcon(ctnimg));
+		ctntimer.setSize(30, 30);
+		ctntimer.setLocation(5, 10);
+		toolPane.add(ctntimer);
+
+		JLabel timer = new JLabel();
+		timer.setSize(80, 30);
 		timer.setLocation(35, 10);
 		toolPane.add(timer);
+
 		
-		//채팅----------------------------------------------------------------------
+		JLabel item1 = new JLabel(u.getOwnItem1() + "");
+		item1.setSize(30, 30);
+		item1.setLocation(150, 10);
+		toolPane.add(item1);
+		Image item1Image = new ImageIcon("images/timer.png").getImage().getScaledInstance(30, 30, 0);
+		JLabel item1Img = new JLabel(new ImageIcon(item1Image));
+		item1Img.setSize(30, 30);
+		item1Img.setLocation(110, 10);
+		toolPane.add(item1Img);
+
+		JLabel item2 = new JLabel(u.getOwnItem2() + "");
+		item2.setSize(30, 30);
+		item2.setLocation(210, 10);
+		toolPane.add(item2);
+		Image item2Image = new ImageIcon("images/chosung.png").getImage().getScaledInstance(30, 30, 0);
+		JLabel item2Img = new JLabel(new ImageIcon(item2Image));
+		item2Img.setSize(30, 30);
+		item2Img.setLocation(170, 10);
+		toolPane.add(item2Img);
+
+		JButton capture = new JButton("화면 캡쳐");
+		capture.setSize(150, 20);
+		capture.setLocation(20, 15);
+		roomCenter.add(capture);
+
+		capture.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
+		JButton settingbtn = new JButton("설정");
+		settingbtn.setSize(60, 20);
+		settingbtn.setLocation(425, 15);
+		roomCenter.add(settingbtn);
+
+		settingbtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setting = new Setting(u);
+
+			}
+		});
+		// 채팅----------------------------------------------------------------------
 		JTextArea chatOutput = new JTextArea();
 		chatOutput.setBackground(Color.WHITE);
 		chatOutput.setEditable(false);
@@ -156,12 +257,13 @@ public class GameRoom extends JFrame {
 		roomRight.setSize(262, 768);
 		this.add(roomRight);
 
-		//이미지, 닉네임, 게임 내 정답횟수
+		// 이미지, 닉네임, 게임 내 정답횟수
 		JPanel user5 = new JPanel();
 		user5.setLayout(null);
 		user5.setSize(240, 120);
 		user5.setLocation(12, 35);
-//		userImg = new JLabel(new ImageIcon(new ImageIcon(u.getImgName()).getImage().getScaledInstance(100, 100, 0)));
+		// userImg = new JLabel(new ImageIcon(new
+		// ImageIcon(u.getImgName()).getImage().getScaledInstance(100, 100, 0)));
 		userImg = new JLabel("유저5 이미지");
 		userImg.setSize(100, 100);
 		userImg.setLocation(10, 15);
@@ -267,22 +369,104 @@ public class GameRoom extends JFrame {
 		exitbtn.setLocation(150, 670);
 		roomRight.add(exitbtn);
 
+		// 나가기 버튼 클릭
+		exitbtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+
+			}
+		});
+
+		// 신고하기 버튼
 		JButton report = new JButton("신고하기");
 		report.setSize(90, 40);
 		report.setLocation(40, 670);
 		roomRight.add(report);
-		
-		// 나가기 버튼 클릭
-		exitbtn.addActionListener(new ActionListener() {
-			
+
+		Dialog reportDialog = new Dialog(this, "신고하기", true);
+		reportDialog.setLayout(null);
+		reportDialog.setSize(380, 480);
+		reportDialog.setLocationRelativeTo(null);
+
+		Image reportImage = new ImageIcon("images/report.png").getImage().getScaledInstance(132, 220, 0);
+		JLabel reportImageIcon = new JLabel(new ImageIcon(reportImage));
+		reportImageIcon.setSize(132, 220);
+		reportImageIcon.setLocation(8, 180);
+		reportDialog.add(reportImageIcon);
+
+		JLabel reportNameLabel = new JLabel("신고할 유저 : ");
+		reportNameLabel.setSize(100, 30);
+		reportNameLabel.setLocation(40, 50);
+		reportDialog.add(reportNameLabel);
+
+		JTextField reportNameText = new JTextField();
+		reportNameText.setSize(200, 30);
+		reportNameText.setLocation(140, 50);
+		reportDialog.add(reportNameText);
+
+		JLabel reportReason = new JLabel("신고 내용 : ");
+		reportReason.setSize(100, 100);
+		reportReason.setLocation(40, 100);
+		reportDialog.add(reportReason);
+
+		JTextArea reportReasonText = new JTextArea();
+		reportReasonText.setSize(200, 300);
+		reportReasonText.setLocation(140, 100);
+		reportReasonText.setLineWrap(true);
+		reportDialog.add(reportReasonText);
+
+		JButton reportOk = new JButton("확인");
+		reportOk.setSize(60, 30);
+		reportOk.setLocation(170, 420);
+		reportDialog.add(reportOk);
+
+		JButton reportCancel = new JButton("취소");
+		reportCancel.setSize(60, 30);
+		reportCancel.setLocation(250, 420);
+		reportDialog.add(reportCancel);
+
+		// 신고하기 버튼
+		report.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				dispose();
 				MainMenu mm = new MainMenu();
 				
+
+				reportDialog.setVisible(true);
+
 			}
 		});
 
+		// 신고 확인 버튼
+		reportOk.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (!reportNameText.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "신고 완료되었습니다.");
+					reportDialog.dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "유저 이름이나 내용이 입력되지 않았습니다.");
+				}
+
+
+			}
+		});
+
+		// 신고 취소 버튼
+		reportCancel.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				reportDialog.dispose();
+
+			}
+		});
 		// ---------------------------------------------------------------------
 		// 왼쪽 화면
 		JPanel roomLeft = new JPanel();
@@ -402,13 +586,13 @@ public class GameRoom extends JFrame {
 		logo.setSize(240, 150);
 		logo.setLocation(12, 580);
 		roomLeft.add(logo);
-		
+
 		JLabel copyRight = new JLabel("CopyRighted by KH치마인드");
 		copyRight.setFont(copyfont);
 		copyRight.setSize(200, 20);
 		copyRight.setLocation(170, 717);
 		roomCenter.add(copyRight);
-		
+
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -416,6 +600,5 @@ public class GameRoom extends JFrame {
 
 	public static void main(String[] args) {
 		new GameRoom();
-		
 	}
 }

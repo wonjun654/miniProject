@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.kh.model.vo.asdasd;
 import com.kh.user.controller.UserManager;
 import com.kh.user.model.vo.User;
 
