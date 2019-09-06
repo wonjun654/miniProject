@@ -39,14 +39,19 @@ public class QuestMenu extends JFrame {
 				setOpaque(false);
 				super.paintComponent(g); 
 				
+				
 			}
 		};
 
+		
+		
 		Panel.setLocation(30, 30);
 		Panel.setSize(600, 600);
 		
 		/////////////////////////////////////////////////////
 
+		
+		
 		JTextField questList1 = new JTextField(questList[0], 15);
 		questList1.setEditable(false);
 		questList1.setLocation(50, 70);
