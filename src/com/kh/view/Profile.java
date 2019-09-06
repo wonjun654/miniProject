@@ -1,5 +1,6 @@
 package com.kh.view;
 
+import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -28,7 +29,9 @@ public class Profile extends JFrame {
 		this.setBounds(700, 300, 600, 300);
 		JPanel panel = new JPanel();
 
-		
+		panel.setLayout(null);
+		panel.setSize(1024, 768);
+		panel.setBackground(new Color(195, 245, 230));
 		
 		panel.setLocation(30, 20);
 		panel.setSize(600, 300);
@@ -74,8 +77,8 @@ public class Profile extends JFrame {
 		label7.setLocation(460, 80);
 
 		RoundButton button = new RoundButton("프로필 설정");
-		button.setLocation(200, 130);
-		button.setSize(120, 30);
+		button.setLocation(300, 130);
+		button.setSize(150, 30);
 
 		RoundButton button3 = new RoundButton("확인");
 		sd.add(button3);

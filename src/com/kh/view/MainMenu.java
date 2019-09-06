@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
@@ -25,7 +26,9 @@ import com.kh.model.vo.MediaTest;
 import com.kh.part01_main.LoginPage;
 import com.kh.user.controller.UserManager;
 
-public class MainMenu extends JFrame implements MouseListener{
+import javafx.scene.input.MouseEvent;
+
+public class MainMenu extends JFrame implements MouseListener {
 
 	JTable table1;
 	DefaultTableModel model1;
@@ -33,60 +36,53 @@ public class MainMenu extends JFrame implements MouseListener{
 	UserManager um = new UserManager();
 
 	JPanel listPan = new JPanel();
+	JPanel bgPan = new JPanel();
 	JTextArea ta;
 	JScrollPane sc;
-	
-	RoundButton rbtn; 
+
+	RoundButton rbtn;
 
 	JList roomList;
 	JList roomList2;
 	JList roomList3;
-	
+
 	JLabel lblroom;
 	JLabel lblsang;
 	JLabel lblpeople;
-	
-	String col1[] = {"안녕하세요", "반갑습니다", "수고하세요"};
-	String col2[] = {"게임중", "대기중", "대기중"};
-	String col3[] = {"4/4", "2/6", "3/8"};
-	
+
+	String col1[] = { "안녕하세요", "반갑습니다", "수고하세요" };
+	String col2[] = { "게임중", "대기중", "대기중" };
+	String col3[] = { "4/4", "2/6", "3/8" };
+
 	Color color;
 
 	public MainMenu() {
 
 		super("MainMenuPage");
 
-		
-
 		// Layout 지정 없이 위치 지정하면서 배치하는 방법이다.
 		this.setLayout(null);
 		this.setSize(1024, 768);
-		this.setBackground(Color.WHITE);
-		
-		rbtn = new RoundButton("확인");
-		rbtn.setBounds(800, 20, 60, 35);
-		rbtn.setBackground(new Color(52, 152, 219));		
-		rbtn.setFocusPainted(false);
-		rbtn.setContentAreaFilled(false);
-		rbtn.setVerticalTextPosition(JButton.CENTER);
-		rbtn.setHorizontalTextPosition(JButton.CENTER);
-		
+		bgPan.setLayout(null);
+		bgPan.setSize(1024, 768);
+		bgPan.setBackground(new Color(195, 245, 230));
+
 		ta = new JTextArea(50, 50);
 		ta.setBounds(80, 150, 450, 500);
 		ta.setEditable(false);
-		
 
 		sc = new JScrollPane(ta);
 		sc.setBounds(80, 150, 700, 320);
-		
+
 		lblroom = new JLabel("방이름");
-		lblroom.setBounds(145, 100, 75, 75);
-		
+		lblroom.setBounds(145, 100, 60, 60);
+
 		lblsang = new JLabel("상태");
-		lblsang.setBounds(385, 100, 75, 75);
-		
+		lblsang.setBounds(385, 100, 60, 60);
+
 		lblpeople = new JLabel("인원");
-		lblpeople.setBounds(625, 100, 75, 75);
+		lblpeople.setBounds(625, 100, 60, 60);
+
 		
 		roomList = new JList(col1);
 		roomList.setBounds(0, 0, 200, 360);
@@ -103,64 +99,89 @@ public class MainMenu extends JFrame implements MouseListener{
 
 		sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		
+
 		roomList.addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				
+				if(roomList.getSelectedIndex() == 0) {
+					GameRoom gr = new GameRoom();
+					dispose();
+				}
 				
 			}
 		});
-		
-		
 
-		Image profileimg = new ImageIcon("images\\profile.PNG").getImage().getScaledInstance(75, 75, 0);
-		Image makeimg = new ImageIcon("images\\make.PNG").getImage().getScaledInstance(75, 75, 0);
-		Image optimg = new ImageIcon("images\\opt.PNG").getImage().getScaledInstance(75, 75, 0);
-		Image shopimg = new ImageIcon("images\\shop.PNG").getImage().getScaledInstance(75, 75, 0);
-		Image exitimg = new ImageIcon("images\\exit.PNG").getImage().getScaledInstance(75, 75, 0);
-		Image coinimg = new ImageIcon("images\\coin.jpg").getImage().getScaledInstance(75, 75, 0);
-		Image questimg = new ImageIcon("images\\login.PNG").getImage().getScaledInstance(75, 75, 0);
+		Image profileimg = new ImageIcon("images\\profile.PNG").getImage().getScaledInstance(60, 60, 0);
+		Image makeimg = new ImageIcon("images\\make.PNG").getImage().getScaledInstance(60, 60, 0);
+		Image optimg = new ImageIcon("images\\opt.PNG").getImage().getScaledInstance(85, 70, 0);
+		Image shopimg = new ImageIcon("images\\shop.PNG").getImage().getScaledInstance(60, 60, 0);
+		Image exitimg = new ImageIcon("images\\exit.PNG").getImage().getScaledInstance(60, 60, 0);
+		Image coinimg = new ImageIcon("images\\coin.jpg").getImage().getScaledInstance(60, 60, 0);
+		Image questimg = new ImageIcon("images\\login.PNG").getImage().getScaledInstance(85, 70, 0);
+		Image chosungimg = new ImageIcon("images\\chosung.png").getImage().getScaledInstance(60, 60, 0);
+		Image timerimg = new ImageIcon("images\\timer.png").getImage().getScaledInstance(60, 60, 0);
+		
 
 		JLabel namelbl = new JLabel(um.selectOneUser("123").getUserId() + "");
-		namelbl.setBounds(86, 10, 75, 75);
-
-		JLabel coinlbl = new JLabel("내 코인 : " + um.selectOneUser("123").getCoin() + "");
-		coinlbl.setBounds(276, 10, 200, 75);
+		namelbl.setBounds(86, 10, 60, 60);
 
 		JLabel coinImg = new JLabel(new ImageIcon(coinimg));
-		coinImg.setBounds(200, 10, 75, 75);
+		coinImg.setBounds(200, 10, 60, 60);
+		
+		JLabel coinlbl = new JLabel("내 코인 : " + um.selectOneUser("123").getCoin() + "");
+		coinlbl.setBounds(276, 10, 100, 60);
+
+		
+		JLabel chosungImg = new JLabel(new ImageIcon(chosungimg));
+		chosungImg.setBounds(376, 10, 60, 60);
+		
+		JLabel chosunglbl = new JLabel("내 아이템 : " + um.selectOneUser("123").getOwnItem2() + "");
+		chosunglbl.setBounds(437, 10, 100, 60);
+		
+		JLabel timerImg = new JLabel(new ImageIcon(timerimg));
+		timerImg.setBounds(576, 10, 60, 60);
+		
+		JLabel timerlbl = new JLabel("내 아이템 : " + um.selectOneUser("123").getOwnItem1() + "");
+		timerlbl.setBounds(637, 10, 100, 60);
 
 		JButton profilebtn = new JButton(new ImageIcon(profileimg));
 		profilebtn.setLocation(10, 10);
-		profilebtn.setSize(75, 75);
+		profilebtn.setSize(60, 60);
 
 		JButton makebtn = new JButton(new ImageIcon(makeimg));
-		makebtn.setLocation(765, 500);
-		makebtn.setSize(75, 75);
+		makebtn.setLocation(765, 10);
+		makebtn.setSize(60, 60);
 
 		JButton optbtn = new JButton(new ImageIcon(optimg));
-		optbtn.setLocation(885, 500);
-		optbtn.setSize(75, 75);
+		optbtn.setLocation(885, 600);
+		optbtn.setSize(85, 70);
 
 		JButton shopbtn = new JButton(new ImageIcon(shopimg));
-		shopbtn.setLocation(765, 600);
-		shopbtn.setSize(75, 75);
+		shopbtn.setLocation(885, 10);
+		shopbtn.setSize(60, 60);
+		shopbtn.setFocusPainted(false);
+		shopbtn.setContentAreaFilled(false);
 
-		JButton exitbtn = new JButton(new ImageIcon(exitimg));
-		exitbtn.setLocation(885, 600);
-		exitbtn.setSize(75, 75);
+		rbtn = new RoundButton("E     X     I     T");
+		rbtn.setLocation(750, 680);
+		rbtn.setSize(235, 48);
+		rbtn.setFocusPainted(false);
+		rbtn.setContentAreaFilled(false);
 
 		JButton questbtn = new JButton(new ImageIcon(questimg));
-		questbtn.setLocation(600, 500);
-		questbtn.setSize(75,75);
+		questbtn.setLocation(750, 600);
+		questbtn.setSize(85, 70);
+		questbtn.setFocusPainted(false);
+		questbtn.setContentAreaFilled(false);
+		
+		
 		JTextArea ta = new JTextArea();
-		ta.setBounds(0, 590, 400, 400);
+		ta.setBounds(0, 590, 600, 600);
 		ta.setEditable(false);
 
 		JTextField tf = new JTextField();
-		tf.setBounds(0, 710, 400, 20);
+		tf.setBounds(0, 720, 600, 20);
 		tf.requestFocus();
 		tf.addActionListener(new ActionListener() {
 
@@ -210,7 +231,7 @@ public class MainMenu extends JFrame implements MouseListener{
 
 			}
 		});
-		exitbtn.addActionListener(new ActionListener() {
+		rbtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -221,17 +242,18 @@ public class MainMenu extends JFrame implements MouseListener{
 			}
 		});
 		questbtn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				QuestMenu qm = new QuestMenu(um.selectOneUser("123"));
 				qm.setVisible(true);
 			}
 		});
 
 
-		//MediaTest.musicOff();
+		MediaTest.musicOff();
+
 
 		//MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
 		this.add(listPan);
@@ -242,7 +264,7 @@ public class MainMenu extends JFrame implements MouseListener{
 		this.add(coinlbl);
 		this.add(coinImg);
 		// this.add(panel);
-		this.add(exitbtn);
+		this.add(rbtn);
 		this.add(shopbtn);
 		this.add(optbtn);
 		this.add(makebtn);
@@ -256,7 +278,12 @@ public class MainMenu extends JFrame implements MouseListener{
 		this.add(lblroom);
 		this.add(lblsang);
 		this.add(lblpeople);
-		this.add(rbtn);
+		this.add(chosungImg);
+		this.add(timerImg);
+		this.add(chosunglbl);
+		this.add(timerlbl);
+	
+		this.add(bgPan);
 
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
@@ -277,26 +304,25 @@ public class MainMenu extends JFrame implements MouseListener{
 	@Override
 	public void mouseEntered(java.awt.event.MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(java.awt.event.MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mousePressed(java.awt.event.MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(java.awt.event.MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
 }

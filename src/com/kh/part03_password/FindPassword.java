@@ -1,5 +1,6 @@
 package com.kh.part03_password;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,9 +21,12 @@ public class FindPassword extends JFrame{
 	
 public FindPassword() {
 		
+	
+	
 		UserManager um = new UserManager();
 		
 		JPanel pwPopup = new JPanel();
+		pwPopup.setBackground(new Color(195, 245, 230));
 
 		
 		

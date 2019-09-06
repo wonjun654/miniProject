@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,6 +19,7 @@ import com.kh.user.model.vo.User;
 public class QuestMenu extends JFrame {
 
 	ImageIcon background;
+	JPanel bgPan = new JPanel();
 
 	public QuestMenu(User user) {
 		String[] questList = new String[4];
@@ -66,7 +66,7 @@ public class QuestMenu extends JFrame {
 		title.setSize(150, 60);
 		title.setLocation(250, 0);
 
-		JButton button = new JButton("확인");
+		RoundButton button = new RoundButton("확인");
 		button.setSize(80, 30);
 		button.setLocation(470, 480);
 
@@ -76,7 +76,7 @@ public class QuestMenu extends JFrame {
 		change[2] = "완료";
 
 		//////////////////////////////////////////////////////////////////////
-		JButton sdButton = new JButton("아이템 받기 !");
+		RoundButton sdButton = new RoundButton("아이템 받기 !");
 		sdButton.setSize(120, 40);
 		sdButton.setLocation(150, 300);
 		
@@ -91,7 +91,7 @@ public class QuestMenu extends JFrame {
 		sd.add(sdButton);
 		sd.add(sdlabel);
 		
-		JButton clearButton1 = new JButton("수락");
+		RoundButton clearButton1 = new RoundButton("수락");
 		clearButton1.setSize(80, 30);
 		clearButton1.setLocation(470, 80);
 
@@ -106,7 +106,7 @@ public class QuestMenu extends JFrame {
 		}
 
 		
-		JButton clearButton2 = new JButton("수락");
+		RoundButton clearButton2 = new RoundButton("수락");
 		clearButton2.setSize(80, 30);
 		clearButton2.setLocation(470, 200);
 		
@@ -122,7 +122,7 @@ public class QuestMenu extends JFrame {
 		}
 
 
-		JButton clearButton3 = new JButton("수락");
+		RoundButton clearButton3 = new RoundButton("수락");
 		clearButton3.setSize(80, 30);
 		clearButton3.setLocation(470, 325);
 		
@@ -242,7 +242,7 @@ public class QuestMenu extends JFrame {
 		  });
 		
 		  
-
+		  this.add(bgPan);
 		this.add(Panel);
 
 		Panel.add(button);
@@ -258,7 +258,7 @@ public class QuestMenu extends JFrame {
 		Panel.add(questList2);
 		Panel.add(questList3);
 		Panel.setLayout(null);
-
+		
 		this.add(Panel);
 
 	}

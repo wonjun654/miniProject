@@ -1,21 +1,24 @@
 package com.kh.view;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 
 public class MakeRoom extends JFrame {
+	
 	public JTextArea roomName2;
 	public JTextArea roomPwd2;
 	public RoundButton btnOK;
-	
+	JPanel bgPan = new JPanel();
 	
 
 	public MakeRoom(MainMenu mm) {
@@ -23,6 +26,10 @@ public class MakeRoom extends JFrame {
 		this.setBounds(600, 500, 600, 500);
 		setLayout(null);
 
+		bgPan.setLayout(null);
+		bgPan.setSize(600, 500);
+		bgPan.setBackground(new Color(195, 245, 230));
+		
 		JLabel roomName = new JLabel("방제목");
 		JLabel roomPwd = new JLabel("방암호");
 		JLabel roomPeople = new JLabel("인원수");
@@ -97,6 +104,7 @@ public class MakeRoom extends JFrame {
 		this.add(checkSecret);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
+		this.add(bgPan);
 
 	}
 

@@ -1,5 +1,6 @@
 package com.kh.part03_ID;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -15,11 +16,15 @@ import com.kh.part01_main.LoginPage;
 import com.kh.view.RoundButton;
 
 public class FindResult extends JFrame {
-
+	
+	
 	public FindResult(String str) {
 
 		JPanel idResultPop = new JPanel();
-
+		
+		
+		idResultPop.setBackground(new Color(195, 245, 230));
+		
 		setTitle("KH치 마인드 - 아이디 찾기 결과");
 		try {
 			this.setIconImage(ImageIO.read(new File("images//logo.PNG")));
@@ -77,7 +82,7 @@ public class FindResult extends JFrame {
 
 			}
 		});
-
+		
 	}
 
 }

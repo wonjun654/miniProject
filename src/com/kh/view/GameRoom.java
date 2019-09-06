@@ -29,13 +29,22 @@ public class GameRoom extends JFrame {
 	JLabel userCtn = null;
 	User u = new User();
 	Font copyfont = new Font("고딕", Font.PLAIN, 10);
-	Setting setting;
+
+	JPanel bgPan = new JPanel();
+	
+Setting setting;
+
 
 	public GameRoom() {
 		this.setTitle("방번호 - 00");
 		this.setLayout(null);
 		this.setSize(1030, 768);
 		this.setResizable(false);
+		
+		bgPan.setLayout(null);
+		bgPan.setSize(1024, 768);
+		bgPan.setBackground(new Color(195, 245, 230));
+		
 
 		// 자리잡기용
 		// 가운데 화면
@@ -423,6 +432,11 @@ public class GameRoom extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
+				dispose();
+				MainMenu mm = new MainMenu();
+				
+
 				reportDialog.setVisible(true);
 
 			}
@@ -439,6 +453,7 @@ public class GameRoom extends JFrame {
 				} else {
 					JOptionPane.showMessageDialog(null, "유저 이름이나 내용이 입력되지 않았습니다.");
 				}
+
 
 			}
 		});

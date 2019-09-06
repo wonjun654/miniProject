@@ -1,5 +1,6 @@
 package com.kh.view;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,14 +16,16 @@ import com.kh.user.model.vo.User;
 
 public class Setting extends JFrame {
 	UserManager um = new UserManager();
+	
 
 	public Setting(User user) {
 
 		this.setBounds(800, 300, 400, 400);
 
 		JPanel panel = new JPanel();
-
-		panel.setLocation(30, 20);
+		panel.setBackground(new Color(195, 245, 230));
+		
+	
 		panel.setSize(400, 400);
 
 		JLabel label = new JLabel("배경음악");
@@ -42,18 +45,22 @@ public class Setting extends JFrame {
 
 		profileOn.setSize(50, 50);
 		profileOn.setLocation(100, 155);
+		profileOn.setBackground(new Color(195, 245, 230));
 
 		profileOff.setSize(50, 50);
 		profileOff.setLocation(200, 155);
+		profileOff.setBackground(new Color(195, 245, 230));
 		///////////// 배경음악 설정/////////////////
 		JRadioButton musicOn = new JRadioButton("On");
 		JRadioButton musicOff = new JRadioButton("OFF");
 
 		musicOn.setSize(50, 50);
 		musicOn.setLocation(100, 75);
+		musicOn.setBackground(new Color(195, 245, 230));
 
 		musicOff.setSize(50, 50);
 		musicOff.setLocation(200, 75);
+		musicOff.setBackground(new Color(195, 245, 230));
 
 		ButtonGroup profilegroup = new ButtonGroup();
 		ButtonGroup musicgroup = new ButtonGroup();
@@ -116,9 +123,9 @@ public class Setting extends JFrame {
 
 		panel.add(label);
 		panel.add(label2);
-
+		
 		this.add(panel);
-
+		
 		this.setVisible(true);
 
 		this.setLocationRelativeTo(null);

@@ -1,5 +1,6 @@
 package com.kh.part03_ID;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +23,7 @@ public class FindID extends JFrame{
 		
 		
 		JPanel idPopup = new JPanel();
-
+		idPopup.setBackground(new Color(195, 245, 230));
 		
 		
 		setTitle("KH치 마인드 - 아이디 찾기");
@@ -97,8 +98,9 @@ public class FindID extends JFrame{
 				
 			}
 		});
-
+		
 	}
+	
 	
 
 }
