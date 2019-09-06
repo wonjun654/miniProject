@@ -774,8 +774,6 @@ public class Store extends JFrame {
 					paySelect.setText(presult.getText());
 					// 충전할 코인개수 가져와서 출력
 					chargeCoinNum.setText(buyCoin + "개 충전하시겠습니까?");
-					u.setCoin(u.getCoin() + buyCoin);
-					um.updateUser(u);
 					payDialog.setVisible(true);
 					// 입력된 값 초기화
 					cardNumberText1.setText(null);
@@ -789,7 +787,7 @@ public class Store extends JFrame {
 			}
 		});
 
-		// 확인버튼 클릭
+		// 계좌번호 입력 팝업 확인버튼 클릭
 		cashNumberInputOkButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -810,8 +808,6 @@ public class Store extends JFrame {
 					paySelect.setText(presult.getText());
 					// 충전할 코인계수 가져와서 출력
 					chargeCoinNum.setText(buyCoin + "개 충전하시겠습니까?");
-					u.setCoin(u.getCoin() + buyCoin);
-					um.updateUser(u);
 					payDialog.setVisible(true);
 					// 입력된 값 초기화
 					cashText.setText(null);

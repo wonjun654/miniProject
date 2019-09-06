@@ -272,7 +272,6 @@ public class MainMenu extends JFrame implements MouseListener{
 	@Override
 	public void mouseClicked(java.awt.event.MouseEvent e) {
 		
-		
 	}
 
 	@Override
