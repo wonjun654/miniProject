@@ -1,12 +1,21 @@
 package com.kh.view;
 
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,6 +28,7 @@ import javax.swing.JTextField;
 
 import com.kh.user.model.vo.User;
 import com.sun.glass.events.KeyEvent;
+import com.sun.glass.ui.Screen;
 
 public class GameRoom extends JFrame {
 
@@ -29,22 +39,20 @@ public class GameRoom extends JFrame {
 	JLabel userCtn = null;
 	User u = new User();
 	Font copyfont = new Font("고딕", Font.PLAIN, 10);
-
+	Robot robot;
 	JPanel bgPan = new JPanel();
-	
-Setting setting;
 
+	Setting setting;
 
 	public GameRoom() {
 		this.setTitle("방번호 - 00");
 		this.setLayout(null);
 		this.setSize(1030, 768);
 		this.setResizable(false);
-		
+
 		bgPan.setLayout(null);
 		bgPan.setSize(1024, 768);
 		bgPan.setBackground(new Color(195, 245, 230));
-		
 
 		// 자리잡기용
 		// 가운데 화면
@@ -91,7 +99,6 @@ Setting setting;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 		});
@@ -106,7 +113,6 @@ Setting setting;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 		});
@@ -146,7 +152,6 @@ Setting setting;
 		timer.setLocation(35, 10);
 		toolPane.add(timer);
 
-		
 		JLabel item1 = new JLabel(u.getOwnItem1() + "");
 		item1.setSize(30, 30);
 		item1.setLocation(150, 10);
@@ -167,16 +172,36 @@ Setting setting;
 		item2Img.setLocation(170, 10);
 		toolPane.add(item2Img);
 
+		// 화면캡쳐===================================================================================================
+
 		JButton capture = new JButton("화면 캡쳐");
 		capture.setSize(150, 20);
 		capture.setLocation(20, 15);
 		roomCenter.add(capture);
+		int x = this.getX();
+		int y = this.getY();
+		int w = this.getWidth();
+		int h = this.getHeight();
+		// Toolkit.getDefaultToolkit().getScreenSize(); //모니터 사이즈
 
 		capture.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				try {
+					robot = new Robot();
+					// BufferedImage bufferedImage = robot.createScreenCapture(new Rectangle(x, y,
+					// w, h));
+					BufferedImage bufferedImage = robot.createScreenCapture(new Rectangle(x, y,
+							(int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() - paint.getWidth()),
+							(int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() - paint.getHeight())));
+					ImageIO.write(bufferedImage, "gif", new File("screenshot.gif"));
 
+				} catch (AWTException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -433,10 +458,6 @@ Setting setting;
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				dispose();
-				MainMenu mm = new MainMenu();
-				
-
 				reportDialog.setVisible(true);
 
 			}
@@ -447,13 +468,12 @@ Setting setting;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!reportNameText.getText().isEmpty()) {
+				if (!reportNameText.getText().isEmpty() && !reportReasonText.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "신고 완료되었습니다.");
 					reportDialog.dispose();
 				} else {
 					JOptionPane.showMessageDialog(null, "유저 이름이나 내용이 입력되지 않았습니다.");
 				}
-
 
 			}
 		});
