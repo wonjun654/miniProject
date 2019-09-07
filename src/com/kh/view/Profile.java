@@ -5,6 +5,8 @@ import java.awt.Dialog;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -27,6 +29,7 @@ public class Profile extends JFrame {
 		// 기본 프로필창-----------------------------------------------
 		UserManager um = new UserManager();
 		this.setBounds(700, 300, 600, 300);
+		
 		JPanel panel = new JPanel();
 
 		panel.setLayout(null);
@@ -43,7 +46,12 @@ public class Profile extends JFrame {
 		sd.setBounds(800, 250, 400, 500);
 		sd.add(new JLabel("이름"));
 		sd.setLayout(null);
-
+		sd.setBackground(new Color(195, 245, 230));
+		sd.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				sd.dispose();
+			}
+		});
 		
 		
 		
@@ -97,7 +105,7 @@ public class Profile extends JFrame {
 		charlist.setBounds(200, 280, 150, 30);
 
 		charlist.setSelectedIndex(0);
-		icon = new ImageIcon("images/yangpa.PNG").getImage().getScaledInstance(150, 150, 0);
+		icon = new ImageIcon(user.getImgName()).getImage().getScaledInstance(150, 150, 0);
 		label5.setIcon(new ImageIcon(icon));
 		String name = null;
 		charlist.addActionListener(new ActionListener() {

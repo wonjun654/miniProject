@@ -118,7 +118,7 @@ public class MainMenu extends JFrame implements MouseListener {
 		Image shopimg = new ImageIcon("images\\shop.PNG").getImage().getScaledInstance(60, 60, 0);
 		Image exitimg = new ImageIcon("images\\exit.PNG").getImage().getScaledInstance(60, 60, 0);
 		Image coinimg = new ImageIcon("images\\coin.jpg").getImage().getScaledInstance(60, 60, 0);
-		Image questimg = new ImageIcon("images\\login.PNG").getImage().getScaledInstance(85, 70, 0);
+		Image questimg = new ImageIcon("images\\quest.PNG").getImage().getScaledInstance(85, 70, 0);
 		Image chosungimg = new ImageIcon("images\\chosung.png").getImage().getScaledInstance(60, 60, 0);
 		Image timerimg = new ImageIcon("images\\timer.png").getImage().getScaledInstance(60, 60, 0);
 		
@@ -255,7 +255,7 @@ public class MainMenu extends JFrame implements MouseListener {
 		MediaTest.musicOff();
 
 
-		//MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
+		MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
 		this.add(listPan);
 
 		this.add(tf);
