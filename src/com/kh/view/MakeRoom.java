@@ -17,6 +17,8 @@ import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
+import com.kh.room.RoomManager;
+
 public class MakeRoom extends JFrame {
 
 	public JTextArea roomName2;
@@ -25,6 +27,11 @@ public class MakeRoom extends JFrame {
 	JPanel bgPan = new JPanel();
 	int no = 0;
 	MainMenu mm;
+	
+	JPanel tablePan;
+	RoomManager rm = new RoomManager();
+	String str = "";
+	
 
 	
 	public MakeRoom() {
@@ -80,8 +87,9 @@ public class MakeRoom extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				no = mm.table1.getRowCount();
-				System.out.println(no);
+				
+				
+			
 			}
 		});
 
