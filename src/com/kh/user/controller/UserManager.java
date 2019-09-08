@@ -62,6 +62,7 @@ public class UserManager {
 	}
 
 	public void updateUser(User u) {
+		System.out.println("updateuser");	
 		ArrayList<User> list = ud.readUserList();
 
 		if (list == null) {
@@ -86,6 +87,7 @@ public class UserManager {
 	}
 	
 	public User selectOneUser(String userId) {
+		System.out.println("selectoneuser");
 		ArrayList<User> list = ud.readUserList();
 		User selectedUser = null;
 

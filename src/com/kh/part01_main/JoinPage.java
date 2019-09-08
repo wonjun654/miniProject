@@ -179,7 +179,7 @@ public class JoinPage extends JFrame {
 				str += nameTextField.getText() + ":";
 				str += emailTextField.getText();
 				um.signUp(str);
-				dispose();
+				
 			}
 		});
 

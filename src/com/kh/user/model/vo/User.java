@@ -20,13 +20,13 @@ public class User implements Serializable {
 	private int victory;
 	private int ownItem1;
 	private int ownItem2;
+	boolean tempPwd = false;
 	boolean acceptQuest1 = false;
 	boolean acceptQuest2 = false;
 	boolean acceptQuest3 = false;
 	boolean questClear1 = false;
 	boolean questClear2 = false;
 	boolean questClear3 = false;
-
 	public User() {
 		this.coin = 0;
 		this.profile = true;
@@ -176,6 +176,15 @@ public class User implements Serializable {
 
 	public void setImgName(String imgName) {
 		this.imgName = imgName;
+	}
+
+	
+	public boolean getTempPwd() {
+		return tempPwd;
+	}
+
+	public void setTempPwd(boolean tempPwd) {
+		this.tempPwd = tempPwd;
 	}
 
 	@Override
