@@ -4,9 +4,13 @@ import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,17 +36,16 @@ public class QuestMenu extends JFrame {
 		UserManager um = new UserManager();
 		this.setBounds(420, 100, 600, 600);
 
-		background = new ImageIcon("images/login.PNG");
-		JPanel Panel = new JPanel() {
-			public void paintComponent(Graphics g) {
+		try {
+			this.setIconImage(ImageIO.read(new File("images//logo.PNG")));
+		} catch (IOException e) {
 
-				g.drawImage(background.getImage(), 0, 0, 600, 600, null);
-				setOpaque(false);
-				super.paintComponent(g);
-
-			}
-		};
-
+			e.printStackTrace();
+		}
+		
+		JPanel Panel = new JPanel();
+		
+		Panel.setBackground(new Color(195,245,230));	
 		Panel.setLocation(30, 30);
 		Panel.setSize(600, 600);
 

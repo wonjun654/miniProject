@@ -1,9 +1,13 @@
 package com.kh.view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import com.kh.model.vo.MediaTest;
+import com.kh.part03_password.PasswordChange;
 import com.kh.user.controller.UserManager;
 import com.kh.user.model.vo.User;
 
@@ -19,9 +24,15 @@ public class Setting extends JFrame {
 	
 
 	public Setting(User user) {
+		Font font = new Font("고딕", Font.BOLD, 18);
 
 		this.setBounds(800, 300, 400, 400);
+		try {
+			this.setIconImage(ImageIO.read(new File("images//logo.PNG")));
+		} catch (IOException e) {
 
+			e.printStackTrace();
+		}
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(195, 245, 230));
 		
@@ -29,13 +40,25 @@ public class Setting extends JFrame {
 		panel.setSize(400, 400);
 
 		JLabel label = new JLabel("배경음악");
-		label.setLocation(10, 40);
+		label.setLocation(20, 10);
 		label.setSize(120, 120);
+		label.setFont(font);
 
 		JLabel label2 = new JLabel("프로필");
-		label2.setLocation(10, 120);
+		label2.setLocation(20, 70);
 		label2.setSize(120, 120);
-
+		label2.setFont(font);
+		
+		JLabel pwdLabel = new JLabel("비밀번호 변경");
+		pwdLabel.setLocation(20,130);
+		pwdLabel.setSize(130,120);
+		pwdLabel.setFont(font);
+		
+		RoundButton pwdBtn= new RoundButton("변경");
+		pwdBtn.setSize(80,30);
+		pwdBtn.setLocation(260,180);
+		pwdBtn.setFont(font);
+		
 		RoundButton button = new RoundButton("확인");
 		button.setSize(60, 50);
 		button.setLocation(280, 250);
@@ -44,22 +67,22 @@ public class Setting extends JFrame {
 		JRadioButton profileOff = new JRadioButton("OFF");
 
 		profileOn.setSize(50, 50);
-		profileOn.setLocation(100, 155);
+		profileOn.setLocation(160, 110);
 		profileOn.setBackground(new Color(195, 245, 230));
 
 		profileOff.setSize(50, 50);
-		profileOff.setLocation(200, 155);
+		profileOff.setLocation(260, 110);
 		profileOff.setBackground(new Color(195, 245, 230));
 		///////////// 배경음악 설정/////////////////
 		JRadioButton musicOn = new JRadioButton("On");
 		JRadioButton musicOff = new JRadioButton("OFF");
 
 		musicOn.setSize(50, 50);
-		musicOn.setLocation(100, 75);
+		musicOn.setLocation(160, 45);
 		musicOn.setBackground(new Color(195, 245, 230));
 
 		musicOff.setSize(50, 50);
-		musicOff.setLocation(200, 75);
+		musicOff.setLocation(260, 45);
 		musicOff.setBackground(new Color(195, 245, 230));
 
 		ButtonGroup profilegroup = new ButtonGroup();
@@ -74,6 +97,16 @@ public class Setting extends JFrame {
 		panel.add(profileOn);
 		panel.add(profileOff);
 
+		/////////////////pwd 변경 //////////
+		pwdBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PasswordChange pc = new PasswordChange(user);
+				
+				
+			}
+		});
 		// ------------------프로필오프----------------
 		profileOff.addActionListener(new ActionListener() {
 
@@ -123,6 +156,8 @@ public class Setting extends JFrame {
 
 		panel.add(label);
 		panel.add(label2);
+		panel.add(pwdLabel);
+		panel.add(pwdBtn);
 		
 		this.add(panel);
 		

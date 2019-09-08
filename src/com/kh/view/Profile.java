@@ -7,7 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -24,12 +27,17 @@ public class Profile extends JFrame {
 	Image icon = null;
 	//Image img = user.getImg();
 	
+	UserManager um = new UserManager();
 
 	public Profile(User user) {
 		// 기본 프로필창-----------------------------------------------
-		UserManager um = new UserManager();
 		this.setBounds(700, 300, 600, 300);
-		
+		try {
+			this.setIconImage(ImageIO.read(new File("images//logo.PNG")));
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
 		JPanel panel = new JPanel();
 
 		panel.setLayout(null);
@@ -119,7 +127,7 @@ public class Profile extends JFrame {
 				icon = new ImageIcon("images/" + name + ".PNG").getImage().getScaledInstance(150, 150, 0);
 				user.setImgName("images/" + name + ".PNG");
 				System.out.println(user.getImgName());
-				
+				System.out.println(user.getImgName());
 				
 				
 				label5.setIcon(new ImageIcon(icon));
@@ -174,5 +182,8 @@ public class Profile extends JFrame {
 		this.add(panel);
 
 	}
-
+	public void re() {
+		if(um.selectOneUser("123").getImgName()=="images/baechu.PNG") {
+		}
+	}
 }

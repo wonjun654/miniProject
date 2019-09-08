@@ -1,14 +1,18 @@
 package com.kh.part01_main;
 
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,16 +23,21 @@ import javax.swing.JTextField;
 import com.kh.model.vo.MediaTest;
 import com.kh.part03_ID.FindID;
 import com.kh.part03_password.FindPassword;
+import com.kh.part03_password.PasswordChange;
 import com.kh.user.controller.UserManager;
+import com.kh.user.model.vo.User;
 import com.kh.view.MainMenu;
 import com.kh.view.RoundButton;
+
+
 
 public class LoginPage extends JFrame {
 	ImageIcon icon;
 	String str = "";
 	UserManager um = new UserManager();
 	JPanel bgPan = new JPanel();
-
+	User u = um.selectOneUser("123");
+	
 	public LoginPage() {
 
 		this.setSize(1024, 768);
@@ -94,6 +103,13 @@ public class LoginPage extends JFrame {
 		RoundButton pwbtn = new RoundButton("P/W 찾기 ");
 		pwbtn.setBounds(572, 600, 90, 30);
 		panel.add(pwbtn);
+		
+		//
+		
+		
+		
+		
+		
 
 		// 로그인 버튼
 		loginbtn.addActionListener(new ActionListener() {
@@ -114,8 +130,16 @@ public class LoginPage extends JFrame {
 
 				if (um.login(str)) {
 					JOptionPane.showMessageDialog(null, "로그인 성공 !");
-					MainMenu menu = new MainMenu();
+					if(um.selectOneUser("123").getTempPwd()==true) {
+						PasswordChange pc = new PasswordChange(u);
+						
+						
+						
+					}else {
 					dispose();
+					MainMenu menu = new MainMenu();
+					}
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "ID/PW를 확인해 주세요.");
 					str = "";
@@ -149,6 +173,8 @@ public class LoginPage extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				
 				FindPassword fp = new FindPassword();
 
 			}
