@@ -7,13 +7,11 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Robot;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -27,8 +25,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.kh.user.model.vo.User;
-import com.sun.glass.events.KeyEvent;
-import com.sun.glass.ui.Screen;
 
 public class GameRoom extends JFrame {
 
@@ -41,6 +37,7 @@ public class GameRoom extends JFrame {
 	Font copyfont = new Font("고딕", Font.PLAIN, 10);
 	Robot robot;
 	JPanel bgPan = new JPanel();
+	timer t = new timer();
 
 	Setting setting;
 
@@ -132,12 +129,12 @@ public class GameRoom extends JFrame {
 		});
 
 		// 버튼 테두리 없앰
-		trash.setBorderPainted(false);
-		trash.setContentAreaFilled(false);
+		trash.setBorderPainted(true);
+		trash.setContentAreaFilled(true);
 		next.setBorderPainted(false);
-		next.setContentAreaFilled(false);
+		next.setContentAreaFilled(true);
 		prev.setBorderPainted(false);
-		prev.setContentAreaFilled(false);
+		prev.setContentAreaFilled(true);
 		tool.setBorderPainted(false);
 		tool.setContentAreaFilled(false);
 
@@ -149,7 +146,7 @@ public class GameRoom extends JFrame {
 
 		JLabel timer = new JLabel();
 		timer.setSize(80, 30);
-		timer.setLocation(35, 10);
+		timer.setLocation(50, 10);
 		toolPane.add(timer);
 
 		JLabel item1 = new JLabel(u.getOwnItem1() + "");
@@ -188,20 +185,24 @@ public class GameRoom extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					robot = new Robot();
-					// BufferedImage bufferedImage = robot.createScreenCapture(new Rectangle(x, y,
-					// w, h));
-					BufferedImage bufferedImage = robot.createScreenCapture(new Rectangle(x, y,
-							(int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() - paint.getWidth()),
-							(int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() - paint.getHeight())));
-					ImageIO.write(bufferedImage, "gif", new File("screenshot.gif"));
 
-				} catch (AWTException e1) {
-					e1.printStackTrace();
+				Robot robot;
+				//윈도우기준 패널위치 잡아서 범위로 지정
+				Rectangle rec = new Rectangle(paint.getLocationOnScreen().x, paint.getLocationOnScreen().y, 480, 480);
+				BufferedImage bufferedImage = new BufferedImage(rec.width, rec.height, BufferedImage.TYPE_INT_ARGB);
+
+				try {
+					BufferedImage capturedImg = new Robot().createScreenCapture(rec);
+					File temp = new File("screenshot.png");
+
+					ImageIO.write(capturedImg, "png", temp);
+
 				} catch (IOException e1) {
 					e1.printStackTrace();
+				} catch (AWTException e1) {
+					e1.printStackTrace();
 				}
+
 			}
 		});
 
@@ -389,12 +390,34 @@ public class GameRoom extends JFrame {
 		user8.add(userCtn);
 		roomRight.add(user8);
 
+		// 게임시작
+		// 버튼=========================================================================================
+		JButton startBtn = new JButton("게임 시작");
+		startBtn.setSize(190, 40);
+		startBtn.setLocation(40, 610);
+		roomRight.add(startBtn);
+
+		startBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				t.start();
+				timer.setText(t.showSec());
+			}
+		});
+
+		// while (t.getT() <= 0) {
+		toolPane.revalidate();
+		toolPane.repaint();
+		// }
+
 		JButton exitbtn = new JButton("나가기");
 		exitbtn.setSize(80, 40);
 		exitbtn.setLocation(150, 670);
 		roomRight.add(exitbtn);
 
-		// 나가기 버튼 클릭
+		// 나가기 버튼
+		// 클릭=======================================================================================
 		exitbtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -404,7 +427,8 @@ public class GameRoom extends JFrame {
 			}
 		});
 
-		// 신고하기 버튼
+		// 신고하기
+		// 버튼=========================================================================================
 		JButton report = new JButton("신고하기");
 		report.setSize(90, 40);
 		report.setLocation(40, 670);
@@ -447,12 +471,13 @@ public class GameRoom extends JFrame {
 		reportOk.setLocation(170, 420);
 		reportDialog.add(reportOk);
 
+		// 신고하기
+		// 버튼===============================================================================================
 		JButton reportCancel = new JButton("취소");
 		reportCancel.setSize(60, 30);
 		reportCancel.setLocation(250, 420);
 		reportDialog.add(reportCancel);
 
-		// 신고하기 버튼
 		report.addActionListener(new ActionListener() {
 
 			@Override
@@ -615,7 +640,7 @@ public class GameRoom extends JFrame {
 
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 
 	public static void main(String[] args) {
