@@ -8,10 +8,14 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.table.DefaultTableModel;
 
 public class MakeRoom extends JFrame {
 
@@ -19,8 +23,11 @@ public class MakeRoom extends JFrame {
 	public JTextArea roomPwd2;
 	public RoundButton btnOK;
 	JPanel bgPan = new JPanel();
+	int no = 0;
+	MainMenu mm;
 
-	public MakeRoom(MainMenu mm) {
+	
+	public MakeRoom() {
 
 		this.setBounds(600, 500, 600, 500);
 		setLayout(null);
@@ -28,7 +35,7 @@ public class MakeRoom extends JFrame {
 		bgPan.setLayout(null);
 		bgPan.setSize(600, 500);
 		bgPan.setBackground(new Color(195, 245, 230));
-		
+
 		JLabel roomName = new JLabel("방제목");
 		JLabel roomPwd = new JLabel("방암호");
 		JLabel roomPeople = new JLabel("인원수");
@@ -57,6 +64,9 @@ public class MakeRoom extends JFrame {
 
 		JCheckBox checkSecret = new JCheckBox();
 		checkSecret.setBounds(360, 185, 50, 50);
+		checkSecret.setBackground(new Color(195, 245, 230));
+		
+		
 
 		btnCancel.addActionListener(new ActionListener() {
 
@@ -70,28 +80,40 @@ public class MakeRoom extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
+				no = mm.table1.getRowCount();
+				System.out.println(no);
 			}
 		});
 
 		checkSecret.addActionListener(new ActionListener() {
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (checkSecret.isSelected()) {
-			roomPwd2.setEditable(true);
-			roomPwd2.setEnabled(true);
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (checkSecret.isSelected()) {
+					roomPwd2.setEditable(true);
+					roomPwd2.setEnabled(true);
 
-		} else {
-			roomPwd2.setEditable(false);
-			roomPwd2.setEnabled(false);
-		}
+				} else {
+					roomPwd2.setEditable(false);
+					roomPwd2.setEnabled(false);
+				}
+
+			}
+		});
+
+		this.add(roomPeople);
+		this.add(roomPwd);
+		this.add(roomName);
+		this.add(roomName2);
+		this.add(roomPwd2);
+		this.add(selectPeople);
+		this.add(btnOK);
+		this.add(btnCancel);
+		this.add(checkSecret);
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
+		this.add(bgPan);
 
 	}
-});
-
-this.add(roomPeople);this.add(roomPwd);this.add(roomName);this.add(roomName2);this.add(roomPwd2);this.add(selectPeople);this.add(btnOK);this.add(btnCancel);this.add(checkSecret);this.setVisible(true);this.setLocationRelativeTo(null);this.add(bgPan);
-
-}
 
 }

@@ -4,8 +4,12 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -47,7 +51,6 @@ public class MainMenu extends JFrame implements MouseListener{
 	
 	JTable table1;
 	DefaultTableModel model1;
-	MakeRoom mr;
 	
 	
 
@@ -64,6 +67,12 @@ public class MainMenu extends JFrame implements MouseListener{
 	public MainMenu() {
 
 		super("MainMenuPage");
+		try {
+			this.setIconImage(ImageIO.read(new File("images//logo.PNG")));
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
 
 		// Layout 지정 없이 위치 지정하면서 배치하는 방법이다.
 		this.setLayout(null);
@@ -121,6 +130,40 @@ public class MainMenu extends JFrame implements MouseListener{
 		this.add(scPanel);
 		this.pack();
 		
+		table1.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getClickCount() == 2) {
+					GameRoom gr = new GameRoom();
+				}
+				
+			}
+		});
 
 				
 		
@@ -257,7 +300,7 @@ public class MainMenu extends JFrame implements MouseListener{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MakeRoom mr = new MakeRoom(null);
+				MakeRoom mr = new MakeRoom();
 
 			}
 		});
@@ -311,7 +354,7 @@ public class MainMenu extends JFrame implements MouseListener{
 		this.add(chosungImg);
 		this.add(timerImg);
 		this.add(chosunglbl);
-		this.add(timerlbl);
+		this.add(timerlbl);	
 		
 	
 		this.add(bgPan);

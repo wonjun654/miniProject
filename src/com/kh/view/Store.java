@@ -8,7 +8,10 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 
@@ -43,6 +46,13 @@ public class Store extends JFrame {
 		this.setLayout(null);
 		this.setSize(1024, 768);
 		this.setResizable(false);
+		try {
+			this.setIconImage(ImageIO.read(new File("images//logo.PNG")));
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		
 		Dimension frameSize = this.getSize(); // 프레임 사이즈
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
 		this.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2); // 화면 중앙

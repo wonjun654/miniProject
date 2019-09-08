@@ -170,8 +170,9 @@ public class Profile extends JFrame {
 		panel.add(label6);
 		panel.add(label7);
 		panel.add(button);
-		panel.add(button4);
+		panel.add(button4);		
 		this.add(panel);
+		this.setLocationRelativeTo(null);
 
 	}
 

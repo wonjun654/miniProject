@@ -84,6 +84,7 @@ public class FindID extends JFrame{
 				String str = um.FindId(idf.getText());
 				if(str != null) {
 					FindResult fr = new FindResult(str);
+					dispose();
 					
 				}
 				

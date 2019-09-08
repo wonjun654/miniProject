@@ -45,6 +45,14 @@ public class GameRoom extends JFrame {
 	Setting setting;
 
 	public GameRoom() {
+		
+		try {
+			this.setIconImage(ImageIO.read(new File("images//logo.PNG")));
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		
 		this.setTitle("방번호 - 00");
 		this.setLayout(null);
 		this.setSize(1030, 768);

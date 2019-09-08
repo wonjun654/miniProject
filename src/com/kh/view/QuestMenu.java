@@ -320,6 +320,7 @@ public class QuestMenu extends JFrame {
 		Panel.add(questList2);
 		Panel.add(questList3);
 		Panel.setLayout(null);
+		this.setLocationRelativeTo(null);
 
 		this.add(Panel);
 
