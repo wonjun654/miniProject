@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
@@ -17,21 +16,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import com.kh.model.vo.MediaTest;
 import com.kh.part01_main.LoginPage;
 import com.kh.user.controller.UserManager;
 
-import javafx.scene.input.MouseEvent;
+public class MainMenu extends JFrame implements MouseListener{
 
-public class MainMenu extends JFrame implements MouseListener {
-
-	JTable table1;
-	DefaultTableModel model1;
+	
+	
 	JTextField tf;
 	UserManager um = new UserManager();
 
@@ -49,12 +44,22 @@ public class MainMenu extends JFrame implements MouseListener {
 	JLabel lblroom;
 	JLabel lblsang;
 	JLabel lblpeople;
+	
+	JTable table1;
+	DefaultTableModel model1;
+	MakeRoom mr;
+	
+	
 
-	String col1[] = { "안녕하세요", "반갑습니다", "수고하세요" };
-	String col2[] = { "게임중", "대기중", "대기중" };
-	String col3[] = { "4/4", "2/6", "3/8" };
-
-	Color color;
+//	String col1[] = { "안녕하세요", "반갑습니다", "수고하세요" };
+//	String col2[] = { "게임중", "대기중", "대기중" };
+//	String col3[] = { "4/4", "2/6", "3/8" };
+	
+	String header[] = {"방제목", "상태", "인원"};
+	String contents[][] = {
+			                { "안녕하세요", "게임중", "4/4" },
+							{ "안녕하세요", "대기중", "3/8" },
+							{ "안녕하세요", "대기중", "3/8" }};
 
 	public MainMenu() {
 
@@ -67,50 +72,76 @@ public class MainMenu extends JFrame implements MouseListener {
 		bgPan.setSize(1024, 768);
 		bgPan.setBackground(new Color(195, 245, 230));
 
-		ta = new JTextArea(50, 50);
-		ta.setBounds(80, 150, 450, 500);
-		ta.setEditable(false);
-
-		sc = new JScrollPane(ta);
-		sc.setBounds(80, 150, 700, 320);
-
-		lblroom = new JLabel("방이름");
-		lblroom.setBounds(145, 100, 60, 60);
-
-		lblsang = new JLabel("상태");
-		lblsang.setBounds(385, 100, 60, 60);
-
-		lblpeople = new JLabel("인원");
-		lblpeople.setBounds(625, 100, 60, 60);
+//		ta = new JTextArea(50, 50);
+//		ta.setBounds(80, 150, 450, 500);
+//		ta.setEditable(false);
+//
+//		sc = new JScrollPane(ta);
+//		sc.setBounds(80, 150, 700, 320);
+//
+//		lblroom = new JLabel("방이름");
+//		lblroom.setBounds(145, 100, 60, 60);
+//
+//		lblsang = new JLabel("상태");
+//		lblsang.setBounds(385, 100, 60, 60);
+//
+//		lblpeople = new JLabel("인원");
+//		lblpeople.setBounds(625, 100, 60, 60);
+//
+//		
+//		roomList = new JList(col1);
+//		roomList.setBounds(0, 0, 200, 360);
+//
+//		roomList2 = new JList(col2);
+//		roomList2.setBounds(250, 0, 200, 360);
+//
+//		roomList3 = new JList(col3);
+//		roomList3.setBounds(500, 0, 200, 360);
+//
+//		ta.add(roomList);
+//		ta.add(roomList2);
+//		ta.add(roomList3);
 
 		
-		roomList = new JList(col1);
-		roomList.setBounds(0, 0, 200, 360);
-
-		roomList2 = new JList(col2);
-		roomList2.setBounds(250, 0, 200, 360);
-
-		roomList3 = new JList(col3);
-		roomList3.setBounds(500, 0, 200, 360);
-
-		ta.add(roomList);
-		ta.add(roomList2);
-		ta.add(roomList3);
-
-		sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-		roomList.addListSelectionListener(new ListSelectionListener() {
+		model1 = new DefaultTableModel(contents, header) {
 			
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				if(roomList.getSelectedIndex() == 0) {
-					GameRoom gr = new GameRoom();
-					dispose();
-				}
-				
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int i, int c) {
+				return false;
 			}
-		});
+		};
+		
+		JTable table1 = new JTable(model1);
+		table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		JScrollPane scPanel = new JScrollPane(table1);
+		scPanel.setBounds(80, 150, 700, 320);
+		scPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		this.add(scPanel);
+		this.pack();
+		
+
+				
+		
+		
+		
+		this.setSize(1024, 768);
+			
+		//sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		//sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+//		//roomList.addListSelectionListener(new ListSelectionListener() {
+//			
+//			@Override
+//			public void valueChanged(ListSelectionEvent e) {
+//				if(roomList.getSelectedIndex() == 0) {
+//					GameRoom gr = new GameRoom();
+//					dispose();
+//				}
+//				
+//			}
+//		});
 
 		Image profileimg = new ImageIcon("images\\profile.PNG").getImage().getScaledInstance(60, 60, 0);
 		Image makeimg = new ImageIcon("images\\make.PNG").getImage().getScaledInstance(60, 60, 0);
@@ -174,8 +205,7 @@ public class MainMenu extends JFrame implements MouseListener {
 		questbtn.setSize(85, 70);
 		questbtn.setFocusPainted(false);
 		questbtn.setContentAreaFilled(false);
-		
-		
+				
 		JTextArea ta = new JTextArea();
 		ta.setBounds(0, 590, 600, 600);
 		ta.setEditable(false);
@@ -273,15 +303,16 @@ public class MainMenu extends JFrame implements MouseListener {
 		// this.add(table1);
 		// this.add(js1);
 		this.add(ta);
-		this.add(sc);
+		//this.add(sc);
 		this.add(questbtn);
-		this.add(lblroom);
-		this.add(lblsang);
-		this.add(lblpeople);
+		//this.add(lblroom);
+		//this.add(lblsang);
+		//this.add(lblpeople);
 		this.add(chosungImg);
 		this.add(timerImg);
 		this.add(chosunglbl);
 		this.add(timerlbl);
+		
 	
 		this.add(bgPan);
 
@@ -299,30 +330,34 @@ public class MainMenu extends JFrame implements MouseListener {
 	@Override
 	public void mouseClicked(java.awt.event.MouseEvent e) {
 		
+		
 	}
 
 	@Override
 	public void mouseEntered(java.awt.event.MouseEvent e) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void mouseExited(java.awt.event.MouseEvent e) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void mousePressed(java.awt.event.MouseEvent e) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void mouseReleased(java.awt.event.MouseEvent e) {
 		// TODO Auto-generated method stub
-
+		
 	}
+	
+
+	
 
 }

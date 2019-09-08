@@ -14,12 +14,11 @@ import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 
 public class MakeRoom extends JFrame {
-	
+
 	public JTextArea roomName2;
 	public JTextArea roomPwd2;
 	public RoundButton btnOK;
 	JPanel bgPan = new JPanel();
-	
 
 	public MakeRoom(MainMenu mm) {
 
@@ -71,41 +70,28 @@ public class MakeRoom extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mm.model1.addRow(new Object[] {roomName2.getText(), "대기중", selectPeople});
-				
-				dispose();
+			
 			}
 		});
 
 		checkSecret.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (checkSecret.isSelected()) {
-					roomPwd2.setEditable(true);
-					roomPwd2.setEnabled(true);
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (checkSecret.isSelected()) {
+			roomPwd2.setEditable(true);
+			roomPwd2.setEnabled(true);
 
-				} else {
-					roomPwd2.setEditable(false);
-					roomPwd2.setEnabled(false);
-				}
-
-			}
-		});
-
-		this.add(roomPeople);
-		this.add(roomPwd);
-		this.add(roomName);
-		this.add(roomName2);
-		this.add(roomPwd2);
-		this.add(selectPeople);
-		this.add(btnOK);
-		this.add(btnCancel);
-		this.add(checkSecret);
-		this.setVisible(true);
-		this.setLocationRelativeTo(null);
-		this.add(bgPan);
+		} else {
+			roomPwd2.setEditable(false);
+			roomPwd2.setEnabled(false);
+		}
 
 	}
+});
+
+this.add(roomPeople);this.add(roomPwd);this.add(roomName);this.add(roomName2);this.add(roomPwd2);this.add(selectPeople);this.add(btnOK);this.add(btnCancel);this.add(checkSecret);this.setVisible(true);this.setLocationRelativeTo(null);this.add(bgPan);
+
+}
 
 }
