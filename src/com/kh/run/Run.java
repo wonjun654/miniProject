@@ -1,5 +1,6 @@
 package com.kh.run;
 
+import com.kh.model.vo.MyMusicPlayer;
 import com.kh.user.view.UserMenu;
 
 public class Run {
@@ -8,6 +9,7 @@ public class Run {
 		
 		UserMenu menu = new UserMenu();
 		menu.mainMenu();
+		
 
 		
 	}
