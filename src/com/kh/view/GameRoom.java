@@ -1,31 +1,38 @@
 package com.kh.view;
 
-import java.awt.AWTException;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Vector;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.Timer;
+import javax.swing.colorchooser.ColorSelectionModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-import com.kh.user.model.vo.User;
+import com.kh.model.vo.TempPoint;
+import com.kh.user.model.vo.Sender;
 
 public class GameRoom extends JFrame {
 
@@ -34,25 +41,56 @@ public class GameRoom extends JFrame {
 	JLabel userName = null;
 	JLabel ctn = null;
 	JLabel userCtn = null;
-	User u = new User();
-	Font copyfont = new Font("고딕", Font.PLAIN, 10);
+	JTextArea chatOutput;
+	JTextField chatInput;
+	String roomName;
+	String userId;
+	Thread receiver;
+	Thread sender;
+	JFrame mainFrame;
+
+	JPanel canvasPanel;
+	JPanel colorPanel;
+	JDialog colorDialog;
+	JColorChooser chooser; // 색상
+	Color color = Color.BLACK; // 색상
+	JSlider penSize;
+	JButton remover;
+	JButton colorButton;
+	Graphics g; // 그림판
+	Graphics2D g2;
+	ColorSelectionModel model;
+	Vector<Vector> list = new Vector<Vector>();
+	Vector<TempPoint> tmp = new Vector<TempPoint>();
+	int sX, sY, eX, eY;
+	float stroke = 1;
+	boolean isDraw = false;
+
+Font copyfont = new Font("고딕", Font.PLAIN, 10);
+Font timerFont = new Font("고딕", Font.BOLD, 18);
 	Robot robot;
 	JPanel bgPan = new JPanel();
 	Timer timerT = null;
 	int time = 180;
-
 	
-	Setting setting;
+	
 
-	public GameRoom() {
-		this.setTitle("방번호 - 00");
+	public GameRoom(Thread sender, Thread receiver, String userId, String roomName) {
+		this.userId = userId;
+		this.roomName = roomName;
+		this.sender = sender;
+		this.receiver = receiver;
+
+	}
+
+	public void doGame(JFrame mainFrame) {
+		this.mainFrame = mainFrame;
+		mainFrame.dispose();
+
+		this.setTitle(roomName);
 		this.setLayout(null);
 		this.setSize(1030, 768);
 		this.setResizable(false);
-
-		bgPan.setLayout(null);
-		bgPan.setSize(1024, 768);
-		bgPan.setBackground(new Color(195, 245, 230));
 
 		// 자리잡기용
 		// 가운데 화면
@@ -63,12 +101,108 @@ public class GameRoom extends JFrame {
 		this.add(roomCenter);
 
 		// 그림판
-		JPanel paint = new JPanel();
-		paint.setLayout(null);
-		paint.setSize(480, 480);
-		paint.setLocation(10, 35);
-		paint.setBackground(Color.BLACK);
-		roomCenter.add(paint);
+		canvasPanel = new JPanel();
+		canvasPanel.setLayout(null);
+		canvasPanel.setSize(480, 480);
+		canvasPanel.setLocation(10, 35);
+		canvasPanel.setBackground(Color.LIGHT_GRAY);
+
+		chooser = new JColorChooser();
+		colorDialog = new JDialog(mainFrame, "색상표");
+		colorDialog.setBounds(0, 0, 800, 400);
+		colorDialog.setLayout(null);
+
+		colorPanel = new JPanel();
+		colorPanel.setBounds(0, 0, 800, 400);
+		colorPanel.setLayout(null);
+		colorPanel.setVisible(true);
+
+		colorDialog.add(colorPanel);
+		chooser.setBounds(0, 0, 600, 300);
+		colorPanel.add(chooser);
+
+		penSize = new JSlider(1, 30, 1);
+		penSize.setBounds(610, 10, 150, 100);
+		penSize.setMajorTickSpacing(5);
+		penSize.setMinorTickSpacing(1);
+		penSize.setPaintTicks(true);
+		penSize.setVisible(true);
+		colorPanel.add(penSize);
+
+		remover = new JButton();
+		remover.setBounds(700, 200, 50, 50);
+		remover.setVisible(true);
+		colorPanel.add(remover);
+
+		remover.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				color = canvasPanel.getBackground();
+			}
+		});
+
+		penSize.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				stroke = (float) penSize.getValue();
+			}
+		});
+
+		canvasPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if (isDraw != false) {
+					super.mousePressed(e);
+					eX = e.getX();
+					eY = e.getY();
+					tmp.add(new TempPoint(eX, eY));
+					int sendColor = color.getRGB();
+					((Sender) sender).sendPress(eX, eY, roomName);
+				}
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if (isDraw != false) {
+					super.mouseReleased(e);
+					/*
+					 * eX = e.getX(); eY = e.getY();
+					 */
+					list.add(tmp);
+					tmp = new Vector<TempPoint>();
+					((Sender) sender).sendRelease(roomName);
+				}
+			}
+		});
+
+		canvasPanel.addMouseMotionListener(new MouseAdapter() {
+
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if (isDraw != false) {
+					super.mouseDragged(e);
+					sX = e.getX();
+					sY = e.getY();
+					tmp.add(new TempPoint(sX, sY));
+					g = canvasPanel.getGraphics();
+					g2 = (Graphics2D) g;
+					g2.setStroke(new BasicStroke(stroke, BasicStroke.CAP_ROUND, 0));
+					g.setColor(color);
+					g.drawLine(sX, sY, eX, eY);
+					eX = sX;
+					eY = sY;
+					int sendColor = color.getRGB();
+					((Sender) sender).sendCoordinate(sX, sY, sendColor, stroke, roomName);
+				}
+			}
+		});
+
+		roomCenter.add(canvasPanel);
 
 		JPanel toolPane = new JPanel();
 		toolPane.setLayout(null);
@@ -86,11 +220,23 @@ public class GameRoom extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				colorDialog.setVisible(true);
 
+				ColorSelectionModel model = chooser.getSelectionModel();
+
+				ChangeListener listener = new ChangeListener() {
+					@Override
+					public void stateChanged(ChangeEvent e) {
+
+						color = chooser.getColor();
+					}
+				};
+				model.addChangeListener(listener);
 			}
 		});
+
 		Image trashIcon = new ImageIcon("images/trash.jpg").getImage().getScaledInstance(30, 30, 0);
-		JButton trash = new JButton(new ImageIcon(trashIcon));
+		JButton trash = new JButton(/* new ImageIcon(trashIcon) */"전환");
 		trash.setSize(30, 30);
 		trash.setLocation(350, 10);
 		toolPane.add(trash);
@@ -99,7 +245,20 @@ public class GameRoom extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				// TODO Auto-generated method stub
+				if (isDraw) {
+					isDraw = false;
+					chatOutput.append("정답자모드로 전환되었습니다.\n");
+					chatOutput.setCaretPosition(chatOutput.getDocument().getLength());
+					chatInput.setText(null);
+					chatInput.requestFocus();
+				} else {
+					isDraw = true;
+					chatOutput.append("출제자모드로 전환되었습니다.\n");
+					chatOutput.setCaretPosition(chatOutput.getDocument().getLength());
+					chatInput.setText(null);
+					chatInput.requestFocus();
+				}
 			}
 		});
 
@@ -113,6 +272,7 @@ public class GameRoom extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
 
 			}
 		});
@@ -132,12 +292,12 @@ public class GameRoom extends JFrame {
 		});
 
 		// 버튼 테두리 없앰
-		trash.setBorderPainted(true);
-		trash.setContentAreaFilled(true);
+		trash.setBorderPainted(false);
+		trash.setContentAreaFilled(false);
 		next.setBorderPainted(false);
-		next.setContentAreaFilled(true);
+		next.setContentAreaFilled(false);
 		prev.setBorderPainted(false);
-		prev.setContentAreaFilled(true);
+		prev.setContentAreaFilled(false);
 		tool.setBorderPainted(false);
 		tool.setContentAreaFilled(false);
 
@@ -147,12 +307,14 @@ public class GameRoom extends JFrame {
 		ctntimer.setLocation(5, 10);
 		toolPane.add(ctntimer);
 
-		JLabel timer = new JLabel();
+		// timer tm = new timer();
+
+		JLabel timer = new JLabel("03:00");
 		timer.setSize(80, 30);
-		timer.setLocation(50, 10);
+		timer.setLocation(35, 10);
 		toolPane.add(timer);
 
-		JLabel item1 = new JLabel(u.getOwnItem1() + "");
+		JLabel item1 = new JLabel(/* u.getOwnItem1() + */"");
 		item1.setSize(30, 30);
 		item1.setLocation(150, 10);
 		toolPane.add(item1);
@@ -162,7 +324,7 @@ public class GameRoom extends JFrame {
 		item1Img.setLocation(110, 10);
 		toolPane.add(item1Img);
 
-		JLabel item2 = new JLabel(u.getOwnItem2() + "");
+		JLabel item2 = new JLabel(/* u.getOwnItem2() + */"");
 		item2.setSize(30, 30);
 		item2.setLocation(210, 10);
 		toolPane.add(item2);
@@ -172,17 +334,10 @@ public class GameRoom extends JFrame {
 		item2Img.setLocation(170, 10);
 		toolPane.add(item2Img);
 
-		// 화면캡쳐===================================================================================================
-
 		JButton capture = new JButton("화면 캡쳐");
 		capture.setSize(150, 20);
 		capture.setLocation(20, 15);
 		roomCenter.add(capture);
-		int x = this.getX();
-		int y = this.getY();
-		int w = this.getWidth();
-		int h = this.getHeight();
-		// Toolkit.getDefaultToolkit().getScreenSize(); //모니터 사이즈
 
 		capture.addActionListener(new ActionListener() {
 
@@ -192,24 +347,37 @@ public class GameRoom extends JFrame {
 				Robot robot;
 				// 윈도우기준 패널위치 잡아서 범위로 지정
 				Rectangle rec = new Rectangle(paint.getLocationOnScreen().x, paint.getLocationOnScreen().y, 480, 480);
+				// 범위 지정 크기만큼 이미지 저장
 				BufferedImage bufferedImage = new BufferedImage(paint.getWidth(), paint.getHeight(),
 						BufferedImage.TYPE_INT_ARGB);
 
+				// FileDialog를 열어 저장 경로 및 파일명 지정
+				fileSave.setDirectory(".");
+				fileSave.setVisible(true);
+
+				// 비정상 종료되었을 때
+				if (fileSave.getFile() == null)
+					return;
+
 				try {
+
+					// 캡쳐된 이미지 저장
 					BufferedImage capturedImg = new Robot().createScreenCapture(rec);
-					File temp = new File("screenshot.png");
 
-					ImageIO.write(capturedImg, "png", temp);
+					String fsName = fileSave.getDirectory() + fileSave.getFile();
 
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				} catch (AWTException e1) {
-					e1.printStackTrace();
+					BufferedWriter writer = new BufferedWriter(new FileWriter(fsName));
+
+					writer.write(fileSave.getFile());
+
+					writer.close();
+
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(fileSave, "저장 오류");
 				}
 
 			}
 		});
-
 		JButton settingbtn = new JButton("설정");
 		settingbtn.setSize(60, 20);
 		settingbtn.setLocation(425, 15);
@@ -219,17 +387,18 @@ public class GameRoom extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setting = new Setting(u);
+				// setting = new Setting(u);
+				System.out.println("세팅창 미구현");
 
 			}
 		});
 		// 채팅----------------------------------------------------------------------
-		JTextArea chatOutput = new JTextArea();
+		chatOutput = new JTextArea();
 		chatOutput.setBackground(Color.WHITE);
 		chatOutput.setEditable(false);
 		roomCenter.add(chatOutput);
 
-		JTextField chatInput = new JTextField(15);
+		chatInput = new JTextField(15);
 		chatInput.setSize(500, 30);
 		chatInput.setLocation(0, 690);
 		roomCenter.add(chatInput);
@@ -249,11 +418,12 @@ public class GameRoom extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String text = chatInput.getText();
+				String msg = chatInput.getText();
 
 				// 채팅입력 출력하기
-				if (!text.isEmpty()) {
-					chatOutput.append(text + "\n");
+				if (!msg.isEmpty()) {
+					((Sender) sender).sendAllMsg(msg, roomName);
+					chatOutput.append(userId + " >> " + msg + "\n");
 					chatOutput.setCaretPosition(chatOutput.getDocument().getLength());
 					chatInput.setText(null);
 					chatInput.requestFocus();
@@ -267,10 +437,13 @@ public class GameRoom extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String text = chatInput.getText();
+				String msg = chatInput.getText();
 
-				if (!text.isEmpty()) {
-					chatOutput.append(text + "\n");
+				if (!msg.isEmpty()) {
+					// chatOutput이 textArea
+					// chatInput이 textField
+					((Sender) sender).sendAllMsg(msg, roomName);
+					chatOutput.append(msg + "\n");
 					chatOutput.setCaretPosition(chatOutput.getDocument().getLength());
 					chatInput.setText(null);
 					chatInput.requestFocus();
@@ -394,7 +567,12 @@ public class GameRoom extends JFrame {
 		user8.add(userCtn);
 		roomRight.add(user8);
 
-		// 게임시작
+		JButton exitbtn = new JButton("나가기");
+		exitbtn.setSize(80, 40);
+		exitbtn.setLocation(150, 670);
+		roomRight.add(exitbtn);
+
+// 게임시작
 		// 버튼=========================================================================================
 		JButton startBtn = new JButton("게임 시작");
 		startBtn.setSize(190, 40);
@@ -405,20 +583,23 @@ public class GameRoom extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("test");
 				toolPane.revalidate();
 				time--;
+
 				try {
 					Thread.sleep(1000);
+
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
 
 				timer.setText((time / 60) + " : " + (time % 60));
-				System.out.println((time / 60) + " : " + (time % 60));
+
 				if (time == 0) {
 					timerT.stop();
+					time = 180;
 				}
+
 			}
 		});
 
@@ -430,25 +611,29 @@ public class GameRoom extends JFrame {
 				timer.setText((time / 60) + " : " + (time % 60));
 			}
 		});
-
-		// 나가기 버튼
-		// 클릭=======================================================================================
-		JButton exitbtn = new JButton("나가기");
-		exitbtn.setSize(80, 40);
-		exitbtn.setLocation(150, 670);
-		roomRight.add(exitbtn);
-
+		// 나가기 버튼 클릭
 		exitbtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				((Sender) sender).exitRoom(roomName, userId);
 				dispose();
-
+				mainFrame.setVisible(true);
 			}
 		});
 
-		// 신고하기
-		// 버튼=========================================================================================
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				JFrame frame = (JFrame) e.getWindow();
+				((Sender) sender).exitRoom(roomName, userId);
+				frame.dispose();
+				mainFrame.setVisible(true);
+			}
+		});
+
+		// 신고하기 버튼
 		JButton report = new JButton("신고하기");
 		report.setSize(90, 40);
 		report.setLocation(40, 670);
@@ -491,18 +676,16 @@ public class GameRoom extends JFrame {
 		reportOk.setLocation(170, 420);
 		reportDialog.add(reportOk);
 
-		// 신고하기
-		// 버튼===============================================================================================
 		JButton reportCancel = new JButton("취소");
 		reportCancel.setSize(60, 30);
 		reportCancel.setLocation(250, 420);
 		reportDialog.add(reportCancel);
 
+		// 신고하기 버튼
 		report.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				reportDialog.setVisible(true);
 
 			}
@@ -513,7 +696,7 @@ public class GameRoom extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!reportNameText.getText().isEmpty() && !reportReasonText.getText().isEmpty()) {
+				if (!reportNameText.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "신고 완료되었습니다.");
 					reportDialog.dispose();
 				} else {
@@ -663,7 +846,35 @@ public class GameRoom extends JFrame {
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 
-	public static void main(String[] args) {
-		new GameRoom();
+	public void appendChat(String msg) {
+		chatOutput.append(msg + "\n");
+		chatOutput.setCaretPosition(chatOutput.getDocument().getLength());
+		chatInput.setText(null);
+		chatInput.requestFocus();
+	}
+
+	public void dragMouse(int sX, int sY, Color color, float stroke) {
+		tmp.add(new TempPoint(sX, sY));
+		g = canvasPanel.getGraphics();
+		g2 = (Graphics2D) g;
+		g2.setStroke(new BasicStroke(stroke, BasicStroke.CAP_ROUND, 0));
+		g.setColor(color);
+		g.drawLine(sX, sY, eX, eY);
+		eX = sX;
+		eY = sY;
+	}
+
+	public void pressMouse(int eX, int eY) {
+		this.eX = eX;
+		this.eY = eY;
+		tmp.add(new TempPoint(eX, eY));
+	}
+
+	public void releaseMouse(/* int eX, int eY */) {
+		/*
+		 * this.eX = eX; this.eY = eY;
+		 */
+		list.add(tmp);
+		tmp = new Vector<TempPoint>();
 	}
 }
