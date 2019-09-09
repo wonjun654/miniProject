@@ -1,6 +1,5 @@
 package com.kh.run;
 
-import com.kh.user.model.vo.User;
 import com.kh.user.view.UserMenu;
 
 public class Run {

@@ -207,6 +207,26 @@ public class MainMenu extends JFrame implements MouseListener{
 		rbtn.setSize(235, 48);
 		rbtn.setFocusPainted(false);
 		rbtn.setContentAreaFilled(false);
+		
+		RoundButton make = new RoundButton("방생성");
+		make.setBounds(850, 200, 80, 30);
+		make.setFocusPainted(false);
+		make.setContentAreaFilled(false);
+		
+		RoundButton in = new RoundButton("방입장");
+		in.setBounds(850, 250, 80, 30);
+		in.setFocusPainted(false);
+		in.setContentAreaFilled(false);
+		
+		in.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GameRoom gr = new GameRoom();
+				dispose();
+				
+			}
+		});
 
 		JButton questbtn = new JButton(new ImageIcon(questimg));
 		questbtn.setLocation(750, 600);
@@ -320,7 +340,8 @@ public class MainMenu extends JFrame implements MouseListener{
 		this.add(timerImg);
 		this.add(chosunglbl);
 		this.add(timerlbl);
-		
+		this.add(make);
+		this.add(in);
 	
 		this.add(bgPan);
 

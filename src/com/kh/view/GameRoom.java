@@ -66,6 +66,7 @@ public class GameRoom extends JFrame {
 	float stroke = 1;
 	boolean isDraw = false;
 
+
 Font copyfont = new Font("고딕", Font.PLAIN, 10);
 Font timerFont = new Font("고딕", Font.BOLD, 18);
 	Robot robot;
@@ -75,17 +76,21 @@ Font timerFont = new Font("고딕", Font.BOLD, 18);
 	
 	
 
+
 	public GameRoom(Thread sender, Thread receiver, String userId, String roomName) {
 		this.userId = userId;
 		this.roomName = roomName;
 		this.sender = sender;
 		this.receiver = receiver;
+    
+
 
 	}
 
 	public void doGame(JFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		mainFrame.dispose();
+
 
 		this.setTitle(roomName);
 		this.setLayout(null);
@@ -344,6 +349,7 @@ Font timerFont = new Font("고딕", Font.BOLD, 18);
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+
 				Robot robot;
 				// 윈도우기준 패널위치 잡아서 범위로 지정
 				Rectangle rec = new Rectangle(paint.getLocationOnScreen().x, paint.getLocationOnScreen().y, 480, 480);
@@ -376,6 +382,7 @@ Font timerFont = new Font("고딕", Font.BOLD, 18);
 					JOptionPane.showMessageDialog(fileSave, "저장 오류");
 				}
 
+r
 			}
 		});
 		JButton settingbtn = new JButton("설정");
@@ -572,6 +579,7 @@ Font timerFont = new Font("고딕", Font.BOLD, 18);
 		exitbtn.setLocation(150, 670);
 		roomRight.add(exitbtn);
 
+
 // 게임시작
 		// 버튼=========================================================================================
 		JButton startBtn = new JButton("게임 시작");
@@ -611,6 +619,7 @@ Font timerFont = new Font("고딕", Font.BOLD, 18);
 				timer.setText((time / 60) + " : " + (time % 60));
 			}
 		});
+
 		// 나가기 버튼 클릭
 		exitbtn.addActionListener(new ActionListener() {
 

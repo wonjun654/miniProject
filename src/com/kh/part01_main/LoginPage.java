@@ -1,18 +1,14 @@
 package com.kh.part01_main;
 
 import java.awt.Color;
-import java.awt.Dialog;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -55,7 +51,7 @@ public class LoginPage extends JFrame {
 		bgPan.setSize(1024, 768);
 		bgPan.setBackground(new Color(195, 245, 230));
 		// 배경 이미지 삽입
-		icon = new ImageIcon("images//login.PNG");
+		icon = new ImageIcon("images//login.png");
 		JPanel panel = new JPanel() {
 			public void paintComponent(Graphics g) {
 				g.drawImage(icon.getImage(), 0, 0, null);

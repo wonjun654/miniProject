@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -30,6 +31,7 @@ public class JoinPage extends JFrame {
 	JPanel bgPan = new JPanel();
 	UserManager um = new UserManager();
 	String str = "";
+	int cnt = 0;
 
 	public JoinPage() {
 
@@ -66,6 +68,20 @@ public class JoinPage extends JFrame {
 		RoundButton btnNewButton = new RoundButton("중복확인");
 		btnNewButton.setBounds(525, 240, 97, 31);
 		add(btnNewButton);
+
+		btnNewButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cnt++;
+				if (um.DuplicateCheck(idtextField.getText())) {
+					JOptionPane.showMessageDialog(null, "이미 존재하는 ID입니다.");
+					idtextField.setText(null);
+				} else {
+					JOptionPane.showMessageDialog(null, "사용 가능한 ID입니다.");
+				}
+			}
+		});
 
 		// 비밀번호
 		JLabel pwLabel = new JLabel("비밀번호 : ");
@@ -149,37 +165,72 @@ public class JoinPage extends JFrame {
 
 		JTextField emailTextField = new JTextField();
 		emailTextField.setColumns(10);
-		emailTextField.setBounds(249, 460, 263, 30);
+		emailTextField.setBounds(249, 460, 190, 30);
 		add(emailTextField);
+
+		JLabel atLabel = new JLabel("@");
+		atLabel.setBounds(442, 465, 15, 15);
+		add(atLabel);
+
+		JTextField domainTextField = new JTextField();
+		domainTextField.setColumns(10);
+		domainTextField.setBounds(460, 460, 160, 30);
+		add(domainTextField);
+
+		String[] domain = { "직접 입력", "naver.com", "gmail.com" };
+		JComboBox<String> emailList = new JComboBox<>(domain);
+		emailList.setSelectedIndex(0);
+
+		emailList.setBounds(620, 460, 150, 30);
+		add(emailList);
+
+		emailList.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JComboBox<String> temp = (JComboBox<String>) e.getSource();
+				if (((String) temp.getSelectedItem()).equals("직접 입력")) {
+					domainTextField.setText(null);
+				} else {
+					domainTextField.setText((String) temp.getSelectedItem());
+				}
+			}
+		});
 
 		// 가입완료 버튼_가입 완료 팝업창 후 로그인화면
 		RoundButton CompleteBtn = new RoundButton("가입완료");
 		CompleteBtn.setBounds(254, 527, 118, 42);
 		add(CompleteBtn);
+		dispose();
 
 		// 나가기 _ 로그인화면
 		RoundButton exitBtn = new RoundButton("나가기");
 		exitBtn.setBounds(394, 527, 118, 42);
 		add(exitBtn);
+		dispose();
 
 		CompleteBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "회원가입에 감사드립니다. \n 환영합니다!!!");
-				str += idtextField.getText() + ":";
+				if (cnt > 0) {
+					JOptionPane.showMessageDialog(null, "회원가입에 감사드립니다. \n 환영합니다!!!");
+					str += idtextField.getText() + ":";
 
-				char[] tempPassword = pwTextField.getPassword();
-				String pwd = "";
-				for (int i = 0; i < tempPassword.length; i++) {
-					pwd += tempPassword[i];
-				}				
-				str += pwd + ":";
-				
-				str += nameTextField.getText() + ":";
-				str += emailTextField.getText();
-				um.signUp(str);
-				
+					char[] tempPassword = pwTextField.getPassword();
+					String pwd = "";
+					for (int i = 0; i < tempPassword.length; i++) {
+						pwd += tempPassword[i];
+					}
+					str += pwd + ":";
+
+					str += nameTextField.getText() + ":";
+					str += emailTextField.getText() + "@" + domainTextField.getText();
+					um.signUp(str);
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "ID 중복 확인은 필수사항입니다.");
+				}
 			}
 		});
 
