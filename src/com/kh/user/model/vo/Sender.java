@@ -7,14 +7,16 @@ import java.net.Socket;
 
 public class Sender extends Thread {
 	Socket socket;
-	ObjectOutputStream out;
+//	ObjectOutputStream out;
+	DataOutputStream out;
 	String userId;
 	String roomName;
 	
 	public Sender(Socket socket) { // Ŭ���̾�Ʈ�� ���ϰ� ���̵�
 		this.socket = socket;
 		try {
-			out = new ObjectOutputStream(new DataOutputStream(socket.getOutputStream()));
+//			out = new ObjectOutputStream(new DataOutputStream(socket.getOutputStream()));
+			out = new DataOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
 			System.out.println("Sender ������ Exception �߻�");
 			e.printStackTrace();
@@ -72,7 +74,17 @@ public class Sender extends Thread {
 		}
     }
 	
-	public void exitRoom(String roomName, String userId) {
+	public void sendMainRoomMsg(String msg) {
+		try {
+			out.writeUTF("sendMainRoomMsg:::" + msg + ",/" + userId);
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void exitRoom(String roomName) {
     	try {
 			out.writeUTF("exitRoom:::" + roomName + ",/" + userId);
 			out.flush();
@@ -126,6 +138,17 @@ public class Sender extends Thread {
 			out.flush();
 		} catch(IOException e) {
 			System.out.println("회원가입 Exception");
+			e.printStackTrace();
+		}
+	}
+	
+	public void sendLogin(String msg, String userId) {
+		try {
+			this.userId = userId;
+			out.writeUTF("login:::" + msg);
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -7,12 +7,18 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.util.Timer;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -62,6 +68,9 @@ public class GameRoom extends JFrame {
 	ColorSelectionModel model;
 	Vector<Vector> list = new Vector<Vector>();
 	Vector<TempPoint> tmp = new Vector<TempPoint>();
+	
+	MainMenu mm;
+	
 	int sX, sY, eX, eY;
 	float stroke = 1;
 	boolean isDraw = false;
@@ -82,15 +91,14 @@ Font timerFont = new Font("고딕", Font.BOLD, 18);
 		this.roomName = roomName;
 		this.sender = sender;
 		this.receiver = receiver;
-    
+		
 
 
 	}
 
-	public void doGame(JFrame mainFrame) {
-		this.mainFrame = mainFrame;
-		mainFrame.dispose();
-
+	public void doGame(MainMenu mm) {
+		this.mm = mm;
+		mm.dispose();
 
 		this.setTitle(roomName);
 		this.setLayout(null);
@@ -344,7 +352,7 @@ Font timerFont = new Font("고딕", Font.BOLD, 18);
 		capture.setLocation(20, 15);
 		roomCenter.add(capture);
 
-		capture.addActionListener(new ActionListener() {
+		/*capture.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -384,7 +392,7 @@ Font timerFont = new Font("고딕", Font.BOLD, 18);
 
 r
 			}
-		});
+		});*/
 		JButton settingbtn = new JButton("설정");
 		settingbtn.setSize(60, 20);
 		settingbtn.setLocation(425, 15);
@@ -574,10 +582,10 @@ r
 		user8.add(userCtn);
 		roomRight.add(user8);
 
-		JButton exitbtn = new JButton("나가기");
-		exitbtn.setSize(80, 40);
-		exitbtn.setLocation(150, 670);
-		roomRight.add(exitbtn);
+		JButton exitBtn = new JButton("나가기");
+		exitBtn.setSize(80, 40);
+		exitBtn.setLocation(150, 670);
+		roomRight.add(exitBtn);
 
 
 // 게임시작
@@ -587,7 +595,7 @@ r
 		startBtn.setLocation(40, 610);
 		roomRight.add(startBtn);
 
-		timerT = new Timer(time, new ActionListener() {
+	/*	timerT = new Timer(time, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -618,16 +626,16 @@ r
 				timerT.start();
 				timer.setText((time / 60) + " : " + (time % 60));
 			}
-		});
+		});*/
 
 		// 나가기 버튼 클릭
-		exitbtn.addActionListener(new ActionListener() {
+		exitBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				((Sender) sender).exitRoom(roomName, userId);
+				((Sender) sender).exitRoom(roomName);
 				dispose();
-				mainFrame.setVisible(true);
+				mm.setVisible(true);
 			}
 		});
 
@@ -636,9 +644,9 @@ r
 			public void windowClosing(WindowEvent e) {
 				// TODO Auto-generated method stub
 				JFrame frame = (JFrame) e.getWindow();
-				((Sender) sender).exitRoom(roomName, userId);
+				((Sender) sender).exitRoom(roomName);
 				frame.dispose();
-				mainFrame.setVisible(true);
+				mm.setVisible(true);
 			}
 		});
 

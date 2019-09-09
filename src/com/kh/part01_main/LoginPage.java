@@ -121,7 +121,7 @@ public class LoginPage extends JFrame {
 		
 
 		// 로그인 버튼
-		/*loginbtn.addActionListener(new ActionListener() {
+		loginbtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -137,7 +137,7 @@ public class LoginPage extends JFrame {
 				}
 				str += pwd;
 
-				if (um.login(str)) {
+				/*if (um.login(str)) {
 					JOptionPane.showMessageDialog(null, "로그인 성공 !");
 					if(um.selectOneUser("123").getTempPwd()==true) {
 						PasswordChange pc = new PasswordChange(u);
@@ -152,10 +152,12 @@ public class LoginPage extends JFrame {
 				} else {
 					JOptionPane.showMessageDialog(null, "ID/PW를 확인해 주세요.");
 					str = "";
-				}
+				}*/
+				((Sender) sender).sendLogin(str, idText.getText());
+				str = "";
 
 			}
-		});*/
+		});
 
 		// 회원가입 연동
 		joinbtn.addActionListener(new ActionListener() {
@@ -201,7 +203,26 @@ public class LoginPage extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
-
+	public void resultSignUp(boolean result) {
+		if(result) {
+			JOptionPane.showMessageDialog(null, "회원가입 성공");
+		} else {
+			JOptionPane.showMessageDialog(null, "회원가입 실패");
+		}
+	}
+	
+	public void resultLogin(boolean result, String userId, String userPw, String userCoin, String userItem2, String userItem1, boolean userMusicSet,
+			Thread sender, Thread receiver) {
+		if (result) {
+			System.out.println("로그인성공" + userId);
+			MainMenu mm = new MainMenu(socket, userId, userPw, userCoin, userItem2, userItem1, userMusicSet,
+					sender, receiver);
+			mm.doMain();
+			this.dispose();
+		} else {
+			JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 맞지않습니다!");
+		}
+	}
 	/*
 	 * public static void main(String[] args) { new LoginPage(); }
 	 */

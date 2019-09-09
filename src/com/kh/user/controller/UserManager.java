@@ -11,7 +11,6 @@ public class UserManager {
 	private UserDao ud = new UserDao();
 
 	public boolean login(String str) {
-		Scanner sc = new Scanner(System.in);
 		ArrayList<User> list = ud.readUserList();
 		String[] user = str.split(":");
 		String userId = user[0];
