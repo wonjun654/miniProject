@@ -55,7 +55,7 @@ public class LoginPage extends JFrame {
 		bgPan.setSize(1024, 768);
 		bgPan.setBackground(new Color(195, 245, 230));
 		// 배경 이미지 삽입
-		icon = new ImageIcon("images//login.PNG");
+		icon = new ImageIcon("images//login.png");
 		JPanel panel = new JPanel() {
 			public void paintComponent(Graphics g) {
 				g.drawImage(icon.getImage(), 0, 0, null);
