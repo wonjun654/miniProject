@@ -41,6 +41,7 @@ public class GameRoom extends JFrame {
 	Timer timerT = null;
 	int time = 180;
 
+	
 	Setting setting;
 
 	public GameRoom() {
