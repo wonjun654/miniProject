@@ -66,21 +66,31 @@ public class GameRoom extends JFrame {
 	float stroke = 1;
 	boolean isDraw = false;
 
-	// User u = new User();
-	Font copyfont = new Font("고딕", Font.PLAIN, 10);
-	// Setting setting;
+
+Font copyfont = new Font("고딕", Font.PLAIN, 10);
+Font timerFont = new Font("고딕", Font.BOLD, 18);
+	Robot robot;
+	JPanel bgPan = new JPanel();
+	Timer timerT = null;
+	int time = 180;
+	
+	
+
 
 	public GameRoom(Thread sender, Thread receiver, String userId, String roomName) {
 		this.userId = userId;
 		this.roomName = roomName;
 		this.sender = sender;
 		this.receiver = receiver;
+    
+
 
 	}
 
 	public void doGame(JFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		mainFrame.dispose();
+
 
 		this.setTitle(roomName);
 		this.setLayout(null);
@@ -339,9 +349,42 @@ public class GameRoom extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+
+				Robot robot;
+				// 윈도우기준 패널위치 잡아서 범위로 지정
+				Rectangle rec = new Rectangle(paint.getLocationOnScreen().x, paint.getLocationOnScreen().y, 480, 480);
+				// 범위 지정 크기만큼 이미지 저장
+				BufferedImage bufferedImage = new BufferedImage(paint.getWidth(), paint.getHeight(),
+						BufferedImage.TYPE_INT_ARGB);
+
+				// FileDialog를 열어 저장 경로 및 파일명 지정
+				fileSave.setDirectory(".");
+				fileSave.setVisible(true);
+
+				// 비정상 종료되었을 때
+				if (fileSave.getFile() == null)
+					return;
+
+				try {
+
+					// 캡쳐된 이미지 저장
+					BufferedImage capturedImg = new Robot().createScreenCapture(rec);
+
+					String fsName = fileSave.getDirectory() + fileSave.getFile();
+
+					BufferedWriter writer = new BufferedWriter(new FileWriter(fsName));
+
+					writer.write(fileSave.getFile());
+
+					writer.close();
+
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(fileSave, "저장 오류");
+				}
+
+r
 			}
 		});
-
 		JButton settingbtn = new JButton("설정");
 		settingbtn.setSize(60, 20);
 		settingbtn.setLocation(425, 15);
@@ -535,6 +578,47 @@ public class GameRoom extends JFrame {
 		exitbtn.setSize(80, 40);
 		exitbtn.setLocation(150, 670);
 		roomRight.add(exitbtn);
+
+
+// 게임시작
+		// 버튼=========================================================================================
+		JButton startBtn = new JButton("게임 시작");
+		startBtn.setSize(190, 40);
+		startBtn.setLocation(40, 610);
+		roomRight.add(startBtn);
+
+		timerT = new Timer(time, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				toolPane.revalidate();
+				time--;
+
+				try {
+					Thread.sleep(1000);
+
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+
+				timer.setText((time / 60) + " : " + (time % 60));
+
+				if (time == 0) {
+					timerT.stop();
+					time = 180;
+				}
+
+			}
+		});
+
+		startBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				timerT.start();
+				timer.setText((time / 60) + " : " + (time % 60));
+			}
+		});
 
 		// 나가기 버튼 클릭
 		exitbtn.addActionListener(new ActionListener() {
