@@ -66,14 +66,14 @@ public class UserManager {
 		if (list == null) {
 			list = new ArrayList<User>();
 		}
-		for(int i=0;i<list.size(); i++) {
-			if(list.get(i).getUserId().equals(u.getUserId())) {
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getUserId().equals(u.getUserId())) {
 				list.remove(i);
 				list.add(u);
 				break;
 			}
 		}
-		//list.add(u);
+		// list.add(u);
 
 		int result = ud.addUserList(list);
 
@@ -83,7 +83,7 @@ public class UserManager {
 			System.out.println("유저 정보 수정 실패");
 		}
 	}
-	
+
 	public User selectOneUser(String userId) {
 		ArrayList<User> list = ud.readUserList();
 		User selectedUser = null;
@@ -101,22 +101,22 @@ public class UserManager {
 		} else {
 			return selectedUser;
 		}
-		
+
 		return null;
 	}
 
 	public boolean DuplicateCheck(String userId) {
 		ArrayList<User> list = ud.readUserList();
-		
-		for(int i =0; i<list.size(); i++) {
-			if(list.get(i).getUserId().equals(userId)) {
-				return true;
-			} 
+		if (list != null) {
+			for (int i = 0; i < list.size(); i++) {
+				if (list.get(i).getUserId().equals(userId)) {
+					return true;
+				}
+			}
 		}
-		
 		return false;
 	}
-	
+
 	public String FindId(String email) {
 		ArrayList<User> list = ud.readUserList();
 
