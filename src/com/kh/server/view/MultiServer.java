@@ -364,7 +364,7 @@ public class MultiServer implements Serializable{
 				} // while()---------
 			} catch(SocketException e) {
 				clientMap.remove(userId);
-				System.out.println(userId + "����!");
+				System.out.println(userId + "퇴장 !");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
