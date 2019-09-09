@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 import com.kh.user.model.vo.User;
 
@@ -37,8 +38,10 @@ public class GameRoom extends JFrame {
 	Font copyfont = new Font("고딕", Font.PLAIN, 10);
 	Robot robot;
 	JPanel bgPan = new JPanel();
-	timer t = new timer();
+	Timer timerT = null;
+	int time = 180;
 
+	
 	Setting setting;
 
 	public GameRoom() {
@@ -187,9 +190,10 @@ public class GameRoom extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				Robot robot;
-				//윈도우기준 패널위치 잡아서 범위로 지정
+				// 윈도우기준 패널위치 잡아서 범위로 지정
 				Rectangle rec = new Rectangle(paint.getLocationOnScreen().x, paint.getLocationOnScreen().y, 480, 480);
-				BufferedImage bufferedImage = new BufferedImage(rec.width, rec.height, BufferedImage.TYPE_INT_ARGB);
+				BufferedImage bufferedImage = new BufferedImage(paint.getWidth(), paint.getHeight(),
+						BufferedImage.TYPE_INT_ARGB);
 
 				try {
 					BufferedImage capturedImg = new Robot().createScreenCapture(rec);
@@ -397,27 +401,43 @@ public class GameRoom extends JFrame {
 		startBtn.setLocation(40, 610);
 		roomRight.add(startBtn);
 
+		timerT = new Timer(time, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("test");
+				toolPane.revalidate();
+				time--;
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+
+				timer.setText((time / 60) + " : " + (time % 60));
+				System.out.println((time / 60) + " : " + (time % 60));
+				if (time == 0) {
+					timerT.stop();
+				}
+			}
+		});
+
 		startBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				t.start();
-				timer.setText(t.showSec());
+				timerT.start();
+				timer.setText((time / 60) + " : " + (time % 60));
 			}
 		});
 
-		// while (t.getT() <= 0) {
-		toolPane.revalidate();
-		toolPane.repaint();
-		// }
-
+		// 나가기 버튼
+		// 클릭=======================================================================================
 		JButton exitbtn = new JButton("나가기");
 		exitbtn.setSize(80, 40);
 		exitbtn.setLocation(150, 670);
 		roomRight.add(exitbtn);
 
-		// 나가기 버튼
-		// 클릭=======================================================================================
 		exitbtn.addActionListener(new ActionListener() {
 
 			@Override
