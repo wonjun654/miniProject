@@ -32,7 +32,7 @@ public class LoginPage extends JFrame {
 	String str = "";
 	UserManager um = new UserManager();
 	JPanel bgPan = new JPanel();
-	User u = um.selectOneUser("123");
+	
 	
 	public LoginPage() {
 
@@ -127,9 +127,7 @@ public class LoginPage extends JFrame {
 				if (um.login(str)) {
 					JOptionPane.showMessageDialog(null, "로그인 성공 !");
 					if(um.selectOneUser("123").getTempPwd()==true) {
-						PasswordChange pc = new PasswordChange(u);
-						
-						
+						PasswordChange pc = new PasswordChange(um.selectOneUser("123"));
 						
 					}else {
 					dispose();
