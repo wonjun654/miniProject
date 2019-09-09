@@ -19,6 +19,8 @@ public class MakeRoom extends JFrame {
 	public JTextArea roomPwd2;
 	public RoundButton btnOK;
 	JPanel bgPan = new JPanel();
+	
+	
 
 	public MakeRoom(MainMenu mm) {
 
@@ -70,6 +72,11 @@ public class MakeRoom extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String roomList[][] = new String[][] {{roomName2.getText()},
+						{roomPwd2.getText()},
+						{roomPeople2.getText()}
+			};
+			System.out.println(roomList.toString());	
 			
 			}
 		});
