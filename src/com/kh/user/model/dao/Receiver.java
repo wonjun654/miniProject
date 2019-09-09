@@ -5,14 +5,14 @@ import java.awt.Graphics;
 import java.io.DataInputStream;
 import java.io.ObjectInputStream;
 import java.net.Socket;
-import java.net.SocketException;
 import java.util.Vector;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import com.kh.model.vo.TempPoint;
+import com.kh.part01_main.LoginPage;
 import com.kh.view.GameRoom;
-import com.kh.view.MainMenu;
 
 public class Receiver extends Thread{
 	Socket socket;
@@ -24,32 +24,24 @@ public class Receiver extends Thread{
 	Color color = Color.BLACK;
 	Graphics g;
 	GameRoom game;
-//	MultiClient mc;
-	MainMenu mm;
+	LoginPage lp;
 	JFrame mf;
 	Vector<TempPoint> tmp = new Vector<TempPoint>(); 
 	Vector<Vector> list = new Vector<Vector>();
 
 	// Socket�� �Ű������� �޴� ������.
-	public Receiver(Socket socket, String userId, Thread sender, JFrame mf, MainMenu mm) {
+	public Receiver(Socket socket, Thread sender, LoginPage lp) {
 		this.socket = socket;
-		this.userId = userId;
 		this.sender = sender;
-		this.mf = mf;
-		this.mm = mm;
+		this.lp = lp;
 		
-		try {
-			in = new ObjectInputStream(new DataInputStream(this.socket.getInputStream()));
-		} catch (Exception e) {
-			System.out.println("����:" + e);
-		}
+		
 	}// ������ --------------------
 	
 	@Override
 	public void run() { // run()�޼ҵ� ������
-
-		while (in != null) { // �Է½�Ʈ���� null�� �ƴϸ�..�ݺ�
 			try {
+				while (in != null) { // �Է½�Ʈ���� null�� �ƴϸ�..�ݺ�
 				String msg = in.readUTF();
 				if (msg.startsWith("coordinate")) {
 					String[] tmpMsg = msg.split(":::");
@@ -101,15 +93,18 @@ public class Receiver extends Thread{
 					String fromUserId = tmpMsg[1];
 					game.appendChat(fromUserId + " >> " + receiveMsg);
 
+				} else if(msg.startsWith("signUp")) {
+					String[] tmpMsg = msg.split(":::");
+					boolean result = Boolean.parseBoolean(tmpMsg[1]);
+					if(result) {
+						JOptionPane.showMessageDialog(null, "회원가입 성공");
+					} else {
+						JOptionPane.showMessageDialog(null, "회원가입 실패");
+					}
 				}
-
-			} catch (SocketException e) {
-				System.out.println("������ ����� ������ϴ�. ������ �����մϴ�.");
-				System.exit(0);
-			} catch (Exception e) {
-				System.out.println("���ܹ߻�");
-				e.printStackTrace();
-			}
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
 		} // while----
 	}// run()------
 }

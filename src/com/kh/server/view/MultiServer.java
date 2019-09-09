@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import com.kh.user.controller.UserManager;
 import com.kh.view.GameRoom;
 
 public class MultiServer implements Serializable{
@@ -24,14 +25,16 @@ public class MultiServer implements Serializable{
 	ServerSocket serverSocket;
 	Socket socket;
 	GameRoom game;
-	
-	
+	UserManager um;
+	ObjectOutputStream out;
 	// ������
 	public MultiServer() {
+		um = new UserManager();
 		clientMap = new HashMap<>(); 				// Ŭ���̾�Ʈ�� ��½�Ʈ���� ������ �ؽ��� ����.
 		multiRoom = new HashMap<>();
 		Collections.synchronizedMap(multiRoom);
 		Collections.synchronizedMap(clientMap); // �ؽ��� ����ȭ ����.
+		
 	}// ������----
 
 	public void init() {
@@ -42,9 +45,9 @@ public class MultiServer implements Serializable{
 			while (true) { 															  // ������ ����Ǵ� ���� Ŭ���̾�Ʈ���� ������ ��ٸ�.
 				socket = serverSocket.accept(); 									  // Ŭ���̾�Ʈ�� ������ ��ٸ��ٰ� ������ �Ǹ� Socket��ü�� ����.
 				System.out.println(socket.getInetAddress() + ":" + socket.getPort()); // Ŭ���̾�Ʈ ���� (ip, ��Ʈ) ���
-
 				Thread msr = new MultiServerRec(socket); // ������ ����.
 				msr.start(); 							 // ������ �õ�.
+				
 			}
 
 		} catch (Exception e) {
@@ -287,6 +290,20 @@ public class MultiServer implements Serializable{
 			System.out.println("���¹� ���� �ǤǤǤ� ��� �ĵ������ϳ�! ���߷Ҿ�!");
 		}
 	}
+	
+	public void sendSignUp(String msg) {
+		String[] tmpMsg = msg.split(":::");
+		System.out.println(tmpMsg[1]);
+		boolean result = um.signUp(tmpMsg[1]);
+		
+		try {
+			out = new ObjectOutputStream(new DataOutputStream(socket.getOutputStream()));
+			out.writeUTF("signUp:::" + result);
+			out.flush();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
 	// ----// ���� Ŭ���� //--------//
 
 	// Ŭ���̾�Ʈ�κ��� �о�� �޽����� �ٸ� Ŭ���̾�Ʈ(socket)�� ������ ������ �ϴ� �޼���
@@ -341,6 +358,8 @@ public class MultiServer implements Serializable{
 					} else if(msg.startsWith("sendAllMsg")) {	//���ӹ�޼���
 						System.out.println(msg);
 						sendAllMsg(msg);
+					} else if(msg.startsWith("signUp")) {
+						sendSignUp(msg);
 					}
 				} // while()---------
 			} catch(SocketException e) {

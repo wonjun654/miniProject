@@ -11,9 +11,8 @@ public class Sender extends Thread {
 	String userId;
 	String roomName;
 	
-	public Sender(Socket socket, String userId) { // Ŭ���̾�Ʈ�� ���ϰ� ���̵�
+	public Sender(Socket socket) { // Ŭ���̾�Ʈ�� ���ϰ� ���̵�
 		this.socket = socket;
-		this.userId = userId;
 		try {
 			out = new ObjectOutputStream(new DataOutputStream(socket.getOutputStream()));
 		} catch (IOException e) {
@@ -25,13 +24,13 @@ public class Sender extends Thread {
 	@Override
 	public void run() { // run()�޼ҵ� ������
 		// ������ �Է��� ������̸��� �����ش�.
-		try {
+		/*try {
 			out.writeUTF("login:::" + userId);
 			out.flush();
 		} catch (IOException e) {
 			System.out.println("�α��� Exception!!! : ");
 			e.printStackTrace();
-		}
+		}*/
 	}// run()------
 
 	public void sendCoordinate(int x, int y, int sendColor, float stroke, String roomName) {
@@ -117,6 +116,16 @@ public class Sender extends Thread {
 			out.flush();
 		} catch (IOException e) {
 			System.out.println("������ Exception!!!");
+			e.printStackTrace();
+		}
+	}
+	
+	public void sendSignUp(String msg) {
+		try {
+			out.writeUTF("signUp:::" + msg);
+			out.flush();
+		} catch(IOException e) {
+			System.out.println("회원가입 Exception");
 			e.printStackTrace();
 		}
 	}

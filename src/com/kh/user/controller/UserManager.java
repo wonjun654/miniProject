@@ -28,7 +28,7 @@ public class UserManager {
 		return false;
 	}
 
-	public void signUp(String str) {
+	public boolean signUp(String str) {
 		User u = null;
 
 		String[] user = str.split(":");
@@ -40,10 +40,10 @@ public class UserManager {
 
 		u = new User(userId, userPwd, userName, email);
 
-		insertUser(u);
+		return insertUser(u);
 	}
 
-	public void insertUser(User u) {
+	public boolean insertUser(User u) {
 		ArrayList<User> list = ud.readUserList();
 
 		if (list == null) {
@@ -55,8 +55,10 @@ public class UserManager {
 
 		if (result > 0) {
 			System.out.println("유저 추가 성공");
+			return true;
 		} else {
 			System.out.println("유저 추가 실패");
+			return false;
 		}
 	}
 

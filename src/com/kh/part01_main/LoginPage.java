@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.Socket;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -21,6 +22,8 @@ import com.kh.part03_ID.FindID;
 import com.kh.part03_password.FindPassword;
 import com.kh.part03_password.PasswordChange;
 import com.kh.user.controller.UserManager;
+import com.kh.user.model.dao.Receiver;
+import com.kh.user.model.vo.Sender;
 import com.kh.user.model.vo.User;
 import com.kh.view.MainMenu;
 import com.kh.view.RoundButton;
@@ -30,12 +33,22 @@ import com.kh.view.RoundButton;
 public class LoginPage extends JFrame {
 	ImageIcon icon;
 	String str = "";
-	UserManager um = new UserManager();
+	String userId;
+//	UserManager um = new UserManager();
 	JPanel bgPan = new JPanel();
-	User u = um.selectOneUser("123");
+//	User u = um.selectOneUser(userId);
+	Socket socket;
+	Thread sender;
+	Thread receiver;
 	
-	public LoginPage() {
-
+	public LoginPage(Socket socket) {
+		this.socket = socket;
+		sender = new Sender(socket);
+		receiver = new Receiver(socket, sender, this);
+		
+		sender.start();
+		receiver.start();
+		
 		this.setSize(1024, 768);
 		setTitle("KH치 마인드");
 		try {
@@ -108,7 +121,7 @@ public class LoginPage extends JFrame {
 		
 
 		// 로그인 버튼
-		loginbtn.addActionListener(new ActionListener() {
+		/*loginbtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -142,14 +155,14 @@ public class LoginPage extends JFrame {
 				}
 
 			}
-		});
+		});*/
 
 		// 회원가입 연동
 		joinbtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JoinText jt = new JoinText();
+				JoinPage jp = new JoinPage(sender, receiver);
 
 			}
 		});
