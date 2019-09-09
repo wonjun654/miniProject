@@ -108,12 +108,13 @@ public class UserManager {
 	public boolean DuplicateCheck(String userId) {
 		ArrayList<User> list = ud.readUserList();
 		
+		if (list !=null) {
 		for(int i =0; i<list.size(); i++) {
 			if(list.get(i).getUserId().equals(userId)) {
 				return true;
 			} 
 		}
-		
+		}
 		return false;
 	}
 	

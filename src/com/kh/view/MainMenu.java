@@ -1,25 +1,32 @@
 package com.kh.view;
 
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 import com.kh.model.vo.MediaTest;
@@ -51,7 +58,8 @@ public class MainMenu extends JFrame implements MouseListener{
 	JTable table1;
 	DefaultTableModel model1;
 	MakeRoom mr;
-	
+	private Vector data = null;	
+	ArrayList list = new ArrayList<>();
 	
 
 //	String col1[] = { "안녕하세요", "반갑습니다", "수고하세요" };
@@ -62,7 +70,12 @@ public class MainMenu extends JFrame implements MouseListener{
 	String contents[][] = {
 			                { "안녕하세요", "게임중", "4/4" },
 							{ "안녕하세요", "대기중", "3/8" },
-							{ "안녕하세요", "대기중", "3/8" }};
+							{ "안녕하세요", "대기중", "3/8" },
+							
+							
+							
+			
+	};
 
 	public MainMenu() {
 
@@ -113,8 +126,6 @@ public class MainMenu extends JFrame implements MouseListener{
 		
 		model1 = new DefaultTableModel(contents, header) {
 			
-			private static final long serialVersionUID = 1L;
-
 			public boolean isCellEditable(int i, int c) {
 				return false;
 			}
@@ -129,8 +140,7 @@ public class MainMenu extends JFrame implements MouseListener{
 		this.add(scPanel);
 		this.pack();
 		
-
-				
+		
 		
 		
 		
@@ -218,11 +228,103 @@ public class MainMenu extends JFrame implements MouseListener{
 		in.setFocusPainted(false);
 		in.setContentAreaFilled(false);
 		
+		Dialog makeRoomDialog = new Dialog(this, "방만들기", true);
+		makeRoomDialog.setBounds(600, 500, 600, 500);
+		makeRoomDialog.setLayout(null);
+		
+		
+		
+		JLabel roomName = new JLabel("방제목");
+		JLabel roomPwd = new JLabel("방암호");
+		JLabel roomPeople = new JLabel("인원수");
+
+		roomName.setBounds(125, 150, 75, 35);
+		roomPwd.setBounds(125, 200, 75, 35);
+		roomPeople.setBounds(125, 250, 75, 35);
+
+		JTextArea roomName2 = new JTextArea();
+		JTextArea roomPwd2 = new JTextArea();
+		JTextArea roomPeople2 = new JTextArea();
+		roomName2.setBounds(175, 150, 175, 25);
+		roomPwd2.setEnabled(false);
+		roomPwd2.setEditable(false);
+		roomPwd2.setBounds(175, 200, 175, 25);
+		roomPeople2.setBounds(175, 250, 175, 25);
+
+		SpinnerModel numberModel = new SpinnerNumberModel(4, 4, 8, 1);
+		JSpinner selectPeople = new JSpinner(numberModel);
+		selectPeople.setBounds(175, 250, 175, 25);
+
+		RoundButton btnOK = new RoundButton("확인");
+		RoundButton btnCancel = new RoundButton("취소");
+		btnOK.setBounds(250, 300, 100, 35);
+		btnCancel.setBounds(375, 300, 100, 35);
+
+		JCheckBox checkSecret = new JCheckBox();
+		checkSecret.setBounds(360, 185, 50, 50);
+		
+		makeRoomDialog.add(roomPeople);
+		makeRoomDialog.add(roomPwd);
+		makeRoomDialog.add(roomName);
+		makeRoomDialog.add(roomName2);
+		makeRoomDialog.add(roomPwd2);
+		makeRoomDialog.add(selectPeople);
+		makeRoomDialog.add(btnOK);
+		makeRoomDialog.add(btnCancel);
+		makeRoomDialog.add(checkSecret);
+		
+		
+		makeRoomDialog.setLocationRelativeTo(null);
+
+		
+		btnCancel.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				makeRoomDialog.dispose();
+				
+			}
+		});
+		btnOK.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				model1.insertRow(0, new Object[] {roomName2.getText(), roomPwd2.getText(),selectPeople.getValue() });
+				table1.updateUI();
+				makeRoomDialog.dispose();
+				
+			}
+		});
+		
+		checkSecret.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (checkSecret.isSelected()) {
+					roomPwd2.setEditable(true);
+					roomPwd2.setEnabled(true);
+
+				} else {
+					roomPwd2.setEditable(false);
+					roomPwd2.setEnabled(false);
+				}
+
+			}
+		});
+		
+		make.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				makeRoomDialog.setVisible(true);
+			}
+		});
+		
 		in.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GameRoom gr = new GameRoom();
 				dispose();
 				
 			}
@@ -385,6 +487,8 @@ public class MainMenu extends JFrame implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+
+
 	
 
 	
