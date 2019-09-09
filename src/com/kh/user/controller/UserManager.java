@@ -1,6 +1,5 @@
 package com.kh.user.controller;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -62,7 +61,6 @@ public class UserManager {
 	}
 
 	public void updateUser(User u) {
-		System.out.println("updateuser");	
 		ArrayList<User> list = ud.readUserList();
 
 		if (list == null) {
@@ -87,7 +85,6 @@ public class UserManager {
 	}
 	
 	public User selectOneUser(String userId) {
-		System.out.println("selectoneuser");
 		ArrayList<User> list = ud.readUserList();
 		User selectedUser = null;
 
@@ -102,13 +99,24 @@ public class UserManager {
 		if (selectedUser == null) {
 			System.out.println("해당 아이디가 없습니다.");
 		} else {
-			//System.out.println(selectedUser);
 			return selectedUser;
 		}
 		
 		return null;
 	}
 
+	public boolean DuplicateCheck(String userId) {
+		ArrayList<User> list = ud.readUserList();
+		
+		for(int i =0; i<list.size(); i++) {
+			if(list.get(i).getUserId().equals(userId)) {
+				return true;
+			} 
+		}
+		
+		return false;
+	}
+	
 	public String FindId(String email) {
 		ArrayList<User> list = ud.readUserList();
 
