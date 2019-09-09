@@ -156,11 +156,13 @@ public class JoinPage extends JFrame {
 		RoundButton CompleteBtn = new RoundButton("가입완료");
 		CompleteBtn.setBounds(254, 527, 118, 42);
 		add(CompleteBtn);
+		dispose();
 
 		// 나가기 _ 로그인화면
 		RoundButton exitBtn = new RoundButton("나가기");
 		exitBtn.setBounds(394, 527, 118, 42);
 		add(exitBtn);
+		dispose();
 
 		CompleteBtn.addActionListener(new ActionListener() {
 
