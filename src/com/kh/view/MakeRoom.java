@@ -3,22 +3,29 @@ package com.kh.view;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 
-public class MakeRoom extends JFrame {
+import com.kh.user.controller.UserManager;
+
+public class MakeRoom extends JFrame{
 
 	public JTextArea roomName2;
-	public JTextArea roomPwd2;
+	public JPasswordField roomPwd2;
 	public RoundButton btnOK;
 	JPanel bgPan = new JPanel();
+	Vector<String> userRow = null;
+	UserManager um =new UserManager();
+	
 	
 	
 
@@ -72,15 +79,13 @@ public class MakeRoom extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String roomList[][] = new String[][] {{roomName2.getText()},
-						{roomPwd2.getText()},
-						{roomPeople2.getText()}
-			};
-			System.out.println(roomList.toString());	
-			
+				mm.model1.insertRow(0, new Object[] {roomName2.getText()});
+				
 			}
 		});
-
+		
+		
+		
 		checkSecret.addActionListener(new ActionListener() {
 
 	@Override
@@ -97,8 +102,11 @@ public class MakeRoom extends JFrame {
 	}
 });
 
-this.add(roomPeople);this.add(roomPwd);this.add(roomName);this.add(roomName2);this.add(roomPwd2);this.add(selectPeople);this.add(btnOK);this.add(btnCancel);this.add(checkSecret);this.setVisible(true);this.setLocationRelativeTo(null);this.add(bgPan);
+		this.add(roomPeople);this.add(roomPwd);this.add(roomName);this.add(roomName2);this.add(roomPwd2);this.add(selectPeople);this.add(btnOK);this.add(btnCancel);this.add(checkSecret);this.setVisible(true);this.setLocationRelativeTo(null);this.add(bgPan);
 
 }
+
+
+	
 
 }
