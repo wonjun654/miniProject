@@ -316,6 +316,8 @@ public class MainMenu extends JFrame implements MouseListener {
 				String people = selectPeople.getValue() + "";
 				model1.insertRow(0, new Object[] { roomName2.getText(), roomPwd2.getText(), selectPeople.getValue() });
 				((Sender) sender).sendCreateRoom(roomName, roomPw, people);
+				((Sender) sender).sendRoomInfo(roomName, roomPw, people);
+				
 
 				table1.updateUI();
 				makeRoomDialog.dispose();
