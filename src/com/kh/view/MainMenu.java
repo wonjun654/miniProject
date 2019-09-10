@@ -413,8 +413,6 @@ public class MainMenu extends JFrame implements MouseListener{
 
 
 		MediaTest.musicOff();
-
-
 		MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
 		this.add(listPan);
 

@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,8 +26,9 @@ public class Setting extends JFrame {
 
 	public Setting(User user) {
 		Font font = new Font("고딕", Font.BOLD, 18);
-
+		this.setResizable(false);
 		this.setBounds(800, 300, 400, 400);
+		
 		try {
 			this.setIconImage(ImageIO.read(new File("images//logo.PNG")));
 		} catch (IOException e) {
@@ -80,14 +82,27 @@ public class Setting extends JFrame {
 		musicOn.setSize(50, 50);
 		musicOn.setLocation(160, 45);
 		musicOn.setBackground(new Color(195, 245, 230));
-
+		musicOn.isSelected();
 		musicOff.setSize(50, 50);
 		musicOff.setLocation(260, 45);
 		musicOff.setBackground(new Color(195, 245, 230));
-
+		
+		if(user.getMusicSet()==true) {
+			musicOn.setSelected(true);
+		}else {
+			musicOff.setSelected(true);
+		}
+		
+		if(user.getProfile()==true) {
+			profileOn.setSelected(true);
+		}else {
+			profileOff.setSelected(true);
+		}
+		
+		
 		ButtonGroup profilegroup = new ButtonGroup();
 		ButtonGroup musicgroup = new ButtonGroup();
-
+		
 		profilegroup.add(profileOn);
 		profilegroup.add(profileOff);
 		musicgroup.add(musicOn);
@@ -107,25 +122,9 @@ public class Setting extends JFrame {
 				
 			}
 		});
-		// ------------------프로필오프----------------
-		profileOff.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				user.setProfile(false);
-
-			}
-		});
-		// -----------------------프로필 온----------------
-
-		profileOn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				user.setProfile(true);
-
-			}
-		});
+		
+		
+		
 		// 확인버튼 -----------------------------------------
 		button.addActionListener(new ActionListener() {
 
@@ -145,6 +144,22 @@ public class Setting extends JFrame {
 					um.updateUser(user);
 					MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
 				}
+				
+				if (profileOn.isSelected() == true) {
+					user.setProfile(true);
+
+				} else if (profileOn.isSelected() == false) {
+					user.setProfile(false);
+
+				}
+
+				if (profileOn.isSelected() == true && user.getProfile() == true) {
+
+				} else {
+				
+					///asd///
+				}
+				um.updateUser(user);
 				dispose();
 			}
 		});
