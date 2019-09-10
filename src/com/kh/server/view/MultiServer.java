@@ -24,12 +24,13 @@ public class MultiServer implements Serializable{
 	HashMap<String, DataOutputStream> clientMap;
 //	HashMap<String, HashMap<String, ObjectOutputStream>> multiRoom;
 	HashMap<String, HashMap<String, DataOutputStream>> multiRoom;
-	HashMap<Integer, DataOutputStream> loginMap;
-	ArrayList<Object> arrRoom;
+	HashMap<Integer, DataOutputStream> loginMap;	
+	ArrayList<String> arrRoom = new ArrayList<String>();
+	
 	ServerSocket serverSocket;
 	Socket socket;
 	GameRoom game;
-	UserManager um;
+	UserManager um;	
 //	ObjectOutputStream out;
 //	DataOutputStream out;
 	// ������
@@ -299,14 +300,13 @@ public class MultiServer implements Serializable{
 	
 	public void sendRoomInfo(String msg) {
 		String[] tmpMsg = msg.split(":::");
-		tmpMsg = tmpMsg[1].split(",/");
-		
+		arrRoom.add(tmpMsg[1]);	
 		Iterator iter = clientMap.keySet().iterator();
 		while(iter.hasNext()) {
 			String key = (String) iter.next();		
 				DataOutputStream iterOut = (DataOutputStream) clientMap.get(key);
 				try {
-					iterOut.writeUTF("sendRoomInfo:::" + tmpMsg);
+					iterOut.writeUTF("sendRoomInfo:::" + tmpMsg[1]);
 					iterOut.flush();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -315,6 +315,24 @@ public class MultiServer implements Serializable{
 			
 		}
 		 
+	}
+	public void sendRoomList() {
+		for (int i = 0; i < arrRoom.size(); i++) {
+					
+			Iterator iter = clientMap.keySet().iterator();
+			while(iter.hasNext()) {
+				String key = (String) iter.next();		
+					DataOutputStream iterOut = (DataOutputStream) clientMap.get(key);
+					try {
+						iterOut.writeUTF("sendRoomList:::" + arrRoom.get(i));
+						iterOut.flush();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+				
+			}
+		}
 	}
 	
 	public void createMultiRoom(String msg) {
@@ -348,6 +366,8 @@ public class MultiServer implements Serializable{
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
+							
+							
 							System.out.println(userId + "님이 게임방 " + key + "으로 입장했습니다.");
 							clientMap.remove(userId);	//방에 들어가니깐 메인화면에서 정보 삭제
 							break exit;
