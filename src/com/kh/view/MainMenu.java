@@ -217,18 +217,19 @@ public class MainMenu extends JFrame implements MouseListener{
 		make.setFocusPainted(false);
 		make.setContentAreaFilled(false);
 		
-		make.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String roomName = JOptionPane.showInputDialog("방이름 입력");
-				if(roomName == null) {
-					JOptionPane.showMessageDialog(null, "방이름을 입력하세요!");
-				} else {
-					((Sender) sender).sendCreateRoom(roomName);
-				}
-			}
-		});
+//		make.addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				String roomName = JOptionPane.showInputDialog("방이름 입력");
+//				if(roomName == null) {
+//					JOptionPane.showMessageDialog(null, "방이름을 입력하세요!");
+//				} else {
+//					((Sender) sender).sendCreateRoom(roomName);
+//				}
+//			}
+//		});
+		
 		RoundButton in = new RoundButton("방입장");
 		in.setBounds(850, 250, 80, 30);
 		in.setFocusPainted(false);
@@ -295,7 +296,12 @@ public class MainMenu extends JFrame implements MouseListener{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String roomName = roomName2.getText();
+				String roomPw = roomPwd2.getText();
+				String people = selectPeople.getValue() + "";
 				model1.insertRow(0, new Object[] {roomName2.getText(), roomPwd2.getText(),selectPeople.getValue() });
+				((Sender) sender).sendCreateRoom(roomName, roomPw, people);
+				
 				table1.updateUI();
 				makeRoomDialog.dispose();
 				
@@ -347,27 +353,54 @@ public class MainMenu extends JFrame implements MouseListener{
 		questbtn.setContentAreaFilled(false);
 				
 		textOutput = new JTextArea();
-		textOutput.setBounds(0, 590, 600, 600);
-		textOutput.setEditable(false);
+	      textOutput.setBounds(0, 590, 600, 600);
+	      textOutput.setEditable(false);
 
-		textInput = new JTextField();
-		textInput.setBounds(0, 720, 600, 20);
-		textInput.requestFocus();
-		
-		textInput.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String msg = textInput.getText();
-				if(!msg.isEmpty()) {
-					((Sender) sender).sendMainRoomMsg(msg);
-					textOutput.append(userId + " >> " + msg + "\n");
-					textOutput.setCaretPosition(textOutput.getDocument().getLength());
-					textInput.setText(null);
-					textInput.requestFocus();
-				}
-			}
-		});
+	      textInput = new JTextField();
+	      textInput.setBounds(0, 710, 600, 28);
+	      textInput.requestFocus();
+	      this.add(textInput);
+
+	      JScrollPane chatScroll = new JScrollPane(textOutput);
+	      chatScroll.setLocation(0, 590);
+	      chatScroll.setSize(600, 122);
+	      this.add(chatScroll);
+
+	      JButton textOkbtn = new JButton("전송");
+	      textOkbtn.setSize(60, 28);
+	      textOkbtn.setLocation(538, 0);
+	      textInput.add(textOkbtn);
+
+	      // 전송 버튼
+	      textOkbtn.addActionListener(new ActionListener() {
+
+	         @Override
+	         public void actionPerformed(ActionEvent e) {
+	            String msg = textInput.getText();
+	            if (!msg.isEmpty()) {
+	               ((Sender) sender).sendMainRoomMsg(msg);
+	               textOutput.append(userId + " >> " + msg + "\n");
+	               textOutput.setCaretPosition(textOutput.getDocument().getLength());
+	               textInput.setText(null);
+	               textInput.requestFocus();
+	            }
+	         }
+	      });
+	      // 엔터
+	      textInput.addActionListener(new ActionListener() {
+
+	         @Override
+	         public void actionPerformed(ActionEvent e) {
+	            String msg = textInput.getText();
+	            if (!msg.isEmpty()) {
+	               ((Sender) sender).sendMainRoomMsg(msg);
+	               textOutput.append(userId + " >> " + msg + "\n");
+	               textOutput.setCaretPosition(textOutput.getDocument().getLength());
+	               textInput.setText(null);
+	               textInput.requestFocus();
+	            }
+	         }
+	      });
 
 		profilebtn.addActionListener(new ActionListener() {
 
@@ -402,7 +435,7 @@ public class MainMenu extends JFrame implements MouseListener{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MakeRoom mr = new MakeRoom(null);
+				//MakeRoom mr = new MakeRoom(null);
 
 			}
 		});

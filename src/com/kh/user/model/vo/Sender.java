@@ -112,9 +112,9 @@ public class Sender extends Thread {
 		}
 	}
 
-	public void sendCreateRoom(String roomName) {
+	public void sendCreateRoom(String roomName, String roomPwd, String people) {
 		try {
-			out.writeUTF("createRoom:::" + roomName + ",/" + userId);
+			out.writeUTF("createRoom:::" + roomName + ",/" + roomPwd + ",/"+ people + ",/" + userId);
 			out.flush();
 		} catch (IOException e) {
 			System.out.println("�游��� Exception!!!");
@@ -132,7 +132,7 @@ public class Sender extends Thread {
 		}
 	}
 	
-	public void sendSignUp(String msg) {
+	public synchronized void sendSignUp(String msg) {
 		try {
 			out.writeUTF("signUp:::" + msg);
 			out.flush();
