@@ -128,38 +128,24 @@ public class LoginPage extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				
 				str += idText.getText() + ":";
-
 				char[] tempPassword = pwField.getPassword();
 				String pwd = "";
-
 				for (int i = 0; i < tempPassword.length; i++) {
 					pwd += tempPassword[i];
-
 				}
 				str += pwd;
-
-				/*if (um.login(str)) {
-					JOptionPane.showMessageDialog(null, "로그인 성공 !");
-					if(um.selectOneUser("123").getTempPwd()==true) {
-						PasswordChange pc = new PasswordChange(um.selectOneUser("123"));
-						
-					}else {
-					dispose();
-					MainMenu menu = new MainMenu();
-					}
-					
-				} else {
-					JOptionPane.showMessageDialog(null, "ID/PW를 확인해 주세요.");
+				if(idText.getText().isEmpty() || pwd.isEmpty() || str.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호를 확인하세요!");
 					str = "";
-				}*/
-				((Sender) sender).sendLogin(str, idText.getText());
-				str = "";
-
+				} else {
+					((Sender) sender).sendLogin(str, idText.getText());
+					str = "";
+				}
 			}
 		});
-
+		
 		// 회원가입 연동
 		joinbtn.addActionListener(new ActionListener() {
 

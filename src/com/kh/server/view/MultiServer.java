@@ -342,6 +342,16 @@ public class MultiServer implements Serializable{
 		}
 	}
 	
+	public void sendFailLogin() {
+		try {
+			out = new DataOutputStream(socket.getOutputStream());
+			out.writeUTF("failLogin:::");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	// ----// 내부 클래스 //--------//
 
@@ -385,12 +395,17 @@ public class MultiServer implements Serializable{
 		                  String userId = tmpMsg[0];
 		                  this.userId = userId;
 		                  String userPw = tmpMsg[1];
-		                  clientMap.put(userId, out);
-		                  System.out.println(clientMap.get(userId));
-		                  User connectUser = um.selectOneUser(userId);
-		                  System.out.println(userId + ":" + userPw + ":" + connectUser.getCoin() + ":" + connectUser.getOwnItem2() + ":" + connectUser.getOwnItem1() + ":" + connectUser.getMusicSet());
-		                  String msg2 = userId + ":" + userPw + ":" + connectUser.getCoin() + ":" + connectUser.getOwnItem2() + ":" + connectUser.getOwnItem1() + ":" + connectUser.getMusicSet();
-		                  sendLogin(msg2);
+		                  if(um.login(userId + ":" + userPw)) {
+		                	  clientMap.put(userId, out);
+			                  System.out.println(clientMap.get(userId));
+			                  User connectUser = um.selectOneUser(userId);
+			                  System.out.println(userId + ":" + userPw + ":" + connectUser.getCoin() + ":" + connectUser.getOwnItem2() + ":" + connectUser.getOwnItem1() + ":" + connectUser.getMusicSet());
+			                  String msg2 = userId + ":" + userPw + ":" + connectUser.getCoin() + ":" + connectUser.getOwnItem2() + ":" + connectUser.getOwnItem1() + ":" + connectUser.getMusicSet();
+			                  sendLogin(msg2);
+		                  } else {
+		                	  sendFailLogin();
+		                  }
+		                  
 					} else if(msg.startsWith("createRoom")) {	//���ӹ����
 						System.out.println(msg);
 						createMultiRoom(msg);
@@ -417,6 +432,8 @@ public class MultiServer implements Serializable{
 			} catch(SocketException e) {
 				clientMap.remove(userId);
 				System.out.println(userId + "퇴장 !");
+			} catch(ArrayIndexOutOfBoundsException e) {
+				sendFailLogin();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

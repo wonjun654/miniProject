@@ -121,6 +121,8 @@ public class Receiver extends Thread{
 					String[] tmpMsg = msg.split(":::");
 					boolean result = Boolean.parseBoolean(tmpMsg[1]);
 					lp.resultSignUp(result);
+				} else if(msg.startsWith("failLogin")) {
+					JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 확인하세요!");
 				}
 			}  
 		} catch (SocketException e) {
