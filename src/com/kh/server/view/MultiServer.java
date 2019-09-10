@@ -299,14 +299,15 @@ public class MultiServer implements Serializable{
 	
 	public void sendRoomInfo(String msg) {
 		String[] tmpMsg = msg.split(":::");
-		tmpMsg = tmpMsg[1].split(",/");
+		
 		
 		Iterator iter = clientMap.keySet().iterator();
 		while(iter.hasNext()) {
-			String key = (String) iter.next();		
+			String key = (String) iter.next();	
+			System.out.println("server send roominfo");
 				DataOutputStream iterOut = (DataOutputStream) clientMap.get(key);
 				try {
-					iterOut.writeUTF("sendRoomInfo:::" + tmpMsg);
+					iterOut.writeUTF("sendRoomInfo:::" + tmpMsg[1]);
 					iterOut.flush();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
