@@ -1,5 +1,6 @@
 package com.kh.view;
 
+import java.awt.AWTException;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dialog;
@@ -16,15 +17,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.util.Timer;
+import java.io.File;
+import java.io.IOException;
+
+import javax.swing.Timer;
 import java.util.Vector;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -36,6 +40,7 @@ import javax.swing.JTextField;
 import javax.swing.colorchooser.ColorSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.kh.model.vo.TempPoint;
 import com.kh.user.model.vo.Sender;
@@ -68,31 +73,24 @@ public class GameRoom extends JFrame {
 	ColorSelectionModel model;
 	Vector<Vector> list = new Vector<Vector>();
 	Vector<TempPoint> tmp = new Vector<TempPoint>();
-	
 	MainMenu mm;
-	
+
 	int sX, sY, eX, eY;
 	float stroke = 1;
 	boolean isDraw = false;
 
-
-Font copyfont = new Font("고딕", Font.PLAIN, 10);
-Font timerFont = new Font("고딕", Font.BOLD, 18);
+	Font copyfont = new Font("고딕", Font.PLAIN, 10);
+	Font timerFont = new Font("고딕", Font.BOLD, 18);
 	Robot robot;
 	JPanel bgPan = new JPanel();
 	Timer timerT = null;
 	int time = 180;
-	
-	
-
 
 	public GameRoom(Thread sender, Thread receiver, String userId, String roomName) {
 		this.userId = userId;
 		this.roomName = roomName;
 		this.sender = sender;
 		this.receiver = receiver;
-		
-
 
 	}
 
@@ -320,8 +318,6 @@ Font timerFont = new Font("고딕", Font.BOLD, 18);
 		ctntimer.setLocation(5, 10);
 		toolPane.add(ctntimer);
 
-		// timer tm = new timer();
-
 		JLabel timer = new JLabel("03:00");
 		timer.setSize(80, 30);
 		timer.setLocation(35, 10);
@@ -352,47 +348,46 @@ Font timerFont = new Font("고딕", Font.BOLD, 18);
 		capture.setLocation(20, 15);
 		roomCenter.add(capture);
 
-		/*capture.addActionListener(new ActionListener() {
+		capture.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-
 				Robot robot;
 				// 윈도우기준 패널위치 잡아서 범위로 지정
-				Rectangle rec = new Rectangle(paint.getLocationOnScreen().x, paint.getLocationOnScreen().y, 480, 480);
+				Rectangle rec = new Rectangle(canvasPanel.getLocationOnScreen().x, canvasPanel.getLocationOnScreen().y, 480, 480);
 				// 범위 지정 크기만큼 이미지 저장
-				BufferedImage bufferedImage = new BufferedImage(paint.getWidth(), paint.getHeight(),
+				BufferedImage bufferedImage = new BufferedImage(canvasPanel.getWidth(), canvasPanel.getHeight(),
 						BufferedImage.TYPE_INT_ARGB);
 
-				// FileDialog를 열어 저장 경로 및 파일명 지정
-				fileSave.setDirectory(".");
-				fileSave.setVisible(true);
-
-				// 비정상 종료되었을 때
-				if (fileSave.getFile() == null)
-					return;
-
+				 BufferedImage capturedImg = null;
 				try {
+					capturedImg = new Robot().createScreenCapture(rec);
 
-					// 캡쳐된 이미지 저장
-					BufferedImage capturedImg = new Robot().createScreenCapture(rec);
-
-					String fsName = fileSave.getDirectory() + fileSave.getFile();
-
-					BufferedWriter writer = new BufferedWriter(new FileWriter(fsName));
-
-					writer.write(fileSave.getFile());
-
-					writer.close();
-
-				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(fileSave, "저장 오류");
+				} catch (AWTException e1) {
+					e1.printStackTrace();
 				}
 
-r
+				JFileChooser fileChooser = new JFileChooser("C:\\Users\\김수진\\Desktop");
+
+				// 파일 확장자 목록
+				fileChooser.setFileFilter(new FileNameExtensionFilter("*.jpg", "jpg"));
+
+				if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+					File file = fileChooser.getSelectedFile();
+
+					try {
+						ImageIO.write((BufferedImage) capturedImg, "jpg", new File(file.getAbsolutePath() + ".jpg"));
+					} catch (IOException ex) {
+						System.out.println("Failed to save image!");
+					}
+				} else {
+					System.out.println("No file choosen!");
+				}
+
 			}
-		});*/
+		});
+
 		JButton settingbtn = new JButton("설정");
 		settingbtn.setSize(60, 20);
 		settingbtn.setLocation(425, 15);
@@ -587,38 +582,34 @@ r
 		exitBtn.setLocation(150, 670);
 		roomRight.add(exitBtn);
 
-
-// 게임시작
+		// 게임시작
 		// 버튼=========================================================================================
 		JButton startBtn = new JButton("게임 시작");
 		startBtn.setSize(190, 40);
 		startBtn.setLocation(40, 610);
 		roomRight.add(startBtn);
 
-	/*	timerT = new Timer(time, new ActionListener() {
+		// 타이머
+		timerT = new Timer(time, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				toolPane.revalidate();
 				time--;
-
 				try {
 					Thread.sleep(1000);
-
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
 
 				timer.setText((time / 60) + " : " + (time % 60));
-
 				if (time == 0) {
 					timerT.stop();
 					time = 180;
 				}
-
 			}
 		});
-
+		// 시작버튼 클릭시 타이머 실행 및 게임 실행
 		startBtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -626,7 +617,15 @@ r
 				timerT.start();
 				timer.setText((time / 60) + " : " + (time % 60));
 			}
-		});*/
+		});
+		startBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				timerT.start();
+				timer.setText((time / 60) + " : " + (time % 60));
+			}
+		});
 
 		// 나가기 버튼 클릭
 		exitBtn.addActionListener(new ActionListener() {
