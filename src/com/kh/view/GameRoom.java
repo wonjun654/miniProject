@@ -463,7 +463,7 @@ public class GameRoom extends JFrame {
                // chatOutput이 textArea
                // chatInput이 textField
                ((Sender) sender).sendAllMsg(msg, roomName);
-               chatOutput.append((userId + " >> " + msg + "\n");
+               chatOutput.append((userId + " >> " + msg + "\n"));
                chatOutput.setCaretPosition(chatOutput.getDocument().getLength());
                chatInput.setText(null);
                chatInput.requestFocus();
@@ -637,6 +637,13 @@ public class GameRoom extends JFrame {
             ((Sender) sender).exitRoom(roomName);
             dispose();
             mm.setVisible(true);
+            for(int i = 0; i < mm.model1.getRowCount(); i++) {
+            	if(roomName.equals(mm.model1.getValueAt(i, 0))) {
+            		mm.model1.removeRow(i);
+            	}
+            	
+            }
+           
          }
       });
 
