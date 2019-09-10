@@ -36,10 +36,13 @@ public class LoginPage extends JFrame {
 	String userId;
 //	UserManager um = new UserManager();
 	JPanel bgPan = new JPanel();
+  
+
 //	User u = um.selectOneUser(userId);
 	Socket socket;
 	Thread sender;
 	Thread receiver;
+
 	
 	public LoginPage(Socket socket) {
 		this.socket = socket;
@@ -140,9 +143,7 @@ public class LoginPage extends JFrame {
 				/*if (um.login(str)) {
 					JOptionPane.showMessageDialog(null, "로그인 성공 !");
 					if(um.selectOneUser("123").getTempPwd()==true) {
-						PasswordChange pc = new PasswordChange(u);
-						
-						
+						PasswordChange pc = new PasswordChange(um.selectOneUser("123"));
 						
 					}else {
 					dispose();

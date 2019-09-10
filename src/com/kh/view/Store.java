@@ -26,8 +26,8 @@ public class Store extends JFrame {
 
 	JLabel paySelect = new JLabel(); // 결제금액확인
 	JLabel chooseSelect = new JLabel(); // 결제방식선택확인
-	JLabel presult = new JLabel(); // 결제금액
-	JLabel cresult = new JLabel(); // 결제방식
+	JLabel presult = new JLabel("금액이 선택되지 않았습니다."); // 결제금액
+	JLabel cresult = new JLabel("방식이 선택되지 않았습니다."); // 결제방식
 	int buyCoin; // 코인개수
 	JLabel chargeCoinNum = null; // 코인충전개수확인
 	ButtonGroup c = null;
@@ -37,7 +37,6 @@ public class Store extends JFrame {
 	MainMenu mm;
 	int item = 50;
 	int random = 30;
-	
 
 	public Store(User u) {
 		this.setLayout(null);
@@ -468,6 +467,7 @@ public class Store extends JFrame {
 		payDialog.setLocation((screenSize.width - payDialog.getWidth()) / 2,
 				(screenSize.height - payDialog.getHeight()) / 2);
 
+		//버튼
 		RoundButton payDialogOkButton = new RoundButton("확인");
 		RoundButton payDialogCancelButton = new RoundButton("취소");
 
@@ -479,17 +479,16 @@ public class Store extends JFrame {
 		payDialog.add(payDialogCancelButton);
 		payDialog.add(payDialogOkButton);
 
-		this.cresult.setText("방식이 설정되지 않았습니다.");
+		//결제금액, 방식 출력 text
 		this.cresult.setLocation(100, 350);
 		this.cresult.setSize(300, 30);
 		pay.add(this.cresult);
 
-		this.presult.setText("금액이 설정되지 않았습니다.");
 		this.presult.setLocation(100, 400);
 		this.presult.setSize(300, 30);
 		pay.add(this.presult);
 
-		// -----------------------------------------------------
+		// ------------------------------------------------------------------------------------------------
 		// 카드결제 선택시 번호 입력
 		Dialog cardNumberInput = new Dialog(payDialog, "카드번호 입력", true);
 		cardNumberInput.setResizable(false);
@@ -522,6 +521,7 @@ public class Store extends JFrame {
 		cardNumberInputCancelMsg.setSize(300, 40);
 		cardNumberInputCancelMsg.setLocation(70, 210);
 
+		//카드번호 미입력시 ==============================================================================================
 		Dialog cardNumberError = new Dialog(cardNumberInput, "nochooseLabel!", true);
 		cardNumberError.setResizable(false);
 		cardNumberError.setModal(false);
@@ -546,8 +546,8 @@ public class Store extends JFrame {
 		cardNumberInput.add(cardNumberInputOkButton);
 		cardNumberInput.add(cardNumberInputCalcelButton);
 		cardNumberInput.add(cardNumberInputCancelMsg);
-
-		// 계좌이체 선택시 번호입력
+		
+		// 계좌이체 선택시 번호입력=================================================================================
 		Dialog cashNumberInput = new Dialog(payDialog, "계좌번호 입력", true);
 		cashNumberInput.setResizable(false);
 		cashNumberInput.setLayout(null);
@@ -570,6 +570,7 @@ public class Store extends JFrame {
 		cashNumberInputCancelMsg.setSize(300, 40);
 		cashNumberInputCancelMsg.setLocation(70, 210);
 
+		//계좌번호 미입력시 =========================================================================================
 		Dialog cashNumberError = new Dialog(cashNumberInput, "Error!", true);
 		cashNumberError.setResizable(false);
 		cashNumberError.setLayout(null);
@@ -585,7 +586,7 @@ public class Store extends JFrame {
 		cashNumberError.add(cashNumberErrorOkButton);
 		cashNumberError.add(cashNumberErrorLabel);
 
-		// 은행선택
+		// 은행선택================================================================================================
 		String[] banks = { "신한", "하나", "농협", "카카오", "대구", "부산" };
 		JComboBox banklist = new JComboBox(banks);
 		banklist.setSize(60, 40);
@@ -687,7 +688,7 @@ public class Store extends JFrame {
 		payDialog.add(paySelect);
 		payDialog.add(chargeCoinNum);
 
-		// 아무것도 선택하지 않았을때 경고창
+		// 아무것도 선택하지 않았을때 경고창==============================================================================
 		Dialog nochooseDialog = new Dialog(payDialog, "Error!", true);
 		nochooseDialog.setResizable(false);
 		nochooseDialog.setLayout(null);
@@ -774,7 +775,6 @@ public class Store extends JFrame {
 					paySelect.setText(presult.getText());
 					// 충전할 코인개수 가져와서 출력
 					chargeCoinNum.setText(buyCoin + "개 충전하시겠습니까?");
-					u.setCoin(u.getCoin() + buyCoin);
 					payDialog.setVisible(true);
 					// 입력된 값 초기화
 					cardNumberText1.setText(null);
@@ -809,7 +809,6 @@ public class Store extends JFrame {
 					paySelect.setText(presult.getText());
 					// 충전할 코인계수 가져와서 출력
 					chargeCoinNum.setText(buyCoin + "개 충전하시겠습니까?");
-					u.setCoin(u.getCoin() + buyCoin);
 					payDialog.setVisible(true);
 					// 입력된 값 초기화
 					cashText.setText(null);
@@ -876,7 +875,7 @@ public class Store extends JFrame {
 			}
 		});
 
-		// --------------------------------------------------------------------------------
+		// --------------------------------------------------------------------------------------------------------
 		// 충전확인시 방식,금액 확인 팝업
 		Dialog payCompleteDialog = new Dialog(pay, "충전완료", true);
 		payCompleteDialog.setResizable(false);
@@ -919,15 +918,18 @@ public class Store extends JFrame {
 				// 선택된 값 초기화
 				c.clearSelection();
 				p.clearSelection();
-
+				
 				// 보유코인개수 수정
+				u.setCoin(u.getCoin() + buyCoin);
 				ownCoinLabel.setText("내 코인 : " + u.getCoin());
 				um.updateUser(u);
+				
 				// 결제창 종료
 				pay.dispose();
 			}
 		});
 
+		//상점으로 버튼===============================================================================================
 		RoundButton payexit = new RoundButton("상점으로");
 		payexit.setLocation(280, 500);
 		payexit.setSize(90, 30);
@@ -937,11 +939,17 @@ public class Store extends JFrame {
 		payexit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				um.updateUser(u);
+				// 선택된 값 초기화
+				c.clearSelection();
+				p.clearSelection();
+				cresult.setText("방식이 설정되지 않았습니다.");
+				presult.setText("금액이 설정되지 않았습니다.");
+
 				pay.dispose(); // 창 종료
 			}
 		});
-		// --------------------------------------------------------------------------------
+		
+		// ----------------------------------------------------------------------------------------------------
 		// 결제버튼
 		RoundButton payButton = new RoundButton("결제하기");
 		payButton.setSize(106, 30);
@@ -954,7 +962,6 @@ public class Store extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// 결제창 팝업 실행
-				um.updateUser(u);
 				pay.setVisible(true);
 			}
 		});
