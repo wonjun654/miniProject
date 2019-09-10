@@ -47,6 +47,7 @@ import com.kh.user.model.vo.Sender;
 
 public class GameRoom extends JFrame {
 
+
    JLabel userImg = null;
    JLabel name = null;
    JLabel userName = null;
@@ -901,4 +902,5 @@ public class GameRoom extends JFrame {
       list.add(tmp);
       tmp = new Vector<TempPoint>();
    }
+
 }

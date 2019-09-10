@@ -24,23 +24,29 @@ public class MultiServer implements Serializable{
 	HashMap<String, DataOutputStream> clientMap;
 //	HashMap<String, HashMap<String, ObjectOutputStream>> multiRoom;
 	HashMap<String, HashMap<String, DataOutputStream>> multiRoom;
+	HashMap<Integer, DataOutputStream> loginMap;
 	ArrayList<Object> arrRoom;
 	ServerSocket serverSocket;
 	Socket socket;
 	GameRoom game;
 	UserManager um;
 //	ObjectOutputStream out;
-	DataOutputStream out;
+//	DataOutputStream out;
 	// ������
 	public MultiServer() {
 		um = new UserManager();
 		clientMap = new HashMap<>(); 				// Ŭ���̾�Ʈ�� ��½�Ʈ���� ������ �ؽ��� ����.
 		multiRoom = new HashMap<>();
+		loginMap = new HashMap<>();
 		Collections.synchronizedMap(multiRoom);
-		Collections.synchronizedMap(clientMap); // �ؽ��� ����ȭ ����.
+		Collections.synchronizedMap(clientMap);
+		Collections.synchronizedMap(loginMap);
 		
 	}// ������----
-
+	
+	/*public void run() {
+		init();
+	}*/
 	public void init() {
 		try {
 			serverSocket = new ServerSocket(PORT); // 7771����Ʈ�� ������ü ����
@@ -48,9 +54,11 @@ public class MultiServer implements Serializable{
 			
 			while (true) { 															  // ������ ����Ǵ� ���� Ŭ���̾�Ʈ���� ������ ��ٸ�.
 				socket = serverSocket.accept(); 									  // Ŭ���̾�Ʈ�� ������ ��ٸ��ٰ� ������ �Ǹ� Socket��ü�� ����.
-				System.out.println(socket.getInetAddress() + ":" + socket.getPort()); // Ŭ���̾�Ʈ ���� (ip, ��Ʈ) ���
+				System.out.println(socket.getInetAddress() + ":" + socket.getPort());
+//				loginMap.put(socket.getPort(), out);			//맨처음에 들어올때 테스트
 //				out = new ObjectOutputStream(new DataOutputStream(socket.getOutputStream()));
-				out = new DataOutputStream(socket.getOutputStream());
+				DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+				loginMap.put(socket.getPort(), out);
 				Thread msr = new MultiServerRec(socket); // ������ ����.
 				msr.start(); 							 // ������ �õ�.
 				
@@ -61,16 +69,25 @@ public class MultiServer implements Serializable{
 		}
 	}
 
-	public void sendSignUp(String msg) {
+	public synchronized void sendSignUp(String msg) {
 		String[] tmpMsg = msg.split(":::");
-		System.out.println(tmpMsg[1]);
-		boolean result = um.signUp(tmpMsg[1]);
+		tmpMsg = tmpMsg[1].split(",/");
+		int tmpPort = Integer.parseInt(tmpMsg[1]);
+		boolean result = um.signUp(tmpMsg[0]);
 		
 		try {
 //			out = new ObjectOutputStream(new DataOutputStream(socket.getOutputStream()));
-			out = new DataOutputStream(socket.getOutputStream());
-			out.writeUTF("signUp:::" + result);
-			out.flush();
+			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+			Iterator iter = loginMap.keySet().iterator();
+			while(iter.hasNext()) {
+				int key = (int) iter.next();
+				if(key == tmpPort) {
+					DataOutputStream iterOut = (DataOutputStream) loginMap.get(key);
+					iterOut.writeUTF("signUp:::" + result);
+					iterOut.flush();
+				}
+			}
+			
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -84,14 +101,25 @@ public class MultiServer implements Serializable{
 	      String userItem2 = tmpMsg[3];
 	      String userItem1 = tmpMsg[4];
 	      String userMusicSet = tmpMsg[5];
+	      int port = Integer.parseInt(tmpMsg[6]);
 	      
 	      boolean result = um.login(userId + ":" + userPw);
 	      try {
-//	    	 out = new ObjectOutputStream(new DataOutputStream(socket.getOutputStream()));
-	    	  out = new DataOutputStream(socket.getOutputStream());
+	    	 Iterator iter = loginMap.keySet().iterator();
+	    	 while(iter.hasNext()) {
+	    		 int key = (int) iter.next();
+	    		 if(key == port) {
+	    			 DataOutputStream iterOut = (DataOutputStream) loginMap.get(key);
+	    			 iterOut.writeUTF("login:::" + result + ":" + userId + ":" + userPw + ":" + userCoin + ":" 
+	                  + userItem2 + ":" + userItem1 + ":" + userMusicSet);
+	    			 iterOut.flush();
+	    		 }
+	    	 }
+/*//	    	 out = new ObjectOutputStream(new DataOutputStream(socket.getOutputStream()));
+	    	 DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 	         out.writeUTF("login:::" + result + ":" + userId + ":" + userPw + ":" + userCoin + ":" 
 	                  + userItem2 + ":" + userItem1 + ":" + userMusicSet);
-	         out.flush();
+	         out.flush();*/
 	      } catch (IOException e) {
 	         // TODO Auto-generated catch block
 	         e.printStackTrace();
@@ -348,7 +376,7 @@ public class MultiServer implements Serializable{
 	
 	public void sendFailLogin() {
 		try {
-			out = new DataOutputStream(socket.getOutputStream());
+			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 			out.writeUTF("failLogin:::");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -386,7 +414,10 @@ public class MultiServer implements Serializable{
 		}// ������ ------------
 
 		@Override
-		public void run() {
+		public synchronized void run() {
+			receiveServer();
+		}// run()------------
+		public synchronized void receiveServer() {
 			try {
 				while (in != null) { // �Է½�Ʈ���� null�� �ƴϸ� �ݺ�.
 					String msg = in.readUTF();
@@ -399,12 +430,13 @@ public class MultiServer implements Serializable{
 		                  String userId = tmpMsg[0];
 		                  this.userId = userId;
 		                  String userPw = tmpMsg[1];
+		                  int localPort = Integer.parseInt(tmpMsg[2]);
 		                  if(um.login(userId + ":" + userPw)) {
 		                	  clientMap.put(userId, out);
 			                  System.out.println(clientMap.get(userId));
 			                  User connectUser = um.selectOneUser(userId);
 			                  System.out.println(userId + ":" + userPw + ":" + connectUser.getCoin() + ":" + connectUser.getOwnItem2() + ":" + connectUser.getOwnItem1() + ":" + connectUser.getMusicSet());
-			                  String msg2 = userId + ":" + userPw + ":" + connectUser.getCoin() + ":" + connectUser.getOwnItem2() + ":" + connectUser.getOwnItem1() + ":" + connectUser.getMusicSet();
+			                  String msg2 = userId + ":" + userPw + ":" + connectUser.getCoin() + ":" + connectUser.getOwnItem2() + ":" + connectUser.getOwnItem1() + ":" + connectUser.getMusicSet() + ":" + localPort;
 			                  sendLogin(msg2);
 		                  } else {
 		                	  sendFailLogin();
@@ -441,6 +473,6 @@ public class MultiServer implements Serializable{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}// run()------------
+		}
 	}// class MultiServerRec-------------
 }
