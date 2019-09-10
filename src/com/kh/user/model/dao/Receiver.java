@@ -123,6 +123,7 @@ public class Receiver extends Thread{
 					lp.resultSignUp(result);
 				} else if(msg.startsWith("failLogin")) {
 					JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 확인하세요!");
+					
 				}
 			}  
 		} catch (SocketException e) {
@@ -134,5 +135,6 @@ public class Receiver extends Thread{
 	}// run()------
 	public void getMainMenu(MainMenu mm) {
 		this.mm = mm;
+		
 	}
 }
