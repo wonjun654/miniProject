@@ -125,6 +125,7 @@ public class Sender extends Thread {
 	public void sendRoomInfo(String roomName, String roomPwd, String people) {
 		try {
 			out.writeUTF("roomInfo:::" + roomName + ",/" + roomPwd + ",/"+ people);
+			System.out.println("roomInfo sender");
 			out.flush();
 		} catch (IOException e) {
 			

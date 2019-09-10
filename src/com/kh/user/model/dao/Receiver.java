@@ -124,13 +124,16 @@ public class Receiver extends Thread{
 				} else if(msg.startsWith("failLogin")) {
 					JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 확인하세요!");
 					
-				} else if(msg.startsWith("roomInfo")) {
+				} else if(msg.startsWith("sendRoomInfo")) {
+					System.out.println("receiver roominfo");
 					String[] tmpMsg = msg.split(":::");
+					System.out.println(tmpMsg[1]);
 					tmpMsg = tmpMsg[1].split(",/");
 					String roomName = tmpMsg[0];
 					String roomPwd = tmpMsg[1];
 					int people = Integer.parseInt(tmpMsg[2]);
 					mm.model1.insertRow(0, new Object[] {roomName, roomPwd, people});
+					mm.updateTable();
 				}
 			}  
 		} catch (SocketException e) {
