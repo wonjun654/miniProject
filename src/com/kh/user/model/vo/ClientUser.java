@@ -13,35 +13,39 @@ public class ClientUser {
 	private int ownItem1;
 	private int ownItem2;
 
-	boolean tempPwd = false;
+	private boolean tempPwd = false;
 
-	boolean acceptQuest1 = false;
-	boolean acceptQuest2 = false;
-	boolean acceptQuest3 = false;
-	boolean questClear1 = false;
-	boolean questClear2 = false;
-	boolean questClear3 = false;
+	private boolean acceptQuest1 = false;
+	private boolean acceptQuest2 = false;
+	private boolean acceptQuest3 = false;
+	private boolean questClear1 = false;
+	private boolean questClear2 = false;
+	private boolean questClear3 = false;
 	
 	
 	
 
 
-	public ClientUser(String userId, String userPwd, String userName, String email, int coin, String imgName,
-			boolean profile, boolean musicSet, int victory, int ownItem1, int ownItem2, boolean tempPwd,
+	public ClientUser(String userId, String userPwd, String userName, String email, int coin,
+			boolean profile, boolean musicSet, int victory,
 			boolean acceptQuest1, boolean acceptQuest2, boolean acceptQuest3, boolean questClear1, boolean questClear2,
-			boolean questClear3) {
+			boolean questClear3, int ownItem1, int ownItem2) {
 		this.userId = userId;
 		this.userPwd = userPwd;
 		this.userName = userName;
 		this.email = email;
 		this.coin = coin;
-		this.imgName = imgName;
+		
+		this.imgName = null;
+		
 		this.profile = profile;
 		this.musicSet = musicSet;
 		this.victory = victory;
 		this.ownItem1 = ownItem1;
 		this.ownItem2 = ownItem2;
-		this.tempPwd = tempPwd;
+		
+		this.tempPwd = false;
+		
 		this.acceptQuest1 = acceptQuest1;
 		this.acceptQuest2 = acceptQuest2;
 		this.acceptQuest3 = acceptQuest3;
@@ -49,6 +53,15 @@ public class ClientUser {
 		this.questClear2 = questClear2;
 		this.questClear3 = questClear3;
 	}
+
+
+	
+
+
+	
+
+
+
 
 
 	public String getUserId() {

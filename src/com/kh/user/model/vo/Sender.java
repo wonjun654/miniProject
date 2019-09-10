@@ -153,5 +153,15 @@ public class Sender extends Thread {
 			e.printStackTrace();
 		}
 	}
+	
+	public void sendLogOut(String userId) {
+		try {
+			out.writeUTF("logOut:::" + userId);
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }// class Sender-------

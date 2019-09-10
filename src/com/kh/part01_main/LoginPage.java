@@ -40,7 +40,7 @@ public class LoginPage extends JFrame {
 	Socket socket;
 	Thread sender;
 	Thread receiver;
-
+	ClientUser u;
 	
 	public LoginPage(Socket socket) {
 		this.socket = socket;
@@ -177,13 +177,28 @@ public class LoginPage extends JFrame {
 		}
 	}
 	
-	public void resultLogin(boolean result, String userId, String userPw, String userCoin, String userItem2, String userItem1, boolean userMusicSet,
-			Thread sender, Thread receiver) {
+	/*public void resultLogin(boolean result, String userId, String userPwd, String userName, String email, int coin,
+			boolean profile, boolean musicSet, int victory, boolean tempPwd,
+			boolean acceptQuest1, boolean acceptQuest2, boolean acceptQuest3, boolean questClear1, boolean questClear2,
+			boolean questClear3, int ownItem1, int ownItem2, Thread sender, Thread receiver) {
+		
 		if (result) {
 //			ClientUser u = new ClientUser(userId, userPw, userName, email);
 			System.out.println("로그인성공");
 			MainMenu mm = new MainMenu(socket, userId, userPw, userCoin, userItem2, userItem1, userMusicSet,
 					sender, receiver);
+			mm.doMain();
+			this.dispose();
+		} else {
+			JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 맞지않습니다!");
+		}
+	}*/
+	public void resultLogin(boolean result, ClientUser u, Thread sender, Thread receiver) {
+		
+		if (result) {
+//			ClientUser u = new ClientUser(userId, userPw, userName, email);
+			System.out.println("로그인성공");
+			MainMenu mm = new MainMenu(socket, u, sender, receiver);
 			mm.doMain();
 			this.dispose();
 		} else {

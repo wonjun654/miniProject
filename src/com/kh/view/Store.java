@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
-
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,7 +19,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import com.kh.user.controller.UserManager;
-import com.kh.user.model.vo.User;
+import com.kh.user.model.vo.ClientUser;
 
 public class Store extends JFrame {
 
@@ -38,7 +37,7 @@ public class Store extends JFrame {
 	int item = 50;
 	int random = 30;
 
-	public Store(User u) {
+	public Store(ClientUser u) {
 		this.setLayout(null);
 		this.setSize(1024, 768);
 		this.setResizable(false);
@@ -287,7 +286,7 @@ public class Store extends JFrame {
 				// 보유코인개수 출력
 				ownCoinLabel.setText("내 코인 : " + u.getCoin());
 				item1BuyDialog.dispose();
-				um.updateUser(u);
+//				um.updateUser(u);
 			}
 		});
 
@@ -321,7 +320,7 @@ public class Store extends JFrame {
 				// 보유코인개수 출력
 				ownCoinLabel.setText("내 코인 : " + u.getCoin());
 				item2BuyDialog.dispose();
-				um.updateUser(u);
+//				um.updateUser(u);
 			}
 		});
 
@@ -922,7 +921,7 @@ public class Store extends JFrame {
 				// 보유코인개수 수정
 				u.setCoin(u.getCoin() + buyCoin);
 				ownCoinLabel.setText("내 코인 : " + u.getCoin());
-				um.updateUser(u);
+//				um.updateUser(u);
 				
 				// 결제창 종료
 				pay.dispose();
@@ -977,9 +976,9 @@ public class Store extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				um.updateUser(u);
+//				um.updateUser(u);
 				dispose();
-				mm = new MainMenu();
+//				mm = new MainMenu();
 			}
 		});
 

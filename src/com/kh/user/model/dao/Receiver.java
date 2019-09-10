@@ -81,25 +81,28 @@ public class Receiver extends Thread{
 					String userPw = tmpMsg[2];
 					String userName = tmpMsg[3];
 					String userEmail = tmpMsg[4];
-					String userCoin = tmpMsg[5];
-					String userProfile = tmpMsg[6];
-					String userMusicSet = tmpMsg[7];
-					String userVictory = tmpMsg[8];
-					String userAcceptQuest1 = tmpMsg[9];
-					String userAcceptQuest2 = tmpMsg[10];
-					String userAcceptQuest3 = tmpMsg[11];
-					String userQuestClear1 = tmpMsg[12];
-					String userQuestClear2 = tmpMsg[13];
-					String userQusetClear3 = tmpMsg[14];
-					String userItem1 = tmpMsg[15];
-					String userItem2 = tmpMsg[16];
+					int userCoin = Integer.parseInt(tmpMsg[5]);
+					boolean userProfile = Boolean.parseBoolean(tmpMsg[6]);
+					boolean userMusicSet = Boolean.parseBoolean(tmpMsg[7]);
+					int userVictory = Integer.parseInt(tmpMsg[8]);
+					boolean userAcceptQuest1 = Boolean.parseBoolean(tmpMsg[9]);
+					boolean userAcceptQuest2 = Boolean.parseBoolean(tmpMsg[10]);
+					boolean userAcceptQuest3 = Boolean.parseBoolean(tmpMsg[11]);
+					boolean userQuestClear1 = Boolean.parseBoolean(tmpMsg[12]);
+					boolean userQuestClear2 = Boolean.parseBoolean(tmpMsg[13]);
+					boolean userQusetClear3 = Boolean.parseBoolean(tmpMsg[14]);
+					int userItem1 = Integer.parseInt(tmpMsg[15]);
+					int userItem2 = Integer.parseInt(tmpMsg[16]);
+					
+					
+					
+					
 					System.out.println(result);
 					ClientUser u = new ClientUser(userId, userPw, userName, userEmail, userCoin, userProfile, userMusicSet, userVictory
 							, userAcceptQuest1, userAcceptQuest2, userAcceptQuest3, userQuestClear1, userQuestClear2, userQusetClear3
 							, userItem1, userItem2);
-					lp.resultLogin(result, userId, userPw, userName, userEmail, userCoin, userProfile, userMusicSet, userVictory
-							, userAcceptQuest1, userAcceptQuest2, userAcceptQuest3, userQuestClear1, userQuestClear2, userQusetClear3
-							, userItem1, userItem2, sender, this);
+					
+					lp.resultLogin(result, u, sender, this);
 
 				}  else if (msg.startsWith("released")) {
 					game.releaseMouse();
