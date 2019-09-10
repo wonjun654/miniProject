@@ -1,3 +1,4 @@
+
 package com.kh.user.controller;
 
 import java.util.ArrayList;
@@ -11,7 +12,6 @@ public class UserManager {
 	private UserDao ud = new UserDao();
 
 	public boolean login(String str) {
-		Scanner sc = new Scanner(System.in);
 		ArrayList<User> list = ud.readUserList();
 		String[] user = str.split(":");
 		String userId = user[0];
@@ -28,7 +28,7 @@ public class UserManager {
 		return false;
 	}
 
-	public void signUp(String str) {
+	public boolean signUp(String str) {
 		User u = null;
 
 		String[] user = str.split(":");
@@ -40,10 +40,10 @@ public class UserManager {
 
 		u = new User(userId, userPwd, userName, email);
 
-		insertUser(u);
+		return insertUser(u);
 	}
 
-	public void insertUser(User u) {
+	public boolean insertUser(User u) {
 		ArrayList<User> list = ud.readUserList();
 
 		if (list == null) {
@@ -55,8 +55,10 @@ public class UserManager {
 
 		if (result > 0) {
 			System.out.println("유저 추가 성공");
+			return true;
 		} else {
 			System.out.println("유저 추가 실패");
+			return false;
 		}
 	}
 
@@ -66,14 +68,14 @@ public class UserManager {
 		if (list == null) {
 			list = new ArrayList<User>();
 		}
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getUserId().equals(u.getUserId())) {
+		for(int i=0;i<list.size(); i++) {
+			if(list.get(i).getUserId().equals(u.getUserId())) {
 				list.remove(i);
 				list.add(u);
 				break;
 			}
 		}
-		// list.add(u);
+		//list.add(u);
 
 		int result = ud.addUserList(list);
 
@@ -83,7 +85,7 @@ public class UserManager {
 			System.out.println("유저 정보 수정 실패");
 		}
 	}
-
+	
 	public User selectOneUser(String userId) {
 		ArrayList<User> list = ud.readUserList();
 		User selectedUser = null;
@@ -101,24 +103,22 @@ public class UserManager {
 		} else {
 			return selectedUser;
 		}
-
+		
 		return null;
 	}
 
 	public boolean DuplicateCheck(String userId) {
 		ArrayList<User> list = ud.readUserList();
-
-		if (list != null) {
-			for (int i = 0; i < list.size(); i++) {
-				if (list.get(i).getUserId().equals(userId)) {
-					return true;
-				}
-			}
+		
+		for(int i =0; i<list.size(); i++) {
+			if(list.get(i).getUserId().equals(userId)) {
+				return true;
+			} 
 		}
-
+		
 		return false;
 	}
-
+	
 	public String FindId(String email) {
 		ArrayList<User> list = ud.readUserList();
 
@@ -145,4 +145,5 @@ public class UserManager {
 			}
 		}
 	}
+
 }

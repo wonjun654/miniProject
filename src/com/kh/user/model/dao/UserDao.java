@@ -27,7 +27,7 @@ public class UserDao {
 			ois = new ObjectInputStream(new FileInputStream("UserList.dat"));
 			list = (ArrayList<User>) ois.readObject();
 		} catch (FileNotFoundException e) {
-			System.out.println("파일이 없습니다.");
+			System.out.println("파일이 없습니다. 새로 생성합니다");
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -43,19 +43,20 @@ public class UserDao {
 	}
 
 	public int addUserList(ArrayList<User> list) {
-		ObjectOutputStream oos = null;
+		ObjectOutputStream out = null;
 
 		int result = 0;
 
 		try {
-			oos = new ObjectOutputStream(new FileOutputStream("UserList.dat"));
-			oos.writeObject(list);
+			out = new ObjectOutputStream(new FileOutputStream("UserList.dat"));
+			out.writeObject(list);
+			out.flush();
 			result++;
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				oos.close();
+				out.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

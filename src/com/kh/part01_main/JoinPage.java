@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.kh.user.controller.UserManager;
+import com.kh.user.model.vo.Sender;
 import com.kh.view.RoundButton;
 
 public class JoinPage extends JFrame {
@@ -31,10 +32,14 @@ public class JoinPage extends JFrame {
 	JPanel bgPan = new JPanel();
 	UserManager um = new UserManager();
 	String str = "";
+	Thread sender;
+	Thread receiver;
 	int cnt = 0;
 
-	public JoinPage() {
-
+	public JoinPage(Thread sender, Thread receiver) {
+		this.sender = sender;
+		this.receiver = receiver;
+		
 		setTitle("KH치 마인드 - 회원가입");
 		try {
 			this.setIconImage(ImageIO.read(new File("images/logo.PNG")));
@@ -69,7 +74,7 @@ public class JoinPage extends JFrame {
 		btnNewButton.setBounds(525, 240, 97, 31);
 		add(btnNewButton);
 
-		btnNewButton.addActionListener(new ActionListener() {
+		/*btnNewButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -81,7 +86,7 @@ public class JoinPage extends JFrame {
 					JOptionPane.showMessageDialog(null, "사용 가능한 ID입니다.");
 				}
 			}
-		});
+		});*/
 
 		// 비밀번호
 		JLabel pwLabel = new JLabel("비밀번호 : ");
@@ -213,24 +218,21 @@ public class JoinPage extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (cnt > 0) {
-					JOptionPane.showMessageDialog(null, "회원가입에 감사드립니다. \n 환영합니다!!!");
-					str += idtextField.getText() + ":";
+				String signUpId = idtextField.getText();
+				str += signUpId + ":";
 
-					char[] tempPassword = pwTextField.getPassword();
-					String pwd = "";
-					for (int i = 0; i < tempPassword.length; i++) {
-						pwd += tempPassword[i];
-					}
-					str += pwd + ":";
-
-					str += nameTextField.getText() + ":";
-					str += emailTextField.getText() + "@" + domainTextField.getText();
-					um.signUp(str);
-					dispose();
-				} else {
-					JOptionPane.showMessageDialog(null, "ID 중복 확인은 필수사항입니다.");
+				char[] tempPassword = pwTextField.getPassword();
+				String pwd = "";
+				for (int i = 0; i < tempPassword.length; i++) {
+					pwd += tempPassword[i];
 				}
+				str += pwd + ":";
+
+				str += nameTextField.getText() + ":";
+				str += emailTextField.getText() + "@" + domainTextField.getText();
+				send(str);
+				str = "";
+				dispose();
 			}
 		});
 
@@ -246,6 +248,10 @@ public class JoinPage extends JFrame {
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);// 정중앙
+	}
+	
+	public void send(String str) {
+		((Sender) sender).sendSignUp(str);
 	}
 
 }
