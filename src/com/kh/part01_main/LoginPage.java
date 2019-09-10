@@ -20,11 +20,9 @@ import javax.swing.JTextField;
 import com.kh.model.vo.MediaTest;
 import com.kh.part03_ID.FindID;
 import com.kh.part03_password.FindPassword;
-import com.kh.part03_password.PasswordChange;
-import com.kh.user.controller.UserManager;
 import com.kh.user.model.dao.Receiver;
+import com.kh.user.model.vo.ClientUser;
 import com.kh.user.model.vo.Sender;
-import com.kh.user.model.vo.User;
 import com.kh.view.MainMenu;
 import com.kh.view.RoundButton;
 
@@ -115,20 +113,11 @@ public class LoginPage extends JFrame {
 		RoundButton pwbtn = new RoundButton("P/W 찾기 ");
 		pwbtn.setBounds(572, 600, 90, 30);
 		panel.add(pwbtn);
-		
-		//
-		
-		
-		
-		
-		
 
 		// 로그인 버튼
 		loginbtn.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				str += idText.getText() + ":";
 				char[] tempPassword = pwField.getPassword();
 				String pwd = "";
@@ -148,45 +137,35 @@ public class LoginPage extends JFrame {
 		
 		// 회원가입 연동
 		joinbtn.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JoinPage jp = new JoinPage(sender, receiver);
-
 			}
 		});
 
 		// 아이디 찾기 버튼
 		idbtn.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				FindID fi = new FindID();
-
 			}
 		});
 
 		// 비밀번호 찾기 버튼
 		pwbtn.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
 				FindPassword fp = new FindPassword();
-
 			}
 		});
 
 		this.add(panel);
 		this.setResizable(false);
 		this.setVisible(true);
-		this.setLocationRelativeTo(null);// 정중앙ㅣ
-
-
+		this.setLocationRelativeTo(null);
+		
 		MediaTest.musicOn(2, true);
-
-
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
@@ -201,7 +180,8 @@ public class LoginPage extends JFrame {
 	public void resultLogin(boolean result, String userId, String userPw, String userCoin, String userItem2, String userItem1, boolean userMusicSet,
 			Thread sender, Thread receiver) {
 		if (result) {
-			System.out.println("로그인성공" + userId);
+//			ClientUser u = new ClientUser(userId, userPw, userName, email);
+			System.out.println("로그인성공");
 			MainMenu mm = new MainMenu(socket, userId, userPw, userCoin, userItem2, userItem1, userMusicSet,
 					sender, receiver);
 			mm.doMain();
@@ -210,8 +190,4 @@ public class LoginPage extends JFrame {
 			JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 맞지않습니다!");
 		}
 	}
-	/*
-	 * public static void main(String[] args) { new LoginPage(); }
-	 */
-
 }

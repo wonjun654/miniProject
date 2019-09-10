@@ -94,14 +94,30 @@ public class MultiServer implements Serializable{
 	}
 	
 	public void sendLogin(String msg) {
+		
 	      String[] tmpMsg = msg.split(":");
+	      /*loginUser.getUserId() + ":" + loginUser.getUserPwd() + ":" + loginUser.getUserName()
+          + ":" + loginUser.getEmail() + ":" + loginUser.getCoin() + ":" + loginUser.getProfile()
+          + ":" + loginUser.getMusicSet() + ":" + loginUser.getVictory() + ":" + loginUser.getAcceptQuest1() + ":" + loginUser.getAcceptQuest2()
+          + ":" + loginUser.getAcceptQuest3() + ":" + loginUser.getQuestClear1() + ":" + loginUser.getQuestClear2()
+          + ":" + loginUser.getQuestClear3() + ":" + loginUser.getOwnItem1() + ":" + loginUser.getOwnItem2() + ":" + localPort;*/
 	      String userId = tmpMsg[0];
 	      String userPw = tmpMsg[1];
-	      String userCoin = tmpMsg[2];
-	      String userItem2 = tmpMsg[3];
-	      String userItem1 = tmpMsg[4];
-	      String userMusicSet = tmpMsg[5];
-	      int port = Integer.parseInt(tmpMsg[6]);
+	      String userName = tmpMsg[2];
+	      String userEmail = tmpMsg[3];
+	      String userCoin = tmpMsg[4];
+	      String userProfile = tmpMsg[5];
+	      String userMusicSet = tmpMsg[6];
+	      String userVictory = tmpMsg[7];
+	      String userAcceptQuest1 = tmpMsg[8];
+	      String userAcceptQuest2 = tmpMsg[9];
+	      String userAcceptQuest3 = tmpMsg[10];
+	      String userQuestClear1 = tmpMsg[11];
+	      String userQuestClear2 = tmpMsg[12];
+	      String userQusetClear3 = tmpMsg[13];
+	      String userItem1 = tmpMsg[14];
+	      String userItem2 = tmpMsg[15];
+	      int port = Integer.parseInt(tmpMsg[16]);
 	      
 	      boolean result = um.login(userId + ":" + userPw);
 	      try {
@@ -110,8 +126,10 @@ public class MultiServer implements Serializable{
 	    		 int key = (int) iter.next();
 	    		 if(key == port) {
 	    			 DataOutputStream iterOut = (DataOutputStream) loginMap.get(key);
-	    			 iterOut.writeUTF("login:::" + result + ":" + userId + ":" + userPw + ":" + userCoin + ":" 
-	                  + userItem2 + ":" + userItem1 + ":" + userMusicSet);
+	    			 iterOut.writeUTF("login:::" + result + ":" + userId + ":" + userPw + ":" + userName + ":" + userEmail
+	    					 + ":" + userCoin + ":" + userProfile + ":" + userMusicSet + ":" + userVictory + ":" + userAcceptQuest1
+	    					 + ":" + userAcceptQuest2 + ":" + userAcceptQuest3 + ":" + userQuestClear1 + ":" + userQuestClear2
+	    					 + ":" + userQusetClear3 + ":" + userItem1 + ":" + userItem2);
 	    			 iterOut.flush();
 	    		 }
 	    	 }
@@ -434,9 +452,33 @@ public class MultiServer implements Serializable{
 		                  if(um.login(userId + ":" + userPw)) {
 		                	  clientMap.put(userId, out);
 			                  System.out.println(clientMap.get(userId));
-			                  User connectUser = um.selectOneUser(userId);
-			                  System.out.println(userId + ":" + userPw + ":" + connectUser.getCoin() + ":" + connectUser.getOwnItem2() + ":" + connectUser.getOwnItem1() + ":" + connectUser.getMusicSet());
-			                  String msg2 = userId + ":" + userPw + ":" + connectUser.getCoin() + ":" + connectUser.getOwnItem2() + ":" + connectUser.getOwnItem1() + ":" + connectUser.getMusicSet() + ":" + localPort;
+			                  User loginUser = um.selectOneUser(userId);
+			               /*   this.userId = userId;
+			          		this.userPwd = userPwd;
+			          		this.userName = userName;
+			          		this.email = email;
+			          		this.coin = 0;
+			          		this.profile = true;
+			          		this.musicSet = true;
+			          		this.victory = 0;
+			          		this.acceptQuest1 = false;
+			          		this.acceptQuest2 = false;
+			          		this.acceptQuest3 = false;
+			          		this.questClear1 = false;
+			          		this.questClear2 = false;
+			          		this.questClear3 = false;
+			          		this.ownItem1 = 0;
+			          		this.ownItem2 = 0;*/
+			                  System.out.println(loginUser.getUserId() + ":" + loginUser.getUserPwd() + ":" + loginUser.getUserName()
+			                  + ":" + loginUser.getEmail() + ":" + loginUser.getCoin() + ":" + loginUser.getProfile()
+			                  + ":" + loginUser.getMusicSet() + ":" + loginUser.getVictory() + ":" + loginUser.getAcceptQuest1() + ":" + loginUser.getAcceptQuest2()
+			                  + ":" + loginUser.getAcceptQuest3() + ":" + loginUser.getQuestClear1() + ":" + loginUser.getQuestClear2()
+			                  + ":" + loginUser.getQuestClear3() + ":" + loginUser.getOwnItem1() + ":" + loginUser.getOwnItem2());
+			                  String msg2 = loginUser.getUserId() + ":" + loginUser.getUserPwd() + ":" + loginUser.getUserName()
+			                  + ":" + loginUser.getEmail() + ":" + loginUser.getCoin() + ":" + loginUser.getProfile()
+			                  + ":" + loginUser.getMusicSet() + ":" + loginUser.getVictory() + ":" + loginUser.getAcceptQuest1() + ":" + loginUser.getAcceptQuest2()
+			                  + ":" + loginUser.getAcceptQuest3() + ":" + loginUser.getQuestClear1() + ":" + loginUser.getQuestClear2()
+			                  + ":" + loginUser.getQuestClear3() + ":" + loginUser.getOwnItem1() + ":" + loginUser.getOwnItem2() + ":" + localPort;
 			                  sendLogin(msg2);
 		                  } else {
 		                	  sendFailLogin();

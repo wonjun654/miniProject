@@ -39,7 +39,7 @@ public class UserManager {
 		String email = user[3];
 
 		u = new User(userId, userPwd, userName, email);
-
+		
 		return insertUser(u);
 	}
 
