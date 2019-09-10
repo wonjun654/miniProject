@@ -271,7 +271,9 @@ public class MultiServer implements Serializable{
 		String[] tmpMsg = msg.split(":::");		//1번 인덱스가 방이름
 		tmpMsg = tmpMsg[1].split(",/"); 		//0번 : 방이름, 1번 : 아이디
 		String roomName = tmpMsg[0];
-		String userId = tmpMsg[1];
+		String roomPwd = tmpMsg[1];
+		int people = Integer.parseInt(tmpMsg[2]); 
+		String userId = tmpMsg[4];
 		if(multiRoom.containsKey(roomName)) {
 			System.out.println("이미 존재하는 방입니다.");		//동일한 방이름으로 방 생성이 안됨
 		} else {
