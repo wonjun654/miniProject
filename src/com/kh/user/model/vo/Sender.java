@@ -132,7 +132,7 @@ public class Sender extends Thread {
 		}
 	}
 	
-	public void sendSignUp(String msg) {
+	public synchronized void sendSignUp(String msg) {
 		try {
 			out.writeUTF("signUp:::" + msg);
 			out.flush();

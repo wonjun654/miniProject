@@ -18,12 +18,13 @@ import com.kh.user.controller.UserManager;
 import com.kh.user.model.vo.User;
 import com.kh.view.GameRoom;
 
-public class MultiServer implements Serializable{
+public class MultiServer extends Thread implements Serializable{
 	public static final int PORT = 7771;
 //	HashMap<String, ObjectOutputStream> clientMap;
 	HashMap<String, DataOutputStream> clientMap;
 //	HashMap<String, HashMap<String, ObjectOutputStream>> multiRoom;
 	HashMap<String, HashMap<String, DataOutputStream>> multiRoom;
+	HashMap<Integer, DataOutputStream> loginMap;
 	ArrayList<Object> arrRoom;
 	ServerSocket serverSocket;
 	Socket socket;
@@ -40,7 +41,11 @@ public class MultiServer implements Serializable{
 		Collections.synchronizedMap(clientMap); // �ؽ��� ����ȭ ����.
 		
 	}// ������----
-
+	@Override
+	public void run() {
+		init();
+	}
+	
 	public void init() {
 		try {
 			serverSocket = new ServerSocket(PORT); // 7771����Ʈ�� ������ü ����
@@ -48,9 +53,11 @@ public class MultiServer implements Serializable{
 			
 			while (true) { 															  // ������ ����Ǵ� ���� Ŭ���̾�Ʈ���� ������ ��ٸ�.
 				socket = serverSocket.accept(); 									  // Ŭ���̾�Ʈ�� ������ ��ٸ��ٰ� ������ �Ǹ� Socket��ü�� ����.
-				System.out.println(socket.getInetAddress() + ":" + socket.getPort()); // Ŭ���̾�Ʈ ���� (ip, ��Ʈ) ���
-//				out = new ObjectOutputStream(new DataOutputStream(socket.getOutputStream()));
+				System.out.println(socket.getInetAddress() + ":" + socket.getPort());
 				out = new DataOutputStream(socket.getOutputStream());
+				loginMap.put(socket.getPort(), out);			//맨처음에 들어올때 테스트
+//				out = new ObjectOutputStream(new DataOutputStream(socket.getOutputStream()));
+				
 				Thread msr = new MultiServerRec(socket); // ������ ����.
 				msr.start(); 							 // ������ �õ�.
 				
@@ -61,16 +68,24 @@ public class MultiServer implements Serializable{
 		}
 	}
 
-	public void sendSignUp(String msg) {
+	public synchronized void sendSignUp(String msg) {
 		String[] tmpMsg = msg.split(":::");
 		System.out.println(tmpMsg[1]);
 		boolean result = um.signUp(tmpMsg[1]);
 		
 		try {
 //			out = new ObjectOutputStream(new DataOutputStream(socket.getOutputStream()));
-			out = new DataOutputStream(socket.getOutputStream());
-			out.writeUTF("signUp:::" + result);
-			out.flush();
+			int tmpPort = socket.getPort();
+			Iterator iter = loginMap.keySet().iterator();
+			while(iter.hasNext()) {
+				int key = (int) iter.next();
+				if(key == tmpPort) {
+					DataOutputStream iterOut = (DataOutputStream) loginMap.get(key);
+					iterOut.writeUTF("signUp:::" + result);
+					iterOut.flush();
+				}
+			}
+			
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -382,7 +397,10 @@ public class MultiServer implements Serializable{
 		}// ������ ------------
 
 		@Override
-		public void run() {
+		public synchronized void run() {
+			receiveServer();
+		}// run()------------
+		public synchronized void receiveServer() {
 			try {
 				while (in != null) { // �Է½�Ʈ���� null�� �ƴϸ� �ݺ�.
 					String msg = in.readUTF();
@@ -437,6 +455,6 @@ public class MultiServer implements Serializable{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}// run()------------
+		}
 	}// class MultiServerRec-------------
 }
