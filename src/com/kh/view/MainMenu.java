@@ -125,35 +125,6 @@ public class MainMenu extends JFrame implements MouseListener{
 			e.printStackTrace();
 		}
 		
-//		ta = new JTextArea(50, 50);
-//		ta.setBounds(80, 150, 450, 500);
-//		ta.setEditable(false);
-//
-//		sc = new JScrollPane(ta);
-//		sc.setBounds(80, 150, 700, 320);
-//
-//		lblroom = new JLabel("방이름");
-//		lblroom.setBounds(145, 100, 60, 60);
-//
-//		lblsang = new JLabel("상태");
-//		lblsang.setBounds(385, 100, 60, 60);
-//
-//		lblpeople = new JLabel("인원");
-//		lblpeople.setBounds(625, 100, 60, 60);
-//
-//		
-//		roomList = new JList(col1);
-//		roomList.setBounds(0, 0, 200, 360);
-//
-//		roomList2 = new JList(col2);
-//		roomList2.setBounds(250, 0, 200, 360);
-//
-//		roomList3 = new JList(col3);
-//		roomList3.setBounds(500, 0, 200, 360);
-//
-//		ta.add(roomList);
-//		ta.add(roomList2);
-//		ta.add(roomList3);
 
 		
 		model1 = new DefaultTableModel(contents, header) {
@@ -178,20 +149,7 @@ public class MainMenu extends JFrame implements MouseListener{
 		
 		this.setSize(1024, 768);
 			
-		//sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		//sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-//		//roomList.addListSelectionListener(new ListSelectionListener() {
-//			
-//			@Override
-//			public void valueChanged(ListSelectionEvent e) {
-//				if(roomList.getSelectedIndex() == 0) {
-//					GameRoom gr = new GameRoom();
-//					dispose();
-//				}
-//				
-//			}
-//		});
 
 		Image profileimg = new ImageIcon("images\\profile.PNG").getImage().getScaledInstance(60, 60, 0);
 		Image makeimg = new ImageIcon("images\\make.PNG").getImage().getScaledInstance(60, 60, 0);
@@ -263,9 +221,12 @@ public class MainMenu extends JFrame implements MouseListener{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				String roomName = JOptionPane.showInputDialog("방이름 입력");
-				((Sender) sender).sendCreateRoom(roomName);
+				if(roomName == null) {
+					JOptionPane.showMessageDialog(null, "방이름을 입력하세요!");
+				} else {
+					((Sender) sender).sendCreateRoom(roomName);
+				}
 			}
 		});
 		RoundButton in = new RoundButton("방입장");
@@ -334,7 +295,6 @@ public class MainMenu extends JFrame implements MouseListener{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				model1.insertRow(0, new Object[] {roomName2.getText(), roomPwd2.getText(),selectPeople.getValue() });
 				table1.updateUI();
 				makeRoomDialog.dispose();
@@ -372,8 +332,11 @@ public class MainMenu extends JFrame implements MouseListener{
 			public void actionPerformed(ActionEvent e) {
 
 				String roomName = JOptionPane.showInputDialog("방이름 입력");
-				((Sender) sender).sendEnterRoom(roomName);
-
+				if(roomName == null) {
+					JOptionPane.showMessageDialog(null, "방이름을 입력하세요!");
+				} else {
+					((Sender) sender).sendEnterRoom(roomName);
+				}
 			}
 		});
 
