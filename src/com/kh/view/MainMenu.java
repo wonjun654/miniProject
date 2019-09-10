@@ -99,6 +99,11 @@ public class MainMenu extends JFrame implements MouseListener {
 		// Layout 지정 없이 위치 지정하면서 배치하는 방법이다.
 	}
 
+	
+	public void updateTable() {
+		table1.updateUI();
+	}
+	
 	public void doMain() {
 		this.setLayout(null);
 		this.setSize(1024, 768);
@@ -122,6 +127,8 @@ public class MainMenu extends JFrame implements MouseListener {
 		JTable table1 = new JTable(model1);
 		table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+		
+		
 		JScrollPane scPanel = new JScrollPane(table1);
 		scPanel.setBounds(80, 150, 700, 320);
 		scPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -474,10 +481,10 @@ public class MainMenu extends JFrame implements MouseListener {
 			}
 		});
 
-		MediaTest.musicOff();
+		//MediaTest.musicOff();
 
 		// MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
-		MediaTest.musicOn(1, userMusicSet);
+		//MediaTest.musicOn(1, userMusicSet);
 
 		this.add(listPan);
 
