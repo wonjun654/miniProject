@@ -297,6 +297,26 @@ public class MultiServer implements Serializable{
 		}
 	}
 	
+	public void sendRoomInfo(String msg) {
+		String[] tmpMsg = msg.split(":::");
+		tmpMsg = tmpMsg[1].split(",/");
+		
+		Iterator iter = clientMap.keySet().iterator();
+		while(iter.hasNext()) {
+			String key = (String) iter.next();		
+				DataOutputStream iterOut = (DataOutputStream) clientMap.get(key);
+				try {
+					iterOut.writeUTF("sendRoomInfo:::" + tmpMsg);
+					iterOut.flush();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			
+		}
+		 
+	}
+	
 	public void createMultiRoom(String msg) {
 		String[] tmpMsg = msg.split(":::");		//1번 인덱스가 방이름
 		tmpMsg = tmpMsg[1].split(",/"); 		//0번 : 방이름, 1번 : 아이디
@@ -463,7 +483,10 @@ public class MultiServer implements Serializable{
 						sendSignUp(msg);
 					} else if(msg.startsWith("sendMainRoomMsg")) {
 						sendMainRoomMsg(msg);
+					}else if(msg.startsWith("roomInfo")) {
+						sendRoomInfo(msg);
 					}
+					
 				} // while()---------
 			} catch(SocketException e) {
 				clientMap.remove(userId);
