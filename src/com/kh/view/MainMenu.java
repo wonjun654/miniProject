@@ -507,7 +507,6 @@ public class MainMenu extends JFrame implements MouseListener{
 	public void appendChat(String msg) {
 		textOutput.append(msg + "\n");
 		textOutput.setCaretPosition(textOutput.getDocument().getLength());
-		textInput.setText(null);
 		textInput.requestFocus();
 	}
 
