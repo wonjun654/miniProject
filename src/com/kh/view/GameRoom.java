@@ -874,7 +874,6 @@ public class GameRoom extends JFrame {
    public void appendChat(String msg) {
       chatOutput.append(msg + "\n");
       chatOutput.setCaretPosition(chatOutput.getDocument().getLength());
-      chatInput.setText(null);
       chatInput.requestFocus();
    }
 
