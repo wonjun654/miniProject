@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
-
 import java.net.Socket;
 
 import javax.imageio.ImageIO;
@@ -34,7 +33,7 @@ import javax.swing.table.DefaultTableModel;
 import com.kh.model.vo.MediaTest;
 import com.kh.part01_main.LoginPage;
 import com.kh.user.controller.UserManager;
-import com.kh.user.model.dao.Receiver;
+import com.kh.user.model.vo.ClientUser;
 import com.kh.user.model.vo.Sender;
 
 public class MainMenu extends JFrame implements MouseListener {
@@ -74,36 +73,43 @@ public class MainMenu extends JFrame implements MouseListener {
 
 	Thread sender;
 	Thread receiver;
-
+	
+	ClientUser u;
 
 	String header[] = { "방제목", "상태", "인원" };
 	String contents[][] = {
 
 	};
 
-	public MainMenu(Socket socket, String userId, String userPw, String userCoin, String userItem2, String userItem1,
-			boolean userMusicSet, Thread sender, Thread receiver) {
+	/*public MainMenu(Socket socket, ClientUser u, Thread sender, Thread receiver) {
 		super("MainMenuPage");
 		this.socket = socket;
-		this.userId = userId;
-		this.userPw = userPw;
-		this.userCoin = userCoin;
-		this.userItem2 = userItem2;
-		this.userItem1 = userItem1;
-		this.userMusicSet = userMusicSet;
+		this.u = u;
 		this.sender = sender;
 		this.receiver = receiver;
 		profile = true;
 		tempPwd = false;
-		((Receiver) receiver).getMainMenu(this);
+//		((Receiver) receiver).getMainMenu(this);
 		// Layout 지정 없이 위치 지정하면서 배치하는 방법이다.
+	}*/
+
+
+
+
+	public MainMenu(Socket socket, ClientUser u, Thread sender, Thread receiver) {
+		super("MainMenuPage");
+		this.socket = socket;
+		this.u = u;
+		this.sender = sender;
+		this.receiver = receiver;
 	}
+
 
 	
 	public void updateTable() {
 		table1.updateUI();
 	}
-	
+
 	public void doMain() {
 		this.setLayout(null);
 		this.setSize(1024, 768);
@@ -187,7 +193,7 @@ public class MainMenu extends JFrame implements MouseListener {
 		Image timerimg = new ImageIcon("images\\timer.png").getImage().getScaledInstance(60, 60, 0);
 
 		// JLabel namelbl = new JLabel(um.selectOneUser("123").getUserId() + "");
-		JLabel namelbl = new JLabel(userId);
+		JLabel namelbl = new JLabel(u.getUserId());
 		namelbl.setBounds(86, 10, 60, 60);
 
 		JLabel coinImg = new JLabel(new ImageIcon(coinimg));
@@ -195,7 +201,7 @@ public class MainMenu extends JFrame implements MouseListener {
 
 		// JLabel coinlbl = new JLabel("내 코인 : " + um.selectOneUser("123").getCoin() +
 		// "");
-		JLabel coinlbl = new JLabel("내 코인 : " + userCoin);
+		JLabel coinlbl = new JLabel("내 코인 : " + u.getCoin());
 		coinlbl.setBounds(276, 10, 100, 60);
 
 		JLabel chosungImg = new JLabel(new ImageIcon(chosungimg));
@@ -203,7 +209,7 @@ public class MainMenu extends JFrame implements MouseListener {
 
 		// JLabel chosunglbl = new JLabel("내 아이템 : " +
 		// um.selectOneUser("123").getOwnItem2() + "");
-		JLabel chosunglbl = new JLabel("내 아이템 : " + userItem2);
+		JLabel chosunglbl = new JLabel("내 아이템 : " + u.getOwnItem2());
 		chosunglbl.setBounds(437, 10, 100, 60);
 
 		JLabel timerImg = new JLabel(new ImageIcon(timerimg));
@@ -211,7 +217,7 @@ public class MainMenu extends JFrame implements MouseListener {
 
 		// JLabel timerlbl = new JLabel("내 아이템 : " +
 		// um.selectOneUser("123").getOwnItem1() + "");
-		JLabel timerlbl = new JLabel("내 아이템 : " + userItem1);
+		JLabel timerlbl = new JLabel("내 아이템 : " + u.getOwnItem1());
 		timerlbl.setBounds(637, 10, 100, 60);
 
 		JButton profilebtn = new JButton(new ImageIcon(profileimg));
@@ -429,7 +435,8 @@ public class MainMenu extends JFrame implements MouseListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				Profile pf = new Profile(um.selectOneUser("123"));
+//				Profile pf = new Profile(um.selectOneUser("123"));
+				Profile pf = new Profile(u);
 				pf.setVisible(true);
 
 			}
@@ -440,7 +447,7 @@ public class MainMenu extends JFrame implements MouseListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				Store st = new Store(um.selectOneUser("123"));
+				Store st = new Store(u);
 			}
 
 		});
@@ -449,7 +456,7 @@ public class MainMenu extends JFrame implements MouseListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Setting set = new Setting(um.selectOneUser("123"));
+				Setting set = new Setting(u);
 
 			}
 		});
@@ -465,10 +472,11 @@ public class MainMenu extends JFrame implements MouseListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				((Sender) sender).sendLogOut(u.getUserId());
+				JOptionPane.showMessageDialog(null, "로그아웃 되었습니다.");
 				dispose();
 				MediaTest.musicOff();
 				LoginPage login = new LoginPage(socket);
-
 			}
 		});
 		questbtn.addActionListener(new ActionListener() {
@@ -476,7 +484,7 @@ public class MainMenu extends JFrame implements MouseListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				QuestMenu qm = new QuestMenu(um.selectOneUser("123"));
+				QuestMenu qm = new QuestMenu(u);
 				qm.setVisible(true);
 			}
 		});

@@ -69,7 +69,7 @@ public class FindResult extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				LoginPage lp = new LoginPage();
+//				LoginPage lp = new LoginPage();
 
 			}
 		});
@@ -78,7 +78,7 @@ public class FindResult extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				LoginPage lp = new LoginPage();
+//				LoginPage lp = new LoginPage();
 
 			}
 		});

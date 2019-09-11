@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 
 import com.kh.model.vo.TempPoint;
 import com.kh.part01_main.LoginPage;
+import com.kh.user.model.vo.ClientUser;
 import com.kh.view.GameRoom;
 import com.kh.view.MainMenu;
 
@@ -71,21 +72,38 @@ public class Receiver extends Thread{
 					game.pressMouse(eX, eY);
 					
 				} else if (msg.startsWith("login")) {
-					System.out.println("receive to login");
+											
 					String[] tmpMsg = msg.split(":::");
 					tmpMsg = tmpMsg[1].split(":");
-
+					
 					boolean result = Boolean.parseBoolean(tmpMsg[0]);
 					String userId = tmpMsg[1];
 					this.userId = userId;
 					String userPw = tmpMsg[2];
-					String userCoin = tmpMsg[3];
-					String userItem2 = tmpMsg[4];
-					String userItem1 = tmpMsg[5];
-					boolean userMusicSet = Boolean.parseBoolean(tmpMsg[6]);
+					String userName = tmpMsg[3];
+					String userEmail = tmpMsg[4];
+					int userCoin = Integer.parseInt(tmpMsg[5]);
+					boolean userProfile = Boolean.parseBoolean(tmpMsg[6]);
+					boolean userMusicSet = Boolean.parseBoolean(tmpMsg[7]);
+					int userVictory = Integer.parseInt(tmpMsg[8]);
+					boolean userAcceptQuest1 = Boolean.parseBoolean(tmpMsg[9]);
+					boolean userAcceptQuest2 = Boolean.parseBoolean(tmpMsg[10]);
+					boolean userAcceptQuest3 = Boolean.parseBoolean(tmpMsg[11]);
+					boolean userQuestClear1 = Boolean.parseBoolean(tmpMsg[12]);
+					boolean userQuestClear2 = Boolean.parseBoolean(tmpMsg[13]);
+					boolean userQusetClear3 = Boolean.parseBoolean(tmpMsg[14]);
+					int userItem1 = Integer.parseInt(tmpMsg[15]);
+					int userItem2 = Integer.parseInt(tmpMsg[16]);
+					
+					
+					
+					
 					System.out.println(result);
-					lp.resultLogin(result, userId, userPw, userCoin, userItem2, userItem1, userMusicSet,
-							sender, this);
+					ClientUser u = new ClientUser(userId, userPw, userName, userEmail, userCoin, userProfile, userMusicSet, userVictory
+							, userAcceptQuest1, userAcceptQuest2, userAcceptQuest3, userQuestClear1, userQuestClear2, userQusetClear3
+							, userItem1, userItem2);
+					
+					lp.resultLogin(result, u, sender, this);
 
 				}  else if (msg.startsWith("released")) {
 					game.releaseMouse();
@@ -124,7 +142,7 @@ public class Receiver extends Thread{
 				} else if(msg.startsWith("failLogin")) {
 					JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 확인하세요!");
 					
-				} else if(msg.startsWith("sendRoomInfo")) {
+			else if(msg.startsWith("sendRoomInfo")) {
 
 					System.out.println("receiver roominfo");
 
@@ -142,6 +160,7 @@ public class Receiver extends Thread{
 
 					mm.updateTable();
 
+				
 				}
 			}  
 		} catch (SocketException e) {
