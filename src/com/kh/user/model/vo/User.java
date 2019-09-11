@@ -1,9 +1,6 @@
 package com.kh.user.model.vo;
 
-import java.awt.Image;
 import java.io.Serializable;
-
-import javax.swing.ImageIcon;
 
 public class User implements Serializable {
 	/**
@@ -29,20 +26,7 @@ public class User implements Serializable {
 	boolean questClear1 = false;
 	boolean questClear2 = false;
 	boolean questClear3 = false;
-	public User() {
-		this.coin = 0;
-		this.profile = true;
-		this.musicSet = true;
-		this.victory = 0;
-		this.acceptQuest1 = false;
-		this.acceptQuest2 = false;
-		this.acceptQuest3 = false;
-		this.questClear1 = false;
-		this.questClear2 = false;
-		this.questClear3 = false;
-		this.ownItem1 = 0;
-		this.ownItem2 = 0;
-	}
+	
 
 	public boolean getAcceptQuest1() {
 		return acceptQuest1;
@@ -164,11 +148,23 @@ public class User implements Serializable {
 	}
 
 	public User(String userId, String userPwd, String userName, String email) {
-		this();
 		this.userId = userId;
 		this.userPwd = userPwd;
 		this.userName = userName;
 		this.email = email;
+		this.coin = 0;
+		this.imgName = null;
+		this.profile = true;
+		this.musicSet = true;
+		this.victory = 0;
+		this.acceptQuest1 = false;
+		this.acceptQuest2 = false;
+		this.acceptQuest3 = false;
+		this.questClear1 = false;
+		this.questClear2 = false;
+		this.questClear3 = false;
+		this.ownItem1 = 0;
+		this.ownItem2 = 0;
 	}
 
 

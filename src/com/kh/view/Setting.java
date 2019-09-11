@@ -18,13 +18,14 @@ import javax.swing.JRadioButton;
 import com.kh.model.vo.MediaTest;
 import com.kh.part03_password.PasswordChange;
 import com.kh.user.controller.UserManager;
+import com.kh.user.model.vo.ClientUser;
 import com.kh.user.model.vo.User;
 
 public class Setting extends JFrame {
 	UserManager um = new UserManager();
 	
 
-	public Setting(User user) {
+	public Setting(ClientUser u) {
 		Font font = new Font("고딕", Font.BOLD, 18);
 		this.setResizable(false);
 		this.setBounds(800, 300, 400, 400);
@@ -87,13 +88,13 @@ public class Setting extends JFrame {
 		musicOff.setLocation(260, 45);
 		musicOff.setBackground(new Color(195, 245, 230));
 		
-		if(user.getMusicSet()==true) {
+		if(u.isMusicSet()==true) {
 			musicOn.setSelected(true);
 		}else {
 			musicOff.setSelected(true);
 		}
 		
-		if(user.getProfile()==true) {
+		if(u.isProfile()==true) {
 			profileOn.setSelected(true);
 		}else {
 			profileOff.setSelected(true);
@@ -117,7 +118,7 @@ public class Setting extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PasswordChange pc = new PasswordChange(user);
+				PasswordChange pc = new PasswordChange(u);
 				
 				
 			}
@@ -131,35 +132,35 @@ public class Setting extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (musicOn.isSelected() == true) {
-					user.setMusicSet(true);
+					u.setMusicSet(true);
 
 				} else if (musicOn.isSelected() == false) {
-					user.setMusicSet(false);
+					u.setMusicSet(false);
 
 				}
 
 				if (musicOn.isSelected() == true && um.selectOneUser("123").getMusicSet() == true) {
 
 				} else {
-					um.updateUser(user);
+//					um.updateUser(u);
 					MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
 				}
 				
 				if (profileOn.isSelected() == true) {
-					user.setProfile(true);
+					u.setProfile(true);
 
 				} else if (profileOn.isSelected() == false) {
-					user.setProfile(false);
+					u.setProfile(false);
 
 				}
 
-				if (profileOn.isSelected() == true && user.getProfile() == true) {
+				if (profileOn.isSelected() == true && u.isProfile() == true) {
 
 				} else {
 				
 					///asd///
 				}
-				um.updateUser(user);
+//				um.updateUser(u);
 				dispose();
 			}
 		});

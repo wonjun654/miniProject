@@ -122,18 +122,6 @@ public class Sender extends Thread {
 			e.printStackTrace();
 		}
 	}
-	public void sendRoomInfo(String roomName, String roomPwd, String people) {
-		try {
-			out.writeUTF("roomInfo:::" + roomName + ",/" + roomPwd + ",/"+ people);
-			System.out.println("roomInfo sender");
-			out.flush();
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		}
-		
-		
-	}
 
 	public void sendEnterRoom(String roomName) {
 		try {
@@ -147,7 +135,6 @@ public class Sender extends Thread {
 	
 	public synchronized void sendSignUp(String msg) {
 		try {
-			System.out.println("클라sender : " + socket.getLocalPort());
 			out.writeUTF("signUp:::" + msg + ",/" + socket.getLocalPort());
 			out.flush();
 		} catch(IOException e) {
@@ -156,10 +143,20 @@ public class Sender extends Thread {
 		}
 	}
 	
-	public synchronized void sendLogin(String msg, String userId) {
+	public synchronized void sendLogin(String msg, String userId) {		//msg = 아이디 ,/ 비밀번호
 		try {
 			this.userId = userId;
 			out.writeUTF("login:::" + msg + ":" + socket.getLocalPort());
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void sendLogOut(String userId) {
+		try {
+			out.writeUTF("logOut:::" + userId);
 			out.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
