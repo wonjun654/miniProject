@@ -167,7 +167,7 @@ public class MainMenu extends JFrame implements MouseListener {
 					int row = table1.getSelectedRow();
 					String roomName = (String) table1.getValueAt(row, 0);
 					System.out.println(roomName);
-					((Sender) sender).sendEnterRoom(roomName);
+					((Sender) sender).sendEnterRoom(roomName, userId);
 
 				}
 
@@ -323,9 +323,10 @@ public class MainMenu extends JFrame implements MouseListener {
 				String people = selectPeople.getValue() + "";
 				model1.insertRow(0, new Object[] { roomName2.getText(), roomPwd2.getText(), selectPeople.getValue() });
 				((Sender) sender).sendCreateRoom(roomName, roomPw, people);
-				((Sender) sender).sendRoomInfo(roomName, roomPw, people);
 				makeRoomDialog.dispose();
 				table1.updateUI();
+				/*String roomName = roomName2.getText();
+				((Sender) sender).sendCreateRoom(roomName, "123", "123");*/
 
 			}
 		});
@@ -363,7 +364,7 @@ public class MainMenu extends JFrame implements MouseListener {
 				if (roomName == null) {
 					JOptionPane.showMessageDialog(null, "방이름을 입력하세요!");
 				} else {
-					((Sender) sender).sendEnterRoom(roomName);
+					((Sender) sender).sendEnterRoom(roomName, userId);
 				}
 			}
 		});

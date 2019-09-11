@@ -330,7 +330,6 @@ public class MultiServer implements Serializable{
 						iterOut.writeUTF("sendRoomList:::" + arrRoom.get(i));
 						iterOut.flush();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} 
 				
@@ -338,7 +337,7 @@ public class MultiServer implements Serializable{
 		}
 	}
 	
-	public void createMultiRoom(String msg) {
+	/*public void createMultiRoom(String msg) {
 		String[] tmpMsg = msg.split(":::");		//1번 인덱스가 방이름
 		tmpMsg = tmpMsg[1].split(",/"); 		//0번 : 방이름, 1번 : 아이디
 		String roomName = tmpMsg[0];
@@ -380,8 +379,34 @@ public class MultiServer implements Serializable{
 			}//iter.hasNext() while문-------
 		}//else문 (방이름 중복체크)-----------
 	}//createMultiRoom 메소드 -----------
+*/	
+	public void createMultiRoom(String msg) {
+		String[] tmpMsg = msg.split(":::");		//1번 인덱스가 방이름
+		arrRoom.add(tmpMsg[1]);
+		tmpMsg = tmpMsg[1].split(",/"); 		//0번 : 방이름, 1번 : 아이디
+		String roomName = tmpMsg[0];
+		String roomPwd = tmpMsg[1];
+		int people = Integer.parseInt(tmpMsg[2]); 
+		String userId = tmpMsg[3];
+		if(multiRoom.containsKey(roomName)) {
+			System.out.println("이미 존재하는 방입니다.");		//동일한 방이름으로 방 생성이 안됨
+		} else {
+			multiRoom.put(roomName, new HashMap<>());		//방이름에 대해 방생성
+			Collections.synchronizedMap(multiRoom.get(roomName));
+			multiRoom.get(roomName).put(userId, clientMap.get(userId));		//방생성한 유저의 정보 아이디와 출력스트림입력
+			DataOutputStream out = clientMap.get(userId);
+			try {
+				out.writeUTF("createRoom:::" + roomName);
+				out.flush();
+				clientMap.remove(userId);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}//else문 (방이름 중복체크)-----------
+	}//createMultiRoom 메소드 -----------
 	
-	public void enterMultiRoom(String msg) {
+	/*public void enterMultiRoom(String msg) {
 		String[] tmpMsg = msg.split(":::");		//1번 인덱스가 방이름
 		tmpMsg = tmpMsg[1].split(",/"); 		//0번 : 방이름, 1번 : 아이디
 		String roomName = tmpMsg[0];
@@ -402,8 +427,10 @@ public class MultiServer implements Serializable{
 //							ObjectOutputStream iter2Out = (ObjectOutputStream) multiRoom.get(key).get(key2);
 							DataOutputStream iter2Out = (DataOutputStream) multiRoom.get(key).get(key2);
 							try {
+								System.out.println(roomName);
 								iter2Out.writeUTF("enterRoom:::" + roomName);
 								iter2Out.flush();
+								System.out.println(roomName + "!!");
 								break exit;
 							} catch (IOException e) {
 								e.printStackTrace();
@@ -412,6 +439,37 @@ public class MultiServer implements Serializable{
 					}//iter2.hasNext() while문------
 				}//key(방이름)에 대한 if문------
 			}//iter.hasNext() while문------
+		} else {
+			System.out.println("존재하지 않는 방입니다.");
+		}
+	}*/
+	public void enterMultiRoom(String msg) {
+		String[] tmpMsg = msg.split(":::");		//1번 인덱스가 방이름
+		tmpMsg = tmpMsg[1].split(",/"); 		//0번 : 방이름, 1번 : 아이디
+		String roomName = tmpMsg[0];
+		String userId = tmpMsg[1];
+		System.out.println(roomName + ",/" + userId);
+		if(multiRoom.containsKey(roomName)) {
+			Iterator iter = clientMap.keySet().iterator();
+			
+			while(iter.hasNext()) {
+				String key = (String) iter.next();
+				System.out.println("key : " + key);
+				if(key.equals(userId)) {
+					DataOutputStream iterOut = (DataOutputStream) clientMap.get(key);
+					System.out.println(iterOut);
+					try {
+						System.out.println("엔터룸 write전");
+						iterOut.writeUTF("enterRoom:::" + roomName);
+						iterOut.flush();
+						System.out.println("엔터룸 write후");
+						multiRoom.get(roomName).put(key, iterOut);
+						clientMap.remove(key);
+					} catch(IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
 		} else {
 			System.out.println("존재하지 않는 방입니다.");
 		}
@@ -508,6 +566,8 @@ public class MultiServer implements Serializable{
 						sendMainRoomMsg(msg);
 					}else if(msg.startsWith("roomInfo")) {
 						sendRoomInfo(msg);
+					} else if(msg.startsWith("roomList")) {
+						sendRoomList();
 					}
 					
 				} // while()---------

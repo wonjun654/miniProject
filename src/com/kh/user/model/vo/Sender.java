@@ -118,7 +118,7 @@ public class Sender extends Thread {
 			System.out.println("createRoom:::" + roomName + ",/" + roomPwd + ",/"+ people + ",/" + userId);
 			out.flush();
 		} catch (IOException e) {
-			System.out.println("�游��� Exception!!!");
+			System.out.println("생성 Exception!");
 			e.printStackTrace();
 		}
 	}
@@ -131,11 +131,17 @@ public class Sender extends Thread {
 			
 			e.printStackTrace();
 		}
-		
-		
 	}
-
-	public void sendEnterRoom(String roomName) {
+	
+	public void sendRoomList() {
+		try {
+			out.writeUTF("roomList");
+			out.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void sendEnterRoom(String roomName, String userId) {
 		try {
 			out.writeUTF("enterRoom:::" + roomName + ",/" + userId);
 			out.flush();

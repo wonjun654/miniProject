@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 
 import com.kh.model.vo.TempPoint;
 import com.kh.part01_main.LoginPage;
+import com.kh.user.model.vo.Sender;
 import com.kh.view.GameRoom;
 import com.kh.view.MainMenu;
 
@@ -52,7 +53,7 @@ public class Receiver extends Thread{
 		try {
 		while (in != null) { 	// 입력스트림이 null이 아니면..반복
 				String msg = in.readUTF();
-				System.out.println("receive");
+				System.out.println("리시브 메세지 : " + msg);
 				if (msg.startsWith("coordinate")) {
 					String[] tmpMsg = msg.split(":::");
 					tmpMsg = tmpMsg[1].split(",/");
@@ -96,12 +97,16 @@ public class Receiver extends Thread{
 					game = new GameRoom(sender, this, userId, roomName);
 					System.out.println("방을 생성했습니다.");
 					game.doGame(mm);
+					((Sender) sender).sendRoomList();
 
 				} else if (msg.startsWith("enterRoom")) {
+					System.out.println(msg);
 					String[] tmpMsg = msg.split(":::");
 					String roomName = tmpMsg[1];
 					game = new GameRoom(sender, this, userId, roomName);
+					System.out.println("게임룸 객체 생성");
 					game.doGame(mm);
+					System.out.println("게임방 실행");
 
 				} else if (msg.startsWith("sendAllMsg")) {
 					String[] tmpMsg = msg.split(":::");
@@ -136,10 +141,17 @@ public class Receiver extends Thread{
 					int people = Integer.parseInt(tmpMsg[2]);
 					mm.model1.insertRow(0, new Object[] {roomName, roomPwd, people});
 
-					mm.table1.updateUI();				
+					mm.table1.updateUI();
 				} else if(msg.startsWith("sendRoomList")) {
 					
-
+					String[] tmpMsg = msg.split(":::");
+					tmpMsg = tmpMsg[1].split(",/");
+					String roomName = tmpMsg[0];
+					String roomPwd = tmpMsg[1];
+					int people = Integer.parseInt(tmpMsg[2]);
+					
+					mm.model1.insertRow(0, new Object[] {roomName, roomPwd, people});
+					
 					mm.updateTable();
 
 				}
