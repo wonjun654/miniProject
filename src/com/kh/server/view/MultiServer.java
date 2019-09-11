@@ -20,15 +20,20 @@ import com.kh.view.GameRoom;
 
 public class MultiServer implements Serializable{
 	public static final int PORT = 7771;
+												 
 	HashMap<String, DataOutputStream> clientMap;
+																  
 	HashMap<String, HashMap<String, DataOutputStream>> multiRoom;
 	HashMap<Integer, DataOutputStream> loginMap;
-	ArrayList<Object> arrRoom;
+	ArrayList<String> arrRoom = new ArrayList<String>();
+ 
 	ServerSocket serverSocket;
 	Socket socket;
 	GameRoom game;
 	UserManager um;
 	
+						
+					  
 	public MultiServer() {
 		um = new UserManager();
 		clientMap = new HashMap<>(); 				
@@ -40,6 +45,9 @@ public class MultiServer implements Serializable{
 		
 	}
 	
+					  
+		 
+	
 	public void init() {
 		try {
 			serverSocket = new ServerSocket(PORT); 
@@ -48,6 +56,8 @@ public class MultiServer implements Serializable{
 			while (true) { 															  
 				socket = serverSocket.accept(); 									  
 				System.out.println(socket.getInetAddress() + ":" + socket.getPort());
+																				  
+																				   
 				DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 				loginMap.put(socket.getPort(), out);
 				Thread msr = new MultiServerRec(socket); 
@@ -67,6 +77,7 @@ public class MultiServer implements Serializable{
 		boolean result = um.signUp(tmpMsg[0]);
 		
 		try {
+																				  
 			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 			Iterator iter = loginMap.keySet().iterator();
 			while(iter.hasNext()) {
@@ -119,7 +130,13 @@ public class MultiServer implements Serializable{
 //	    			 loginMap.remove(key);
 	    		 }
 	    	 }
+																						
+																			 
+																								
+																	   
+						
 	      } catch (IOException e) {
+											
 	         e.printStackTrace();
 	      }
 	   }
@@ -140,6 +157,7 @@ public class MultiServer implements Serializable{
 			if(key.equals(userId)) {
 				continue;
 			} else {
+																						 
 				DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
 				try {
 					iterOut.writeUTF("coordinate:::" + x + ",/" + y + ",/" + color + ",/" + stroke);
@@ -164,6 +182,7 @@ public class MultiServer implements Serializable{
 			if(key.equals(userId)) {
 				continue;
 			} else {
+																						 
 				DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
 				try {
 					iterOut.writeUTF("press:::" + x + ",/" + y);
@@ -186,6 +205,7 @@ public class MultiServer implements Serializable{
 			if(key.equals(userId)) {
 				continue;
 			} else {
+																						 
 				DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
 				try {
 					iterOut.writeUTF("released:::");
@@ -230,6 +250,7 @@ public class MultiServer implements Serializable{
 		try {
 			Iterator iter = clientMap.keySet().iterator();
 			while(iter.hasNext()) {
+																				   
 				DataOutputStream iterOut = (DataOutputStream) clientMap.get(iter.next());
 				iterOut.writeUTF(userId + "����!!");
 				iterOut.flush();
@@ -253,12 +274,14 @@ public class MultiServer implements Serializable{
 			if(key.equals(userId)) {
 				continue;
 			} else {
+																						 
 				DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
 				System.out.println("iterOut : " + iterOut);
 				try {
 					iterOut.writeUTF("sendAllMsg:::" + sendMsg + ",/" + userId);
 					iterOut.flush();
 				} catch (IOException e) {
+									   
 					e.printStackTrace();
 				}
 			}
@@ -282,12 +305,53 @@ public class MultiServer implements Serializable{
 					iterOut.writeUTF("sendMainRoomMsg:::" + sendMsg + ",/" + userId);
 					iterOut.flush();
 				} catch (IOException e) {
+									   
 					e.printStackTrace();
 				}
 			}
 		}
 	}
 	
+	public void sendRoomInfo(String msg) {
+		String[] tmpMsg = msg.split(":::");
+
+		arrRoom.add(tmpMsg[1]);	
+
+		Iterator iter = clientMap.keySet().iterator();
+		while(iter.hasNext()) {
+			String key = (String) iter.next();	
+			System.out.println("server send roominfo");
+				DataOutputStream iterOut = (DataOutputStream) clientMap.get(key);
+				try {
+					iterOut.writeUTF("sendRoomInfo:::" + tmpMsg[1]);
+					iterOut.flush();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			
+		}
+		 
+	}
+	public void sendRoomList() {
+		for (int i = 0; i < arrRoom.size(); i++) {
+					
+			Iterator iter = clientMap.keySet().iterator();
+			while(iter.hasNext()) {
+				String key = (String) iter.next();		
+					DataOutputStream iterOut = (DataOutputStream) clientMap.get(key);
+					try {
+						iterOut.writeUTF("sendRoomList:::" + arrRoom.get(i));
+						iterOut.flush();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+				
+			}
+		}
+	}
+
 	public void createMultiRoom(String msg) {
 		String[] tmpMsg = msg.split(":::");		//1번 인덱스가 방이름
 		tmpMsg = tmpMsg[1].split(",/"); 		//0번 : 방이름, 1번 : 아이디
@@ -310,13 +374,17 @@ public class MultiServer implements Serializable{
 					while(iter2.hasNext()) {
 						String key2 = (String) iter2.next();	//유저아이디를 키2값으로 저장
 						if(key2.equals(userId)) {
+																						 
 							DataOutputStream iter2Out = (DataOutputStream) multiRoom.get(key).get(key2);
 							try {
 								iter2Out.writeUTF("createRoom:::" + roomName);
 								iter2Out.flush();
 							} catch (IOException e) {
+										  
 								e.printStackTrace();
 							}
+	   
+	   
 							System.out.println(userId + "님이 게임방 " + key + "으로 입장했습니다.");
 							clientMap.remove(userId);	//방에 들어가니깐 메인화면에서 정보 삭제
 							break exit;
@@ -345,6 +413,7 @@ public class MultiServer implements Serializable{
 					while(iter2.hasNext()) {
 						String key2 = (String) iter2.next();
 						if(key2.equals(userId)) {
+																						 
 							DataOutputStream iter2Out = (DataOutputStream) multiRoom.get(key).get(key2);
 							try {
 								iter2Out.writeUTF("enterRoom:::" + roomName);
@@ -367,6 +436,7 @@ public class MultiServer implements Serializable{
 			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 			out.writeUTF("failLogin:::");
 		} catch (IOException e) {
+									 
 			e.printStackTrace();
 		}
 	}
@@ -385,14 +455,21 @@ public class MultiServer implements Serializable{
 	class MultiServerRec extends Thread {
 		String userId;
 		Socket socket;
+						 
 		DataInputStream in;
+						   
 		DataOutputStream out;
 		
 		// ������.
 		public MultiServerRec(Socket socket) {
 			this.socket = socket;
 			try {
+																	   
+																			   
 				in = new DataInputStream(socket.getInputStream());
+	
+																		
+																				   
 				out = new DataOutputStream(socket.getOutputStream());
 			} catch (IOException e) {
 				System.out.println("����123");
@@ -461,7 +538,10 @@ public class MultiServer implements Serializable{
 						sendMainRoomMsg(msg);
 					} else if(msg.startsWith("logOut")) {
 						sendLogOut(msg);
+					}else if(msg.startsWith("roomInfo")) {
+						sendRoomInfo(msg);
 					}
+	 
 				} // while()---------
 			} catch(SocketException e) {
 				clientMap.remove(userId);
@@ -473,4 +553,3 @@ public class MultiServer implements Serializable{
 			}
 		}
 	}// class MultiServerRec-------------
-}

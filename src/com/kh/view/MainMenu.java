@@ -105,7 +105,10 @@ public class MainMenu extends JFrame implements MouseListener {
 	}
 
 
-
+	
+	public void updateTable() {
+		table1.updateUI();
+	}
 
 	public void doMain() {
 		this.setLayout(null);
@@ -130,6 +133,8 @@ public class MainMenu extends JFrame implements MouseListener {
 		JTable table1 = new JTable(model1);
 		table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+		
+		
 		JScrollPane scPanel = new JScrollPane(table1);
 		scPanel.setBounds(80, 150, 700, 320);
 		scPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -324,9 +329,9 @@ public class MainMenu extends JFrame implements MouseListener {
 				String people = selectPeople.getValue() + "";
 				model1.insertRow(0, new Object[] { roomName2.getText(), roomPwd2.getText(), selectPeople.getValue() });
 				((Sender) sender).sendCreateRoom(roomName, roomPw, people);
-
-				table1.updateUI();
+				((Sender) sender).sendRoomInfo(roomName, roomPw, people);
 				makeRoomDialog.dispose();
+				table1.updateUI();
 
 			}
 		});
@@ -484,10 +489,10 @@ public class MainMenu extends JFrame implements MouseListener {
 			}
 		});
 
-		MediaTest.musicOff();
+		//MediaTest.musicOff();
 
 		// MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
-		MediaTest.musicOn(1, userMusicSet);
+		//MediaTest.musicOn(1, userMusicSet);
 
 		this.add(listPan);
 

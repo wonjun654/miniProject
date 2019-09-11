@@ -122,6 +122,18 @@ public class Sender extends Thread {
 			e.printStackTrace();
 		}
 	}
+	public void sendRoomInfo(String roomName, String roomPwd, String people) {
+		try {
+			out.writeUTF("roomInfo:::" + roomName + ",/" + roomPwd + ",/"+ people);
+			System.out.println("roomInfo sender");
+			out.flush();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+	}
 
 	public void sendEnterRoom(String roomName) {
 		try {
