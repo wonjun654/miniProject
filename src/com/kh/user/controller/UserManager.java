@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import com.kh.user.smtptest;
 import com.kh.user.model.dao.UserDao;
-import com.kh.user.model.vo.ClientUser;
 import com.kh.user.model.vo.User;
 
 public class UserManager {
@@ -40,7 +39,7 @@ public class UserManager {
 		String email = user[3];
 
 		u = new User(userId, userPwd, userName, email);
-		
+
 		return insertUser(u);
 	}
 
@@ -63,7 +62,7 @@ public class UserManager {
 		}
 	}
 
-	public void updateUser(ClientUser u) {
+	public void updateUser(User u) {
 		ArrayList<User> list = ud.readUserList();
 
 		if (list == null) {
@@ -72,7 +71,7 @@ public class UserManager {
 		for(int i=0;i<list.size(); i++) {
 			if(list.get(i).getUserId().equals(u.getUserId())) {
 				list.remove(i);
-//				list.add(u);
+				list.add(u);
 				break;
 			}
 		}

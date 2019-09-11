@@ -147,6 +147,7 @@ public class Sender extends Thread {
 	
 	public synchronized void sendSignUp(String msg) {
 		try {
+			System.out.println("클라sender : " + socket.getLocalPort());
 			out.writeUTF("signUp:::" + msg + ",/" + socket.getLocalPort());
 			out.flush();
 		} catch(IOException e) {
@@ -155,20 +156,10 @@ public class Sender extends Thread {
 		}
 	}
 	
-	public synchronized void sendLogin(String msg, String userId) {		//msg = 아이디 ,/ 비밀번호
+	public synchronized void sendLogin(String msg, String userId) {
 		try {
 			this.userId = userId;
 			out.writeUTF("login:::" + msg + ":" + socket.getLocalPort());
-			out.flush();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public void sendLogOut(String userId) {
-		try {
-			out.writeUTF("logOut:::" + userId);
 			out.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
