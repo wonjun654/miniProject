@@ -629,32 +629,6 @@ public class GameRoom extends JFrame {
       // timer.setText((time / 60) + " : " + (time % 60));
       // }
       // });
-      
-      // 시작버튼 클릭시 타이머 및 게임 실행
-		startBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// 타이머 시작
-				Runnable runnable = new Runnable() {
-
-					@Override
-					public void run() {
-						time--;
-						timer.setText((time / 60) + " : " + (time % 60));
-
-					}
-
-				};
-				ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
-				service.scheduleAtFixedRate(runnable, 0, 1, TimeUnit.SECONDS);
-
-				// 시간 종료되었을 시, 시간 초기화
-				time = 180;
-				// 최초 시간 출력
-				timer.setText((time / 60) + " : " + (time % 60));
-			}
-		});
 
       // 나가기 버튼 클릭
       exitBtn.addActionListener(new ActionListener() {

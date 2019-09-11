@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.kh.user.controller.UserManager;
-import com.kh.user.model.vo.ClientUser;
+import com.kh.user.model.vo.User;
 
 
 
@@ -29,7 +29,7 @@ public class Profile extends JFrame {
 	
 	UserManager um = new UserManager();
 
-	public Profile(ClientUser user) {
+	public Profile(User user) {
 		// 기본 프로필창-----------------------------------------------
 		this.setBounds(700, 300, 600, 300);
 		try {

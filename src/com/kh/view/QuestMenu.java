@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -17,13 +18,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.kh.user.controller.UserManager;
-import com.kh.user.model.vo.ClientUser;
+import com.kh.user.model.vo.User;
 
 public class QuestMenu extends JFrame {
 
 	
 
-	public QuestMenu(ClientUser user) {
+	public QuestMenu(User user) {
 		ImageIcon background;
 		ImageIcon bgi;
 		Font font = new Font("고딕", Font.BOLD, 11);
@@ -57,7 +58,7 @@ public class QuestMenu extends JFrame {
 		questList1.setFont(font);
 		
 		questList1.setBackground(Color.white);
-		if (user.isQuestClear1() == true) {
+		if (user.getQuestClear1() == true) {
 			questList1.setText("\t    퀘스트 완료 !! ");
 		}
 
@@ -67,7 +68,7 @@ public class QuestMenu extends JFrame {
 		questList2.setSize(300, 60);
 		questList2.setFont(font);
 		questList2.setBackground(Color.white);
-		if (user.isQuestClear2() == true) {
+		if (user.getQuestClear2() == true) {
 			questList2.setText("\t    퀘스트 완료 !! ");
 		}
 
@@ -77,7 +78,7 @@ public class QuestMenu extends JFrame {
 		questList3.setSize(300, 60);
 		questList3.setFont(font);
 		questList3.setBackground(Color.white);
-		if (user.isQuestClear3() == true) {
+		if (user.getQuestClear3() == true) {
 			questList3.setText("\t    퀘스트 완료 !! ");
 		}
 
@@ -136,16 +137,16 @@ public class QuestMenu extends JFrame {
 		clearButton1.setSize(80, 30);
 		clearButton1.setLocation(470, 80);
 
-		if (user.isAcceptQuest1() == true && user.isQuestClear1() == false) {
+		if (user.getAcceptQuest1() == true && user.getQuestClear1() == false) {
 			clearButton1.setText("진행중");
 			clearButton1.setEnabled(false);
 		}
 
-		if (um.selectOneUser("123").getCoin() >= 100 && user.isAcceptQuest1() == true) {
+		if (um.selectOneUser("123").getCoin() >= 100 && user.getAcceptQuest1() == true) {
 			clearButton1.setEnabled(true);
 			clearButton1.setText("완료");
 		}
-		if (user.isQuestClear1() == true) {
+		if (user.getQuestClear1() == true) {
 			clearButton1.setEnabled(false);
 			clearButton1.setText("완료");
 		}
@@ -154,17 +155,17 @@ public class QuestMenu extends JFrame {
 		clearButton2.setSize(80, 30);
 		clearButton2.setLocation(470, 200);
 
-		if (user.isAcceptQuest2() == true && user.isQuestClear2() == false) {
+		if (user.getAcceptQuest2() == true && user.getQuestClear2() == false) {
 			clearButton2.setText("진행중");
 			clearButton2.setEnabled(false);
 
 		}
 
-		if (user.getOwnItem1() >= 10 && user.isAcceptQuest2() == true) {
+		if (user.getOwnItem1() >= 10 && user.getAcceptQuest2() == true) {
 			clearButton2.setText("완료");
 			clearButton2.setEnabled(true);
 		}
-		if (user.isQuestClear2() == true) {
+		if (user.getQuestClear2() == true) {
 			clearButton2.setEnabled(false);
 			clearButton2.setText("완료");
 		}
@@ -173,17 +174,17 @@ public class QuestMenu extends JFrame {
 		clearButton3.setSize(80, 30);
 		clearButton3.setLocation(470, 325);
 
-		if (user.isAcceptQuest3() == true && user.isQuestClear3() == false) {
+		if (user.getAcceptQuest3() == true && user.getQuestClear3() == false) {
 			clearButton3.setText("진행중");
 			clearButton3.setEnabled(false);
 		}
 
-		if (user.getVictory() >= 1 && user.isAcceptQuest3() == true) {
+		if (user.getVictory() >= 1 && user.getAcceptQuest3() == true) {
 			clearButton3.setText("완료");
 			clearButton3.setEnabled(true);
 		}
 
-		if (user.isQuestClear3() == true) {
+		if (user.getQuestClear3() == true) {
 			clearButton3.setEnabled(false);
 			clearButton3.setText("완료");
 		}
@@ -195,7 +196,7 @@ public class QuestMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				user.setAcceptQuest1(true);
 
-				if (user.isAcceptQuest1() == true && user.isQuestClear1() == false) {
+				if (user.getAcceptQuest1() == true && user.getQuestClear1() == false) {
 					clearButton1.setText("진행중");
 					clearButton1.setEnabled(false);
 				}
@@ -222,7 +223,7 @@ public class QuestMenu extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				user.setAcceptQuest2(true);
-				if (user.isAcceptQuest2() == true && user.isQuestClear2() == false) {
+				if (user.getAcceptQuest2() == true && user.getQuestClear2() == false) {
 					clearButton2.setText("진행중");
 					clearButton2.setEnabled(false);
 				}
@@ -248,7 +249,7 @@ public class QuestMenu extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				user.setAcceptQuest3(true);
-				if (user.isAcceptQuest3() == true && user.isQuestClear3() == false) {
+				if (user.getAcceptQuest3() == true && user.getQuestClear3() == false) {
 					clearButton3.setText("진행중");
 					clearButton3.setEnabled(false);
 				}

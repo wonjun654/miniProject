@@ -15,12 +15,13 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 
 import com.kh.user.controller.UserManager;
-import com.kh.user.model.vo.ClientUser;
+import com.kh.user.model.vo.User;
+import com.kh.view.MainMenu;
 import com.kh.view.RoundButton;
 
 public class PasswordChange extends JFrame{
 	UserManager um = new UserManager();
-	public PasswordChange(ClientUser u) {
+	public PasswordChange(User u) {
 	JPasswordField newpw = new JPasswordField();
 	newpw.setSize(120,30);
 	newpw.setLocation(130, 100);
