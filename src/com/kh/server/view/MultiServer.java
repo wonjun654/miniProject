@@ -352,7 +352,7 @@ public class MultiServer implements Serializable{
 		}
 	}
 
-	public void createMultiRoom(String msg) {
+	/*public void createMultiRoom(String msg) {
 		String[] tmpMsg = msg.split(":::");		//1번 인덱스가 방이름
 		tmpMsg = tmpMsg[1].split(",/"); 		//0번 : 방이름, 1번 : 아이디
 		String roomName = tmpMsg[0];
@@ -394,8 +394,53 @@ public class MultiServer implements Serializable{
 			}//iter.hasNext() while문-------
 		}//else문 (방이름 중복체크)-----------
 	}//createMultiRoom 메소드 -----------
+*/
+	public void createMultiRoom(String msg) {
+		int flag = 0;
+		String[] tmpMsg = msg.split(":::");		//1번 인덱스가 방이름
+		tmpMsg = tmpMsg[1].split(",/"); 		//0번 : 방이름, 1번 : 아이디
+		String roomName = tmpMsg[0];
+		String roomPwd = tmpMsg[1];
+		int people = Integer.parseInt(tmpMsg[2]); 
+		String userId = tmpMsg[3];
+		
+		Iterator iter = multiRoom.keySet().iterator();
+		while(iter.hasNext()) {
+			String key = (String) iter.next();
+			if(key.equals(roomName)) {
+				System.out.println("동일한 방 이름이 존재합니다.");
+				flag = 1;
+				break;
+			}
+		}
+		if(flag == 1) {
+			DataOutputStream out = clientMap.get(userId);
+			try {
+				System.out.println("createRoom:::" + roomName + ",/false");
+				out.writeUTF("createRoom:::" + roomName + ",/false");
+				out.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else if(flag == 0) {
+			multiRoom.put(roomName, new HashMap<>());
+			Collections.synchronizedMap(multiRoom.get(roomName));
+			DataOutputStream out = clientMap.get(userId);
+			try {
+				multiRoom.get(roomName).put(userId, out);
+				System.out.println("createRoom:::" + roomName + ",/true");
+				out.writeUTF("createRoom:::" + roomName + ",/true");
+				out.flush();
+				clientMap.remove(userId);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}//createMultiRoom 메소드 -----------
 	
-	public void enterMultiRoom(String msg) {
+	/*public void enterMultiRoom(String msg) {
 		String[] tmpMsg = msg.split(":::");		//1번 인덱스가 방이름
 		tmpMsg = tmpMsg[1].split(",/"); 		//0번 : 방이름, 1번 : 아이디
 		String roomName = tmpMsg[0];
@@ -428,6 +473,45 @@ public class MultiServer implements Serializable{
 			}//iter.hasNext() while문------
 		} else {
 			System.out.println("존재하지 않는 방입니다.");
+		}
+	}*/
+	
+	public void enterMultiRoom(String msg) {
+		String[] tmpMsg = msg.split(":::");		//1번 인덱스가 방이름
+		tmpMsg = tmpMsg[1].split(",/"); 		//0번 : 방이름, 1번 : 아이디
+		String roomName = tmpMsg[0];
+		String userId = tmpMsg[1];
+		
+		Iterator iter = multiRoom.keySet().iterator();
+		int flag = 0;
+		while(iter.hasNext()) {
+			String key = (String) iter.next();
+			if(key.equals(roomName)) {
+				flag = 1;
+				break;
+			}
+		}
+		
+		if(flag == 1) {
+			DataOutputStream out = clientMap.get(userId);
+			multiRoom.get(roomName).put(userId, out);
+			try {
+				out.writeUTF("enterRoom:::" + roomName + ",/true");
+				out.flush();
+				clientMap.remove(userId);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if(flag == 0) {
+			DataOutputStream out = clientMap.get(userId);
+			try {
+				out.writeUTF("enterRoom:::" + roomName + ",/false");
+				out.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	

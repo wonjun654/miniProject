@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import com.kh.model.vo.TempPoint;
 import com.kh.part01_main.LoginPage;
 import com.kh.user.model.vo.ClientUser;
+import com.kh.user.model.vo.Sender;
 import com.kh.view.GameRoom;
 import com.kh.view.MainMenu;
 
@@ -111,16 +112,30 @@ public class Receiver extends Thread{
 					
 				} else if (msg.startsWith("createRoom")) {
 					String[] tmpMsg = msg.split(":::");
-					String roomName = tmpMsg[1];
-					game = new GameRoom(sender, this, userId, roomName);
-					System.out.println("방을 생성했습니다.");
-					game.doGame(mm);
+					tmpMsg = tmpMsg[1].split(",/");
+					String roomName = tmpMsg[0];
+					boolean result = Boolean.parseBoolean(tmpMsg[1]);
+					if(result) {
+						game = new GameRoom(sender, this, userId, roomName);
+						System.out.println("방을 생성했습니다.");
+						game.doGame(mm);
+						((Sender) sender).sendRoomInfo(roomName, "123", "123");
+					} else {
+						JOptionPane.showMessageDialog(null, "동일한 이름의 방이 있습니다.");
+					}
 
 				} else if (msg.startsWith("enterRoom")) {
 					String[] tmpMsg = msg.split(":::");
-					String roomName = tmpMsg[1];
-					game = new GameRoom(sender, this, userId, roomName);
-					game.doGame(mm);
+					tmpMsg = tmpMsg[1].split(",/");
+					String roomName = tmpMsg[0];
+					boolean result = Boolean.parseBoolean(tmpMsg[1]);
+					if(result) {
+						game = new GameRoom(sender, this, userId, roomName);
+						game.doGame(mm);
+					} else {
+						JOptionPane.showMessageDialog(null, roomName + "방이 없습니다.");
+					}
+					
 
 				} else if (msg.startsWith("sendAllMsg")) {
 					String[] tmpMsg = msg.split(":::");
@@ -154,7 +169,6 @@ public class Receiver extends Thread{
 					String roomPwd = tmpMsg[1];
 					int people = Integer.parseInt(tmpMsg[2]);
 					mm.model1.insertRow(0, new Object[] {roomName, roomPwd, people});
-
 					mm.table1.updateUI();				
 				} else if(msg.startsWith("sendRoomList")) {
 					

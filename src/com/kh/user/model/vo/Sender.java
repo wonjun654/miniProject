@@ -131,8 +131,6 @@ public class Sender extends Thread {
 			
 			e.printStackTrace();
 		}
-		
-		
 	}
 
 	public void sendEnterRoom(String roomName) {
