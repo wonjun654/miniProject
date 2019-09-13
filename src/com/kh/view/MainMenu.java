@@ -172,7 +172,7 @@ public class MainMenu extends JFrame implements MouseListener {
 				if (e.getClickCount() == 2) {
 					int row = table1.getSelectedRow();
 					String roomName = (String) table1.getValueAt(row, 0);
-					System.out.println(roomName);
+					System.out.println("입장방 : " + roomName);
 					((Sender) sender).sendEnterRoom(roomName);
 
 				}

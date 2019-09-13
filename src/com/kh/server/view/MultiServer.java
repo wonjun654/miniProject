@@ -94,7 +94,7 @@ public class MultiServer implements Serializable{
 		}
 	}
 	
-	public void sendLogin(String msg) {
+	public synchronized void sendLogin(String msg) {
 		
 	      String[] tmpMsg = msg.split(":");
 	      String userId = tmpMsg[0];
