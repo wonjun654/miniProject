@@ -32,7 +32,7 @@ public class LoginPage extends JFrame {
 	ImageIcon icon;
 	String str = "";
 	String userId;
-//	UserManager um = new UserManager();
+	MainMenu mm;
 	JPanel bgPan = new JPanel();
   
 
@@ -199,10 +199,15 @@ public class LoginPage extends JFrame {
 //			ClientUser u = new ClientUser(userId, userPw, userName, email);
 			System.out.println("로그인성공");
 			MainMenu mm = new MainMenu(socket, u, sender, receiver);
+			this.mm = mm;
 			mm.doMain();
 			this.dispose();
 		} else {
 			JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 맞지않습니다!");
 		}
+	}
+	
+	public MainMenu getMainMenu() {
+		return mm;
 	}
 }

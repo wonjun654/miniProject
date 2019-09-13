@@ -104,7 +104,8 @@ public class Receiver extends Thread{
 							, userItem1, userItem2);
 					
 					lp.resultLogin(result, u, sender, this);
-
+					mm = lp.getMainMenu();
+					
 				}  else if (msg.startsWith("released")) {
 					game.releaseMouse();
 					
@@ -141,7 +142,7 @@ public class Receiver extends Thread{
 					lp.resultSignUp(result);
 				} else if(msg.startsWith("failLogin")) {
 					JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 확인하세요!");
-					
+				}	
 			else if(msg.startsWith("sendRoomInfo")) {
 
 					System.out.println("receiver roominfo");
