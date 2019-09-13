@@ -160,7 +160,6 @@ public class Setting extends JFrame {
 				
 					///asd///
 				}
-//				um.updateUser(u);
 				dispose();
 			}
 		});
