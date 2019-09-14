@@ -250,16 +250,6 @@ public class MultiServer implements Serializable {
 		}
 	}
 
-	
-	
-	
-	public void sendAllMsg(String msg) {
-		String[] tmpMsg = msg.split(":::");
-		tmpMsg = tmpMsg[1].split(",/");
-		String sendMsg = tmpMsg[0];
-		String roomName = tmpMsg[1];
-		String userId = tmpMsg[2];
-		
 
 	public void login(String msg) {
 		String[] tmpMsg = msg.split(":::");
