@@ -18,15 +18,11 @@ public class MediaTest {
 		AudioFormat format;
 		DataLine.Info info;
 		JFrame mf = new JFrame();
-
 		String[] bgmarr = new String[3];
 		bgmarr[0] = "bgm/CatchMind1.wav";
 		bgmarr[1] = "bgm/CatchMind2.wav";
 		bgmarr[2] = "bgm/CatchMind3.wav";
-		
-
 		if (b) {
-
 			try {
 				bgm = new File(bgmarr[i]);
 				stream = AudioSystem.getAudioInputStream(bgm);
@@ -39,12 +35,9 @@ public class MediaTest {
 			} catch (Exception e) {
 				System.out.println("err : " + e);
 			}
-
 		} else {
-
 		clip.stop();
 		clip.close();
-
 		}
 	}
 

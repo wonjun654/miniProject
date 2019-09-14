@@ -80,11 +80,7 @@ public class GameRoom extends JFrame implements Runnable {
 	JLabel timer;
 	boolean stop;
 	boolean usingTimeStop = false;
-	
-	String[] q = {"박상준", "김상찬", "최원준", "윤혁준", "이원경"};
-	String answer = q[(int) (Math.random() * 5) + 1];
-	
-	
+
 	int sX, sY, eX, eY;
 	float stroke = 1;
 	boolean isDraw = false;
@@ -96,8 +92,7 @@ public class GameRoom extends JFrame implements Runnable {
 	Timer timerT = null;
 	int time = 10;
 	int count;
-	Iterator userIter;
-	
+
 	public GameRoom(Thread sender, Thread receiver, String userId, String roomName) {
 		this.userId = userId;
 		this.roomName = roomName;
@@ -330,7 +325,7 @@ public class GameRoom extends JFrame implements Runnable {
 		ctntimer.setLocation(5, 10);
 		toolPane.add(ctntimer);
 
-		timer = new JLabel("03:00");
+		timer = new JLabel("00:00");
 		timer.setSize(80, 30);
 		timer.setLocation(35, 10);
 		toolPane.add(timer);
@@ -340,21 +335,21 @@ public class GameRoom extends JFrame implements Runnable {
 		item1.setLocation(150, 10);
 		toolPane.add(item1);
 		Image item1Image = new ImageIcon("images/timer.png").getImage().getScaledInstance(30, 30, 0);
-		//JLabel item1Img = new JLabel(new ImageIcon(item1Image));
+		// JLabel item1Img = new JLabel(new ImageIcon(item1Image));
 		JButton item1Img = new JButton(new ImageIcon(item1Image));
 		item1Img.setSize(30, 30);
 		item1Img.setLocation(110, 10);
 		toolPane.add(item1Img);
 
 		item1Img.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (mm.u.getOwnItem1() > 0) {
 					System.out.println("time stop");
 					usingTimeStop = true;
 					mm.u.setOwnItem1(mm.u.getOwnItem1() - 1);
-				}				
+				}
 			}
 		});
 		JLabel item2 = new JLabel(/* u.getOwnItem2() + */"");
@@ -639,10 +634,12 @@ public class GameRoom extends JFrame implements Runnable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				startStopWatch();
-				
+				if (isDraw) {
+					startStopWatch();
+				}
 			}
 		});
+
 		// // 타이머
 		// timerT = new Timer(time, new ActionListener() {
 		//
@@ -914,6 +911,14 @@ public class GameRoom extends JFrame implements Runnable {
 		chatInput.requestFocus();
 	}
 
+	public void oneUserAppendChat(String msg, String userId) {
+		if (this.userId.equals(userId)) {
+			chatOutput.append(msg + "\n");
+			chatOutput.setCaretPosition(chatOutput.getDocument().getLength());
+			chatInput.requestFocus();
+		}
+	}
+
 	public void dragMouse(int sX, int sY, Color color, float stroke) {
 		tmp.add(new TempPoint(sX, sY));
 		g = canvasPanel.getGraphics();
@@ -943,18 +948,17 @@ public class GameRoom extends JFrame implements Runnable {
 		gameTimer = new Thread(this);
 		gameTimer.start();
 	}
-	
+
 	public void inturruptThread() {
-		if(gameTimer!=null){
+		if (gameTimer != null) {
 			gameTimer.interrupt();
 		}
 	}
-	
-	
-	
+
 	public void threadStop(boolean stop) {
 		this.stop = stop;
 	}
+
 	@Override
 	public void run() {
 
@@ -969,7 +973,6 @@ public class GameRoom extends JFrame implements Runnable {
 			String str = s_min + " : " + s_sec;
 			timer.setText(str);
 			count--;
-			System.out.println(s_min + " : " + s_sec);
 			((Sender) sender).sendTimer(str, roomName, userId);
 			if (count == -1) {
 				break;
@@ -979,8 +982,8 @@ public class GameRoom extends JFrame implements Runnable {
 			} catch (Exception e) {
 				return;
 			}
-			
-			if(usingTimeStop) {
+
+			if (usingTimeStop) {
 				try {
 					Thread.sleep(5000);
 					usingTimeStop = false;
@@ -989,21 +992,24 @@ public class GameRoom extends JFrame implements Runnable {
 					e.printStackTrace();
 				}
 			}
-			System.out.println("게임룸 : " + roomName);
-			
-			if(count == 0) {
+
+			if (count == 0) {
 				isDraw = false;
 			}
 		}
 
 	}
 
-	
 	public void setTime(String str) {
 		timer.setText(str);
 		timer.repaint();
 	}
-	
+
+	public void changeIsDraw(String userId, boolean flag) {
+		if (this.userId.equals(userId)) {
+			isDraw = flag;
+		}
+	}
 
 	/*
 	 * public void timer1(int time) { for(int i = time; i > 0; i--) {

@@ -58,10 +58,7 @@ public class MainMenu extends JFrame implements MouseListener {
 	JTextField textInput;
 	RoundButton rbtn;
 
-	
-	JScrollPane gameRoomListScrollPane, waitingRoomUserListScrollPane, waitingRoomChatScrollPane;
-	JList<String> gameRoomList, waitingRoomUserList;
-	
+
 	JLabel lblroom;
 	JLabel lblsang;
 	JLabel lblpeople;
@@ -510,7 +507,9 @@ public class MainMenu extends JFrame implements MouseListener {
 			public void actionPerformed(ActionEvent e) {
 				((Sender) sender).sendLogOut(u.getUserId());
 				JOptionPane.showMessageDialog(null, "로그아웃 되었습니다.");
+				MediaTest.musicOff();
 				dispose();
+				
 				
 
 				LoginPage login = new LoginPage(socket);

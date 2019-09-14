@@ -19,6 +19,7 @@ public class UserManager {
 
 	}
 
+
 	 public void userDelete(String str) {
 
 	      ArrayList<User> list = ud.readUserList();
@@ -44,7 +45,6 @@ public class UserManager {
 	      }
 	      
 	   }
-	 
 	 
 
 	public void createUser(String str) {

@@ -223,4 +223,14 @@ public class Sender extends Thread {
 		}
 	}
 
+	public void sendChangeIsDraw(String userId, String flag, String roomName) {
+		try {
+			out.writeUTF("changeIsDraw:::" + userId + ",/" + flag + ",/" + roomName);
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }// class Sender-------
