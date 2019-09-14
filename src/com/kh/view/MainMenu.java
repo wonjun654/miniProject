@@ -422,8 +422,8 @@ public class MainMenu extends JFrame implements MouseListener {
 			public void actionPerformed(ActionEvent e) {
 				String msg = textInput.getText();
 				if (!msg.isEmpty()) {
-					((Sender) sender).sendMainRoomMsg(msg);
-					textOutput.append(userId + " >> " + msg + "\n");
+					((Sender) sender).sendMainRoomMsg(msg, u.getUserId());
+					textOutput.append(u.getUserId() + " >> " + msg + "\n");
 					textOutput.setCaretPosition(textOutput.getDocument().getLength());
 					textInput.setText(null);
 					textInput.requestFocus();
@@ -437,8 +437,8 @@ public class MainMenu extends JFrame implements MouseListener {
 			public void actionPerformed(ActionEvent e) {
 				String msg = textInput.getText();
 				if (!msg.isEmpty()) {
-					((Sender) sender).sendMainRoomMsg(msg);
-					textOutput.append(userId + " >> " + msg + "\n");
+					((Sender) sender).sendMainRoomMsg(msg, u.getUserId());
+					textOutput.append(u.getUserId() + " >> " + msg + "\n");
 					textOutput.setCaretPosition(textOutput.getDocument().getLength());
 					textInput.setText(null);
 					textInput.requestFocus();

@@ -73,7 +73,7 @@ public class Sender extends Thread {
 		}
     }
 	
-	public void sendMainRoomMsg(String msg) {
+	public void sendMainRoomMsg(String msg, String userId) {
 		try {
 			out.writeUTF("sendMainRoomMsg:::" + msg + ",/" + userId);
 			out.flush();
