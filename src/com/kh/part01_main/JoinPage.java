@@ -154,8 +154,8 @@ public class JoinPage extends JFrame {
 		add(pwCheck);
 
 		// 이름
-		JLabel nameLabel = new JLabel("이름 : ");
-		nameLabel.setBounds(177, 411, 57, 15);
+		JLabel nameLabel = new JLabel("닉네임(한글x) : ");
+		nameLabel.setBounds(132, 411, 90, 15);
 		add(nameLabel);
 
 		JTextField nameTextField = new JTextField();
@@ -218,21 +218,49 @@ public class JoinPage extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String signUpId = idtextField.getText();
-				str += signUpId + ":";
-
-				char[] tempPassword = pwTextField.getPassword();
-				String pwd = "";
-				for (int i = 0; i < tempPassword.length; i++) {
-					pwd += tempPassword[i];
+				int idFlag = 0;
+				char[] tmpStr1 = idtextField.getText().toCharArray();
+				for(int i = 0; i < idtextField.getText().length(); i ++) {
+					if((tmpStr1[i] >= 48 && tmpStr1[i] <= 57)||(tmpStr1[i] >= 65 && tmpStr1[i] <= 90) || (tmpStr1[i] >= 97 && tmpStr1[i] <= 122)) {
+						continue;
+					} else {
+						idFlag = 1;
+						break;
+					}
 				}
-				str += pwd + ":";
+				if(idFlag == 0) {
+					String signUpId = idtextField.getText();
+					str += signUpId + ":";
 
-				str += nameTextField.getText() + ":";
-				str += emailTextField.getText() + "@" + domainTextField.getText();
-				send(str);
-				str = "";
-				dispose();
+					char[] tempPassword = pwTextField.getPassword();
+					String pwd = "";
+					for (int i = 0; i < tempPassword.length; i++) {
+						pwd += tempPassword[i];
+					}
+					str += pwd + ":";
+					int flag = 0;
+					char[] tmpStr = nameTextField.getText().toCharArray();
+					for(int i = 0; i < nameTextField.getText().length(); i ++) {
+						if((tmpStr[i] >= 48 && tmpStr[i] <= 57)||(tmpStr[i] >= 65 && tmpStr[i] <= 90) || (tmpStr[i] >= 97 && tmpStr[i] <= 122)) {
+							continue;
+						} else {
+							flag = 1;
+							break;
+						}
+					}
+					if(flag == 0) {
+						str += nameTextField.getText() + ":";
+						str += emailTextField.getText() + "@" + domainTextField.getText();
+						System.out.println("회원가입 정보 : " + str);
+						send(str);
+						str = "";
+						dispose();
+					} else if(flag == 1) {
+						JOptionPane.showMessageDialog(null, "한글입력은 안됩니다.");
+					}
+				} else if(idFlag == 1) {
+					JOptionPane.showMessageDialog(null, "한글입력은 안됩니다.");
+				}
 			}
 		});
 

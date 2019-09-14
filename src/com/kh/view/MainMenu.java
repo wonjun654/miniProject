@@ -92,19 +92,19 @@ public class MainMenu extends JFrame implements MouseListener {
 
 
 
-	public MainMenu(Socket socket, ClientUser u, Thread sender, Thread receiver, MainMenu mm) {
+	public MainMenu(Socket socket, ClientUser u, Thread sender, Thread receiver) {
 		super("MainMenuPage");
 		this.socket = socket;
 		this.u = u;
 		this.sender = sender;
 		this.receiver = receiver;
-		this.mm = mm;
 	}
 
 
 
 
 	public void doMain() {
+		this.mm = this;
 		this.setLayout(null);
 		this.setSize(1024, 768);
 		bgPan.setLayout(null);
@@ -459,7 +459,7 @@ public class MainMenu extends JFrame implements MouseListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				Store st = new Store(u);
+				Store st = new Store(u, getMainMenu());
 			}
 
 		});

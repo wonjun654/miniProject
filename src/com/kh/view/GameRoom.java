@@ -638,13 +638,6 @@ public class GameRoom extends JFrame {
             ((Sender) sender).exitRoom(roomName);
             dispose();
             mm.setVisible(true);
-            for(int i = 0; i < mm.model1.getRowCount(); i++) {
-            	if(roomName.equals(mm.model1.getValueAt(i, 0))) {
-            		mm.model1.removeRow(i);
-            	}
-            	
-            }
-           
          }
       });
 
@@ -659,7 +652,7 @@ public class GameRoom extends JFrame {
          }
       });
 
-      // 신고하기 버튼
+      // 신고하기 버튼                        
       JButton report = new JButton("신고하기");
       report.setSize(90, 40);
       report.setLocation(40, 670);
