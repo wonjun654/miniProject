@@ -2,7 +2,6 @@ package com.kh.user.model.vo;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class Sender extends Thread {
@@ -143,6 +142,24 @@ public class Sender extends Thread {
 		}
 	}
 	
+	public void sendCheckId(String id) {
+		try {
+			out.writeUTF("checkId:::" + id + ",/" + socket.getLocalPort());
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void sendEmail(String id, String email) {
+		try {
+			out.writeUTF("sendEmail:::" + id + ",/" + email + ",/" + socket.getLocalPort());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public synchronized void sendLogin(String msg, String userId) {		//msg = 아이디 ,/ 비밀번호
 		try {
 			this.userId = userId;
@@ -163,6 +180,7 @@ public class Sender extends Thread {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	public void sendUserInfo(ClientUser u) {
 		String userId = u.getUserId();

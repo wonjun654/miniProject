@@ -18,7 +18,7 @@ public class User implements Serializable {
 	private int ownItem1;
 	private int ownItem2;
 
-	boolean tempPwd = true;
+	boolean tempPwd = false;
 
 	boolean acceptQuest1 = false;
 	boolean acceptQuest2 = false;

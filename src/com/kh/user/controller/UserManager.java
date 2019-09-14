@@ -4,6 +4,7 @@ package com.kh.user.controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.kh.user.TempPassword;
 import com.kh.user.smtptest;
 import com.kh.user.model.dao.UserDao;
 import com.kh.user.model.vo.ClientUser;
@@ -18,20 +19,33 @@ public class UserManager {
 
 	}
 
-	public ArrayList<User> userDelete(String str) {
+	 public void userDelete(String str) {
 
-		ArrayList<User> list = ud.readUserList();
+	      ArrayList<User> list = ud.readUserList();
 
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getUserId().equals(str)) {
-				list.remove(i);
-				return list;
-			}
-		}
+	      for (int i = 0; i < list.size(); i++) {
+	         if (list.get(i).getUserId().equals(str)) {
+	            list.remove(i);
+	            ud.addUserList(list);
+	         }
+	      }
 
-		return list;
+	   }
 
-	}
+	 public void userCor(String str,String Nid,String Nname,String Nemail) {
+	      ArrayList<User> list = ud.readUserList();
+	      for (int i = 0; i < list.size(); i++) {
+	         if (list.get(i).getUserId().equals(str)) {
+	            list.get(i).setUserId(Nid);
+	            list.get(i).setUserName(Nname);
+	            list.get(i).setEmail(Nemail);
+	            ud.addUserList(list);
+	         }
+	      }
+	      
+	   }
+	 
+	 
 
 	public void createUser(String str) {
 		String[] tmpMsg = str.split(",/");
@@ -78,7 +92,16 @@ public class UserManager {
 
 		return false;
 	}
-
+	
+	public synchronized boolean checkId(String str) {
+		ArrayList<User> list = ud.readUserList();
+		User u = selectOneUser(str);
+		if(u == null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	public synchronized boolean signUp(String str) {
 		User u = null;
 
@@ -208,18 +231,25 @@ public class UserManager {
 		return null;
 	}
 
-	public void findPwd(String userId, String email) {
+	public boolean findPwd(String userId, String email) {
 		ArrayList<User> list = ud.readUserList();
 
 		if (list != null) {
 			for (int i = 0; i < list.size(); i++) {
 				if (list.get(i).getUserId().equals(userId)) {
 					if (list.get(i).getEmail().equals(email)) {
+						User u = selectOneUser(userId);
+						u.setTempPwd(true);
+						TempPassword tp = new TempPassword();
+						String tmpPwd = tp.getTempPassword();
+						u.setUserPwd(tmpPwd);
 						smtptest.gmailSend(email);
+						return true;
 					}
 				}
 			}
 		}
+		return false;
 	}
 
 }
