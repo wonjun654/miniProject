@@ -11,7 +11,36 @@ import com.kh.user.model.vo.User;
 
 public class UserManager {
 	private UserDao ud = new UserDao();
+	
+	public void createUser(String str) {
+		String[] tmpMsg = str.split(",/");
 
+		String userId = tmpMsg[0];
+		String userPw = tmpMsg[1];
+		String userName = tmpMsg[2];
+		String userEmail = tmpMsg[3];
+		int userCoin = Integer.parseInt(tmpMsg[4]);
+		String userImgName = tmpMsg[5];
+		boolean userProfile = Boolean.parseBoolean(tmpMsg[6]);
+		boolean userMusicSet = Boolean.parseBoolean(tmpMsg[7]);
+		int userVictory = Integer.parseInt(tmpMsg[8]);
+		int userItem1 = Integer.parseInt(tmpMsg[9]);
+		int userItem2 = Integer.parseInt(tmpMsg[10]);
+		boolean userTempPwd = Boolean.parseBoolean(tmpMsg[11]);
+		boolean userAcceptQuest1 = Boolean.parseBoolean(tmpMsg[12]);
+		boolean userAcceptQuest2 = Boolean.parseBoolean(tmpMsg[13]);
+		boolean userAcceptQuest3 = Boolean.parseBoolean(tmpMsg[14]);
+		boolean userQuestClear1 = Boolean.parseBoolean(tmpMsg[15]);
+		boolean userQuestClear2 = Boolean.parseBoolean(tmpMsg[16]);
+		boolean userQusetClear3 = Boolean.parseBoolean(tmpMsg[17]);
+
+		User u = new User(userId, userPw, userName, userEmail, userCoin, userImgName, userProfile, userMusicSet,
+				userVictory, userItem1, userItem2, userTempPwd, userAcceptQuest1, userAcceptQuest2, userAcceptQuest3,
+				userQuestClear1, userQuestClear2, userQusetClear3);
+		
+		updateUser(u);
+	}
+	
 	public boolean login(String str) {
 		ArrayList<User> list = ud.readUserList();
 		String[] user = str.split(":");
@@ -63,6 +92,31 @@ public class UserManager {
 		}
 	}
 
+	public void updateUser(User u) {
+		ArrayList<User> list = ud.readUserList();
+
+		if (list == null) {
+			list = new ArrayList<User>();
+		} else {
+			for (int i = 0; i < list.size(); i++) {
+				if (list.get(i).getUserId().equals(u.getUserId())) {
+					list.remove(i);
+					list.add(u);
+					break;
+				}
+			}
+		}
+		// list.add(u);
+
+		int result = ud.addUserList(list);
+
+		if (result > 0) {
+			System.out.println("유저 정보 수정 성공");
+		} else {
+			System.out.println("유저 정보 수정 실패");
+		}
+	}
+	
 	public void updateUser(ClientUser u) {
 		ArrayList<User> list = ud.readUserList();
 

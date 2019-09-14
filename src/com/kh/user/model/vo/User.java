@@ -167,7 +167,30 @@ public class User implements Serializable {
 		this.ownItem2 = 0;
 	}
 
-
+	public User(String userId, String userPwd, String userName, String email, int coin, String imgName, boolean profile,
+			boolean musicSet, int victory, int ownItem1, int ownItem2, boolean tempPwd, boolean acceptQuest1,
+			boolean acceptQuest2, boolean acceptQuest3, boolean questClear1, boolean questClear2, boolean questClear3) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.email = email;
+		this.coin = coin;
+		this.imgName = imgName;
+		this.profile = profile;
+		this.musicSet = musicSet;
+		this.victory = victory;
+		this.ownItem1 = ownItem1;
+		this.ownItem2 = ownItem2;
+		this.tempPwd = tempPwd;
+		this.acceptQuest1 = acceptQuest1;
+		this.acceptQuest2 = acceptQuest2;
+		this.acceptQuest3 = acceptQuest3;
+		this.questClear1 = questClear1;
+		this.questClear2 = questClear2;
+		this.questClear3 = questClear3;
+	}
+	
 	public String getImgName() {
 		return imgName;
 	}

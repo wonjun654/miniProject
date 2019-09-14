@@ -488,6 +488,7 @@ public class MainMenu extends JFrame implements MouseListener {
 				dispose();
 				MediaTest.musicOff();
 				LoginPage login = new LoginPage(socket);
+				((Sender) sender).sendUserInfo(u);
 			}
 		});
 		questbtn.addActionListener(new ActionListener() {
