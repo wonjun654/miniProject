@@ -18,19 +18,30 @@ public class UserManager {
 
 	}
 
-	public ArrayList<User> userDelete(String str) {
+	public void userDelete(String str) {
 
 		ArrayList<User> list = ud.readUserList();
 
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getUserId().equals(str)) {
 				list.remove(i);
-				return list;
+				ud.addUserList(list);
 			}
 		}
 
-		return list;
-
+	}
+	
+	public void userCor(String str,String Nid,String Nname,String Nemail) {
+		ArrayList<User> list = ud.readUserList();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getUserId().equals(str)) {
+				list.get(i).setUserId(Nid);
+				list.get(i).setUserName(Nname);
+				list.get(i).setEmail(Nemail);
+				ud.addUserList(list);
+			}
+		}
+		
 	}
 
 	public void createUser(String str) {
