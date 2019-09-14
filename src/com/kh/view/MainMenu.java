@@ -9,10 +9,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
-
 import java.net.Socket;
 
 import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -26,7 +26,6 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
@@ -34,7 +33,7 @@ import javax.swing.table.DefaultTableModel;
 import com.kh.model.vo.MediaTest;
 import com.kh.part01_main.LoginPage;
 import com.kh.user.controller.UserManager;
-import com.kh.user.model.dao.Receiver;
+import com.kh.user.model.vo.ClientUser;
 import com.kh.user.model.vo.Sender;
 
 public class MainMenu extends JFrame implements MouseListener {
@@ -43,15 +42,14 @@ public class MainMenu extends JFrame implements MouseListener {
 
 	JPanel listPan = new JPanel();
 	JPanel bgPan = new JPanel();
+	
 
-	JScrollPane sc;
+
 	JTextArea textOutput;
 	JTextField textInput;
 	RoundButton rbtn;
 
-	JList roomList;
-	JList roomList2;
-	JList roomList3;
+	
 
 	JLabel lblroom;
 	JLabel lblsang;
@@ -74,36 +72,37 @@ public class MainMenu extends JFrame implements MouseListener {
 
 	Thread sender;
 	Thread receiver;
+	
+	ClientUser u;
 
+	
 
-	String header[] = { "방제목", "상태", "인원" };
-	String contents[][] = {
-
-	};
-
-	public MainMenu(Socket socket, String userId, String userPw, String userCoin, String userItem2, String userItem1,
-			boolean userMusicSet, Thread sender, Thread receiver) {
+	/*public MainMenu(Socket socket, ClientUser u, Thread sender, Thread receiver) {
 		super("MainMenuPage");
 		this.socket = socket;
-		this.userId = userId;
-		this.userPw = userPw;
-		this.userCoin = userCoin;
-		this.userItem2 = userItem2;
-		this.userItem1 = userItem1;
-		this.userMusicSet = userMusicSet;
+		this.u = u;
 		this.sender = sender;
 		this.receiver = receiver;
 		profile = true;
 		tempPwd = false;
-		((Receiver) receiver).getMainMenu(this);
+//		((Receiver) receiver).getMainMenu(this);
 		// Layout 지정 없이 위치 지정하면서 배치하는 방법이다.
+	}*/
+
+
+
+
+	public MainMenu(Socket socket, ClientUser u, Thread sender, Thread receiver) {
+		super("MainMenuPage");
+		this.socket = socket;
+		this.u = u;
+		this.sender = sender;
+		this.receiver = receiver;
 	}
 
-	
-	public void updateTable() {
-		table1.updateUI();
-	}
-	
+
+
+
 	public void doMain() {
 		this.setLayout(null);
 		this.setSize(1024, 768);
@@ -117,62 +116,13 @@ public class MainMenu extends JFrame implements MouseListener {
 			e.printStackTrace();
 		}
 
-		model1 = new DefaultTableModel(contents, header) {
-
-			public boolean isCellEditable(int i, int c) {
-				return false;
-			}
-		};
-
-		JTable table1 = new JTable(model1);
-		table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
 		
 		
-		JScrollPane scPanel = new JScrollPane(table1);
-		scPanel.setBounds(80, 150, 700, 320);
-		scPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		this.add(scPanel);
-		this.pack();
-
-		table1.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (e.getClickCount() == 2) {
-					int row = table1.getSelectedRow();
-					String roomName = (String) table1.getValueAt(row, 0);
-					System.out.println(roomName);
-					((Sender) sender).sendEnterRoom(roomName);
-
-				}
-
-			}
-		});
+		
+		
+		
+		
+		
 
 		this.setSize(1024, 768);
 
@@ -187,7 +137,7 @@ public class MainMenu extends JFrame implements MouseListener {
 		Image timerimg = new ImageIcon("images\\timer.png").getImage().getScaledInstance(60, 60, 0);
 
 		// JLabel namelbl = new JLabel(um.selectOneUser("123").getUserId() + "");
-		JLabel namelbl = new JLabel(userId);
+		JLabel namelbl = new JLabel(u.getUserId());
 		namelbl.setBounds(86, 10, 60, 60);
 
 		JLabel coinImg = new JLabel(new ImageIcon(coinimg));
@@ -195,7 +145,7 @@ public class MainMenu extends JFrame implements MouseListener {
 
 		// JLabel coinlbl = new JLabel("내 코인 : " + um.selectOneUser("123").getCoin() +
 		// "");
-		JLabel coinlbl = new JLabel("내 코인 : " + userCoin);
+		JLabel coinlbl = new JLabel("내 코인 : " + u.getCoin());
 		coinlbl.setBounds(276, 10, 100, 60);
 
 		JLabel chosungImg = new JLabel(new ImageIcon(chosungimg));
@@ -203,7 +153,7 @@ public class MainMenu extends JFrame implements MouseListener {
 
 		// JLabel chosunglbl = new JLabel("내 아이템 : " +
 		// um.selectOneUser("123").getOwnItem2() + "");
-		JLabel chosunglbl = new JLabel("내 아이템 : " + userItem2);
+		JLabel chosunglbl = new JLabel("내 아이템 : " + u.getOwnItem2());
 		chosunglbl.setBounds(437, 10, 100, 60);
 
 		JLabel timerImg = new JLabel(new ImageIcon(timerimg));
@@ -211,7 +161,7 @@ public class MainMenu extends JFrame implements MouseListener {
 
 		// JLabel timerlbl = new JLabel("내 아이템 : " +
 		// um.selectOneUser("123").getOwnItem1() + "");
-		JLabel timerlbl = new JLabel("내 아이템 : " + userItem1);
+		JLabel timerlbl = new JLabel("내 아이템 : " + u.getOwnItem1());
 		timerlbl.setBounds(637, 10, 100, 60);
 
 		JButton profilebtn = new JButton(new ImageIcon(profileimg));
@@ -305,6 +255,66 @@ public class MainMenu extends JFrame implements MouseListener {
 		makeRoomDialog.add(checkSecret);
 
 		makeRoomDialog.setLocationRelativeTo(null);
+		
+		
+		
+		JTextArea roomState = new JTextArea("da");
+		roomState.setBounds(450, 150, 350, 200);
+	
+		JScrollPane scPanel2 = new JScrollPane(roomState);
+		scPanel2.setBounds(450, 150, 350, 200);
+		roomState.setEditable(false);
+		
+		DefaultListModel<String>  model1 = new DefaultListModel<String>();
+		model1.addElement("시발");
+		model1.addElement("좆같네");
+		JList roomList = new JList(model1);
+		JScrollPane scPanel = new JScrollPane(roomList);
+		scPanel.setBounds(80, 150, 350, 200);
+		
+		roomList.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (roomList.getSelectedIndex() != -1) {
+					String roomName = roomName2.getText();
+					String roomPw = roomPwd2.getText();
+					String people = selectPeople.getValue() + "";
+					roomState.setText(roomName2.getName());
+					System.out.println(roomList.getName());
+					
+					System.out.println("왜안ㅇ돈ㅇ라ㅗㅇ러ㅏ호어ㅏㅀ");
+				}else {
+					
+				System.out.println(456789);
+				}
+			}
+		});
+
 
 		btnCancel.addActionListener(new ActionListener() {
 
@@ -321,11 +331,18 @@ public class MainMenu extends JFrame implements MouseListener {
 				String roomName = roomName2.getText();
 				String roomPw = roomPwd2.getText();
 				String people = selectPeople.getValue() + "";
-				model1.insertRow(0, new Object[] { roomName2.getText(), roomPwd2.getText(), selectPeople.getValue() });
-				((Sender) sender).sendCreateRoom(roomName, roomPw, people);
-				((Sender) sender).sendRoomInfo(roomName, roomPw, people);
+				model1.addElement(roomName);
+				//((Sender) sender).sendCreateRoom(roomName, roomPw, people);
+				
+				
+				
+				roomName2.setText(null);
+				roomPwd2.setText(null);
+				
+				
+				
+				//table1.updateUI();
 				makeRoomDialog.dispose();
-				table1.updateUI();
 
 			}
 		});
@@ -429,7 +446,8 @@ public class MainMenu extends JFrame implements MouseListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				Profile pf = new Profile(um.selectOneUser("123"));
+//				Profile pf = new Profile(um.selectOneUser("123"));
+				Profile pf = new Profile(u);
 				pf.setVisible(true);
 
 			}
@@ -440,7 +458,7 @@ public class MainMenu extends JFrame implements MouseListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				Store st = new Store(um.selectOneUser("123"));
+				Store st = new Store(u);
 			}
 
 		});
@@ -449,7 +467,7 @@ public class MainMenu extends JFrame implements MouseListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Setting set = new Setting(um.selectOneUser("123"));
+				Setting set = new Setting(u);
 
 			}
 		});
@@ -465,10 +483,11 @@ public class MainMenu extends JFrame implements MouseListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				((Sender) sender).sendLogOut(u.getUserId());
+				JOptionPane.showMessageDialog(null, "로그아웃 되었습니다.");
 				dispose();
 				MediaTest.musicOff();
 				LoginPage login = new LoginPage(socket);
-
 			}
 		});
 		questbtn.addActionListener(new ActionListener() {
@@ -476,15 +495,15 @@ public class MainMenu extends JFrame implements MouseListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				QuestMenu qm = new QuestMenu(um.selectOneUser("123"));
+				QuestMenu qm = new QuestMenu(u);
 				qm.setVisible(true);
 			}
 		});
 
-		//MediaTest.musicOff();
+		MediaTest.musicOff();
 
 		// MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
-		//MediaTest.musicOn(1, userMusicSet);
+		MediaTest.musicOn(1, userMusicSet);
 
 		this.add(listPan);
 
@@ -514,7 +533,10 @@ public class MainMenu extends JFrame implements MouseListener {
 		this.add(timerlbl);
 		this.add(make);
 		this.add(in);
-
+		this.add(scPanel);
+		this.add(scPanel2);
+		//this.add(roomState);
+		
 		this.add(bgPan);
 
 		this.setResizable(false);
