@@ -58,10 +58,7 @@ public class MainMenu extends JFrame implements MouseListener {
 	JTextField textInput;
 	RoundButton rbtn;
 
-	
-	JScrollPane gameRoomListScrollPane, waitingRoomUserListScrollPane, waitingRoomChatScrollPane;
-	JList<String> gameRoomList, waitingRoomUserList;
-	
+
 	JLabel lblroom;
 	JLabel lblsang;
 	JLabel lblpeople;
