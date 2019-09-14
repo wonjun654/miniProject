@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import com.kh.model.vo.TempPoint;
 import com.kh.part01_main.LoginPage;
 import com.kh.user.model.vo.ClientUser;
+import com.kh.user.model.vo.Sender;
 import com.kh.view.GameRoom;
 import com.kh.view.MainMenu;
 
@@ -127,8 +128,13 @@ public class Receiver extends Thread{
 					tmpMsg = tmpMsg[1].split(",/");
 					String receiveMsg = tmpMsg[0];
 					String fromUserId = tmpMsg[1];
+					String drawFlag = tmpMsg[2];
+					String roomName = tmpMsg[3];
+					if(drawFlag.equals("true") || drawFlag.equals("false")) {
+						((Sender) sender).sendChangeIsDraw(fromUserId,drawFlag,roomName);
+					}else {
 					game.appendChat(fromUserId + " >> " + receiveMsg);
-
+					}
 				} else if(msg.startsWith("sendMainRoomMsg")) {
 					String[] tmpMsg = msg.split(":::");
 					tmpMsg = tmpMsg[1].split(",/");
@@ -143,9 +149,22 @@ public class Receiver extends Thread{
 				} else if(msg.startsWith("failLogin")) {
 					JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 확인하세요!");
 					
-				}else if(msg.startsWith("timer")) {
+				} else if(msg.startsWith("timer")) {
 					String[] tmpMsg = msg.split(":::");
 					game.setTime(tmpMsg[1]);
+				} else if(msg.startsWith("changeIsDraw")) {
+					String[] tmpMsg = msg.split(":::");
+					tmpMsg = tmpMsg[1].split(",/");
+					
+					String userId = tmpMsg[0];
+					Boolean flag = Boolean.parseBoolean(tmpMsg[1]);
+					game.changeIsDraw(userId, flag);
+				} else if(msg.startsWith("sendAnswer")) {
+					String[] tmpMsg = msg.split(":::");
+					tmpMsg = tmpMsg[1].split(",/");
+					String answer = tmpMsg[0];
+					String userId = tmpMsg[1];
+					game.oneUserAppendChat(answer, userId);
 				}
 			}  
 		} catch (SocketException e) {
