@@ -132,21 +132,20 @@ public class Setting extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (musicOn.isSelected() == true) {
-					u.setMusicSet(true);
-
-				} else if (musicOn.isSelected() == false) {
-					u.setMusicSet(false);
-
-				}
-
-				if (musicOn.isSelected() == true && u.isMusicSet() == true) {
-
-				} else {
-//					um.updateUser(u);
-
+				if (musicOn.isSelected() == true && u.isMusicSet()==true) {
 					
+					
+
+				}else if(musicOn.isSelected()==true&& u.isMusicSet()==false) {
+					u.setMusicSet(true);
+					MediaTest.musicOn(1, u.isMusicSet());
 				}
+
+				if (musicOff.isSelected()==true) {
+					u.setMusicSet(false);
+					MediaTest.musicOn(1, u.isMusicSet());
+				} 
+				
 				
 				if (profileOn.isSelected() == true) {
 					u.setProfile(true);

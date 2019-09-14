@@ -90,52 +90,36 @@ public class PasswordChange extends JFrame{
 
 			for (int i = 0; i < tempPassword.length; i++) {
 				pwd += tempPassword[i];
-
 			}
-			
 			u.setUserPwd(pwd);
 			u.setTempPwd(false);
 			um.updateUser(u);
 			System.out.println(u.getUserPwd() + "" + pwd);
 				tempPwd.setVisible(false);
-				
-				
-				
 		}
 	});
 
 	newpw2.addKeyListener(new KeyListener() {
-
 		@Override
 		public void keyTyped(KeyEvent e) {
-
 		}
-
 		@Override
 		public void keyReleased(KeyEvent e) {
-
 			// 비밀번호 스트링변환
 			char[] tempPassword = newpw.getPassword();
 			String pwd = "";
-
 			for (int i = 0; i < tempPassword.length; i++) {
 				pwd += tempPassword[i];
-
 			}
-
 			// 비밀번호 확인 스트링변환
 			char[] tempPassword2 = newpw2.getPassword();
 			String pwd2 = "";
-
 			for (int j = 0; j < tempPassword2.length; j++) {
 				pwd2 += tempPassword2[j];
-
 			}
-
 			if (pwd.equals(pwd2)) {
 				pwCheck.setText("비밀번호가 일치.");
 				pwdOk.setEnabled(true);
-				
 			} else {
 				pwCheck.setText("비밀번호 불일치.");
 				pwdOk.setEnabled(false);
