@@ -128,13 +128,7 @@ public class Receiver extends Thread{
 					tmpMsg = tmpMsg[1].split(",/");
 					String receiveMsg = tmpMsg[0];
 					String fromUserId = tmpMsg[1];
-					String drawFlag = tmpMsg[2];
-					String roomName = tmpMsg[3];
-					if(drawFlag.equals("true") || drawFlag.equals("false")) {
-						((Sender) sender).sendChangeIsDraw(fromUserId,drawFlag,roomName);
-					}else {
 					game.appendChat(fromUserId + " >> " + receiveMsg);
-					}
 				} else if(msg.startsWith("sendMainRoomMsg")) {
 					String[] tmpMsg = msg.split(":::");
 					tmpMsg = tmpMsg[1].split(",/");
