@@ -110,6 +110,7 @@ public class Receiver extends Thread{
 				} else if (msg.startsWith("createRoom")) {
 					String[] tmpMsg = msg.split(":::");
 					String roomName = tmpMsg[1];
+					mm = lp.getMainMenu();
 					game = new GameRoom(sender, this, userId, roomName);
 					System.out.println("방을 생성했습니다.");
 					game.doGame(mm);
@@ -117,6 +118,7 @@ public class Receiver extends Thread{
 				} else if (msg.startsWith("enterRoom")) {
 					String[] tmpMsg = msg.split(":::");
 					String roomName = tmpMsg[1];
+					mm = lp.getMainMenu();
 					game = new GameRoom(sender, this, userId, roomName);
 					game.doGame(mm);
 
@@ -150,8 +152,5 @@ public class Receiver extends Thread{
 			
 		}
 	}// run()------
-	public void getMainMenu(MainMenu mm) {
-		this.mm = mm;
-		
-	}
+	
 }

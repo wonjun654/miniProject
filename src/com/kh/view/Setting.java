@@ -139,11 +139,11 @@ public class Setting extends JFrame {
 
 				}
 
-				if (musicOn.isSelected() == true && um.selectOneUser("123").getMusicSet() == true) {
+				if (musicOn.isSelected() == true && u.isMusicSet() == true) {
 
 				} else {
 //					um.updateUser(u);
-					MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
+					MediaTest.musicOn(1, u.isMusicSet());
 				}
 				
 				if (profileOn.isSelected() == true) {

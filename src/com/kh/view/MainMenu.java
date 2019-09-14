@@ -72,7 +72,7 @@ public class MainMenu extends JFrame implements MouseListener {
 
 	Thread sender;
 	Thread receiver;
-	
+	MainMenu mm;
 	ClientUser u;
 
 	
@@ -92,12 +92,13 @@ public class MainMenu extends JFrame implements MouseListener {
 
 
 
-	public MainMenu(Socket socket, ClientUser u, Thread sender, Thread receiver) {
+	public MainMenu(Socket socket, ClientUser u, Thread sender, Thread receiver, MainMenu mm) {
 		super("MainMenuPage");
 		this.socket = socket;
 		this.u = u;
 		this.sender = sender;
 		this.receiver = receiver;
+		this.mm = mm;
 	}
 
 
@@ -332,7 +333,7 @@ public class MainMenu extends JFrame implements MouseListener {
 				String roomPw = roomPwd2.getText();
 				String people = selectPeople.getValue() + "";
 				model1.addElement(roomName);
-				//((Sender) sender).sendCreateRoom(roomName, roomPw, people);
+				((Sender) sender).sendCreateRoom(roomName, "123", "123");
 				
 				
 				
@@ -581,5 +582,7 @@ public class MainMenu extends JFrame implements MouseListener {
 		textOutput.setCaretPosition(textOutput.getDocument().getLength());
 		textInput.requestFocus();
 	}
-
+	public MainMenu getMainMenu() {
+		return mm;
+	}
 }

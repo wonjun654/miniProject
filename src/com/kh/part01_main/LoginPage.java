@@ -41,6 +41,7 @@ public class LoginPage extends JFrame {
 	Thread sender;
 	Thread receiver;
 	ClientUser u;
+	MainMenu mm;
 	
 	public LoginPage(Socket socket) {
 		this.socket = socket;
@@ -198,11 +199,14 @@ public class LoginPage extends JFrame {
 		if (result) {
 //			ClientUser u = new ClientUser(userId, userPw, userName, email);
 			System.out.println("로그인성공");
-			MainMenu mm = new MainMenu(socket, u, sender, receiver);
+			mm = new MainMenu(socket, u, sender, receiver, mm);
 			mm.doMain();
 			this.dispose();
 		} else {
 			JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 맞지않습니다!");
 		}
+	}
+	public MainMenu getMainMenu() {
+		return mm;
 	}
 }
