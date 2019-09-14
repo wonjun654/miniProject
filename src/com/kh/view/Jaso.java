@@ -35,10 +35,6 @@ public class Jaso {
     }
     
     
-    public static void main(String[] args) {
-		String str =hangulToJaso("�׽�Ʈ");
-		System.out.println(str);
-	}
 }
 
 

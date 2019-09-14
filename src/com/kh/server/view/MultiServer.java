@@ -383,6 +383,31 @@ public class MultiServer implements Serializable{
 		um.createUser(tmpMsg[1]);
 	}
 	
+	
+	
+	public void sendTimer(String msg) {
+		String[] tmpMsg = msg.split(":::");
+		tmpMsg = tmpMsg[1].split(",/");
+		System.out.println(tmpMsg[0] + tmpMsg[1] + tmpMsg[2]);
+		String time = tmpMsg[0];
+		String roomName = tmpMsg[1];
+		String userId = tmpMsg[2];
+		
+		Iterator iter = multiRoom.get(roomName).keySet().iterator();
+		while(iter.hasNext()){
+			String key = (String) iter.next();
+			if(key.equals(userId)) {
+				continue;
+			} else {
+				DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
+				try {
+					iterOut.writeUTF("timer:::" + time);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 	// ----// 내부 클래스 //--------//
 
 		// 클라이언트로부터 읽어온 메시지를 다른 클라이언트(socket)에 보내는 역할을 하는 메서드
@@ -467,6 +492,8 @@ public class MultiServer implements Serializable{
 						sendLogOut(msg);
 					}else if(msg.startsWith("userInfo")) {
 						sendUserInfo(msg);
+					} else if(msg.startsWith("timer")) {
+						sendTimer(msg);
 					}
 				} // while()---------
 			} catch(SocketException e) {

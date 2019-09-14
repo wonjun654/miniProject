@@ -194,5 +194,15 @@ public class Sender extends Thread {
 			e.printStackTrace();
 		}
 	}
+	
+	public void sendTimer(String time, String roomName, String userId) {
+		try {
+			out.writeUTF("timer:::" + time + ",/" + roomName + ",/" + userId);
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }// class Sender-------

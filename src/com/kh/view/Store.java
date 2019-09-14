@@ -37,7 +37,9 @@ public class Store extends JFrame {
 	int item = 50;
 	int random = 30;
 
-	public Store(ClientUser u) {
+	public Store(ClientUser u, MainMenu m) {
+		System.out.println(m);
+		this.mm = m;
 		this.setLayout(null);
 		this.setSize(1024, 768);
 		this.setResizable(false);
@@ -978,7 +980,8 @@ public class Store extends JFrame {
 
 //				um.updateUser(u);
 				dispose();
-//				mm = new MainMenu();
+				System.out.println(mm);
+				mm.doMain();
 			}
 		});
 

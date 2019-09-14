@@ -141,7 +141,7 @@ public class QuestMenu extends JFrame {
 			clearButton1.setEnabled(false);
 		}
 
-		if (um.selectOneUser("123").getCoin() >= 100 && user.isAcceptQuest1() == true) {
+		if (user.getCoin() >= 100 && user.isAcceptQuest1() == true) {
 			clearButton1.setEnabled(true);
 			clearButton1.setText("완료");
 		}
@@ -273,18 +273,18 @@ public class QuestMenu extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (um.selectOneUser("123").getQuestClear1() == true) {
+				if (user.isQuestClear1() == true) {
 					questList1.setText("\t    퀘스트 완료");
 					clearButton1.setEnabled(false);
 					user.setQuestClear1(true);
 				}
-				if (um.selectOneUser("123").getQuestClear2() == true) {
+				if (user.isQuestClear2() == true) {
 					// 보상2
 					questList2.setText("\t    퀘스트 완료");
 					clearButton2.setEnabled(false);
 					user.setQuestClear2(true);
 				}
-				if (um.selectOneUser("123").getQuestClear3() == true) {
+				if (user.isQuestClear3() == true) {
 					// 보상3
 					questList3.setText("\t    퀘스트 완료");
 					clearButton3.setEnabled(false);
