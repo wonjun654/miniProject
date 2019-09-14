@@ -82,47 +82,73 @@ public class MultiServer implements Serializable {
 		}
 	}
 
-	public void sendLogin(String msg) {
-
-		String[] tmpMsg = msg.split(":");
-		String userId = tmpMsg[0];
-		String userPw = tmpMsg[1];
-		String userName = tmpMsg[2];
-		String userEmail = tmpMsg[3];
-		String userCoin = tmpMsg[4];
-		String userProfile = tmpMsg[5];
-		String userMusicSet = tmpMsg[6];
-		String userVictory = tmpMsg[7];
-		String userAcceptQuest1 = tmpMsg[8];
-		String userAcceptQuest2 = tmpMsg[9];
-		String userAcceptQuest3 = tmpMsg[10];
-		String userQuestClear1 = tmpMsg[11];
-		String userQuestClear2 = tmpMsg[12];
-		String userQusetClear3 = tmpMsg[13];
-		String userItem1 = tmpMsg[14];
-		String userItem2 = tmpMsg[15];
-		int port = Integer.parseInt(tmpMsg[16]);
-
-		boolean result = um.login(userId + ":" + userPw);
+	
+	public synchronized void sendCheckId(String msg) {
+//		"checkId:::" + id + ",/" + socket.getLocalPort()
+		String[] tmpMsg = msg.split(":::");
+		tmpMsg = tmpMsg[1].split(",/");
+		String checkId = tmpMsg[0];
+		int tmpPort = Integer.parseInt(tmpMsg[1]);
+		
 		try {
-			Iterator iter = loginMap.keySet().iterator();
-			while (iter.hasNext()) {
-				int key = (int) iter.next();
-				if (key == port) {
-					DataOutputStream iterOut = (DataOutputStream) loginMap.get(key);
-					iterOut.writeUTF("login:::" + result + ":" + userId + ":" + userPw + ":" + userName + ":"
-							+ userEmail + ":" + userCoin + ":" + userProfile + ":" + userMusicSet + ":" + userVictory
-							+ ":" + userAcceptQuest1 + ":" + userAcceptQuest2 + ":" + userAcceptQuest3 + ":"
-							+ userQuestClear1 + ":" + userQuestClear2 + ":" + userQusetClear3 + ":" + userItem1 + ":"
-							+ userItem2);
-					iterOut.flush();
-					// loginMap.remove(key);
+			boolean result = um.checkId(checkId);
+			
+				Iterator iter = loginMap.keySet().iterator();
+				while(iter.hasNext()) {
+					int key = (int) iter.next();
+					if(key == tmpPort) {
+						DataOutputStream iterOut = (DataOutputStream) loginMap.get(key);
+						iterOut.writeUTF("checkId:::" + result);
+						iterOut.flush();
+					}
 				}
-			}
-		} catch (IOException e) {
+			
+		} catch(IOException e) {
 			e.printStackTrace();
 		}
 	}
+	
+	public synchronized void sendLogin(String msg) {
+		
+	      String[] tmpMsg = msg.split(":");
+	      String userId = tmpMsg[0];
+	      String userPw = tmpMsg[1];
+	      String userName = tmpMsg[2];
+	      String userEmail = tmpMsg[3];
+	      String userCoin = tmpMsg[4];
+	      String userProfile = tmpMsg[5];
+	      String userMusicSet = tmpMsg[6];
+	      String userVictory = tmpMsg[7];
+	      String userAcceptQuest1 = tmpMsg[8];
+	      String userAcceptQuest2 = tmpMsg[9];
+	     String userAcceptQuest3 = tmpMsg[10];
+	     String userQuestClear1 = tmpMsg[11];
+	      String userQuestClear2 = tmpMsg[12];
+	      String userQusetClear3 = tmpMsg[13];
+	      String userItem1 = tmpMsg[14];
+	      String userItem2 = tmpMsg[15];
+	      int port = Integer.parseInt(tmpMsg[16]);
+	      
+	      boolean result = um.login(userId + ":" + userPw);
+	      try {
+	    	 Iterator iter = loginMap.keySet().iterator();
+	    	 while(iter.hasNext()) {
+	    		 int key = (int) iter.next();
+	    		 if(key == port) {
+	    			 DataOutputStream iterOut = (DataOutputStream) loginMap.get(key);
+	    			 iterOut.writeUTF("login:::" + result + ":" + userId + ":" + userPw + ":" + userName + ":" + userEmail
+	    					 + ":" + userCoin + ":" + userProfile + ":" + userMusicSet + ":" + userVictory + ":" + userAcceptQuest1
+	    					 + ":" + userAcceptQuest2 + ":" + userAcceptQuest3 + ":" + userQuestClear1 + ":" + userQuestClear2
+	    					 + ":" + userQusetClear3 + ":" + userItem1 + ":" + userItem2);
+	    			 iterOut.flush();
+//	    			 loginMap.remove(key);
+	    		 }
+	    	 }
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	      }
+	   }
+	
 
 	public void sendCoordinate(String msg) {
 		String[] tmpMsg = msg.split(":::");
@@ -196,7 +222,10 @@ public class MultiServer implements Serializable {
 		}
 	}
 
-	public void exitRoom(String msg) {
+
+	
+	public synchronized void exitRoom(String msg) {
+
 		String[] tmpMsg = msg.split(":::");
 		tmpMsg = tmpMsg[1].split(",/");
 		String roomName = tmpMsg[0];
@@ -221,6 +250,17 @@ public class MultiServer implements Serializable {
 		}
 	}
 
+	
+	
+	
+	public void sendAllMsg(String msg) {
+		String[] tmpMsg = msg.split(":::");
+		tmpMsg = tmpMsg[1].split(",/");
+		String sendMsg = tmpMsg[0];
+		String roomName = tmpMsg[1];
+		String userId = tmpMsg[2];
+		
+
 	public void login(String msg) {
 		String[] tmpMsg = msg.split(":::");
 		tmpMsg = tmpMsg[1].split(",/");
@@ -242,6 +282,7 @@ public class MultiServer implements Serializable {
 		String userId = tmpMsg[0];
 		boolean flag = Boolean.parseBoolean(tmpMsg[1]);
 		String roomName = tmpMsg[2];
+
 
 		Iterator iter = multiRoom.get(roomName).keySet().iterator();
 		while (iter.hasNext()) {
@@ -354,11 +395,13 @@ public class MultiServer implements Serializable {
 				}
 			}
 		}
+
 	}
 
-	public void createMultiRoom(String msg) {
-		String[] tmpMsg = msg.split(":::"); // 1번 인덱스가 방이름
-		tmpMsg = tmpMsg[1].split(",/"); // 0번 : 방이름, 1번 : 아이디
+	public synchronized void createMultiRoom(String msg) {
+		String[] tmpMsg = msg.split(":::");		//1번 인덱스가 방이름
+		tmpMsg = tmpMsg[1].split(",/"); 		//0번 : 방이름, 1번 : 아이디
+
 		String roomName = tmpMsg[0];
 		String roomPwd = tmpMsg[1];
 		int people = Integer.parseInt(tmpMsg[2]);
@@ -390,16 +433,18 @@ public class MultiServer implements Serializable {
 							sendChangeIsDraw(userId + ",/" + true + ",/" + roomName);
 							clientMap.remove(userId); // 방에 들어가니깐 메인화면에서 정보 삭제
 							break exit;
-						} // key2(유저이름) if문--------
-					} // iter2.hasNext() while문------
-				} // key(방이름) if문-----------
-			} // iter.hasNext() while문-------
-		} // else문 (방이름 중복체크)-----------
-	}// createMultiRoom 메소드 -----------
 
-	public void enterMultiRoom(String msg) {
-		String[] tmpMsg = msg.split(":::"); // 1번 인덱스가 방이름
-		tmpMsg = tmpMsg[1].split(",/"); // 0번 : 방이름, 1번 : 아이디
+						}//key2(유저이름) if문--------
+					}//iter2.hasNext() while문------
+				}//key(방이름) if문-----------
+			}//iter.hasNext() while문-------
+		}//else문 (방이름 중복체크)-----------
+	}//createMultiRoom 메소드 -----------
+	
+	public synchronized void enterMultiRoom(String msg) {
+		String[] tmpMsg = msg.split(":::");		//1번 인덱스가 방이름
+		tmpMsg = tmpMsg[1].split(",/"); 		//0번 : 방이름, 1번 : 아이디
+
 		String roomName = tmpMsg[0];
 		String userId = tmpMsg[1];
 
@@ -451,6 +496,41 @@ public class MultiServer implements Serializable {
 		String[] tmpMsg = msg.split(":::");
 		um.createUser(tmpMsg[1]);
 	}
+
+	
+	/*public void sendEmail(String id, String email) {
+		try {
+			out.writeUTF("sendEmail:::" + id + ",/" + email + ",/" + socket.getLocalPort());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}*/
+	
+	public void sendEmail(String msg) {
+		String[] tmpMsg = msg.split(":::");
+		tmpMsg = tmpMsg[1].split(",/");
+		String id = tmpMsg[0];
+		String email = tmpMsg[1];
+		int tmpPort = Integer.parseInt(tmpMsg[2]);
+		
+		try {
+			boolean result = um.findPwd(id, email);
+			
+			Iterator iter = loginMap.keySet().iterator();
+			while(iter.hasNext()) {
+				int key = (int) iter.next();
+				if(key == tmpPort) {
+					DataOutputStream iterOut = (DataOutputStream) loginMap.get(key);
+					iterOut.writeUTF("sendEmail:::" + result);
+					iterOut.flush();
+				}
+			}
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 
 	public void sendTimer(String msg) {
 		String[] tmpMsg = msg.split(":::");
@@ -569,8 +649,15 @@ public class MultiServer implements Serializable {
 						sendUserInfo(msg);
 					} else if (msg.startsWith("timer")) {
 						sendTimer(msg);
+
+					} else if(msg.startsWith("checkId")) {
+						sendCheckId(msg);
+					} else if(msg.startsWith("sendEmail")) {
+						sendEmail(msg);
+
 					} else if (msg.startsWith("changeIsDraw")) {
 						sendChangeIsDraw(msg);
+
 					}
 				} // while()---------
 			} catch (SocketException e) {

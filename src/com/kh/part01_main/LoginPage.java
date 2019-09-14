@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import com.kh.model.vo.MediaTest;
 import com.kh.part03_ID.FindID;
 import com.kh.part03_password.FindPassword;
+import com.kh.part03_password.PasswordChange;
 import com.kh.user.model.dao.Receiver;
 import com.kh.user.model.vo.ClientUser;
 import com.kh.user.model.vo.Sender;
@@ -42,7 +43,7 @@ public class LoginPage extends JFrame {
 	Thread receiver;
 	ClientUser u;
 	MainMenu mm;
-	
+	JoinPage jp;
 	public LoginPage(Socket socket) {
 		this.socket = socket;
 		sender = new Sender(socket);
@@ -140,7 +141,7 @@ public class LoginPage extends JFrame {
 		joinbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JoinPage jp = new JoinPage(sender, receiver);
+				jp = new JoinPage(sender, receiver);
 			}
 		});
 
@@ -156,7 +157,7 @@ public class LoginPage extends JFrame {
 		pwbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FindPassword fp = new FindPassword();
+				FindPassword fp = new FindPassword(sender, receiver);
 			}
 		});
 
@@ -177,11 +178,21 @@ public class LoginPage extends JFrame {
 			JOptionPane.showMessageDialog(null, "회원가입 실패");
 		}
 	}
+	public void resultCheckId(boolean result) {
+		if(result) {
+			JOptionPane.showMessageDialog(null, "사용할 수 있는 아이디입니다.");
+			jp.setCheck(true);
+		} else {
+			JOptionPane.showMessageDialog(null, "사용할 수 없는 아이디입니다.");
+			jp.setCheck(false);
+		}
+	}
 	
 	/*public void resultLogin(boolean result, String userId, String userPwd, String userName, String email, int coin,
 			boolean profile, boolean musicSet, int victory, boolean tempPwd,
 			boolean acceptQuest1, boolean acceptQuest2, boolean acceptQuest3, boolean questClear1, boolean questClear2,
-			boolean questClear3, int ownItem1, int ownItem2, Thread sender, Thread receiver) {
+			boolean questClear3
+			, int ownItem1, int ownItem2, Thread sender, Thread receiver) {
 		
 		if (result) {
 //			ClientUser u = new ClientUser(userId, userPw, userName, email);
@@ -200,7 +211,12 @@ public class LoginPage extends JFrame {
 //			ClientUser u = new ClientUser(userId, userPw, userName, email);
 			System.out.println("로그인성공");
 			mm = new MainMenu(socket, u, sender, receiver);
-			mm.doMain();
+			if(u.isTempPwd()) {
+				PasswordChange pc = new PasswordChange(u);
+				mm.doMain();
+			} else {
+				mm.doMain();
+			}
 			this.dispose();
 		} else {
 			JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 맞지않습니다!");
@@ -208,5 +224,12 @@ public class LoginPage extends JFrame {
 	}
 	public MainMenu getMainMenu() {
 		return mm;
+	}
+	public void resultEmail(boolean result) {
+		if(result) {
+			JOptionPane.showMessageDialog(null, "이메일을 발송했습니다.");
+		} else {
+			JOptionPane.showMessageDialog(null, "이메일을 발송하지 못했습니다.");
+		}
 	}
 }

@@ -24,6 +24,8 @@ import com.kh.user.controller.UserManager;
 import com.kh.user.model.vo.Sender;
 import com.kh.view.RoundButton;
 
+import jdk.nashorn.internal.scripts.JO;
+
 public class JoinPage extends JFrame {
 
 	private JTextArea textArea;
@@ -35,6 +37,7 @@ public class JoinPage extends JFrame {
 	Thread sender;
 	Thread receiver;
 	int cnt = 0;
+	boolean check = false;
 
 	public JoinPage(Thread sender, Thread receiver) {
 		this.sender = sender;
@@ -74,19 +77,13 @@ public class JoinPage extends JFrame {
 		btnNewButton.setBounds(525, 240, 97, 31);
 		add(btnNewButton);
 
-		/*btnNewButton.addActionListener(new ActionListener() {
+		btnNewButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cnt++;
-				if (um.DuplicateCheck(idtextField.getText())) {
-					JOptionPane.showMessageDialog(null, "이미 존재하는 ID입니다.");
-					idtextField.setText(null);
-				} else {
-					JOptionPane.showMessageDialog(null, "사용 가능한 ID입니다.");
-				}
+				((Sender) sender).sendCheckId(idtextField.getText());
 			}
-		});*/
+		});
 
 		// 비밀번호
 		JLabel pwLabel = new JLabel("비밀번호 : ");
@@ -219,47 +216,51 @@ public class JoinPage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int idFlag = 0;
-				char[] tmpStr1 = idtextField.getText().toCharArray();
-				for(int i = 0; i < idtextField.getText().length(); i ++) {
-					if((tmpStr1[i] >= 48 && tmpStr1[i] <= 57)||(tmpStr1[i] >= 65 && tmpStr1[i] <= 90) || (tmpStr1[i] >= 97 && tmpStr1[i] <= 122)) {
-						continue;
-					} else {
-						idFlag = 1;
-						break;
-					}
-				}
-				if(idFlag == 0) {
-					String signUpId = idtextField.getText();
-					str += signUpId + ":";
-
-					char[] tempPassword = pwTextField.getPassword();
-					String pwd = "";
-					for (int i = 0; i < tempPassword.length; i++) {
-						pwd += tempPassword[i];
-					}
-					str += pwd + ":";
-					int flag = 0;
-					char[] tmpStr = nameTextField.getText().toCharArray();
-					for(int i = 0; i < nameTextField.getText().length(); i ++) {
-						if((tmpStr[i] >= 48 && tmpStr[i] <= 57)||(tmpStr[i] >= 65 && tmpStr[i] <= 90) || (tmpStr[i] >= 97 && tmpStr[i] <= 122)) {
+				if(check) {
+					char[] tmpStr1 = idtextField.getText().toCharArray();
+					for(int i = 0; i < idtextField.getText().length(); i ++) {
+						if((tmpStr1[i] >= 48 && tmpStr1[i] <= 57) || (tmpStr1[i] >= 65 && tmpStr1[i] <= 90) || (tmpStr1[i] >= 97 && tmpStr1[i] <= 122)) {
 							continue;
 						} else {
-							flag = 1;
+							idFlag = 1;
 							break;
 						}
 					}
-					if(flag == 0) {
-						str += nameTextField.getText() + ":";
-						str += emailTextField.getText() + "@" + domainTextField.getText();
-						System.out.println("회원가입 정보 : " + str);
-						send(str);
-						str = "";
-						dispose();
-					} else if(flag == 1) {
+					if(idFlag == 0) {
+						String signUpId = idtextField.getText();
+						str += signUpId + ":";
+
+						char[] tempPassword = pwTextField.getPassword();
+						String pwd = "";
+						for (int i = 0; i < tempPassword.length; i++) {
+							pwd += tempPassword[i];
+						}
+						str += pwd + ":";
+						int flag = 0;
+						char[] tmpStr = nameTextField.getText().toCharArray();
+						for(int i = 0; i < nameTextField.getText().length(); i ++) {
+							if((tmpStr[i] >= 48 && tmpStr[i] <= 57)||(tmpStr[i] >= 65 && tmpStr[i] <= 90) || (tmpStr[i] >= 97 && tmpStr[i] <= 122)) {
+								continue;
+							} else {
+								flag = 1;
+								break;
+							}
+						}
+						if(flag == 0) {
+							str += nameTextField.getText() + ":";
+							str += emailTextField.getText() + "@" + domainTextField.getText();
+							System.out.println("회원가입 정보 : " + str);
+							send(str);
+							str = "";
+							dispose();
+						} else if(flag == 1) {
+							JOptionPane.showMessageDialog(null, "한글입력은 안됩니다.");
+						}
+					} else if(idFlag == 1) {
 						JOptionPane.showMessageDialog(null, "한글입력은 안됩니다.");
 					}
-				} else if(idFlag == 1) {
-					JOptionPane.showMessageDialog(null, "한글입력은 안됩니다.");
+				} else {
+					JOptionPane.showMessageDialog(null, "아이디 중복확인 하세요");
 				}
 			}
 		});
@@ -281,5 +282,8 @@ public class JoinPage extends JFrame {
 	public void send(String str) {
 		((Sender) sender).sendSignUp(str);
 	}
-
+	
+	public void setCheck(boolean check) {
+		this.check = check;
+	}
 }

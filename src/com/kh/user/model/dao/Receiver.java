@@ -152,6 +152,18 @@ public class Receiver extends Thread{
 				} else if(msg.startsWith("timer")) {
 					String[] tmpMsg = msg.split(":::");
 					game.setTime(tmpMsg[1]);
+
+				} else if(msg.startsWith("checkId")) {
+					String[] tmpMsg = msg.split(":::");
+					boolean result = Boolean.parseBoolean(tmpMsg[1]);
+					System.out.println(result);
+					lp.resultCheckId(result);
+				} else if(msg.startsWith("sendEmail")) {
+					String[] tmpMsg = msg.split(":::");
+					boolean result = Boolean.parseBoolean(tmpMsg[1]);
+					System.out.println(result);
+					lp.resultEmail(result);
+          
 				} else if(msg.startsWith("changeIsDraw")) {
 					String[] tmpMsg = msg.split(":::");
 					tmpMsg = tmpMsg[1].split(",/");
@@ -165,6 +177,7 @@ public class Receiver extends Thread{
 					String answer = tmpMsg[0];
 					String userId = tmpMsg[1];
 					game.oneUserAppendChat(answer, userId);
+
 				}
 			}  
 		} catch (SocketException e) {
