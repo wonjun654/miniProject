@@ -31,6 +31,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 import com.kh.model.vo.MediaTest;
+import com.kh.model.vo.MyMusicPlayer;
 import com.kh.part01_main.LoginPage;
 import com.kh.user.controller.UserManager;
 import com.kh.user.model.vo.ClientUser;
@@ -126,7 +127,7 @@ public class MainMenu extends JFrame implements MouseListener {
 
 		this.setSize(1024, 768);
 
-		Image profileimg = new ImageIcon("images\\profile.PNG").getImage().getScaledInstance(60, 60, 0);
+		Image profileimg = new ImageIcon("images\\프로필.PNG").getImage().getScaledInstance(60, 60, 0);
 		Image makeimg = new ImageIcon("images\\make.PNG").getImage().getScaledInstance(60, 60, 0);
 		Image optimg = new ImageIcon("images\\opt.PNG").getImage().getScaledInstance(85, 70, 0);
 		Image shopimg = new ImageIcon("images\\shop.PNG").getImage().getScaledInstance(60, 60, 0);
@@ -479,18 +480,6 @@ public class MainMenu extends JFrame implements MouseListener {
 
 			}
 		});
-		rbtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				((Sender) sender).sendLogOut(u.getUserId());
-				JOptionPane.showMessageDialog(null, "로그아웃 되었습니다.");
-				dispose();
-				MediaTest.musicOff();
-				LoginPage login = new LoginPage(socket);
-				((Sender) sender).sendUserInfo(u);
-			}
-		});
 		questbtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -504,7 +493,24 @@ public class MainMenu extends JFrame implements MouseListener {
 		MediaTest.musicOff();
 
 		// MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
-		MediaTest.musicOn(1, userMusicSet);
+		Thread t1 = new MyMusicPlayer(u.isMusicSet());
+		
+		t1.start();
+		
+		rbtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				((Sender) sender).sendLogOut(u.getUserId());
+				JOptionPane.showMessageDialog(null, "로그아웃 되었습니다.");
+				dispose();
+				
+				t1.stop();
+				LoginPage login = new LoginPage(socket);
+				((Sender) sender).sendUserInfo(u);
+			
+			}
+		});
 
 		this.add(listPan);
 
