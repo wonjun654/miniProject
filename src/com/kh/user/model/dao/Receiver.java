@@ -140,6 +140,7 @@ public class Receiver extends Thread{
 					tmpMsg = tmpMsg[1].split(",/");
 					String receiveMsg = tmpMsg[0];
 					String fromUserId = tmpMsg[1];
+					mm = lp.getMainMenu();
 					mm.appendChat(fromUserId + " >> " + receiveMsg);
 					
 				} else if(msg.startsWith("signUp")) {
