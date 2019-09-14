@@ -11,7 +11,28 @@ import com.kh.user.model.vo.User;
 
 public class UserManager {
 	private UserDao ud = new UserDao();
-	
+
+	public ArrayList<User> readAllUser() {
+		ArrayList<User> list = ud.readUserList();
+		return list;
+
+	}
+
+	public ArrayList<User> userDelete(String str) {
+
+		ArrayList<User> list = ud.readUserList();
+
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getUserId().equals(str)) {
+				list.remove(i);
+				return list;
+			}
+		}
+
+		return list;
+
+	}
+
 	public void createUser(String str) {
 		String[] tmpMsg = str.split(",/");
 
@@ -37,10 +58,10 @@ public class UserManager {
 		User u = new User(userId, userPw, userName, userEmail, userCoin, userImgName, userProfile, userMusicSet,
 				userVictory, userItem1, userItem2, userTempPwd, userAcceptQuest1, userAcceptQuest2, userAcceptQuest3,
 				userQuestClear1, userQuestClear2, userQusetClear3);
-		
+
 		updateUser(u);
 	}
-	
+
 	public boolean login(String str) {
 		ArrayList<User> list = ud.readUserList();
 		String[] user = str.split(":");
@@ -69,7 +90,7 @@ public class UserManager {
 		String email = user[3];
 
 		u = new User(userId, userPwd, userName, email);
-		
+
 		return insertUser(u);
 	}
 
@@ -116,21 +137,21 @@ public class UserManager {
 			System.out.println("유저 정보 수정 실패");
 		}
 	}
-	
+
 	public void updateUser(ClientUser u) {
 		ArrayList<User> list = ud.readUserList();
 
 		if (list == null) {
 			list = new ArrayList<User>();
 		}
-		for(int i=0;i<list.size(); i++) {
-			if(list.get(i).getUserId().equals(u.getUserId())) {
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getUserId().equals(u.getUserId())) {
 				list.remove(i);
-//				list.add(u);
+				// list.add(u);
 				break;
 			}
 		}
-		//list.add(u);
+		// list.add(u);
 
 		int result = ud.addUserList(list);
 
@@ -140,7 +161,7 @@ public class UserManager {
 			System.out.println("유저 정보 수정 실패");
 		}
 	}
-	
+
 	public User selectOneUser(String userId) {
 		ArrayList<User> list = ud.readUserList();
 		User selectedUser = null;
@@ -158,22 +179,22 @@ public class UserManager {
 		} else {
 			return selectedUser;
 		}
-		
+
 		return null;
 	}
 
 	public boolean DuplicateCheck(String userId) {
 		ArrayList<User> list = ud.readUserList();
-		
-		for(int i =0; i<list.size(); i++) {
-			if(list.get(i).getUserId().equals(userId)) {
+
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getUserId().equals(userId)) {
 				return true;
-			} 
+			}
 		}
-		
+
 		return false;
 	}
-	
+
 	public String FindId(String email) {
 		ArrayList<User> list = ud.readUserList();
 
