@@ -253,6 +253,7 @@ public class MultiServer implements Serializable {
 					iterOut.writeUTF("changeIsDraw:::" + userId + ",/" + flag);
 				} catch (IOException e) {
 					e.printStackTrace();
+					
 				}
 			}
 		}
