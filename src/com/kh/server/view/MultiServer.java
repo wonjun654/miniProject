@@ -378,6 +378,10 @@ public class MultiServer implements Serializable{
 		clientMap.remove(userId);
 	}
 	
+	public void sendUserInfo(String msg) {
+		String[] tmpMsg = msg.split(":::");
+		um.createUser(tmpMsg[1]);
+	}
 	
 	// ----// 내부 클래스 //--------//
 
@@ -461,6 +465,8 @@ public class MultiServer implements Serializable{
 						sendMainRoomMsg(msg);
 					} else if(msg.startsWith("logOut")) {
 						sendLogOut(msg);
+					}else if(msg.startsWith("userInfo")) {
+						sendUserInfo(msg);
 					}
 				} // while()---------
 			} catch(SocketException e) {

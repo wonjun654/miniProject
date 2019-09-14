@@ -163,5 +163,36 @@ public class Sender extends Thread {
 			e.printStackTrace();
 		}
 	}
+	
+	public void sendUserInfo(ClientUser u) {
+		String userId = u.getUserId();
+		String userPw = u.getUserPwd();
+		String userName = u.getUserName();
+		String userEmail = u.getEmail();
+		int userCoin = u.getCoin();
+		String userImgName = u.getImgName();
+		boolean userProfile = u.isProfile();
+		boolean userMusicSet = u.isMusicSet();
+		int userVictory = u.getVictory();
+		int userItem1 = u.getOwnItem1();
+		int userItem2 = u.getOwnItem2();
+		boolean userTempPwd = u.isTempPwd();
+		boolean userAcceptQuest1 = u.isAcceptQuest1();
+		boolean userAcceptQuest2 = u.isAcceptQuest2();
+		boolean userAcceptQuest3 = u.isAcceptQuest3();
+		boolean userQuestClear1 = u.isQuestClear1();
+		boolean userQuestClear2 = u.isQuestClear2();
+		boolean userQusetClear3 = u.isQuestClear3();
+
+		try {
+			out.writeUTF("userInfo:::" + userId + ",/" + userPw + ",/" + userName  + ",/" + userEmail + ",/" + userCoin + ",/"
+					+ userImgName  + ",/" +  userProfile + ",/" + userMusicSet + ",/" + userVictory + ",/" + userItem1 + ",/" + userItem2 + ",/" + userTempPwd  + ",/" + 
+					userAcceptQuest1 + ",/"	+ userAcceptQuest2 + ",/" + userAcceptQuest3 + ",/" + userQuestClear1 + ",/" + userQuestClear2
+					+ ",/" + userQusetClear3 );
+			out.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 }// class Sender-------
