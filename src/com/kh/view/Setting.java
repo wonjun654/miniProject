@@ -144,6 +144,7 @@ public class Setting extends JFrame {
 
 				} else {
 //					um.updateUser(u);
+
 					
 				}
 				
