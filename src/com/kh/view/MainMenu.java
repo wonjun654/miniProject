@@ -105,6 +105,7 @@ public class MainMenu extends JFrame implements MouseListener {
 
 
 	public void doMain() {
+		this.mm = this;
 		this.setLayout(null);
 		this.setSize(1024, 768);
 		bgPan.setLayout(null);
@@ -459,7 +460,7 @@ public class MainMenu extends JFrame implements MouseListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				Store st = new Store(u);
+				Store st = new Store(u, getMainMenu());
 			}
 
 		});
