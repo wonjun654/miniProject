@@ -422,7 +422,7 @@ public class MainMenu extends JFrame implements MouseListener {
 			public void actionPerformed(ActionEvent e) {
 				String msg = textInput.getText();
 				if (!msg.isEmpty()) {
-					((Sender) sender).sendMainRoomMsg(msg);
+					((Sender) sender).sendMainRoomMsg(msg, u.getUserId());
 					textOutput.append(userId + " >> " + msg + "\n");
 					textOutput.setCaretPosition(textOutput.getDocument().getLength());
 					textInput.setText(null);
@@ -437,7 +437,7 @@ public class MainMenu extends JFrame implements MouseListener {
 			public void actionPerformed(ActionEvent e) {
 				String msg = textInput.getText();
 				if (!msg.isEmpty()) {
-					((Sender) sender).sendMainRoomMsg(msg);
+					((Sender) sender).sendMainRoomMsg(msg, u.getUserId());
 					textOutput.append(userId + " >> " + msg + "\n");
 					textOutput.setCaretPosition(textOutput.getDocument().getLength());
 					textInput.setText(null);

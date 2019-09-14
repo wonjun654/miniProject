@@ -132,6 +132,7 @@ public class LoginPage extends JFrame {
 					str = "";
 				} else {
 					((Sender) sender).sendLogin(str, idText.getText());
+					System.out.println(idText.getText());
 					str = "";
 				}
 			}

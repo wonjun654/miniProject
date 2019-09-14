@@ -264,19 +264,19 @@ public class GameRoom extends JFrame implements Runnable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if (isDraw) {
-					isDraw = false;
-					chatOutput.append("정답자모드로 전환되었습니다.\n");
-					chatOutput.setCaretPosition(chatOutput.getDocument().getLength());
-					chatInput.setText(null);
-					chatInput.requestFocus();
-				} else {
-					isDraw = true;
-					chatOutput.append("출제자모드로 전환되었습니다.\n");
-					chatOutput.setCaretPosition(chatOutput.getDocument().getLength());
-					chatInput.setText(null);
-					chatInput.requestFocus();
-				}
+//				if (isDraw) {
+//					isDraw = false;
+//					chatOutput.append("정답자모드로 전환되었습니다.\n");
+//					chatOutput.setCaretPosition(chatOutput.getDocument().getLength());
+//					chatInput.setText(null);
+//					chatInput.requestFocus();
+//				} else {
+//					isDraw = true;
+//					chatOutput.append("출제자모드로 전환되었습니다.\n");
+//					chatOutput.setCaretPosition(chatOutput.getDocument().getLength());
+//					chatInput.setText(null);
+//					chatInput.requestFocus();
+//				}
 			}
 		});
 
@@ -634,9 +634,9 @@ public class GameRoom extends JFrame implements Runnable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (isDraw) {
+				
 					startStopWatch();
-				}
+				
 			}
 		});
 
