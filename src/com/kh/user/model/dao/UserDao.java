@@ -21,6 +21,7 @@ public class UserDao {
 
 	public ArrayList<User> readUserList() {
 		ObjectInputStream ois = null;
+//		FileInputStream in = null;
 		ArrayList<User> list = null;
 
 		try {

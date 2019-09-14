@@ -103,13 +103,12 @@ public class MainMenu extends JFrame implements MouseListener {
 
 
 
-	public MainMenu(Socket socket, ClientUser u, Thread sender, Thread receiver, MainMenu mm) {
+	public MainMenu(Socket socket, ClientUser u, Thread sender, Thread receiver) {
 		super("MainMenuPage");
 		this.socket = socket;
 		this.u = u;
 		this.sender = sender;
 		this.receiver = receiver;
-		this.mm = mm;
 	}
 	
 
