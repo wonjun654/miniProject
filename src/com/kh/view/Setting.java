@@ -19,6 +19,7 @@ import com.kh.model.vo.MediaTest;
 import com.kh.part03_password.PasswordChange;
 import com.kh.user.controller.UserManager;
 import com.kh.user.model.vo.ClientUser;
+import com.kh.user.model.vo.Sender;
 import com.kh.user.model.vo.User;
 
 public class Setting extends JFrame {
@@ -143,7 +144,8 @@ public class Setting extends JFrame {
 
 				} else {
 //					um.updateUser(u);
-					MediaTest.musicOn(1, u.isMusicSet());
+
+					
 				}
 				
 				if (profileOn.isSelected() == true) {
@@ -161,6 +163,7 @@ public class Setting extends JFrame {
 					///asd///
 				}
 //				um.updateUser(u);
+				
 				dispose();
 			}
 		});

@@ -1,8 +1,11 @@
 package com.kh.view;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dialog;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -28,9 +31,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.kh.model.vo.GameRoomInfo;
 import com.kh.model.vo.MediaTest;
+import com.kh.model.vo.MyMusicPlayer;
 import com.kh.part01_main.LoginPage;
 import com.kh.user.controller.UserManager;
 import com.kh.user.model.vo.ClientUser;
@@ -40,16 +47,17 @@ public class MainMenu extends JFrame implements MouseListener {
 
 	UserManager um = new UserManager();
 
+	JPanel north_p, center_p, south_p;
+	
 	JPanel listPan = new JPanel();
 	JPanel bgPan = new JPanel();
 	
-
+	
 
 	JTextArea textOutput;
 	JTextField textInput;
 	RoundButton rbtn;
 
-	 
 
 	JLabel lblroom;
 	JLabel lblsang;
@@ -92,14 +100,15 @@ public class MainMenu extends JFrame implements MouseListener {
 
 
 
-	public MainMenu(Socket socket, ClientUser u, Thread sender, Thread receiver, MainMenu mm) {
+	public MainMenu(Socket socket, ClientUser u, Thread sender, Thread receiver) {
 		super("MainMenuPage");
 		this.socket = socket;
 		this.u = u;
 		this.sender = sender;
 		this.receiver = receiver;
-		this.mm = mm;
 	}
+	
+
 
 
 
@@ -128,13 +137,13 @@ public class MainMenu extends JFrame implements MouseListener {
 
 		this.setSize(1024, 768);
 
-		Image profileimg = new ImageIcon("images\\profile.PNG").getImage().getScaledInstance(60, 60, 0);
+		Image profileimg = new ImageIcon("images\\프로필.PNG").getImage().getScaledInstance(85, 75, 0);
 		Image makeimg = new ImageIcon("images\\make.PNG").getImage().getScaledInstance(60, 60, 0);
-		Image optimg = new ImageIcon("images\\opt.PNG").getImage().getScaledInstance(85, 70, 0);
-		Image shopimg = new ImageIcon("images\\shop.PNG").getImage().getScaledInstance(60, 60, 0);
+		Image optimg = new ImageIcon("images\\설정.PNG").getImage().getScaledInstance(85, 75, 0);
+		Image shopimg = new ImageIcon("images\\상점.PNG").getImage().getScaledInstance(85, 75, 0);
 		Image exitimg = new ImageIcon("images\\exit.PNG").getImage().getScaledInstance(60, 60, 0);
 		Image coinimg = new ImageIcon("images\\coin.jpg").getImage().getScaledInstance(60, 60, 0);
-		Image questimg = new ImageIcon("images\\quest.PNG").getImage().getScaledInstance(85, 70, 0);
+		Image questimg = new ImageIcon("images\\퀘스트.PNG").getImage().getScaledInstance(85, 75, 0);
 		Image chosungimg = new ImageIcon("images\\chosung.png").getImage().getScaledInstance(60, 60, 0);
 		Image timerimg = new ImageIcon("images\\timer.png").getImage().getScaledInstance(60, 60, 0);
 
@@ -168,7 +177,9 @@ public class MainMenu extends JFrame implements MouseListener {
 
 		JButton profilebtn = new JButton(new ImageIcon(profileimg));
 		profilebtn.setLocation(10, 10);
-		profilebtn.setSize(60, 60);
+		profilebtn.setSize(85, 75);
+		profilebtn.setFocusPainted(false);
+		profilebtn.setContentAreaFilled(false);
 
 		JButton makebtn = new JButton(new ImageIcon(makeimg));
 		makebtn.setLocation(765, 10);
@@ -176,11 +187,11 @@ public class MainMenu extends JFrame implements MouseListener {
 
 		JButton optbtn = new JButton(new ImageIcon(optimg));
 		optbtn.setLocation(885, 600);
-		optbtn.setSize(85, 70);
+		optbtn.setSize(85, 75);
 
 		JButton shopbtn = new JButton(new ImageIcon(shopimg));
 		shopbtn.setLocation(885, 10);
-		shopbtn.setSize(60, 60);
+		shopbtn.setSize(85, 75);
 		shopbtn.setFocusPainted(false);
 		shopbtn.setContentAreaFilled(false);
 
@@ -214,8 +225,8 @@ public class MainMenu extends JFrame implements MouseListener {
 		in.setContentAreaFilled(false);
 
 		Dialog makeRoomDialog = new Dialog(this, "방만들기", true);
-		makeRoomDialog.setBounds(600, 500, 600, 500);
 		makeRoomDialog.setLayout(null);
+		makeRoomDialog.setBounds(600, 500, 600, 500);
 
 		JLabel roomName = new JLabel("방제목");
 		JLabel roomPwd = new JLabel("방암호");
@@ -260,18 +271,18 @@ public class MainMenu extends JFrame implements MouseListener {
 		
 		
 		
-		JTextArea roomState = new JTextArea("da");
+		JTextArea roomState = new JTextArea();
 		roomState.setBounds(450, 150, 350, 200);
+		roomState.setEditable(false);
 	
 		JScrollPane scPanel2 = new JScrollPane(roomState);
 		scPanel2.setBounds(450, 150, 350, 200);
-		roomState.setEditable(false);
+		scPanel2.setBorder(new TitledBorder("방 정보"));
 		
 		DefaultListModel<String>  model1 = new DefaultListModel<String>();
-		model1.addElement("시발");
-		model1.addElement("좆같네");
 		JList roomList = new JList(model1);
 		JScrollPane scPanel = new JScrollPane(roomList);
+		scPanel.setBorder(new TitledBorder("방 목록"));
 		scPanel.setBounds(80, 150, 350, 200);
 		
 		roomList.addMouseListener(new MouseListener() {
@@ -302,20 +313,18 @@ public class MainMenu extends JFrame implements MouseListener {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				String roomName = roomName2.getText();
 				if (roomList.getSelectedIndex() != -1) {
-					String roomName = roomName2.getText();
-					String roomPw = roomPwd2.getText();
-					String people = selectPeople.getValue() + "";
-					roomState.setText(roomName2.getName());
-					System.out.println(roomList.getName());
-					
-					System.out.println("왜안ㅇ돈ㅇ라ㅗㅇ러ㅏ호어ㅏㅀ");
-				}else {
-					
-				System.out.println(456789);
+					if (roomName == null) {
+						JOptionPane.showMessageDialog(null, "방이름을 입력하세요!");
+					} else {
+						((Sender) sender).sendEnterRoom(roomName);
+					}
+				
 				}
 			}
 		});
+
 
 
 		btnCancel.addActionListener(new ActionListener() {
@@ -333,18 +342,12 @@ public class MainMenu extends JFrame implements MouseListener {
 				String roomName = roomName2.getText();
 				String roomPw = roomPwd2.getText();
 				String people = selectPeople.getValue() + "";
-				model1.addElement(roomName);
-				((Sender) sender).sendCreateRoom(roomName, "123", "123");
-				
-				
-				
-				roomName2.setText(null);
-				roomPwd2.setText(null);
-				
-				
-				
-				//table1.updateUI();
+				model1.addElement(roomName + " : " + people); 
+				((Sender) sender).sendCreateRoom(roomName, roomPw, people);
 				makeRoomDialog.dispose();
+				roomName2.setText("");
+				
+				
 
 			}
 		});
@@ -481,18 +484,6 @@ public class MainMenu extends JFrame implements MouseListener {
 
 			}
 		});
-		rbtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				((Sender) sender).sendLogOut(u.getUserId());
-				JOptionPane.showMessageDialog(null, "로그아웃 되었습니다.");
-				dispose();
-				MediaTest.musicOff();
-				LoginPage login = new LoginPage(socket);
-				((Sender) sender).sendUserInfo(u);
-			}
-		});
 		questbtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -506,7 +497,25 @@ public class MainMenu extends JFrame implements MouseListener {
 		MediaTest.musicOff();
 
 		// MediaTest.musicOn(1, um.selectOneUser("123").getMusicSet());
+
 		MediaTest.musicOn(1, u.isMusicSet());
+
+
+		rbtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				((Sender) sender).sendLogOut(u.getUserId());
+				JOptionPane.showMessageDialog(null, "로그아웃 되었습니다.");
+				dispose();
+				
+
+				LoginPage login = new LoginPage(socket);
+				((Sender) sender).sendUserInfo(u);
+			
+			}
+		});
+
 
 		this.add(listPan);
 

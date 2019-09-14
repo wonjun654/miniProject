@@ -199,7 +199,7 @@ public class LoginPage extends JFrame {
 		if (result) {
 //			ClientUser u = new ClientUser(userId, userPw, userName, email);
 			System.out.println("로그인성공");
-			mm = new MainMenu(socket, u, sender, receiver, mm);
+			mm = new MainMenu(socket, u, sender, receiver);
 			mm.doMain();
 			this.dispose();
 		} else {
