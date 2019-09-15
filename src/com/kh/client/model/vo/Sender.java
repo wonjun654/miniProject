@@ -250,5 +250,13 @@ public class Sender extends Thread {
 			e.printStackTrace();
 		}
 	}
+	public void sendRepaint(String roomName) {
+		try {
+			out.writeUTF("repaint:::" + roomName);
+			out.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }// class Sender-------
