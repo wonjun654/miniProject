@@ -293,12 +293,11 @@ public class GameRoom extends JFrame implements Runnable {
 		timer.setLocation(35, 10);
 		toolPane.add(timer);
 
-		JLabel item1 = new JLabel(/* u.getOwnItem1() + */"");
+		JLabel item1 = new JLabel(mm.u.getOwnItem1() + "");
 		item1.setSize(30, 30);
 		item1.setLocation(150, 10);
 		toolPane.add(item1);
 		Image item1Image = new ImageIcon("images/timer.png").getImage().getScaledInstance(30, 30, 0);
-		// JLabel item1Img = new JLabel(new ImageIcon(item1Image));
 		JButton item1Img = new JButton(new ImageIcon(item1Image));
 		item1Img.setSize(30, 30);
 		item1Img.setLocation(110, 10);
@@ -312,15 +311,16 @@ public class GameRoom extends JFrame implements Runnable {
 					System.out.println("time stop");
 					usingTimeStop = true;
 					mm.u.setOwnItem1(mm.u.getOwnItem1() - 1);
+					mm.u.getOwnItem1();
+					item1.setText(mm.u.getOwnItem1() + "");
 				}
 			}
 		});
-		JLabel item2 = new JLabel(/* u.getOwnItem2() + */"");
+		JLabel item2 = new JLabel(mm.u.getOwnItem2() + "");
 		item2.setSize(30, 30);
 		item2.setLocation(210, 10);
 		toolPane.add(item2);
 		Image item2Image = new ImageIcon("images/chosung.png").getImage().getScaledInstance(30, 30, 0);
-		// JLabel item2Img = new JLabel(new ImageIcon(item2Image));
 		JButton item2Img = new JButton(new ImageIcon(item2Image));
 		item2Img.setSize(30, 30);
 		item2Img.setLocation(170, 10);
@@ -333,6 +333,7 @@ public class GameRoom extends JFrame implements Runnable {
 				if (mm.u.getOwnItem2() > 0 && !isDraw) {
 					((Sender) sender).sendChosung(userId, roomName);
 					mm.u.setOwnItem2(mm.u.getOwnItem2() - 1);
+					item2.setText(mm.u.getOwnItem2() + "");
 				}
 			}
 		});
@@ -340,7 +341,7 @@ public class GameRoom extends JFrame implements Runnable {
 		Image captureImage = new ImageIcon("images/screenshot.png").getImage().getScaledInstance(150, 30, 0);
 		JButton capture = new JButton(new ImageIcon(captureImage));
 		capture.setSize(150, 30);
-		capture.setLocation(20, 15);
+		capture.setLocation(20, 5);
 		roomCenter.add(capture);
 
 		capture.addActionListener(new ActionListener() {
@@ -396,7 +397,7 @@ public class GameRoom extends JFrame implements Runnable {
 		Image optionImage = new ImageIcon("images/option.png").getImage().getScaledInstance(60, 30, 0);
 		JButton settingbtn = new JButton(new ImageIcon(optionImage));
 		settingbtn.setSize(60, 30);
-		settingbtn.setLocation(425, 15);
+		settingbtn.setLocation(425, 5);
 		roomCenter.add(settingbtn);
 
 		settingbtn.addActionListener(new ActionListener() {
@@ -642,6 +643,7 @@ public class GameRoom extends JFrame implements Runnable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				((Sender) sender).exitRoom(roomName);
+				((Sender) sender).sendUserInfo(mm.u);
 				dispose();
 				mm.setVisible(true);
 				threadStop(true);
@@ -654,6 +656,7 @@ public class GameRoom extends JFrame implements Runnable {
 				// TODO Auto-generated method stub
 				JFrame frame = (JFrame) e.getWindow();
 				((Sender) sender).exitRoom(roomName);
+				((Sender) sender).sendUserInfo(mm.u);
 				frame.dispose();
 				mm.setVisible(true);
 			}

@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
@@ -505,10 +507,22 @@ public class MainMenu extends JFrame implements MouseListener {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				((Sender) sender).sendLogOut(u.getUserId());
+//				((Sender) sender).sendLogOut(u.getUserId());
+				((Sender) sender).sendUserInfo(u);
 				JOptionPane.showMessageDialog(null, "게임을 종료합니다.");
 				System.exit(DISPOSE_ON_CLOSE);
 			
+			}
+		});
+		
+		this.addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+//				((Sender) sender).sendLogOut(u.getUserId());
+				((Sender) sender).sendUserInfo(u);
+				JOptionPane.showMessageDialog(null, "게임을 종료합니다.");
+				dispose();
 			}
 		});
 		JLabel copyRight = new JLabel("CopyRighted by KH마인드");
