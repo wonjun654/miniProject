@@ -264,58 +264,21 @@ public class GameRoom extends JFrame implements Runnable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if (isDraw) {
-					isDraw = false;
-					chatOutput.append("정답자모드로 전환되었습니다.\n");
-					chatOutput.setCaretPosition(chatOutput.getDocument().getLength());
-					chatInput.setText(null);
-					chatInput.requestFocus();
-				} else {
-					isDraw = true;
-					chatOutput.append("출제자모드로 전환되었습니다.\n");
-					chatOutput.setCaretPosition(chatOutput.getDocument().getLength());
-					chatInput.setText(null);
-					chatInput.requestFocus();
-				}
-			}
-		});
-
-		Image nextIcon = new ImageIcon("images/right.png").getImage().getScaledInstance(30, 30, 0);
-		JButton next = new JButton(new ImageIcon(nextIcon));
-		next.setSize(30, 30);
-		next.setLocation(300, 10);
-		toolPane.add(next);
-
-		next.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-
-		Image prevIcon = new ImageIcon("images/left.png").getImage().getScaledInstance(30, 30, 0);
-		JButton prev = new JButton(new ImageIcon(prevIcon));
-		prev.setSize(30, 30);
-		prev.setLocation(260, 10);
-		toolPane.add(prev);
-
-		prev.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
+				/*
+				 * if (isDraw) { isDraw = false; chatOutput.append("정답자모드로 전환되었습니다.\n");
+				 * chatOutput.setCaretPosition(chatOutput.getDocument().getLength());
+				 * chatInput.setText(null); chatInput.requestFocus(); } else { isDraw = true;
+				 * chatOutput.append("출제자모드로 전환되었습니다.\n");
+				 * chatOutput.setCaretPosition(chatOutput.getDocument().getLength());
+				 * chatInput.setText(null); chatInput.requestFocus(); }
+				 */
+				canvasPanel.repaint();
 			}
 		});
 
 		// 버튼 테두리 없앰
 		trash.setBorderPainted(false);
 		trash.setContentAreaFilled(false);
-		next.setBorderPainted(false);
-		next.setContentAreaFilled(false);
-		prev.setBorderPainted(false);
-		prev.setContentAreaFilled(false);
 		tool.setBorderPainted(false);
 		tool.setContentAreaFilled(false);
 
@@ -345,7 +308,7 @@ public class GameRoom extends JFrame implements Runnable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (mm.u.getOwnItem1() > 0) {
+				if (mm.u.getOwnItem1() > 0 && isDraw) {
 					System.out.println("time stop");
 					usingTimeStop = true;
 					mm.u.setOwnItem1(mm.u.getOwnItem1() - 1);
@@ -367,15 +330,13 @@ public class GameRoom extends JFrame implements Runnable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (mm.u.getOwnItem2() > 0) {
+				if (mm.u.getOwnItem2() > 0 && !isDraw) {
 					((Sender) sender).sendChosung(userId, roomName);
-					String chosung = Jaso.hangulToJaso("가나다");
-					System.out.println(chosung);
 					mm.u.setOwnItem2(mm.u.getOwnItem2() - 1);
 				}
 			}
 		});
-		
+
 		Image captureImage = new ImageIcon("images/screenshot.png").getImage().getScaledInstance(150, 30, 0);
 		JButton capture = new JButton(new ImageIcon(captureImage));
 		capture.setSize(150, 30);
@@ -638,7 +599,7 @@ public class GameRoom extends JFrame implements Runnable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(isDraw) {
+				if (isDraw) {
 					threadStop(false);
 					startStopWatch();
 				}
@@ -941,7 +902,6 @@ public class GameRoom extends JFrame implements Runnable {
 		tmp.add(new TempPoint(eX, eY));
 	}
 
-	
 	public void releaseMouse(/* int eX, int eY */) {
 		/*
 		 * this.eX = eX; this.eY = eY;
@@ -955,7 +915,6 @@ public class GameRoom extends JFrame implements Runnable {
 		gameTimer.start();
 	}
 
-	
 	public void inturruptThread() {
 		if (gameTimer != null) {
 			gameTimer.interrupt();
@@ -1013,10 +972,7 @@ public class GameRoom extends JFrame implements Runnable {
 	}
 
 	public void changeIsDraw(String userId, boolean flag) {
-		if (this.userId.equals(userId)) {
-			isDraw = flag;
-			System.out.println("change is draw : " + isDraw);
-		}
+		isDraw = flag;
 	}
 
 	/*

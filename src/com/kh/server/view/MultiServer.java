@@ -277,6 +277,7 @@ public class MultiServer implements Serializable {
 		Iterator iter = multiRoom.get(roomName).keySet().iterator();
 		while (iter.hasNext()) {
 			String key = (String) iter.next();
+			System.out.println(key);
 			if (key.contains(userId)) {
 				sendAnswer(userId, roomName);
 				DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
@@ -286,7 +287,7 @@ public class MultiServer implements Serializable {
 					e.printStackTrace();
 					
 				}
-			}
+			} 
 		}
 	}
 
