@@ -181,8 +181,9 @@ public class Receiver extends Thread{
 					String userId = tmpMsg[1];
 					Boolean flag = Boolean.parseBoolean(tmpMsg[2]);
 					String roomName = tmpMsg[3];
-					
+					System.out.println("Receiver : " + flag);
 					game.changeIsDraw(userId, flag);
+					game.threadStop(true);
 					mm = lp.getMainMenu();
 					mm.appendChat(receiveMsg);
 				}

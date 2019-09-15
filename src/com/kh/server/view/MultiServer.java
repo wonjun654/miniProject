@@ -349,6 +349,7 @@ public class MultiServer implements Serializable {
 							+ ",/" + roomName);
 					iterOut.flush();
 					sendAnswer(userId, roomName);
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
