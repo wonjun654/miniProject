@@ -250,22 +250,6 @@ public class MultiServer implements Serializable {
 		}
 	}
 
-	public void login(String msg) {
-		String[] tmpMsg = msg.split(":::");
-		tmpMsg = tmpMsg[1].split(",/");
-		String userId = tmpMsg[0];
-		try {
-			Iterator iter = clientMap.keySet().iterator();
-			while (iter.hasNext()) {
-				DataOutputStream iterOut = (DataOutputStream) clientMap.get(iter.next());
-				iterOut.writeUTF(userId + "����!!");
-				iterOut.flush();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
 	public void sendChangeIsDraw(String msg) {
 		String[] tmpMsg = msg.split(",/");
 		String userId = tmpMsg[0];
@@ -478,7 +462,7 @@ public class MultiServer implements Serializable {
 		}
 	}
 
-	public void sendLogOut(String msg) {
+	public synchronized void sendLogOut(String msg) {
 		String[] tmpMsg = msg.split(":::");
 		String userId = tmpMsg[1];
 		System.out.println(userId + "님이 로그아웃했습니다.");
@@ -490,7 +474,7 @@ public class MultiServer implements Serializable {
 		um.createUser(tmpMsg[1]);
 	}
 
-	public void sendEmail(String msg) {
+	public synchronized void sendEmail(String msg) {
 		String[] tmpMsg = msg.split(":::");
 		tmpMsg = tmpMsg[1].split(",/");
 		String id = tmpMsg[0];
@@ -515,7 +499,7 @@ public class MultiServer implements Serializable {
 
 	}
 
-	public void sendFindId(String msg) {
+	public synchronized void sendFindId(String msg) {
 		String[] tmpMsg = msg.split(":::");
 		tmpMsg = tmpMsg[1].split(",/");
 		String email = tmpMsg[0];
