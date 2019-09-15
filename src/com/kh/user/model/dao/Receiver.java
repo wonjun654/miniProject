@@ -94,6 +94,7 @@ public class Receiver extends Thread{
 					boolean userQusetClear3 = Boolean.parseBoolean(tmpMsg[14]);
 					int userItem1 = Integer.parseInt(tmpMsg[15]);
 					int userItem2 = Integer.parseInt(tmpMsg[16]);
+					int userReport =  Integer.parseInt(tmpMsg[17]);
 					
 					
 					
@@ -101,7 +102,7 @@ public class Receiver extends Thread{
 					System.out.println(result);
 					ClientUser u = new ClientUser(userId, userPw, userName, userEmail, userCoin, userProfile, userMusicSet, userVictory
 							, userAcceptQuest1, userAcceptQuest2, userAcceptQuest3, userQuestClear1, userQuestClear2, userQusetClear3
-							, userItem1, userItem2);
+							, userItem1, userItem2,userReport);
 					
 					lp.resultLogin(result, u, sender, this);
 

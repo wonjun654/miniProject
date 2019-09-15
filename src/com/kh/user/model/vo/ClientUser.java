@@ -12,6 +12,7 @@ public class ClientUser {
 	private int victory;
 	private int ownItem1;
 	private int ownItem2;
+	private int userReport;
 
 	private boolean tempPwd = false;
 
@@ -29,7 +30,7 @@ public class ClientUser {
 	public ClientUser(String userId, String userPwd, String userName, String email, int coin,
 			boolean profile, boolean musicSet, int victory,
 			boolean acceptQuest1, boolean acceptQuest2, boolean acceptQuest3, boolean questClear1, boolean questClear2,
-			boolean questClear3, int ownItem1, int ownItem2) {
+			boolean questClear3, int ownItem1, int ownItem2,int userReport) {
 		this.userId = userId;
 		this.userPwd = userPwd;
 		this.userName = userName;
@@ -43,6 +44,7 @@ public class ClientUser {
 		this.victory = victory;
 		this.ownItem1 = ownItem1;
 		this.ownItem2 = ownItem2;
+		this.userReport = userReport;
 		
 		this.tempPwd = false;
 		
@@ -54,15 +56,13 @@ public class ClientUser {
 		this.questClear3 = questClear3;
 	}
 
+	public int getUserReport() {
+		return userReport;
+	}
 
-	
-
-
-	
-
-
-
-
+	public void setUserReport(int userReport) {
+		this.userReport = userReport;
+	}
 
 	public String getUserId() {
 		return userId;
