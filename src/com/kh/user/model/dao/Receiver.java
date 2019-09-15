@@ -170,7 +170,7 @@ public class Receiver extends Thread{
 				} else if(msg.startsWith("sendAnswer")) {
 					String[] tmpMsg = msg.split(":::");
 					tmpMsg = tmpMsg[1].split(",/");
-					String answer = tmpMsg[0];
+					String answer = "제시어 : " + tmpMsg[0];
 					String userId = tmpMsg[1];
 					game.oneUserAppendChat(answer, userId);
 
@@ -186,6 +186,14 @@ public class Receiver extends Thread{
 					game.changeIsDraw(userId, flag);
 					game.threadStop(true);
 					game.appendChat(receiveMsg);
+				} else if(msg.startsWith("chosung")) {
+					String[] tmpMsg = msg.split(":::");
+					tmpMsg = tmpMsg[1].split(",/");
+					
+					String userId = tmpMsg[0];
+					String chosung = tmpMsg[1];
+					
+					game.oneUserAppendChat(chosung, userId);
 				}
 			}  
 		} catch (SocketException e) {
