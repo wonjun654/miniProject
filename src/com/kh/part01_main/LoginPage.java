@@ -44,6 +44,7 @@ public class LoginPage extends JFrame {
 	ClientUser u;
 	MainMenu mm;
 	JoinPage jp;
+	FindPassword fp;
 	public LoginPage(Socket socket) {
 		this.socket = socket;
 		sender = new Sender(socket);
@@ -149,7 +150,7 @@ public class LoginPage extends JFrame {
 		idbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FindID fi = new FindID();
+				FindID fi = new FindID(sender, receiver);
 			}
 		});
 
@@ -157,7 +158,7 @@ public class LoginPage extends JFrame {
 		pwbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FindPassword fp = new FindPassword(sender, receiver);
+				fp = new FindPassword(sender, receiver);
 			}
 		});
 
@@ -228,6 +229,7 @@ public class LoginPage extends JFrame {
 	public void resultEmail(boolean result) {
 		if(result) {
 			JOptionPane.showMessageDialog(null, "이메일을 발송했습니다.");
+			fp.dispose();
 		} else {
 			JOptionPane.showMessageDialog(null, "이메일을 발송하지 못했습니다.");
 		}

@@ -40,8 +40,7 @@ public class Smtptest {
 	            message.setSubject("KH치마인드"); //메일 제목을 입력
 
 	            // Text
-	            message.setText("임시 비밀번호는 < " + tmpPwd + " > 입니다.");    //메일 내용을 입력
-
+	            message.setText("임시 비밀번호는 < " + tmpPwd + " > 입니다.\n설정창에서 반드시 비밀번호를 변경해주시기 바랍니다.");    //메일 내용을 입력
 	            // send the message
 	            Transport.send(message); ////전송
 	            System.out.println("message sent successfully...");

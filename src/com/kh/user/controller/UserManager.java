@@ -248,13 +248,8 @@ public class UserManager {
 						Smtptest.gmailSend(email, tmpPwd);
 						u.setUserPwd(tmpPwd);
 						u.setTempPwd(true);
-						System.out.println(u.getUserPwd());
 						System.out.println(u.getTempPwd());
 						updateUser(u);
-						System.out.println(u.toString());
-						ud.addUserList(list);
-						list = ud.readUserList();
-						System.out.println(list.get(0));
 						return true;
 					}
 				}
@@ -262,5 +257,4 @@ public class UserManager {
 		}
 		return false;
 	}
-
 }

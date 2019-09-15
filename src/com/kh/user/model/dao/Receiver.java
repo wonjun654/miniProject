@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 
 import com.kh.model.vo.TempPoint;
 import com.kh.part01_main.LoginPage;
+import com.kh.part03_ID.FindResult;
 import com.kh.user.model.vo.ClientUser;
 import com.kh.user.model.vo.Sender;
 import com.kh.view.GameRoom;
@@ -173,6 +174,14 @@ public class Receiver extends Thread{
 					String userId = tmpMsg[1];
 					game.oneUserAppendChat(answer, userId);
 
+				} else if(msg.startsWith("findId")) {
+					String[] tmpMsg = msg.split(":::");
+					String findId = tmpMsg[1];
+					if(findId.equals("notFound")) {
+						JOptionPane.showMessageDialog(null, "해당 이메일이 등록된 아이디가 없습니다.");
+					} else {
+						FindResult fr = new FindResult(findId);
+					}
 				}
 			}  
 		} catch (SocketException e) {

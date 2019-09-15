@@ -39,6 +39,7 @@ import com.kh.model.vo.GameRoomInfo;
 import com.kh.model.vo.MediaTest;
 import com.kh.model.vo.MyMusicPlayer;
 import com.kh.part01_main.LoginPage;
+import com.kh.part03_password.PasswordChange;
 import com.kh.user.controller.UserManager;
 import com.kh.user.model.vo.ClientUser;
 import com.kh.user.model.vo.Sender;
@@ -114,6 +115,8 @@ public class MainMenu extends JFrame implements MouseListener {
 
 
 	public void doMain() {
+		
+		
 		this.mm = this;
 		this.setLayout(null);
 		this.setSize(1024, 768);
