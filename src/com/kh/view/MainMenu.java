@@ -3,6 +3,7 @@ package com.kh.view;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dialog;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
@@ -51,7 +52,7 @@ public class MainMenu extends JFrame implements MouseListener {
 	
 	JPanel listPan = new JPanel();
 	JPanel bgPan = new JPanel();
-	
+	Font copyfont = new Font("怨좊뵓", Font.PLAIN, 10);
 	
 
 	JTextArea textOutput;
@@ -137,73 +138,52 @@ public class MainMenu extends JFrame implements MouseListener {
 
 		this.setSize(1024, 768);
 
-		Image profileimg = new ImageIcon("images\\프로필.PNG").getImage().getScaledInstance(85, 75, 0);
-		Image makeimg = new ImageIcon("images\\make.PNG").getImage().getScaledInstance(60, 60, 0);
-		Image optimg = new ImageIcon("images\\설정.PNG").getImage().getScaledInstance(85, 75, 0);
-		Image shopimg = new ImageIcon("images\\상점.PNG").getImage().getScaledInstance(85, 75, 0);
-		Image exitimg = new ImageIcon("images\\exit.PNG").getImage().getScaledInstance(60, 60, 0);
-		Image coinimg = new ImageIcon("images\\coin.jpg").getImage().getScaledInstance(60, 60, 0);
-		Image questimg = new ImageIcon("images\\퀘스트.PNG").getImage().getScaledInstance(85, 75, 0);
+		Image profileimg = new ImageIcon("images\\profile.PNG").getImage().getScaledInstance(85, 60, 0);
+		Image optimg = new ImageIcon("images\\option.PNG").getImage().getScaledInstance(150, 50, 0);
+		Image shopimg = new ImageIcon("images\\shop.PNG").getImage().getScaledInstance(85, 50, 0);
+		Image exitimg = new ImageIcon("images\\exit.PNG").getImage().getScaledInstance(150, 50, 0);
+		Image coinimg = new ImageIcon("images\\coin.png").getImage().getScaledInstance(60, 60, 0);
+		Image questimg = new ImageIcon("images\\quest.PNG").getImage().getScaledInstance(85, 50, 0);
 		Image chosungimg = new ImageIcon("images\\chosung.png").getImage().getScaledInstance(60, 60, 0);
 		Image timerimg = new ImageIcon("images\\timer.png").getImage().getScaledInstance(60, 60, 0);
+		Image logo = new ImageIcon("images\\login.png").getImage().getScaledInstance(200, 150, 0);
+		Image makeimg = new ImageIcon("images\\make.PNG").getImage().getScaledInstance(85, 50, 0);
+		Image joinimg = new ImageIcon("images\\join.png").getImage().getScaledInstance(85, 50, 0);
 
-		// JLabel namelbl = new JLabel(um.selectOneUser("123").getUserId() + "");
 		JLabel namelbl = new JLabel(u.getUserId());
-		namelbl.setBounds(86, 10, 60, 60);
+		namelbl.setBounds(185, 40, 60, 60);
 
-		JLabel coinImg = new JLabel(new ImageIcon(coinimg));
-		coinImg.setBounds(200, 10, 60, 60);
-
-		// JLabel coinlbl = new JLabel("내 코인 : " + um.selectOneUser("123").getCoin() +
-		// "");
-		JLabel coinlbl = new JLabel("내 코인 : " + u.getCoin());
-		coinlbl.setBounds(276, 10, 100, 60);
-
-		JLabel chosungImg = new JLabel(new ImageIcon(chosungimg));
-		chosungImg.setBounds(376, 10, 60, 60);
-
-		// JLabel chosunglbl = new JLabel("내 아이템 : " +
-		// um.selectOneUser("123").getOwnItem2() + "");
-		JLabel chosunglbl = new JLabel("내 아이템 : " + u.getOwnItem2());
-		chosunglbl.setBounds(437, 10, 100, 60);
-
-		JLabel timerImg = new JLabel(new ImageIcon(timerimg));
-		timerImg.setBounds(576, 10, 60, 60);
-
-		// JLabel timerlbl = new JLabel("내 아이템 : " +
-		// um.selectOneUser("123").getOwnItem1() + "");
-		JLabel timerlbl = new JLabel("내 아이템 : " + u.getOwnItem1());
-		timerlbl.setBounds(637, 10, 100, 60);
-
+		JLabel logolb = new JLabel(new ImageIcon(logo));
+		logolb.setBounds(800, 0, 200, 150);
+		this.add(logolb);
+		
 		JButton profilebtn = new JButton(new ImageIcon(profileimg));
-		profilebtn.setLocation(10, 10);
-		profilebtn.setSize(85, 75);
-		profilebtn.setFocusPainted(false);
+		profilebtn.setLocation(80, 40);
+		profilebtn.setSize(85, 60);
+		profilebtn.setBorderPainted(false);
 		profilebtn.setContentAreaFilled(false);
 
-		JButton makebtn = new JButton(new ImageIcon(makeimg));
-		makebtn.setLocation(765, 10);
-		makebtn.setSize(60, 60);
-
 		JButton optbtn = new JButton(new ImageIcon(optimg));
-		optbtn.setLocation(885, 600);
-		optbtn.setSize(85, 75);
+		optbtn.setLocation(825, 600);
+		optbtn.setSize(150, 50);
+		optbtn.setBorderPainted(false);
+		optbtn.setContentAreaFilled(false);
 
 		JButton shopbtn = new JButton(new ImageIcon(shopimg));
-		shopbtn.setLocation(885, 10);
-		shopbtn.setSize(85, 75);
-		shopbtn.setFocusPainted(false);
+		shopbtn.setLocation(715, 150);
+		shopbtn.setSize(85, 50);
+		shopbtn.setBorderPainted(false);
 		shopbtn.setContentAreaFilled(false);
 
 		rbtn = new RoundButton("E     X     I     T");
-		rbtn.setLocation(750, 680);
-		rbtn.setSize(235, 48);
+		rbtn.setLocation(825, 670);
+		rbtn.setSize(150, 50);
 		rbtn.setFocusPainted(false);
 		rbtn.setContentAreaFilled(false);
 
-		RoundButton make = new RoundButton("방생성");
-		make.setBounds(850, 200, 80, 30);
-		make.setFocusPainted(false);
+		JButton make = new JButton(new ImageIcon(makeimg));
+		make.setBounds(460, 150, 85, 50);
+		make.setBorderPainted(false);
 		make.setContentAreaFilled(false);
 
 		// make.addActionListener(new ActionListener() {
@@ -219,9 +199,9 @@ public class MainMenu extends JFrame implements MouseListener {
 		// }
 		// });
 
-		RoundButton in = new RoundButton("방입장");
-		in.setBounds(850, 250, 80, 30);
-		in.setFocusPainted(false);
+		JButton in = new JButton(new ImageIcon(joinimg));
+		in.setBounds(545, 150, 85, 50);
+		in.setBorderPainted(false);
 		in.setContentAreaFilled(false);
 
 		Dialog makeRoomDialog = new Dialog(this, "방만들기", true);
@@ -276,14 +256,14 @@ public class MainMenu extends JFrame implements MouseListener {
 		roomState.setEditable(false);
 	
 		JScrollPane scPanel2 = new JScrollPane(roomState);
-		scPanel2.setBounds(450, 150, 350, 200);
+		scPanel2.setBounds(450, 200, 350, 220);
 		scPanel2.setBorder(new TitledBorder("방 정보"));
 		
 		DefaultListModel<String>  model1 = new DefaultListModel<String>();
 		JList roomList = new JList(model1);
 		JScrollPane scPanel = new JScrollPane(roomList);
 		scPanel.setBorder(new TitledBorder("방 목록"));
-		scPanel.setBounds(80, 150, 350, 200);
+		scPanel.setBounds(80, 200, 350, 220);
 		
 		roomList.addMouseListener(new MouseListener() {
 			
@@ -348,6 +328,7 @@ public class MainMenu extends JFrame implements MouseListener {
 				roomName2.setText("");
 				
 				
+				
 
 			}
 		});
@@ -391,29 +372,29 @@ public class MainMenu extends JFrame implements MouseListener {
 		});
 
 		JButton questbtn = new JButton(new ImageIcon(questimg));
-		questbtn.setLocation(750, 600);
-		questbtn.setSize(85, 70);
-		questbtn.setFocusPainted(false);
+		questbtn.setLocation(630, 150);
+		questbtn.setSize(85, 50);
+		questbtn.setBorderPainted(false);
 		questbtn.setContentAreaFilled(false);
 
 		textOutput = new JTextArea();
-		textOutput.setBounds(0, 590, 600, 600);
+		textOutput.setBounds(80, 520, 720, 640);
 		textOutput.setEditable(false);
 
 		textInput = new JTextField();
-		textInput.setBounds(0, 710, 600, 28);
-		textInput.requestFocus();
+		textInput.setBounds(80, 670, 720, 28);
+//		textInput.requestFocus();
 		this.add(textInput);
 
-		JScrollPane chatScroll = new JScrollPane(textOutput);
-		chatScroll.setLocation(0, 590);
-		chatScroll.setSize(600, 122);
-		this.add(chatScroll);
-
 		JButton textOkbtn = new JButton("전송");
-		textOkbtn.setSize(60, 28);
-		textOkbtn.setLocation(538, 0);
+		textOkbtn.setSize(60, 26);
+		textOkbtn.setLocation(658, 0);
 		textInput.add(textOkbtn);
+		
+		JScrollPane chatScroll = new JScrollPane(textOutput);
+		chatScroll.setLocation(80, 490);
+		chatScroll.setSize(720, 182);
+		this.add(chatScroll);
 
 		// 전송 버튼
 		textOkbtn.addActionListener(new ActionListener() {
@@ -476,7 +457,7 @@ public class MainMenu extends JFrame implements MouseListener {
 
 			}
 		});
-		makebtn.addActionListener(new ActionListener() {
+		make.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -517,34 +498,29 @@ public class MainMenu extends JFrame implements MouseListener {
 			
 			}
 		});
-
+		JLabel copyRight = new JLabel("CopyRighted by KH마인드");
+		copyRight.setFont(copyfont);
+		copyRight.setSize(200, 20);
+		copyRight.setLocation(460, 710);
+		this.add(copyRight);
 
 		this.add(listPan);
 
 		this.add(textInput);
-		this.add(textOutput);
 		this.add(profilebtn);
-		this.add(coinlbl);
-		this.add(coinImg);
 		// this.add(panel);
 		this.add(rbtn);
 		this.add(shopbtn);
 		this.add(optbtn);
-		this.add(makebtn);
 		this.add(namelbl);
 		// this.add(jsp);
 		// this.add(table1);
 		// this.add(js1);
-		this.add(textOutput);
 		// this.add(sc);
 		this.add(questbtn);
 		// this.add(lblroom);
 		// this.add(lblsang);
 		// this.add(lblpeople);
-		this.add(chosungImg);
-		this.add(timerImg);
-		this.add(chosunglbl);
-		this.add(timerlbl);
 		this.add(make);
 		this.add(in);
 		this.add(scPanel);

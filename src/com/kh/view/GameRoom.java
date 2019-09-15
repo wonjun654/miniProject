@@ -374,8 +374,10 @@ public class GameRoom extends JFrame implements Runnable {
 				}
 			}
 		});
-		JButton capture = new JButton("화면 캡쳐");
-		capture.setSize(150, 20);
+		
+		Image captureImage = new ImageIcon("images/screenshot.png").getImage().getScaledInstance(150, 30, 0);
+		JButton capture = new JButton(new ImageIcon(captureImage));
+		capture.setSize(150, 30);
 		capture.setLocation(20, 15);
 		roomCenter.add(capture);
 
@@ -429,8 +431,9 @@ public class GameRoom extends JFrame implements Runnable {
 			}
 		});
 
-		JButton settingbtn = new JButton("설정");
-		settingbtn.setSize(60, 20);
+		Image optionImage = new ImageIcon("images/option.png").getImage().getScaledInstance(60, 30, 0);
+		JButton settingbtn = new JButton(new ImageIcon(optionImage));
+		settingbtn.setSize(60, 30);
 		settingbtn.setLocation(425, 15);
 		roomCenter.add(settingbtn);
 
