@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import com.kh.user.Smtptest;
 import com.kh.user.controller.UserManager;
 import com.kh.user.model.vo.User;
 

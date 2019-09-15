@@ -11,8 +11,8 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class smtptest {
-	public static void gmailSend(String email) {
+public class Smtptest {
+	public static void gmailSend(String email, String tmpPwd) {
 		String user = "wonkyong1022@gmail.com";
 		String password = "wonwoo0922";
 		
@@ -40,7 +40,7 @@ public class smtptest {
 	            message.setSubject("KH치마인드"); //메일 제목을 입력
 
 	            // Text
-	            message.setText("메일서비스 테스트중입니다");    //메일 내용을 입력
+	            message.setText("임시 비밀번호는 < " + tmpPwd + " > 입니다.");    //메일 내용을 입력
 
 	            // send the message
 	            Transport.send(message); ////전송
@@ -54,7 +54,7 @@ public class smtptest {
 	        }
 	}
 	
-/*	public static void main(String[] args) {
-		gmailSend();
+	/*public static void main(String[] args) {
+		gmailSend("gurwns1540@gmail.com", "123");
 	}*/
 }

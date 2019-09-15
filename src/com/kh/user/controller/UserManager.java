@@ -2,10 +2,9 @@
 package com.kh.user.controller;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import com.kh.user.TempPassword;
-import com.kh.user.smtptest;
+import com.kh.user.Smtptest;
 import com.kh.user.model.dao.UserDao;
 import com.kh.user.model.vo.ClientUser;
 import com.kh.user.model.vo.User;
@@ -212,6 +211,7 @@ public class UserManager {
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getUserId().equals(userId)) {
 				return true;
+				
 			}
 		}
 
@@ -238,12 +238,23 @@ public class UserManager {
 			for (int i = 0; i < list.size(); i++) {
 				if (list.get(i).getUserId().equals(userId)) {
 					if (list.get(i).getEmail().equals(email)) {
+						
 						User u = selectOneUser(userId);
-						u.setTempPwd(true);
+						System.out.println(u.toString());
+						System.out.println(userId);
+						System.out.println(email);
 						TempPassword tp = new TempPassword();
-						String tmpPwd = tp.getTempPassword();
+						String tmpPwd = tp.getTempPassword(); 
+						Smtptest.gmailSend(email, tmpPwd);
 						u.setUserPwd(tmpPwd);
-						smtptest.gmailSend(email);
+						u.setTempPwd(true);
+						System.out.println(u.getUserPwd());
+						System.out.println(u.getTempPwd());
+						updateUser(u);
+						System.out.println(u.toString());
+						ud.addUserList(list);
+						list = ud.readUserList();
+						System.out.println(list.get(0));
 						return true;
 					}
 				}
