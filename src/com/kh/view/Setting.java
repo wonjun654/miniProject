@@ -48,10 +48,6 @@ public class Setting extends JFrame {
 		label.setSize(120, 120);
 		label.setFont(font);
 
-		JLabel label2 = new JLabel("프로필");
-		label2.setLocation(20, 70);
-		label2.setSize(120, 120);
-		label2.setFont(font);
 		
 		JLabel pwdLabel = new JLabel("비밀번호 변경");
 		pwdLabel.setLocation(20,130);
@@ -66,17 +62,6 @@ public class Setting extends JFrame {
 		RoundButton button = new RoundButton("확인");
 		button.setSize(60, 50);
 		button.setLocation(280, 250);
-		///////////// 프로필 공개////////////////
-		JRadioButton profileOn = new JRadioButton("On");
-		JRadioButton profileOff = new JRadioButton("OFF");
-
-		profileOn.setSize(50, 50);
-		profileOn.setLocation(160, 110);
-		profileOn.setBackground(new Color(195, 245, 230));
-
-		profileOff.setSize(50, 50);
-		profileOff.setLocation(260, 110);
-		profileOff.setBackground(new Color(195, 245, 230));
 		///////////// 배경음악 설정/////////////////
 		JRadioButton musicOn = new JRadioButton("On");
 		JRadioButton musicOff = new JRadioButton("OFF");
@@ -95,24 +80,15 @@ public class Setting extends JFrame {
 			musicOff.setSelected(true);
 		}
 		
-		if(u.isProfile()==true) {
-			profileOn.setSelected(true);
-		}else {
-			profileOff.setSelected(true);
-		}
 		
 		
 		ButtonGroup profilegroup = new ButtonGroup();
 		ButtonGroup musicgroup = new ButtonGroup();
 		
-		profilegroup.add(profileOn);
-		profilegroup.add(profileOff);
 		musicgroup.add(musicOn);
 		musicgroup.add(musicOff);
 		panel.add(musicOff);
 		panel.add(musicOn);
-		panel.add(profileOn);
-		panel.add(profileOff);
 
 		/////////////////pwd 변경 //////////
 		pwdBtn.addActionListener(new ActionListener() {
@@ -147,20 +123,6 @@ public class Setting extends JFrame {
 				} 
 				
 				
-				if (profileOn.isSelected() == true) {
-					u.setProfile(true);
-
-				} else if (profileOn.isSelected() == false) {
-					u.setProfile(false);
-
-				}
-
-				if (profileOn.isSelected() == true && u.isProfile() == true) {
-
-				} else {
-				
-					///asd///
-				}
 //				um.updateUser(u);
 				
 				dispose();
@@ -173,7 +135,6 @@ public class Setting extends JFrame {
 		panel.add(button);
 
 		panel.add(label);
-		panel.add(label2);
 		panel.add(pwdLabel);
 		panel.add(pwdBtn);
 		
