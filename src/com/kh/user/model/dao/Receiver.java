@@ -204,6 +204,8 @@ public class Receiver extends Thread{
 					
 					game.oneUserAppendChat(chosung, userId);
 
+				}else if(msg.startsWith("repaint")) {
+					game.allRepaint();
 				}
 			}  
 		} catch (SocketException e) {

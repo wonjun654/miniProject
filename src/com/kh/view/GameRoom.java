@@ -601,6 +601,7 @@ public class GameRoom extends JFrame implements Runnable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (isDraw) {
+					((Sender) sender).sendRepaint(roomName);
 					threadStop(false);
 					startStopWatch();
 				}
@@ -978,6 +979,10 @@ public class GameRoom extends JFrame implements Runnable {
 		isDraw = flag;
 	}
 
+	
+	public void allRepaint() {
+		canvasPanel.repaint();
+	}
 	/*
 	 * public void timer1(int time) { for(int i = time; i > 0; i--) {
 	 * 

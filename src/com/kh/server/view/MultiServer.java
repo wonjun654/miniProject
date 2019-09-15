@@ -643,6 +643,24 @@ public class MultiServer implements Serializable {
 		}
 	}
 	
+	public void sendRepaint(String msg) {
+		String[] tmpMsg = msg.split(":::");
+		String roomName = tmpMsg[1];
+		
+		Iterator iter = multiRoom.get(roomName).keySet().iterator();
+		while(iter.hasNext()) {
+			String key = (String) iter.next();
+			DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
+			try {
+				iterOut.writeUTF("repaint");
+				iterOut.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	// ----// 내부 클래스 //--------//
 
 	// 클라이언트로부터 읽어온 메시지를 다른 클라이언트(socket)에 보내는 역할을 하는 메서드
@@ -752,6 +770,8 @@ public class MultiServer implements Serializable {
 					}else if(msg.startsWith("chosung")) {
 						sendchosung(msg);
 
+					}else if(msg.startsWith("repaint")) {
+						sendRepaint(msg);
 					}
 				} // while()---------
 			} catch (SocketException e) {
