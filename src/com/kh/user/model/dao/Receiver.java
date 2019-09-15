@@ -173,6 +173,18 @@ public class Receiver extends Thread{
 					String userId = tmpMsg[1];
 					game.oneUserAppendChat(answer, userId);
 
+				} else if(msg.startsWith("isDraw")) {
+					String[] tmpMsg = msg.split(":::");
+					tmpMsg = tmpMsg[1].split(",/");
+					
+					String receiveMsg = tmpMsg[0];
+					String userId = tmpMsg[1];
+					Boolean flag = Boolean.parseBoolean(tmpMsg[2]);
+					String roomName = tmpMsg[3];
+					System.out.println("Receiver : " + flag);
+					game.changeIsDraw(userId, flag);
+					game.threadStop(true);
+					game.appendChat(receiveMsg);
 				}
 			}  
 		} catch (SocketException e) {
