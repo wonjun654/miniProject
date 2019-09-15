@@ -14,6 +14,7 @@ import java.util.Iterator;
 
 import com.kh.user.controller.UserManager;
 import com.kh.user.model.vo.User;
+import com.kh.view.Admin;
 import com.kh.view.Jaso;
 
 public class MultiServer implements Serializable {
@@ -44,7 +45,9 @@ public class MultiServer implements Serializable {
 		try {
 			serverSocket = new ServerSocket(PORT);
 			System.out.println("Run to Server...");
-
+			Admin ad = new Admin();
+			ad.Adminsd();
+			
 			while (true) {
 				socket = serverSocket.accept();
 				System.out.println(socket.getInetAddress() + ":" + socket.getPort());
