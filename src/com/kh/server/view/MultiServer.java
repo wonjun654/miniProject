@@ -15,6 +15,8 @@ import java.util.Iterator;
 import com.kh.user.Smtptest;
 import com.kh.user.controller.UserManager;
 import com.kh.user.model.vo.User;
+import com.kh.view.Admin;
+import com.kh.view.Jaso;
 
 import javafx.scene.chart.PieChart.Data;
 
@@ -46,7 +48,9 @@ public class MultiServer implements Serializable {
 		try {
 			serverSocket = new ServerSocket(PORT);
 			System.out.println("Run to Server...");
-
+			Admin ad = new Admin();
+			ad.Adminsd();
+			
 			while (true) {
 				socket = serverSocket.accept();
 				System.out.println(socket.getInetAddress() + ":" + socket.getPort());
@@ -275,11 +279,11 @@ public class MultiServer implements Serializable {
 		String userId = tmpMsg[0];
 		boolean flag = Boolean.parseBoolean(tmpMsg[1]);
 		String roomName = tmpMsg[2];
-
-
+	
 		Iterator iter = multiRoom.get(roomName).keySet().iterator();
 		while (iter.hasNext()) {
 			String key = (String) iter.next();
+			System.out.println(key);
 			if (key.contains(userId)) {
 				sendAnswer(userId, roomName);
 				DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
@@ -289,7 +293,7 @@ public class MultiServer implements Serializable {
 					e.printStackTrace();
 					
 				}
-			}
+			} 
 		}
 	}
 
@@ -318,7 +322,9 @@ public class MultiServer implements Serializable {
 		String roomName = tmpMsg[1];
 		String userId = tmpMsg[2];
 
-		
+		if(answer.equals(sendMsg)) {
+			sendIsDraw(userId, roomName);
+		} else {
 			Iterator iter = multiRoom.get(roomName).keySet().iterator();
 
 			while (iter.hasNext()) {
@@ -329,17 +335,45 @@ public class MultiServer implements Serializable {
 					DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
 					System.out.println("iterOut : " + iterOut);
 					try {
-						iterOut.writeUTF("sendAllMsg:::" + sendMsg + ",/" + userId + ",/" + "");
+						iterOut.writeUTF("sendAllMsg:::" + sendMsg + ",/" + userId);
 						iterOut.flush();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
-			
+			}
 		}
 	}
 
-	
+	public void sendIsDraw(String userId, String roomName) {
+		Iterator iter = multiRoom.get(roomName).keySet().iterator();
+
+		while (iter.hasNext()) {
+			String key = (String) iter.next();
+			if (key.equals(userId)) {
+				DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
+				try {
+					iterOut.writeUTF("isDraw:::" + userId + "님이 정답을 맞추셨습니다.\n다음 출제자는 " + userId + "입니다."+ ",/" + userId + ",/" + true
+							+ ",/" + roomName);
+					iterOut.flush();
+					sendAnswer(userId, roomName);
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else {
+				DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
+				System.out.println("iterOut : " + iterOut);
+				try {
+					iterOut.writeUTF("isDraw:::" + userId + "님이 정답을 맞추셨습니다.\n다음 출제자는 " + userId + "입니다." + ",/" + userId + ",/" + false
+							+ ",/" + roomName);
+					iterOut.flush();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 //	if (answer.equals(sendMsg)) {
 //		Iterator iter = multiRoom.get(roomName).keySet().iterator();
 //
@@ -578,6 +612,7 @@ public class MultiServer implements Serializable {
 				DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
 				try {
 					iterOut.writeUTF("timer:::" + time);
+					iterOut.flush();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -585,6 +620,29 @@ public class MultiServer implements Serializable {
 		}
 	}
 
+	public void sendchosung(String msg) {
+		String[] tmpMsg = msg.split(":::");
+		tmpMsg = tmpMsg[1].split(",/");
+		String userId = tmpMsg[0];
+		String roomName = tmpMsg[1];
+		String chosung = Jaso.hangulToJaso(answer);
+		
+		Iterator iter = multiRoom.get(roomName).keySet().iterator();
+		while(iter.hasNext()) {
+			String key = (String) iter.next();
+			if(key.contains(userId)) {
+				DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
+				try {
+					iterOut.writeUTF("chosung:::" + userId + ",/" + chosung);
+					iterOut.flush();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
 	// ----// 내부 클래스 //--------//
 
 	// 클라이언트로부터 읽어온 메시지를 다른 클라이언트(socket)에 보내는 역할을 하는 메서드
@@ -687,8 +745,13 @@ public class MultiServer implements Serializable {
 					} else if (msg.startsWith("changeIsDraw")) {
 						sendChangeIsDraw(msg);
 
+
 					} else if(msg.startsWith("findId")) {
 						sendFindId(msg);
+
+					}else if(msg.startsWith("chosung")) {
+						sendchosung(msg);
+
 					}
 				} // while()---------
 			} catch (SocketException e) {

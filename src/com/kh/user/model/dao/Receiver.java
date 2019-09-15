@@ -170,9 +170,10 @@ public class Receiver extends Thread{
 				} else if(msg.startsWith("sendAnswer")) {
 					String[] tmpMsg = msg.split(":::");
 					tmpMsg = tmpMsg[1].split(",/");
-					String answer = tmpMsg[0];
+					String answer = "제시어 : " + tmpMsg[0];
 					String userId = tmpMsg[1];
 					game.oneUserAppendChat(answer, userId);
+
 
 				} else if(msg.startsWith("findId")) {
 					String[] tmpMsg = msg.split(":::");
@@ -182,6 +183,27 @@ public class Receiver extends Thread{
 					} else {
 						FindResult fr = new FindResult(findId);
 					}
+
+				} else if(msg.startsWith("isDraw")) {
+					String[] tmpMsg = msg.split(":::");
+					tmpMsg = tmpMsg[1].split(",/");
+					
+					String receiveMsg = tmpMsg[0];
+					String userId = tmpMsg[1];
+					Boolean flag = Boolean.parseBoolean(tmpMsg[2]);
+					System.out.println("Receiver : " + flag);
+					game.changeIsDraw(userId, flag);
+					game.threadStop(true);
+					game.appendChat(receiveMsg);
+				} else if(msg.startsWith("chosung")) {
+					String[] tmpMsg = msg.split(":::");
+					tmpMsg = tmpMsg[1].split(",/");
+					
+					String userId = tmpMsg[0];
+					String chosung = tmpMsg[1];
+					
+					game.oneUserAppendChat(chosung, userId);
+
 				}
 			}  
 		} catch (SocketException e) {
