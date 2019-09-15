@@ -52,8 +52,8 @@ public class Admin extends JFrame {
 		JTable table1 = new JTable(model1);
 		table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		for (int i = 0; i < list.size(); i++) {
-			model1.insertRow(0,
-					new Object[] { list.get(i).getUserId(), list.get(i).getUserName(), list.get(i).getEmail() });
+			model1.insertRow(0, new Object[] { list.get(i).getUserId(), list.get(i).getUserName(),
+					list.get(i).getEmail(), list.get(i).getUserReport() });
 			table1.updateUI();
 
 		}
@@ -106,8 +106,7 @@ public class Admin extends JFrame {
 		JPanel corDlPl = new JPanel();
 		corDlPl.setBounds(400, 400, 400, 400);
 		corDlPl.setLayout(null);
-		
-		
+
 		JTextField userId = new JTextField();
 		userId.setSize(200, 30);
 		userId.setLocation(90, 30);
@@ -177,6 +176,10 @@ public class Admin extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				corDl.setVisible(true);
+				userId.setText((String) model1.getValueAt(table1.getSelectedRow(), 0));
+				userName.setText((String) model1.getValueAt(table1.getSelectedRow(), 1));
+				userMail.setText((String) model1.getValueAt(table1.getSelectedRow(), 2));
+			
 
 			}
 		});
@@ -217,9 +220,13 @@ public class Admin extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (table1.getSelectedRow() != -1) {
 					um.userCor((String) model1.getValueAt(table1.getSelectedRow(), 0), userId.getText(),
-							userName.getText(), userMail.getText());
+							userName.getText(), userMail.getText(),userReport.getText());
 					table1.updateUI();
-
+//					dispose();
+					
+//					Admin ad = new Admin();
+//					ad.Adminsd();
+					repaint();
 				}
 				//
 				/*

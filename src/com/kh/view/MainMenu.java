@@ -48,16 +48,13 @@ public class MainMenu extends JFrame implements MouseListener {
 	UserManager um = new UserManager();
 
 	JPanel north_p, center_p, south_p;
-	
+
 	JPanel listPan = new JPanel();
 	JPanel bgPan = new JPanel();
-	
-	
 
 	JTextArea textOutput;
 	JTextField textInput;
 	RoundButton rbtn;
-
 
 	JLabel lblroom;
 	JLabel lblsang;
@@ -83,22 +80,13 @@ public class MainMenu extends JFrame implements MouseListener {
 	MainMenu mm;
 	ClientUser u;
 
-	
-
-	/*public MainMenu(Socket socket, ClientUser u, Thread sender, Thread receiver) {
-		super("MainMenuPage");
-		this.socket = socket;
-		this.u = u;
-		this.sender = sender;
-		this.receiver = receiver;
-		profile = true;
-		tempPwd = false;
-//		((Receiver) receiver).getMainMenu(this);
-		// Layout 지정 없이 위치 지정하면서 배치하는 방법이다.
-	}*/
-
-
-
+	/*
+	 * public MainMenu(Socket socket, ClientUser u, Thread sender, Thread receiver)
+	 * { super("MainMenuPage"); this.socket = socket; this.u = u; this.sender =
+	 * sender; this.receiver = receiver; profile = true; tempPwd = false; //
+	 * ((Receiver) receiver).getMainMenu(this); // Layout 지정 없이 위치 지정하면서 배치하는 방법이다.
+	 * }
+	 */
 
 	public MainMenu(Socket socket, ClientUser u, Thread sender, Thread receiver) {
 		super("MainMenuPage");
@@ -107,11 +95,6 @@ public class MainMenu extends JFrame implements MouseListener {
 		this.sender = sender;
 		this.receiver = receiver;
 	}
-	
-
-
-
-
 
 	public void doMain() {
 		this.mm = this;
@@ -126,14 +109,6 @@ public class MainMenu extends JFrame implements MouseListener {
 
 			e.printStackTrace();
 		}
-
-		
-		
-		
-		
-		
-		
-		
 
 		this.setSize(1024, 768);
 
@@ -268,49 +243,47 @@ public class MainMenu extends JFrame implements MouseListener {
 		makeRoomDialog.add(checkSecret);
 
 		makeRoomDialog.setLocationRelativeTo(null);
-		
-		
-		
+
 		JTextArea roomState = new JTextArea();
 		roomState.setBounds(450, 150, 350, 200);
 		roomState.setEditable(false);
-	
+
 		JScrollPane scPanel2 = new JScrollPane(roomState);
 		scPanel2.setBounds(450, 150, 350, 200);
 		scPanel2.setBorder(new TitledBorder("방 정보"));
-		
-		DefaultListModel<String>  model1 = new DefaultListModel<String>();
+
+		DefaultListModel<String> model1 = new DefaultListModel<String>();
 		JList roomList = new JList(model1);
 		JScrollPane scPanel = new JScrollPane(roomList);
 		scPanel.setBorder(new TitledBorder("방 목록"));
 		scPanel.setBounds(80, 150, 350, 200);
-		
+
 		roomList.addMouseListener(new MouseListener() {
-			
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String roomName = roomName2.getText();
@@ -320,12 +293,10 @@ public class MainMenu extends JFrame implements MouseListener {
 					} else {
 						((Sender) sender).sendEnterRoom(roomName);
 					}
-				
+
 				}
 			}
 		});
-
-
 
 		btnCancel.addActionListener(new ActionListener() {
 
@@ -342,12 +313,10 @@ public class MainMenu extends JFrame implements MouseListener {
 				String roomName = roomName2.getText();
 				String roomPw = roomPwd2.getText();
 				String people = selectPeople.getValue() + "";
-				model1.addElement(roomName + " : " + people); 
+				model1.addElement(roomName + " : " + people);
 				((Sender) sender).sendCreateRoom(roomName, roomPw, people);
 				makeRoomDialog.dispose();
 				roomName2.setText("");
-				
-				
 
 			}
 		});
@@ -451,7 +420,7 @@ public class MainMenu extends JFrame implements MouseListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-//				Profile pf = new Profile(um.selectOneUser("123"));
+				// Profile pf = new Profile(um.selectOneUser("123"));
 				Profile pf = new Profile(u);
 				pf.setVisible(true);
 
@@ -500,24 +469,20 @@ public class MainMenu extends JFrame implements MouseListener {
 
 		MediaTest.musicOn(1, u.isMusicSet());
 
-
 		rbtn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				((Sender) sender).sendLogOut(u.getUserId());
 				JOptionPane.showMessageDialog(null, "로그아웃 되었습니다.");
 				MediaTest.musicOff();
 				dispose();
-				
-				
 
 				LoginPage login = new LoginPage(socket);
 				((Sender) sender).sendUserInfo(u);
-			
+
 			}
 		});
-
 
 		this.add(listPan);
 
@@ -549,8 +514,8 @@ public class MainMenu extends JFrame implements MouseListener {
 		this.add(in);
 		this.add(scPanel);
 		this.add(scPanel2);
-		//this.add(roomState);
-		
+		// this.add(roomState);
+
 		this.add(bgPan);
 
 		this.setResizable(false);
@@ -594,7 +559,13 @@ public class MainMenu extends JFrame implements MouseListener {
 		textOutput.setCaretPosition(textOutput.getDocument().getLength());
 		textInput.requestFocus();
 	}
+
 	public MainMenu getMainMenu() {
 		return mm;
+	}
+
+	public void getUserName(String userId) {
+		if (this.userId.equals(userId))
+			um.selectOneUser(userId).setUserReport(um.selectOneUser(userId).getUserReport() + 1);
 	}
 }
