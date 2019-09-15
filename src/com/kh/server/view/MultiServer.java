@@ -272,8 +272,7 @@ public class MultiServer implements Serializable {
 		String userId = tmpMsg[0];
 		boolean flag = Boolean.parseBoolean(tmpMsg[1]);
 		String roomName = tmpMsg[2];
-
-
+	
 		Iterator iter = multiRoom.get(roomName).keySet().iterator();
 		while (iter.hasNext()) {
 			String key = (String) iter.next();
@@ -315,7 +314,9 @@ public class MultiServer implements Serializable {
 		String roomName = tmpMsg[1];
 		String userId = tmpMsg[2];
 
-		
+		if(answer.equals(sendMsg)) {
+			sendIsDraw(userId, roomName);
+		} else {
 			Iterator iter = multiRoom.get(roomName).keySet().iterator();
 
 			while (iter.hasNext()) {
@@ -326,17 +327,44 @@ public class MultiServer implements Serializable {
 					DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
 					System.out.println("iterOut : " + iterOut);
 					try {
-						iterOut.writeUTF("sendAllMsg:::" + sendMsg + ",/" + userId + ",/" + "");
+						iterOut.writeUTF("sendAllMsg:::" + sendMsg + ",/" + userId);
 						iterOut.flush();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
-			
+			}
 		}
 	}
 
-	
+	public void sendIsDraw(String userId, String roomName) {
+		Iterator iter = multiRoom.get(roomName).keySet().iterator();
+
+		while (iter.hasNext()) {
+			String key = (String) iter.next();
+			if (key.equals(userId)) {
+				DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
+				try {
+					iterOut.writeUTF("isDraw:::" + userId + "님이 정답을 맞추셨습니다." + ",/" + userId + ",/" + true
+							+ ",/" + roomName);
+					iterOut.flush();
+					sendAnswer(userId, roomName);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else {
+				DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
+				System.out.println("iterOut : " + iterOut);
+				try {
+					iterOut.writeUTF("isDraw:::" + userId + "님이 정답을 맞추셨습니다." + ",/" + userId + ",/" + false
+							+ ",/" + roomName);
+					iterOut.flush();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 //	if (answer.equals(sendMsg)) {
 //		Iterator iter = multiRoom.get(roomName).keySet().iterator();
 //
