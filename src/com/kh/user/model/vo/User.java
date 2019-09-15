@@ -17,8 +17,6 @@ public class User implements Serializable {
 	private int victory;
 	private int ownItem1;
 	private int ownItem2;
-	private int userReport;
-	
 
 	boolean tempPwd = false;
 
@@ -29,15 +27,6 @@ public class User implements Serializable {
 	boolean questClear2 = false;
 	boolean questClear3 = false;
 	
-
-	
-	public int getUserReport() {
-		return userReport;
-	}
-
-	public void setUserReport(int userReport) {
-		this.userReport = userReport;
-	}
 
 	public boolean getAcceptQuest1() {
 		return acceptQuest1;

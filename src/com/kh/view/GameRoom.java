@@ -762,8 +762,6 @@ public class GameRoom extends JFrame implements Runnable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (!reportNameText.getText().isEmpty()) {
-					mm.getUserName(userId);
-					
 					JOptionPane.showMessageDialog(null, "신고 완료되었습니다.");
 					reportDialog.dispose();
 				} else {

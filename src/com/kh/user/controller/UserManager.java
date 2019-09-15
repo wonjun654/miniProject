@@ -19,32 +19,33 @@ public class UserManager {
 
 	}
 
-	public void userDelete(String str) {
 
-		ArrayList<User> list = ud.readUserList();
+	 public void userDelete(String str) {
 
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getUserId().equals(str)) {
-				list.remove(i);
-				ud.addUserList(list);
-			}
-		}
+	      ArrayList<User> list = ud.readUserList();
 
-	}
+	      for (int i = 0; i < list.size(); i++) {
+	         if (list.get(i).getUserId().equals(str)) {
+	            list.remove(i);
+	            ud.addUserList(list);
+	         }
+	      }
 
-	public void userCor(String str, String Nid, String Nname, String Nemail, String Nreport) {
-		ArrayList<User> list = ud.readUserList();
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getUserId().equals(str)) {
-				list.get(i).setUserId(Nid);
-				list.get(i).setUserName(Nname);
-				list.get(i).setEmail(Nemail);
-				list.get(i).setUserReport(Integer.parseInt(Nreport));
-				ud.addUserList(list);
-			}
-		}
+	   }
 
-	}
+	 public void userCor(String str,String Nid,String Nname,String Nemail) {
+	      ArrayList<User> list = ud.readUserList();
+	      for (int i = 0; i < list.size(); i++) {
+	         if (list.get(i).getUserId().equals(str)) {
+	            list.get(i).setUserId(Nid);
+	            list.get(i).setUserName(Nname);
+	            list.get(i).setEmail(Nemail);
+	            ud.addUserList(list);
+	         }
+	      }
+	      
+	   }
+	 
 
 	public void createUser(String str) {
 		String[] tmpMsg = str.split(",/");
@@ -91,17 +92,16 @@ public class UserManager {
 
 		return false;
 	}
-
+	
 	public synchronized boolean checkId(String str) {
 		ArrayList<User> list = ud.readUserList();
 		User u = selectOneUser(str);
-		if (u == null) {
+		if(u == null) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-
 	public synchronized boolean signUp(String str) {
 		User u = null;
 
