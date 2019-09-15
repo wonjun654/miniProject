@@ -216,8 +216,8 @@ public class MainMenu extends JFrame implements MouseListener {
 		roomPwd.setBounds(125, 200, 75, 35);
 		roomPeople.setBounds(125, 250, 75, 35);
 
-		JTextArea roomName2 = new JTextArea();
-		JTextArea roomPwd2 = new JTextArea();
+		JTextField roomName2 = new JTextField();
+		JTextField roomPwd2 = new JTextField();
 		JTextArea roomPeople2 = new JTextArea();
 		roomName2.setBounds(175, 150, 175, 25);
 		roomPwd2.setEnabled(false);
@@ -225,6 +225,7 @@ public class MainMenu extends JFrame implements MouseListener {
 		roomPwd2.setBounds(175, 200, 175, 25);
 		roomPeople2.setBounds(175, 250, 175, 25);
 
+		
 		SpinnerModel numberModel = new SpinnerNumberModel(4, 4, 8, 1);
 		JSpinner selectPeople = new JSpinner(numberModel);
 		selectPeople.setBounds(175, 250, 175, 25);
@@ -265,6 +266,21 @@ public class MainMenu extends JFrame implements MouseListener {
 		scPanel.setBorder(new TitledBorder("방 목록"));
 		scPanel.setBounds(80, 200, 350, 220);
 		
+		roomName2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				String roomName = roomName2.getText();
+				String roomPw = roomPwd2.getText();
+				String people = selectPeople.getValue() + "";
+				model1.addElement(roomName + " : " + people); 
+				((Sender) sender).sendCreateRoom(roomName, roomPw, people);
+				makeRoomDialog.dispose();
+				roomName2.setText("");
+
+			}
+		});
 		roomList.addMouseListener(new MouseListener() {
 			
 			@Override
@@ -394,6 +410,7 @@ public class MainMenu extends JFrame implements MouseListener {
 		JScrollPane chatScroll = new JScrollPane(textOutput);
 		chatScroll.setLocation(80, 490);
 		chatScroll.setSize(720, 182);
+		chatScroll.setBorder(new TitledBorder("채팅창"));
 		this.add(chatScroll);
 
 		// 전송 버튼

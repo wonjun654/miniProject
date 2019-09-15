@@ -345,7 +345,7 @@ public class GameRoom extends JFrame implements Runnable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (mm.u.getOwnItem1() > 0) {
+				if (mm.u.getOwnItem1() > 0 && isDraw) {
 					System.out.println("time stop");
 					usingTimeStop = true;
 					mm.u.setOwnItem1(mm.u.getOwnItem1() - 1);
@@ -367,7 +367,7 @@ public class GameRoom extends JFrame implements Runnable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (mm.u.getOwnItem2() > 0) {
+				if (mm.u.getOwnItem2() > 0 && !isDraw) {
 					((Sender) sender).sendChosung(userId, roomName);
 					String chosung = Jaso.hangulToJaso("가나다");
 					System.out.println(chosung);
