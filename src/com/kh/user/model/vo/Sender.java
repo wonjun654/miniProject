@@ -63,6 +63,15 @@ public class Sender extends Thread {
 		}
 	}
 	
+	public void sendChosung(String userId, String roomName) {
+		try {
+			out.writeUTF("chosung:::" + userId + ",/" + roomName);
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public void sendAllMsg(String msg, String roomName) {
     	try {
