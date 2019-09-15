@@ -938,6 +938,7 @@ public class GameRoom extends JFrame implements Runnable {
 		tmp.add(new TempPoint(eX, eY));
 	}
 
+	
 	public void releaseMouse(/* int eX, int eY */) {
 		/*
 		 * this.eX = eX; this.eY = eY;
