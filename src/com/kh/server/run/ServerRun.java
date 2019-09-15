@@ -6,6 +6,5 @@ public class ServerRun {
 	public static synchronized void main(String[] args) {
 		MultiServer ms = new MultiServer();
 		ms.init();
-//		ms.start();
 	}
 }
