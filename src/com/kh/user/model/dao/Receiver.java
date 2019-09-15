@@ -184,8 +184,7 @@ public class Receiver extends Thread{
 					System.out.println("Receiver : " + flag);
 					game.changeIsDraw(userId, flag);
 					game.threadStop(true);
-					mm = lp.getMainMenu();
-					mm.appendChat(receiveMsg);
+					game.appendChat(receiveMsg);
 				}
 			}  
 		} catch (SocketException e) {

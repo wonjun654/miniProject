@@ -635,6 +635,7 @@ public class GameRoom extends JFrame implements Runnable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(isDraw) {
+					threadStop(false);
 					startStopWatch();
 				}
 			}

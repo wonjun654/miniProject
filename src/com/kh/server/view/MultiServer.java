@@ -345,7 +345,7 @@ public class MultiServer implements Serializable {
 			if (key.equals(userId)) {
 				DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
 				try {
-					iterOut.writeUTF("isDraw:::" + userId + "님이 정답을 맞추셨습니다." + ",/" + userId + ",/" + true
+					iterOut.writeUTF("isDraw:::" + userId + "님이 정답을 맞추셨습니다.\n다음 출제자는 " + userId + "입니다."+ ",/" + userId + ",/" + true
 							+ ",/" + roomName);
 					iterOut.flush();
 					sendAnswer(userId, roomName);
@@ -357,7 +357,7 @@ public class MultiServer implements Serializable {
 				DataOutputStream iterOut = (DataOutputStream) multiRoom.get(roomName).get(key);
 				System.out.println("iterOut : " + iterOut);
 				try {
-					iterOut.writeUTF("isDraw:::" + userId + "님이 정답을 맞추셨습니다." + ",/" + userId + ",/" + false
+					iterOut.writeUTF("isDraw:::" + userId + "님이 정답을 맞추셨습니다.\n다음 출제자는 " + userId + "입니다." + ",/" + userId + ",/" + false
 							+ ",/" + roomName);
 					iterOut.flush();
 				} catch (IOException e) {
