@@ -93,9 +93,8 @@ public class FindPassword extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// JOptionPane.showConfirmDialog(null, "이메일 전송 준비중 ㅠㅠ");
 				((Sender) sender).sendEmail(idf.getText(), emailf.getText());
-				
-				JOptionPane.showMessageDialog(null, "입력하신 이메일로 전송을 완료하였습니다.");
-				dispose();
+				/*JOptionPane.showMessageDialog(null, "입력하신 이메일로 전송을 완료하였습니다.");
+				dispose();*/
 			}
 		});
 

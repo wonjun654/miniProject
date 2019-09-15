@@ -19,7 +19,6 @@ import com.kh.user.model.vo.ClientUser;
 import com.kh.view.RoundButton;
 
 public class PasswordChange extends JFrame{
-	UserManager um = new UserManager();
 	public PasswordChange(ClientUser u) {
 	JPasswordField newpw = new JPasswordField();
 	newpw.setSize(120,30);
@@ -93,7 +92,6 @@ public class PasswordChange extends JFrame{
 			}
 			u.setUserPwd(pwd);
 			u.setTempPwd(false);
-			um.updateUser(u);
 			System.out.println(u.getUserPwd() + "" + pwd);
 				tempPwd.setVisible(false);
 		}

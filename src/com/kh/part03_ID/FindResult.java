@@ -47,15 +47,15 @@ public class FindResult extends JFrame {
 		JLabel idText2 = new JLabel("입니다.");
 		idText2.setBounds(650, 350, 300, 30);
 
-		RoundButton checkBtn = new RoundButton("로그인");
-		checkBtn.setBounds(350, 420, 80, 50);
+		/*RoundButton checkBtn = new RoundButton("로그인");
+		checkBtn.setBounds(350, 420, 80, 50);*/
 
 		RoundButton exitBtn = new RoundButton("나가기");
 		exitBtn.setBounds(580, 420, 80, 50);
 
 		idResultPop.add(idText);
 		idResultPop.add(idf);
-		idResultPop.add(checkBtn);
+//		idResultPop.add(checkBtn);
 		idResultPop.add(exitBtn);
 		idResultPop.add(idText2);
 
@@ -65,20 +65,20 @@ public class FindResult extends JFrame {
 		setResizable(false);
 		setVisible(true);
 
-		checkBtn.addActionListener(new ActionListener() {
+		/*checkBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 //				LoginPage lp = new LoginPage();
 
 			}
-		});
+		});*/
 
 		exitBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				LoginPage lp = new LoginPage();
+				dispose();
 
 			}
 		});

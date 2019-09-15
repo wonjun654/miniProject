@@ -12,10 +12,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import com.kh.user.Smtptest;
 import com.kh.user.controller.UserManager;
 import com.kh.user.model.vo.User;
 import com.kh.view.Admin;
 import com.kh.view.Jaso;
+
+import javafx.scene.chart.PieChart.Data;
 
 public class MultiServer implements Serializable {
 	public static final int PORT = 7771;
@@ -557,7 +560,41 @@ public class MultiServer implements Serializable {
 		
 	}
 	
-
+	public void sendFindId(String msg) {
+		String[] tmpMsg = msg.split(":::");
+		tmpMsg = tmpMsg[1].split(",/");
+		String email = tmpMsg[0];
+		int tmpPort = Integer.parseInt(tmpMsg[1]);
+		
+		try {
+			String result = um.FindId(email);
+			if(result != null) {
+				Iterator iter = loginMap.keySet().iterator();
+				while(iter.hasNext()) {
+					int key = (int) iter.next();
+					if(key == tmpPort) {
+						DataOutputStream iterOut = (DataOutputStream) loginMap.get(key);
+						iterOut.writeUTF("findId:::" + result);
+						iterOut.flush();
+					}
+				}
+			} else {
+				Iterator iter = loginMap.keySet().iterator();
+				while(iter.hasNext()) {
+					int key = (int) iter.next();
+					if(key == tmpPort) {
+						DataOutputStream iterOut = (DataOutputStream) loginMap.get(key);
+						iterOut.writeUTF("findId:::notFound");
+						iterOut.flush();
+					}
+				}
+			}
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	public void sendTimer(String msg) {
 		String[] tmpMsg = msg.split(":::");
 		tmpMsg = tmpMsg[1].split(",/");
@@ -708,8 +745,13 @@ public class MultiServer implements Serializable {
 					} else if (msg.startsWith("changeIsDraw")) {
 						sendChangeIsDraw(msg);
 
+
+					} else if(msg.startsWith("findId")) {
+						sendFindId(msg);
+
 					}else if(msg.startsWith("chosung")) {
 						sendchosung(msg);
+
 					}
 				} // while()---------
 			} catch (SocketException e) {

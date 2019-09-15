@@ -120,7 +120,7 @@ public class Sender extends Thread {
 		}
 	}
 
-	public void sendCreateRoom(String roomName, String roomPwd, String people) {
+	public synchronized void sendCreateRoom(String roomName, String roomPwd, String people) {
 		try {
 			out.writeUTF("createRoom:::" + roomName + ",/" + roomPwd + ",/"+ people + ",/" + userId);
 			System.out.println("createRoom:::" + roomName + ",/" + roomPwd + ",/"+ people + ",/" + userId);
@@ -131,7 +131,7 @@ public class Sender extends Thread {
 		}
 	}
 
-	public void sendEnterRoom(String roomName) {
+	public synchronized void sendEnterRoom(String roomName) {
 		try {
 			out.writeUTF("enterRoom:::" + roomName + ",/" + userId);
 			out.flush();
@@ -151,7 +151,7 @@ public class Sender extends Thread {
 		}
 	}
 	
-	public void sendCheckId(String id) {
+	public synchronized void sendCheckId(String id) {
 		try {
 			out.writeUTF("checkId:::" + id + ",/" + socket.getLocalPort());
 			out.flush();
@@ -161,7 +161,7 @@ public class Sender extends Thread {
 		}
 	}
 	
-	public void sendEmail(String id, String email) {
+	public synchronized void sendEmail(String id, String email) {
 		try {
 			out.writeUTF("sendEmail:::" + id + ",/" + email + ",/" + socket.getLocalPort());
 		} catch (IOException e) {
@@ -180,7 +180,7 @@ public class Sender extends Thread {
 		}
 	}
 	
-	public void sendLogOut(String userId) {
+	public synchronized void sendLogOut(String userId) {
 		try {
 			out.writeUTF("logOut:::" + userId);
 			out.flush();
@@ -191,7 +191,7 @@ public class Sender extends Thread {
 	}
 	
 	
-	public void sendUserInfo(ClientUser u) {
+	public synchronized void sendUserInfo(ClientUser u) {
 		String userId = u.getUserId();
 		String userPw = u.getUserPwd();
 		String userName = u.getUserName();
@@ -238,6 +238,15 @@ public class Sender extends Thread {
 			out.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public synchronized void sendFindId(String email) {
+		try {
+			out.writeUTF("findId:::" + email + ",/" + socket.getLocalPort());
+			out.flush();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

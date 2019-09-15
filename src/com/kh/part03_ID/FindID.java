@@ -10,17 +10,22 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.kh.user.controller.UserManager;
+import com.kh.user.model.vo.Sender;
 import com.kh.view.RoundButton;
 
 public class FindID extends JFrame{
 	UserManager um = new UserManager();
+	Thread sender;
+	Thread receiver;
 	
-	public FindID() {
-		
+	public FindID(Thread sender, Thread receiver) {
+		this.sender = sender;
+		this.receiver = receiver;
 		
 		JPanel idPopup = new JPanel();
 		idPopup.setBackground(new Color(195, 245, 230));
@@ -81,10 +86,12 @@ public class FindID extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String str = um.FindId(idf.getText());
+				String str = idf.getText();
 				if(str != null) {
-					FindResult fr = new FindResult(str);
-					
+					((Sender) sender).sendFindId(str);
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "이메일을 다시 확인하세요");
 				}
 				
 			}
