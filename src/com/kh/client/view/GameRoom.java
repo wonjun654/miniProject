@@ -251,7 +251,7 @@ public class GameRoom extends JFrame implements Runnable {
 		});
 
 		Image trashIcon = new ImageIcon("images/trash.jpg").getImage().getScaledInstance(30, 30, 0);
-		JButton trash = new JButton(/* new ImageIcon(trashIcon) */"전환");
+		JButton trash = new JButton( new ImageIcon(trashIcon) );
 		trash.setSize(30, 30);
 		trash.setLocation(350, 10);
 		toolPane.add(trash);
@@ -270,6 +270,7 @@ public class GameRoom extends JFrame implements Runnable {
 				 * chatInput.setText(null); chatInput.requestFocus(); }
 				 */
 				canvasPanel.repaint();
+				((Sender) sender).sendRepaint(roomName);
 			}
 		});
 
