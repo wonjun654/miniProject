@@ -269,8 +269,10 @@ public class GameRoom extends JFrame implements Runnable {
 				 * chatOutput.setCaretPosition(chatOutput.getDocument().getLength());
 				 * chatInput.setText(null); chatInput.requestFocus(); }
 				 */
+				if(isDraw) {
 				canvasPanel.repaint();
 				((Sender) sender).sendRepaint(roomName);
+				}
 			}
 		});
 
