@@ -26,8 +26,8 @@ public class MultiServer implements Serializable {
 	Socket socket;
 	UserManager um;
 
-	String[] q = { "박상준", "김상찬", "최원준", "윤혁준", "이원경" };
-	String answer = q[(int) (Math.random() * 5)];
+	String[] q = { "고래밥", "마우스", "하늘보리", "인터폰", "조보아", "백종원", "치킨", "피자", "양꼬치", "올레길", "아이폰", "코카콜라", "우리말", "골목식당", "알라딘", "마스터", "김진호", "도깨비", "노트북", "귓속말" };
+	String answer = q[(int) (Math.random() * 20)];
 
 	public MultiServer() {
 		um = new UserManager();

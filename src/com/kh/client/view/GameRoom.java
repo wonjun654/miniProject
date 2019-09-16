@@ -123,7 +123,7 @@ public class GameRoom extends JFrame implements Runnable {
 		canvasPanel.setBackground(Color.LIGHT_GRAY);
 
 		chooser = new JColorChooser();
-		colorDialog = new JDialog(mainFrame, "색상표");
+		colorDialog = new JDialog(this, "색상표");
 		colorDialog.setBounds(0, 0, 800, 400);
 		colorDialog.setLayout(null);
 
@@ -144,8 +144,8 @@ public class GameRoom extends JFrame implements Runnable {
 		penSize.setVisible(true);
 		colorPanel.add(penSize);
 
-		remover = new JButton();
-		remover.setBounds(700, 200, 50, 50);
+		remover = new JButton("지우개");
+		remover.setBounds(650, 200, 100, 50);
 		remover.setVisible(true);
 		colorPanel.add(remover);
 
@@ -605,36 +605,6 @@ public class GameRoom extends JFrame implements Runnable {
 			}
 		});
 
-		// // 타이머
-		// timerT = new Timer(time, new ActionListener() {
-		//
-		// @Override
-		// public void actionPerformed(ActionEvent e) {
-		// toolPane.revalidate();
-		// time--;
-		// try {
-		// Thread.sleep(1000);
-		// } catch (InterruptedException e1) {
-		// e1.printStackTrace();
-		// }
-		//
-		// timer.setText((time / 60) + " : " + (time % 60));
-		// if (time == 0) {
-		// timerT.stop();
-		// time = 180;
-		// }
-		// }
-		// });
-		// // 시작버튼 클릭시 타이머 실행 및 게임 실행
-		// startBtn.addActionListener(new ActionListener() {
-		//
-		// @Override
-		// public void actionPerformed(ActionEvent arg0) {
-		// timerT.start();
-		// timer.setText((time / 60) + " : " + (time % 60));
-		// }
-		// });
-
 		// 나가기 버튼 클릭
 		exitBtn.addActionListener(new ActionListener() {
 
@@ -885,7 +855,10 @@ public class GameRoom extends JFrame implements Runnable {
 			chatInput.requestFocus();
 		}
 	}
-
+	
+	public void allRepaint() {
+		canvasPanel.repaint();
+	}
 	public void dragMouse(int sX, int sY, Color color, float stroke) {
 		tmp.add(new TempPoint(sX, sY));
 		g = canvasPanel.getGraphics();
@@ -975,29 +948,4 @@ public class GameRoom extends JFrame implements Runnable {
 	public void changeIsDraw(String userId, boolean flag) {
 		isDraw = flag;
 	}
-
-	/*
-	 * public void timer1(int time) { for(int i = time; i > 0; i--) {
-	 * 
-	 * String str = i/60 + " : " + i % 60; timer.setText(str);
-	 * System.out.println(str); timer.repaint();
-	 * 
-	 * }
-	 * 
-	 * }
-	 */
-	/*
-	 * public void gameTimer() { Timer m_timer = new Timer(true); TimerTask m_task =
-	 * new TimerTask() {
-	 * 
-	 * @Override public void run() { if(time < 0) { try { wait(); } catch
-	 * (InterruptedException e) { // TODO Auto-generated catch block
-	 * e.printStackTrace(); } }else { String str = time/60 + " : " + time % 60; time
-	 * = time -1; System.out.println(str); timer.setText(str); } }
-	 * 
-	 * };
-	 * 
-	 * m_timer.schedule(m_task, 0, 180); }
-	 */
-
 }

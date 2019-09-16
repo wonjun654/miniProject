@@ -7,7 +7,7 @@ import java.net.Socket;
 import javax.swing.JOptionPane;
 
 public class UserMenu {
-	public static final String SERVER_IP = "192.168.43.5";
+	public static final String SERVER_IP = "localhost";
 	public static final int PORT = 7771;
 	Socket socket;
 	
