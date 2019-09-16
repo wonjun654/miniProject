@@ -17,7 +17,7 @@ import com.kh.server.function.UserManager;
 import com.kh.server.model.vo.User;
 
 public class MultiServer implements Serializable {
-	public static final int PORT = 7771;
+	public static final int PORT = 1540;
 	HashMap<String, DataOutputStream> clientMap;
 	HashMap<String, HashMap<String, DataOutputStream>> multiRoom;
 	HashMap<Integer, DataOutputStream> loginMap;
@@ -237,11 +237,12 @@ public class MultiServer implements Serializable {
 			if (iterId.equals(userId)) {
 				clientMap.put(userId, multiRoom.get(roomName).get(iterId));
 				System.out.println(userId + "님이 게임방 " + roomName + "을 나오고 메인화면에 접속했습니다.");
+				sendAllMsg("sendAllMsg:::" + userId + "님이 퇴장했습니다" + ",/" + roomName + ",/" + userId);
+				multiRoom.get(roomName).remove(userId); // 방에서 빠져나왔기 때문에 삭제
 				break;
 			}
 		}
-
-		multiRoom.get(roomName).remove(userId); // 방에서 빠져나왔기 때문에 삭제
+		
 
 		if (multiRoom.get(roomName).size() == 0) {
 			System.out.println("방에 인원이 없어서 삭제합니다.");
@@ -440,6 +441,10 @@ public class MultiServer implements Serializable {
 							try {
 								iter2Out.writeUTF("enterRoom:::" + roomName);
 								iter2Out.flush();
+								/*String sendMsg = tmpMsg[0];
+								String roomName = tmpMsg[1];
+								String userId = tmpMsg[2];*/
+								sendAllMsg("sendAllMsg:::" + userId + "님이 입장했습니다" + ",/" + roomName + ",/" + userId);
 								break exit;
 							} catch (IOException e) {
 								e.printStackTrace();

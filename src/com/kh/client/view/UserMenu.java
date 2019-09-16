@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 public class UserMenu {
 	public static final String SERVER_IP = "localhost";
-	public static final int PORT = 7771;
+	public static final int PORT = 1540;
 	Socket socket;
 	
 	public UserMenu() {
